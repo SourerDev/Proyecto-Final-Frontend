@@ -1,4 +1,4 @@
-import Footer from "../componets/footer/Footer.jsx";
+import Footer from "../../componets/footer/Footer.jsx";
 
 export default function Landing() {
   return (
