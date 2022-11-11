@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <div className="flex bg-blue-300 sm:flex-row flex-col justify-around items-center  shadow p-4">
+    <div className="flex sm:flex-row flex-col justify-around items-center  shadow p-4">
       <div className="flex space-x-4 items-center">
         <img
           src="https://images.vexels.com/media/users/3/142719/isolated/preview/f07a4b2d673e9935e58e6ff8262d4a1d-icono-de-casas-de-triangulo.png"
