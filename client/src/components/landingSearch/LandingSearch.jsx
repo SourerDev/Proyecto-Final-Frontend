@@ -11,14 +11,14 @@ export default function LandingSearch() {
   const [operation, setOperation] = useState(null);
   const [propertyType, setPropertyType] = useState(null);
   const [city, setCity] = useState(null);
-
+  
   return (
     <div>
       <select 
         name="operation"
         onChange={(e) => setOperation(e.target.value)}
       >
-        <option value={null}>Operación</option>
+        <option value="default">Operación</option>
         <option value="Venta">Comprar</option>
         <option value="Alquiler">Alquilar</option>
       </select>
@@ -26,7 +26,7 @@ export default function LandingSearch() {
         name="propertyType"
         onChange={(e) => setPropertyType(e.target.value)}
       >
-        <option value={null}>Tipo de propiedad</option>
+        <option value="default">Tipo de propiedad</option>
         <option value="Casa">Casa</option>
         <option value="Departamento">Departamento</option>
         <option value="PH">PH</option>
@@ -36,7 +36,7 @@ export default function LandingSearch() {
         name="location"
         onChange={(e) => setCity(e.target.value)}
       >
-        <option value={null}>Ubicacion</option>
+        <option value="default">Ubicacion</option>
         {cities.map(c => <option key={c.idCity} value={c.idCity}>{`${c.city}, ${c.provincia}`}</option>)}
       </select>
       <Link to='/home'>

@@ -24,7 +24,6 @@ export function getCities() {
 }
 
 export function basicFilter(filteredProperties) {
-    console.log(filteredProperties)
     return {type: "BASIC_FILTER", payload: filteredProperties}
 }
 
