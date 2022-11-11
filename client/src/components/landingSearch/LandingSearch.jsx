@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
@@ -12,9 +11,7 @@ export default function LandingSearch() {
   const [operation, setOperation] = useState(null);
   const [propertyType, setPropertyType] = useState(null);
   const [city, setCity] = useState(null);
-  useEffect(() => {
-    console.log(propertyType)
-  }, [propertyType])
+  
   return (
     <div>
       <select 
