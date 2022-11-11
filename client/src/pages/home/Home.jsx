@@ -1,22 +1,17 @@
 
-import { useEffect, useState } from 'react'
-import { useDispatch,useSelector } from 'react-redux'
-import { getallProperties } from '../../redux/actions/index'
+import {useState} from 'react'
+import {useSelector } from 'react-redux'
 import Paginado from "../../components/paginado/Paginado.jsx"
 import Card from '../../components/card/Card'
 
 
 export default function Home(){
-const Dispatch = useDispatch()
+
 const properties = useSelector(state => state.properties)
 
 const paginado = (pageNumbers) =>{
     setCurrentPage(pageNumbers)
 }
-
-useEffect(()=> {
-Dispatch(getallProperties())
-},[Dispatch])
 
 
 const [currentPage, setCurrentPage] = useState(1);

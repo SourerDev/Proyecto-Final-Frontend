@@ -1,21 +1,16 @@
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
-//import { filterByOperation, filterByPropertyType, filterByLocation, getLoacations} from '../../redux/actions';
+import {basicFilter} from '../../redux/actions/index';
+import {filterLanding} from "../../utils/filters.js";
 
 export default function LandingSearch() {
   const dispatch = useDispatch();
+  const {properties, cities} = useSelector(state => state);
   
   const [operation, setOperation] = useState(null);
   const [propertyType, setPropertyType] = useState(null);
-  const [location, setLocation] = useState(null);
-
-  const allLocations = useSelector(state => state.locations)
-  const mockLocations = ['Bariloche', 'Rafaela', 'Posadas', 'Carlos Paz'];
-
-  /* useEffect(() => {
-    dispatch(getLoacations())
-  },[]) */
+  const [city, setCity] = useState(null);
 
   return (
     <div>
@@ -23,7 +18,7 @@ export default function LandingSearch() {
         name="operation"
         onChange={(e) => setOperation(e.target.value)}
       >
-        <option value="default">Operación</option>
+        <option value={null}>Operación</option>
         <option value="comprar">Comprar</option>
         <option value="alquilar">Alquilar</option>
       </select>
@@ -31,7 +26,7 @@ export default function LandingSearch() {
         name="propertyType"
         onChange={(e) => setPropertyType(e.target.value)}
       >
-        <option value="default">Tipo de propiedad</option>
+        <option value={null}>Tipo de propiedad</option>
         <option value="casa">Casa</option>
         <option value="departamento">Departamento</option>
         <option value="ph">PH</option>
@@ -39,18 +34,14 @@ export default function LandingSearch() {
       </select>
       <select 
         name="location"
-        onChange={(e) => setLocation(e.target.value)}
+        onChange={(e) => setCity(e.target.value)}
       >
-        <option value="default">Ubicacion</option>
-        {mockLocations.map(city => <option value={city}>{city}</option>)}
+        <option value={null}>Ubicacion</option>
+        {cities.map(city => <option value={city}>{city}</option>)}
       </select>
       <Link to='/home'>
         <button 
-          onClick={() => {
-            // operation && operation !== 'default' && dispatch(filterByOperation(operation));
-            // propertyType && propertyType !== 'default' && dispatch(filterByPropertyType(propertyType));
-            // location && location !== 'default' && dispatch(filterByLocation(location));
-          }}
+          onClick={ () => dispatch(basicFilter(filterLanding(properties, operation, propertyType, city))) }
         >
           Buscar
         </button>
