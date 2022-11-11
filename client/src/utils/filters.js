@@ -7,7 +7,7 @@ export function filterLanding(properties, operation, propertyType, city) {
     properties = properties.filter(p => p.type === propertyType)
   }
   if(city) {
-    properties = properties.filter(p => p.city === city)
+    properties = properties.filter(p => p.idCity === parseInt(city))
   }
 
   return properties

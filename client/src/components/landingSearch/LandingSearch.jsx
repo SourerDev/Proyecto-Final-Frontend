@@ -19,25 +19,25 @@ export default function LandingSearch() {
         onChange={(e) => setOperation(e.target.value)}
       >
         <option value={null}>Operación</option>
-        <option value="comprar">Comprar</option>
-        <option value="alquilar">Alquilar</option>
+        <option value="Venta">Comprar</option>
+        <option value="Alquiler">Alquilar</option>
       </select>
       <select 
         name="propertyType"
         onChange={(e) => setPropertyType(e.target.value)}
       >
         <option value={null}>Tipo de propiedad</option>
-        <option value="casa">Casa</option>
-        <option value="departamento">Departamento</option>
-        <option value="ph">PH</option>
-        <option value="bungalow">Bungalow</option>
+        <option value="Casa">Casa</option>
+        <option value="Departamento">Departamento</option>
+        <option value="PH">PH</option>
+        <option value="Finca">Finca</option>
       </select>
       <select 
         name="location"
         onChange={(e) => setCity(e.target.value)}
       >
         <option value={null}>Ubicacion</option>
-        {cities.map(city => <option value={city}>{city}</option>)}
+        {cities.map(c => <option key={c.idCity} value={c.idCity}>{`${c.city}, ${c.provincia}`}</option>)}
       </select>
       <Link to='/home'>
         <button 
