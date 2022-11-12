@@ -1,8 +1,8 @@
-export default function FormCheckbox({service, serviceName}) {
+export default function FormCheckbox({handleChange, value, inputName}) {
   return (
     <div>
-      <label htmlFor={`${serviceName}`}>{service}</label>
-      <input type="checkbox" name={`${serviceName}`}/>
+      <label htmlFor={value}>{inputName} </label>
+      <input type="checkbox" name={value} onChange={(e) => handleChange(e)}/>
     </div>
   )
 }

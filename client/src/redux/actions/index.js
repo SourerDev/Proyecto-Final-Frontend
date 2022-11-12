@@ -27,3 +27,54 @@ export function basicFilter(filteredProperties) {
     return {type: "BASIC_FILTER", payload: filteredProperties}
 }
 
+export function postPorperty(formData, services) {
+    return async function(dispatch) {
+        let {antiquity, area, bathrooms, city, enviroments, floors, garage, rooms, adressName, adressNumber, images, modality, type, description, observation, price} = formData;
+        let trueServices = []
+        for(const s in services) {
+            if(services[s]) trueServices.push(s)
+        }
+        const fixedData = {
+            images: [images],
+            modality,
+            type,
+            address: `${adressName} ${adressNumber}`,
+            services: trueServices,
+            antiquity: parseInt(antiquity),
+            area: parseInt(area),
+            bathrooms: parseInt(bathrooms),
+            idCity: parseInt(city),
+            environments: parseInt(enviroments),
+            floors: parseInt(floors),
+            garage: parseInt(garage),
+            rooms: parseInt(rooms),
+            price: parseInt(price),
+            description,
+            observation,
+        }
+        console.log(fixedData)
+        await axios.post("http://localhost:3001/properties/createProperty", fixedData)
+        dispatch({type: "POST_PROPERTY", payload: fixedData})
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
