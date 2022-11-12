@@ -1,9 +1,9 @@
 const initialState = {
-    allProperties : [],
     properties : [],
-    detail:[]
+    filteredProperties: [],
+    detail:[],
+    cities: [],
 }
-
 
 
 
@@ -12,11 +12,18 @@ export default function rootReducer(state = initialState,action){
         case "GET_ALL_PROPERTIES":
             return{
                 ...state,
-                allProperties: action.payload,
-                properties: [action.payload]
-                
+                properties: action.payload,
             }
-
+        case "GET_CITIES": 
+            return {
+                ...state,
+                cities: action.payload,
+            }
+        case "BASIC_FILTER": 
+            return {
+                ...state,
+                filteredProperties: action.payload,
+            }
         default: 
         return state
     }
