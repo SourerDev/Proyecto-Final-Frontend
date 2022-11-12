@@ -53,7 +53,7 @@ export function postPorperty(formData, services) {
             observation,
         }
         console.log(fixedData)
-        await axios.post("http://localhost:3001/createProperty", fixedData)
+        await axios.post("http://localhost:3001/properties/createProperty", fixedData)
         dispatch({type: "POST_PROPERTY", payload: fixedData})
     }
 }
