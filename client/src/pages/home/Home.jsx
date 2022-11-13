@@ -40,7 +40,7 @@ export default function Home(){
                         <Card
                         address={el.address}
                         price={el.price}
-                        image={el.image}
+                        images={el.images}
                         garage={el.garage}
                         
                         />
