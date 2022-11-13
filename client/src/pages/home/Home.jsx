@@ -19,7 +19,7 @@ export default function Home(){
     const indexOfLastProperties = currentPage * propertiesPage;
     const indexOfFirstProperties = indexOfLastProperties - propertiesPage;
     const currentProperties = properties.slice(indexOfFirstProperties,indexOfLastProperties)
-    console.log(currentProperties)
+    /* console.log(currentProperties) */
     return(
         <>
         <LandingSearch/>

@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
-import {getallProperties, getCities} from '../../redux/actions';
+import {getallProperties, getCities,getCitiesA} from '../../redux/actions';
 import Footer from "../../components/footer/Footer.jsx";
 import HeaderLanding from "../../components/header/HeaderLanding.jsx";
 
@@ -9,6 +9,7 @@ export default function Landing() {
     useEffect(() => {
         dispatch(getallProperties())
         dispatch(getCities())
+        dispatch(getCitiesA())
     }, [])
   return (
     <div>
