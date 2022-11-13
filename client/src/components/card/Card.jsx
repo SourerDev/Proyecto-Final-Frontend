@@ -1,11 +1,11 @@
 
 import { Link } from "react-router-dom";
 
-export default function Card ({address, price , garage ,id, image}){
+export default function Card ({address, price , garage ,id, images}){
 
     return(
         <div className=" bg-indigo-500 w-full max-w-sm bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <img className="p-8 rounded-t-lg" src={image} alt="imagen" />      
+            <img className="p-8 rounded-t-lg" src={images} alt="imagen" />      
             <div className="px-5 pb-5"> 
            <a> 
             <h3 className="text-3xl text-gray-900 dark:text-white font-semibold tracking-tight ">{address}</h3>
