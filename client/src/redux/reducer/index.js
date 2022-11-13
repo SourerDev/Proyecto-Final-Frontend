@@ -3,7 +3,7 @@ import {GET_CITIES_A} from '../actions/actionTypes.js';
 const initialState = {
     properties : [],
     filteredProperties: [],
-    detail:[],
+    detail:{},
     cities: [],
     citiesA:{}
 }
@@ -27,6 +27,13 @@ export default function rootReducer(state = initialState,action){
                 ...state,
                 filteredProperties: action.payload,
             }
+
+        case "GET_ID_PROPERTIES":
+            return{
+                ...state,
+                detail: action.payload
+            }
+
         case GET_CITIES_A:
             return{
                 ...state,
@@ -34,7 +41,6 @@ export default function rootReducer(state = initialState,action){
             }
         
             default:
-             
-        return state
+               return state
     }
 }
