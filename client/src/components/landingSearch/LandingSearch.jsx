@@ -1,47 +1,77 @@
 import {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {basicFilter} from '../../redux/actions/index';
-import {filterLanding} from "../../utils/filters.js";
+import {filter} from "../../utils/filters.js";
+import {filterProperties} from '../../redux/actions/index';
+import AutocompleteSearch from '../autocomplete-search/autocompleteSearch';
+
 
 export default function LandingSearch() {
   const dispatch = useDispatch();
-  const {properties, cities} = useSelector(state => state);
+  const {properties, cities, citiesA} = useSelector(state => state);
   
-  const [operation, setOperation] = useState(null);
-  const [propertyType, setPropertyType] = useState(null);
-  const [city, setCity] = useState(null);
+  const [state, setState] = useState({
+    operation: "",
+    propertyType: "",
+    city: "",
+    idCity: null
+  })
+
+  const stateHandleChange = (evt) => {
+    const { name, value} = evt.target;
+    if(name === 'city') {
+      setState((previus) => {
+        return {
+          ...previus,
+          [name]: value,
+          idCity: citiesA[value] ? citiesA[value].id :null
+        };
+      });
+    }
+    else {
+      setState((previus) => {
+        return {
+          ...previus,
+          [name]: value
+        };
+      });
+    }
+  }
   
+    
   return (
     <div>
       <select 
         name="operation"
-        onChange={(e) => setOperation(e.target.value)}
+        onChange={stateHandleChange}
+        value = {state.operation}
       >
-        <option value="default">Operación</option>
+        <option value="" disabled hidden>Operación</option>
         <option value="Venta">Comprar</option>
         <option value="Alquiler">Alquilar</option>
       </select>
       <select 
         name="propertyType"
-        onChange={(e) => setPropertyType(e.target.value)}
+        onChange={stateHandleChange}
+        value={state.propertyType}
       >
-        <option value="default">Tipo de propiedad</option>
+        <option value=""disabled hidden>Tipo de propiedad</option>
         <option value="Casa">Casa</option>
         <option value="Departamento">Departamento</option>
         <option value="PH">PH</option>
         <option value="Finca">Finca</option>
       </select>
-      <select 
-        name="location"
-        onChange={(e) => setCity(e.target.value)}
-      >
-        <option value="default">Ubicacion</option>
-        {cities.map(c => <option key={c.idCity} value={c.idCity}>{`${c.city}, ${c.provincia}`}</option>)}
-      </select>
+      
+      <AutocompleteSearch 
+        apiData={citiesA}
+        city={state.city}
+        stateHandleChange={stateHandleChange}
+      />
+      
       <Link to='/home'>
-        <button 
-          onClick={ () => dispatch(basicFilter(filterLanding(properties, operation, propertyType, city))) }
+        <button
+          disabled ={citiesA[state.city] || !state.city ? false :true }
+          onClick={ () => dispatch(filterProperties(filter(properties,state))) }
         >
           Buscar
         </button>
