@@ -7,7 +7,7 @@ const HeaderLanding = () => {
   const Slider = slider();
   return (
     <div className="flex flex-col sm:min-h-screen">
-      <div className="flex flex row justify-between p-4 relative shadow">
+      <div className="flex flex-row justify-between p-4 relative shadow">
         <div className="text-2xl font-bold sm:text-3xl sm:font-extrabold tracking-wide flex space-x-4">
           <img
             className="h-8 w-auto sm:h-12"
@@ -70,7 +70,7 @@ export function slider(
 
     transform: translate(-50%, -50%);
     border-radius: 10px;
-    transition: all 2s;
+    transition: all 1s;
     animation: slide 40s ease infinite;
     @keyframes slide {
       25% {
