@@ -1,14 +1,16 @@
 
-export function filterLanding(properties, operation, propertyType, city) {
-  if(operation && operation !== "default") {
-    properties = properties.filter(p => p.modality === operation)
+export function filter(properties, filter) {
+  console.log(properties)
+  console.log(filter)
+  if(filter.operation.length) {
+    properties = properties.filter(p => p.modality === filter.operation)
   }
-  if(propertyType && propertyType !== "default") {
-    properties = properties.filter(p => p.type === propertyType)
+  if(filter.propertyType.length) {
+    properties = properties.filter(p => p.type === filter.propertyType)
   }
-  if(city && city !== "default") {
-    properties = properties.filter(p => p.idCity === parseInt(city))
+  if(filter.idCity) {
+    properties = properties.filter(p => p.idCity === filter.idCity)
   }
-
+  console.log(properties)
   return properties
 }
