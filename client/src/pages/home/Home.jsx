@@ -38,6 +38,7 @@ export default function Home(){
                 currentProperties?.length && currentProperties.map((el)=> {
                     return(
                         <Card
+                        key={el.id} id={el.id}
                         address={el.address}
                         price={el.price}
                         images={el.images}

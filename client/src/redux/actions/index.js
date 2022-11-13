@@ -27,3 +27,15 @@ export function basicFilter(filteredProperties) {
     return {type: "BASIC_FILTER", payload: filteredProperties}
 }
 
+export function getIdProperties(id){
+    return async function (dispatch){
+        
+            let json = await axios.get(`http://localhost:3001/properties/findById/${id}`)
+            console.log(json)
+            return dispatch({
+                type:"GET_ID_PROPERTIES",
+                payload: json.data.paylaod
+            })
+        }
+}
+

@@ -1,7 +1,7 @@
 const initialState = {
     properties : [],
     filteredProperties: [],
-    detail:[],
+    detail:{},
     cities: [],
 }
 
@@ -23,6 +23,11 @@ export default function rootReducer(state = initialState,action){
             return {
                 ...state,
                 filteredProperties: action.payload,
+            }
+        case "GET_ID_PROPERTIES":
+            return{
+                ...state,
+                detail: action.payload
             }
         default: 
         return state
