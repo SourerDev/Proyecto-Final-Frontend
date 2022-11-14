@@ -40,18 +40,18 @@ export default function Home(){
                 
             </div>
             <br />
-        <div className='flex xl:flex-row flex-col '>
+        <div className='flex lg:flex-row flex-col '>
         
         <div >
         <AdvancedFilters/>
         </div>
         
             
-            <div className='grid xl:grid-cols-2 flex sm:flex-col bg-gray-300'>
+            <div className='grid lg:grid-cols-2 flex sm:flex-col bg-gray-300'>
 
             {
                 currentProperties?.length && currentProperties.map((el)=> {
-                    return( <div className='  xl:m-6 '>
+                    return( <div className='  lg:m-6 '>
                         <Card
                         
                         key={el.id} id={el.id}

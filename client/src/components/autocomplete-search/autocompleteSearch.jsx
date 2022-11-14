@@ -19,7 +19,7 @@ export default function AutocompleteSearch({apiData, city, stateHandleChange,}) 
           ))}
         </datalist>
       </div>
-      {apiData[city] || !city ? null : <p className="text-red-700">no existe</p> }
+      {apiData[city] || !city ? null : <p className="text-red-700">eliga una de las opciones</p> }
     </div>
   )
 }
