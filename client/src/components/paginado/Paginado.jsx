@@ -4,11 +4,10 @@ export default function Paginado({propertiesPage, properties, setCurrentPage, cu
     const pageNumbers = []
 
     for(let i = 0; i < Math.ceil(properties/propertiesPage); i++){
-        pageNumbers.push(i+1)
+        pageNumbers.push(i + 1)
     }
-    const porPagina = 5
-    let maximo = Math.round( properties.length / porPagina)
-    
+    const porPagina = 4
+    let maximo = Math.round( properties/ porPagina)
     //////////////////////////// FUNCIONES DEL BUSCADOR ///////////////////////////////// 
     
     const disablePrev = () => {

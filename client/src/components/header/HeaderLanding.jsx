@@ -6,17 +6,16 @@ import LandingSearch from "../landingSearch/LandingSearch";
 const HeaderLanding = () => {
   const Slider = slider();
   return (
-    <div className="flex flex-col sm:min-h-screen">
+    <div className=" justify-center m-1 sm:min-h-screen">
       <div className="flex flex row justify-between p-4 relative shadow">
-        <div className="text-2xl font-bold sm:text-3xl sm:font-extrabold tracking-wide flex space-x-4">
+        <div className="text-2xl  font-bold sm:text-3xl sm:font-extrabold tracking-wide flex space-x-4">
           <img
             className="h-8 w-auto sm:h-12"
             src="https://images.vexels.com/media/users/3/142719/isolated/preview/f07a4b2d673e9935e58e6ff8262d4a1d-icono-de-casas-de-triangulo.png"
             alt=""
           />
-          <h1 className="self-start">Properties</h1>
-          <h1 className="self-center">&</h1>
-          <h1 className="self-end">You</h1>
+          <h1 className="self-start">Properties & You</h1>
+          
         </div>
         <div className="">
           <div className="flex items-center space-x-4">
@@ -37,7 +36,7 @@ const HeaderLanding = () => {
           </div>
         </div>
       </div>
-      <div className="relative w-full h-96 sm:h-[32rem] lg:h-[40rem]">
+      <div className="  border-1 rounded relative w-full h-96 sm:h-[32rem] lg:h-[40rem]">
         <Slider>
           <div className="flex justify-center items-center">
             <LandingSearch />
