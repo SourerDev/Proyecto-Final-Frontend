@@ -58,15 +58,15 @@ export default function Form() {
           dispatch(postPorperty(data, services))
         }}
       >
-        
-        <select className="  sm:text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="modality" onChange={(e) => handleChange(e)}>
-          <option selected>Operación </option>
+        <div className="xl px-48">
+        <select className="sm:text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="modality" onChange={(e) => handleChange(e)}>
+          <option selected >Operación </option>
           <option value="Venta">Venta</option>
           <option value="Alquiler">Alquiler</option>
-        </select>
+        </select></div>
         {errs.modality && <p className=" text-center mt-2 text-sm text-red-600 dark:text-red-500">{errs.modality}</p>}
         <br/>
-
+       <div className="px-48">
         
         <select className="  sm:text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="type" onChange={(e) => handleChange(e)}>
           <option selected>Tipo de propiedad </option>
@@ -74,34 +74,34 @@ export default function Form() {
           <option value="Departamento">Departamento</option>
           <option value="PH">PH</option>
           <option value="Finca">Finca</option>
-        </select>
+        </select></div>
         {errs.type && <p className=" text-center mt-2 text-sm text-red-600 dark:text-red-500">{errs.type}</p>}
         <br/>
-        
+        <div className="px-48">
         <select  className="  sm:text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="city" onChange={(e) => handleChange(e)}>
           <option selected>Ciudad/Localidad</option>
           {cities.length && cities.map(c => <option value={c.idCity} key={c.idCity}>{`${c.city}, ${c.provincia}`}</option>)}
-        </select>
+        </select></div>
         {errs.city && <p className=" text-center mt-2 text-sm text-red-600 dark:text-red-500">{errs.city}</p>}
         <br/>
 <div className="flex flex-col  ">
       <div>  <label htmlFor="adress" className=" after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-base italic font-semibold text-center text-gray-600 dark:text-white">Direccion </label></div>
-      <div>
+      <div className="px-48">
         <input type="text" className=" sm:text-center
         form-control block w-full  px-3 py-1.5 text-base  font-normal  text-gray-700  bg-white bg-clip-padding  border border-solid border-gray-30  rounded  transition  ease-in-out  m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none " placeholder="e.j Av. San Martin"
-         name="adressName" onChange={(e) => handleChange(e)}/>
+         name="adressName" onChange={(e) => handleChange(e)}/></div>  
         {errs.adressName && <p className=" text-center mt-2 text-sm text-red-600 dark:text-red-500">{errs.adressName}</p>}
-      </div>  
-    
+      
+    <div className="px-56">
       <input type="number" className="sm:text-center
         form-control block w-full  px-3 py-1.5 text-base  font-normal  text-gray-700  bg-white bg-clip-padding  border border-solid border-gray-30  rounded  transition  ease-in-out  m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none " 
         name="adressNumber" onChange={(e) => handleChange(e)} placeholder="numero..."/>
-        {errs.adressNumber && <p className=" text-center mt-2 text-sm text-red-600 dark:text-red-500">{errs.adressNumber}</p>}
+        </div>{errs.adressNumber && <p className=" text-center mt-2 text-sm text-red-600 dark:text-red-500">{errs.adressNumber}</p>}
         {data.type === "Departamento" }
         
-         <div>
+         
           <label className=" after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-base italic font-semibold text-center text-gray-600 dark:text-white" htmlFor="dptoNumber">nmro de piso</label>
-          <input  className="sm:text-center
+        <div className="px-56">  <input  className="sm:text-center
         form-control block w-full  px-3 py-1.5 text-base  font-normal  text-gray-700  bg-white bg-clip-padding  border border-solid border-gray-30  rounded  transition  ease-in-out  m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none "  type="text" name="dptoNumber" placeholder="e.j tercero B" onChange={(e) => handleChange(e)}/>
           </div>
         
@@ -155,16 +155,18 @@ export default function Form() {
         <br />
 
         <p className=" after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-base italic font-semibold text-center text-gray-600 dark:text-white"> Breve descripcion  </p>
-        <input className=" form-control block w-full  px-3 py-1.5 text-base  font-normal  text-gray-700  bg-white bg-clip-padding  border border-solid border-gray-30  rounded  transition  ease-in-out  m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none "  type="text" name="description" onChange={(e) => handleChange(e)}/>
+        <textarea className=" form-control block w-full  px-3 py-1.5 text-base  font-normal  text-gray-700  bg-white bg-clip-padding  border border-solid border-gray-30  rounded  transition  ease-in-out  m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none "  type="text" name="description" onChange={(e) => handleChange(e)}/>
         {errs.description && <p className=" text-center mt-2 text-sm text-red-600 dark:text-red-500">{errs.description}</p>}
         <br />
         
         <p className="text-base italic font-semibold text-center text-gray-600 dark:text-white">Observaciones (opcional)</p>
-        <input className=" form-control block w-full  px-3 py-1.5 text-base  font-normal  text-gray-700  bg-white bg-clip-padding  border border-solid border-gray-30  rounded  transition  ease-in-out  m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none "  type="text" name="observation" onChange={(e) => handleChange(e)}/>
+        <textarea className=" form-control block w-full  px-3 py-1.5 text-base  font-normal  text-gray-700  bg-white bg-clip-padding  border border-solid border-gray-30  rounded  transition  ease-in-out  m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none "  type="text" name="observation" onChange={(e) => handleChange(e)}/>
         <br />
-        
         <p className=" after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-base italic font-semibold text-center text-gray-600 dark:text-white">{`Por ultimo ingrese ${data.modality === 'Venta' ? 'presouesto' : 'precio mensual'} de la propiedad (en ARS)`}</p>
-        <input className=" form-control block w-full  px-3 py-1.5 text-base  font-normal  text-gray-700  bg-white bg-clip-padding  border border-solid border-gray-30  rounded  transition  ease-in-out  m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none sm:text-center "  type="number" name="price" onChange={(e) => handleChange(e)}/>
+        
+        <div className="xl:px-40 px.56 ">
+        <input className="  form-control block w-full  px-3 py-1.5 text-base  font-normal  text-gray-700  bg-white bg-clip-padding  border border-solid border-gray-30  rounded  transition  ease-in-out  m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none sm:text-center "  type="number" name="price" onChange={(e) => handleChange(e)}/>
+        </div>
         {errs.price && <p className=" text-center mt-2 text-sm text-red-600 dark:text-red-500">{errs.price}</p>}
         <br />
 
@@ -175,7 +177,7 @@ export default function Form() {
         
       </form>
     </div>
-    <div className="grid grid-cols-1 gap-4 flex items-center basis-1/2">
+    <div className="grid grid-cols-1 hover:auto-cols-min gap-4 flex items-center basis-1/2">
       <div className="mb-4">
     <img src="https://images.unsplash.com/photo-1628745277862-bc0b2d68c50c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" className="max-w-xs h-auto rounded-lg" alt=""/>
   </div>
