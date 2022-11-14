@@ -8,7 +8,7 @@ export default function Carousel(){
         "https://i.pinimg.com/originals/27/51/cc/2751cc959a1ecb2ec3ff304791f1c86a.jpg",
       ]
     return(
-        <div className='relative w-full'>
+        <div className='relative w-full bg-regal-blue'>
             <div className='flex flex nowrap overflow-hidden w-full justify-center items-center'>
                 <a href="url">
                     <img src={images[0]} alt=""  className='' width={340}/>
