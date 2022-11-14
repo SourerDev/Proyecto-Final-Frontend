@@ -57,18 +57,22 @@ export default function AdvancedFilters(){
     }
 
     return(
-        <div className=''>
-            <div className="flex flex-col p-2">
-                <label htmlFor="price">Precio</label>
+        <div className='bg-gray-300'>
+            <div >
+             <br/>
+            <div className="flex flex-col p-2 pb-20">
+                <label className="sm-text-xl 2xl-text-3xl italic font-semibold text-center text-gray-900 dark:text-white" htmlFor="price">Precio</label>
                     <div className='flex slice-y-2'>
-                        <input className="w-20" id='minPrice' value={state.price.min} onChange={stateHandleChange} name='price-min' placeholder="Desde"/>
+                        <input className="w-20 sm:text-center
+        form-control block w-full  px-3 py-1.5 text-base  font-normal  text-gray-700  bg-white bg-clip-padding  border border-solid border-gray-30  rounded  transition  ease-in-out  m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none "  id='minPrice' value={state.price.min} onChange={stateHandleChange} name='price-min' placeholder="Desde"/>
                         <p>...</p>
-                        <input className="w-20" id='maxPrice' value={state.price.max} onChange={stateHandleChange} name='price-max' placeholder="Hasta"/>
+                        <input className="w-20 sm:text-center
+        form-control block w-full  px-3 py-1.5 text-base  font-normal  text-gray-700  bg-white bg-clip-padding  border border-solid border-gray-30  rounded  transition  ease-in-out  m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none " id='maxPrice' value={state.price.max} onChange={stateHandleChange} name='price-max' placeholder="Hasta"/>
                     </div>
                 </div>
-
+                <br/>
             <div>
-                <select 
+                <select className=" pb-6 sm:text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 name="operation"
                 onChange={stateHandleChange}
                 value = {state.operation}
@@ -77,29 +81,29 @@ export default function AdvancedFilters(){
                     <option value="Venta">Comprar</option>
                     <option value="Alquiler">Alquilar</option>
                 </select>
-            </div>
+            </div> <br/>
             <div>
-                <select 
+                <select className="sm:text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 name="propertyType"
                 onChange={stateHandleChange}
                 value={state.propertyType}
                 >
-                    <option value="" disabled hidden>Tipo de propiedad</option>
+                    <option selected>Tipo de propiedad</option>
                     <option value="Casa">Casa</option>
                     <option value="Departamento">Departamento</option>
                     <option value="PH">PH</option>
                     <option value="Finca">Finca</option>
                 </select>
-            </div>
+            </div> <br/>
             <div>
                 <AutocompleteSearch 
                     apiData={citiesA}
                     city={state.city}
                     stateHandleChange={stateHandleChange}
                 />
-            </div>
+            </div> <br/>
             <div>
-                <select 
+                <select className="sm:text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     name="environments"
                     onChange={stateHandleChange}
                     value={state.environments}
@@ -111,9 +115,9 @@ export default function AdvancedFilters(){
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
-            </div>
+            </div> <br/>
             <div>
-                <select 
+                <select className="sm:text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     name="floors" 
                     onChange={stateHandleChange}
                 >
@@ -125,9 +129,9 @@ export default function AdvancedFilters(){
                     <option value="5">5</option>
                 </select>
             </div>
-
+            <br/>
             <div>
-                <select 
+                <select className="sm:text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     name="rooms"
                     onChange={stateHandleChange} 
                 >
@@ -139,9 +143,9 @@ export default function AdvancedFilters(){
                     <option value="5">5</option>
                 </select>
             </div>
-                
+            <br/>
             <div>
-                <select 
+                <select className="sm:text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     name="bathrooms" 
                     onChange={stateHandleChange}
                 >
@@ -153,8 +157,9 @@ export default function AdvancedFilters(){
                     <option value="5">5</option>
                 </select> 
             </div>
+            <br/>
             <div>
-                <select 
+                <select className="sm:text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     name="garage" 
                     onChange={stateHandleChange}
                 >
@@ -164,30 +169,41 @@ export default function AdvancedFilters(){
                 </select> 
             </div>    
             
-            
+            <br/>
             <div className="flex flex-col p-2">
-                <label htmlFor="area">Area</label>
+                <label className="sm-text-xl 2xl-text-3xl italic font-semibold text-center text-gray-900 dark:text-white" htmlFor="area">Area</label>
                     <div className='flex slice-y-2'>
-                        <input className="w-20" id='minArea' value={state.area.min} onChange={stateHandleChange} name='area-min'placeholder="Desde"/>
+                        <input className="w-20 sm:text-center
+        form-control block w-full  px-3 py-1.5 text-base  font-normal  text-gray-700  bg-white bg-clip-padding  border border-solid border-gray-30  rounded  transition  ease-in-out  m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none " id='minArea' value={state.area.min} onChange={stateHandleChange} name='area-min'placeholder="Desde"/>
                         <p>...</p>
-                        <input className="w-20" id='maxArea' value={state.area.max} onChange={stateHandleChange} name='area-max' placeholder="Hasta"/>
+                        <input className="w-20 sm:text-center
+        form-control block w-full  px-3 py-1.5 text-base  font-normal  text-gray-700  bg-white bg-clip-padding  border border-solid border-gray-30  rounded  transition  ease-in-out  m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none " id='maxArea' value={state.area.max} onChange={stateHandleChange} name='area-max' placeholder="Hasta"/>
                     </div>
             </div>
+            <br/>
             <div className="flex flex-col p-2">
-                <label htmlFor="price">Antiquity</label>
+                <label className="sm-text-xl 2xl-text-3xl italic font-semibold text-center text-gray-900 dark:text-white" htmlFor="price">Antiquity</label>
                     <div className='flex slice-y-2'>
-                        <input className=" w-20" id='minAntiquity' value={state.antiquity.min} onChange={stateHandleChange} name='antiquity-min' placeholder="Desde"/>
+                        <input className="w-20 sm:text-center
+        form-control block w-full  px-3 py-1.5 text-base  font-normal  text-gray-700  bg-white bg-clip-padding  border border-solid border-gray-30  rounded  transition  ease-in-out  m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none " id='minAntiquity' value={state.antiquity.min} onChange={stateHandleChange} name='antiquity-min' placeholder="Desde"/>
                         <p>...</p>
-                        <input className="w-20" id='maxAntiquity' value={state.antiquity.max} onChange={stateHandleChange} name='antiquity-max' placeholder="Hasta"/>
+                        <input className="w-20 sm:text-center
+        form-control block w-full  px-3 py-1.5 text-base  font-normal  text-gray-700  bg-white bg-clip-padding  border border-solid border-gray-30  rounded  transition  ease-in-out  m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none " id='maxAntiquity' value={state.antiquity.max} onChange={stateHandleChange} name='antiquity-max' placeholder="Hasta"/>
                     </div>
             </div>
-            <div>
+            <br/>
+            <div class="flex justify-center">
+                <div>
                 <button 
-                    className="p-2 bg-blue-500"
+                    className="p-2 bg-blue-500 rounded-full"
                     onClick={() => dispatch(filterProperties(filter(properties, state)))}
                 >
                     Aplicar filtros
                 </button>
+            </div>
+            <br />
+            <br />
+            </div>
             </div>
         </div>
     )
