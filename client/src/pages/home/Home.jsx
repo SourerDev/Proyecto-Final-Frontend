@@ -14,7 +14,7 @@ export default function Home(){
     const newProperties = filteredProperties?.length ? filteredProperties : properties;
     
     const [currentPage, setCurrentPage] = useState(1);
-    const [propertiesPage, setPropertiesPage] = useState(5);
+    const [propertiesPage, setPropertiesPage] = useState(4);
 
     const lastIndex = currentPage * propertiesPage;
     const firstIndex = lastIndex - propertiesPage;
@@ -27,35 +27,40 @@ export default function Home(){
     }, [])
 
     return(
-        <>
-        <div className='flex flex-row'>
-            {/* <LandingSearch/> */}
-        <AdvancedFilters
-        />
         <div>
-            <div>
-                <ul>                  
+            <div class="flex justify-center bg-red-200">
+                <ul className='my-8'>                  
                     <Paginado
                     propertiesPage={propertiesPage}
                     properties={newProperties.length}
                     currentPage={currentPage}
                     setCurrentPage={setCurrentPage}
                     paginado={paginado}
-                    />  
-                </ul>
+                    />  </ul>
+                
             </div>
-            <div className='flex flex-wrap'>
+            <br />
+        <div className='flex xl:flex-row flex-col '>
+        
+        <div >
+        <AdvancedFilters/>
+        </div>
+        
+            
+            <div className='grid xl:grid-cols-2 flex sm:flex-col bg-gray-300'>
 
             {
                 currentProperties?.length && currentProperties.map((el)=> {
-                    return(
+                    return( <div className='  xl:m-6 '>
                         <Card
+                        
                         key={el.id} id={el.id}
                         address={el.address}
                         price={el.price}
                         images={el.images}
                         garage={el.garage}
                         />
+                        </div>
                     )
                 })
             }
@@ -63,6 +68,11 @@ export default function Home(){
             
         </div>
         </div>
-        </>
+        
+        
+        
+        
+        
+       
     )
 }
