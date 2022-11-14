@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { getIdProperties } from "../../redux/actions/index";
 import { useEffect } from "react";
-
+import { findNameCity } from "../../utils/autocompleteUtils";
 
 
 
@@ -16,14 +16,16 @@ export default function Detail() {
 
 
     const payload = useSelector((state) => state.detail)
+    const city = useSelector((state) => state.citiesA)
 
     useEffect(() => {
         dispatch(getIdProperties(id))
 
     }, [dispatch, id])
 
-
-
+    
+   
+   const ciudad = findNameCity(city, payload.idCity)
 
 
 
@@ -39,6 +41,12 @@ export default function Detail() {
                         </div>
                         <div class="relative p-3 col-start-1 row-start-1 flex flex-col-reverse rounded-lg bg-gradient-to-t from-black/75 via-black/0 sm:bg-none sm:row-start-2 sm:p-0 lg:row-start-1">
                             <h1 class="mt-1 text-lg font-semibold text-white sm:text-slate-900 md:text-2xl dark:sm:text-black">{payload.address}</h1>
+                            <h1 class="mt-1 text-lg font-semibold text-white sm:text-slate-900 md:text-2xl dark:sm:text-black">
+                                { 
+                                    ciudad
+                                
+                                
+                                }</h1>
                             <p class="text-sm leading-4 font-medium text-white sm:text-slate-500 dark:sm:text-slate-400">{payload.modality}</p>
                         </div>
                         <dl class="mt-4 text-xs font-medium drop-shadow-2xl row-start-2 sm:mt-1 sm:row-start-3 md:mt-2.5 lg:row-start-2">
