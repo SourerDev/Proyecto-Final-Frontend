@@ -4,8 +4,9 @@ export default function AutocompleteSearch({apiData, city, stateHandleChange,}) 
 
   return (
     <div>
-      <div>
+      <div className="border-1 rounded justify item-center ">
         <input
+        className=" w-full"
           list="ubications"
           name="city"
           value={city}
@@ -18,7 +19,7 @@ export default function AutocompleteSearch({apiData, city, stateHandleChange,}) 
           ))}
         </datalist>
       </div>
-      {apiData[city] || !city ? null : <p clasName='bg-red-300'>no existe</p> }
+      {apiData[city] || !city ? null : <p className="text-red-700">no existe</p> }
     </div>
   )
 }
