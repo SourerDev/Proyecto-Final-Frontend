@@ -3,7 +3,7 @@ export function isValidForm(data, allAdress) {
 
   if(!data.modality.length) errs.modality = 'seleccione un tipo de operacion';
   if(!data.type.length) errs.type = 'seleccione un tipo de propiedad';
-  if(!data.city.length) errs.city = 'seleccione la ciudad donde se encuentra la propiedad';
+  /* if(!data.idCity) errs.city = 'seleccione la ciudad donde se encuentra la propiedad'; */
 
   if(!data.adressName.length) errs.adressName = 'ingrese la direccion';
   else if(!/^[A-Za-z\s]*$/.test(data.adressName)) errs.adressName = 'solo puede contener letras';

@@ -1,15 +1,17 @@
 import {useState, useEffect} from "react";
 import {useSelector, useDispatch} from "react-redux";
-import {redirect} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import FormCheckbox from "../../components/form-checkbox/FormCheckbox.jsx";
 import FormInputNumber from "../../components/form-input-number/FormInputNumber.jsx";
 import {postPorperty} from '../../redux/actions/index';
 import {isValidForm} from "../../utils/isValidForm.js";
 import {inputNumber, inputServices} from "../../utils/formInputs.js";
+import AutocompleteSearch from "../../components/autocomplete-search/autocompleteSearch.jsx";
 
 export default function Form() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const {cities} = useSelector(state => state);
+  const {cities, citiesA} = useSelector(state => state);
   const [data, setData] = useState({
     modality: "",
     type: "",
@@ -32,14 +34,27 @@ export default function Form() {
   const [errs, setErrs] = useState({});
   
   function handleChange(event) {
-    setData({
-      ...data,
-      [event.target.name] : event.target.value
-    })
-    setErrs(isValidForm({
-      ...data,
-      [event.target.name] : event.target.value
-    }))
+    if(event.target.name === 'city') {
+      const { name, value} = event.target;
+      setData((previus) => {
+        return {
+          ...previus,
+          [name]: value,
+          idCity: citiesA[value] ? citiesA[value].id :null
+        };
+      });
+    }
+    else {
+      setData({
+        ...data,
+        [event.target.name] : event.target.value
+      })
+      setErrs(isValidForm({
+        ...data,
+        [event.target.name] : event.target.value
+      }))
+
+    }
   }
 
   function handleServices(event) {
@@ -49,6 +64,9 @@ export default function Form() {
     })
   }
 
+  useEffect(() => {
+    console.log(data)
+  }, [data])
   return (<div className = "flex flex-row  ">
     <div className="bg-blue-50 basis-1/2">
       <h4 className="sm-text-xl 2xl-text-3xl italic font-semibold text-center text-gray-900 dark:text-white">Rellene el siguiente formulario para publicar su propiedad</h4>
@@ -56,6 +74,7 @@ export default function Form() {
         onSubmit={(e) => {
           e.preventDefault()
           dispatch(postPorperty(data, services))
+          navigate("/home")
         }}
       >
         <div className="xl px-48">
@@ -69,7 +88,7 @@ export default function Form() {
        <div className="px-48">
         
         <select className="  sm:text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="type" onChange={(e) => handleChange(e)}>
-          <option selected>Tipo de propiedad </option>
+          <option selected value="">Tipo de propiedad </option>
           <option value="Casa">Casa</option>
           <option value="Departamento">Departamento</option>
           <option value="PH">PH</option>
@@ -78,14 +97,17 @@ export default function Form() {
         {errs.type && <p className=" text-center mt-2 text-sm text-red-600 dark:text-red-500">{errs.type}</p>}
         <br/>
         <div className="px-48">
-        <select  className="  sm:text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="city" onChange={(e) => handleChange(e)}>
-          <option selected>Ciudad/Localidad</option>
-          {cities.length && cities.map(c => <option value={c.idCity} key={c.idCity}>{`${c.city}, ${c.provincia}`}</option>)}
-        </select></div>
+        
+        <AutocompleteSearch 
+          apiData={citiesA}
+          city={data.city}
+          stateHandleChange={handleChange}
+        />
+        </div>
         {errs.city && <p className=" text-center mt-2 text-sm text-red-600 dark:text-red-500">{errs.city}</p>}
         <br/>
 <div className="flex flex-col  ">
-      <div>  <label htmlFor="adress" className=" after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-base italic font-semibold text-center text-gray-600 dark:text-white">Direccion </label></div>
+      <div>  <label htmlFor="adress" className=" after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-base italic font-semibold text-center text-gray-600 dark:text-white">Dirección </label></div>
       <div className="px-48">
         <input type="text" className=" sm:text-center
         form-control block w-full  px-3 py-1.5 text-base  font-normal  text-gray-700  bg-white bg-clip-padding  border border-solid border-gray-30  rounded  transition  ease-in-out  m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none " placeholder="e.j Av. San Martin"
@@ -97,13 +119,17 @@ export default function Form() {
         form-control block w-full  px-3 py-1.5 text-base  font-normal  text-gray-700  bg-white bg-clip-padding  border border-solid border-gray-30  rounded  transition  ease-in-out  m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none " 
         name="adressNumber" onChange={(e) => handleChange(e)} placeholder="numero..."/>
         </div>{errs.adressNumber && <p className=" text-center mt-2 text-sm text-red-600 dark:text-red-500">{errs.adressNumber}</p>}
-        {data.type === "Departamento" }
+        {data.type === "Departamento" && 
         
-         
+          <>
           <label className=" after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-base italic font-semibold text-center text-gray-600 dark:text-white" htmlFor="dptoNumber">nmro de piso</label>
         <div className="px-56">  <input  className="sm:text-center
         form-control block w-full  px-3 py-1.5 text-base  font-normal  text-gray-700  bg-white bg-clip-padding  border border-solid border-gray-30  rounded  transition  ease-in-out  m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none "  type="text" name="dptoNumber" placeholder="e.j tercero B" onChange={(e) => handleChange(e)}/>
           </div>
+          </>
+        }
+        
+         
         
         
         </div>
