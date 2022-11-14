@@ -29,7 +29,7 @@ export function filterProperties(filteredProperties) {
 
 export function postPorperty(formData, services) {
     return async function(dispatch) {
-        let {antiquity, area, bathrooms, city, enviroments, floors, garage, rooms, adressName, adressNumber, images, modality, type, description, observation, price} = formData;
+        let {antiquity, area, bathrooms, idCity, enviroments, floors, garage, rooms, adressName, adressNumber, images, modality, type, description, observation, price} = formData;
         let trueServices = []
         for(const s in services) {
             if(services[s]) trueServices.push(s)
@@ -43,7 +43,7 @@ export function postPorperty(formData, services) {
             antiquity: parseInt(antiquity),
             area: parseInt(area),
             bathrooms: parseInt(bathrooms),
-            idCity: parseInt(city),
+            idCity: idCity,
             environments: parseInt(enviroments),
             floors: parseInt(floors),
             garage: parseInt(garage),

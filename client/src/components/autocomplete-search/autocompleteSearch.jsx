@@ -11,7 +11,7 @@ export default function AutocompleteSearch({apiData, city, stateHandleChange,}) 
           name="city"
           value={city}
           onChange={stateHandleChange}
-          placeholder="Seleccionar city"
+          placeholder="Seleccione una ciudad"
         />
         <datalist id="ubications">
           {valuesCities(apiData).map((element) => (
