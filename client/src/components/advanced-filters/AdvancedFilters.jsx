@@ -65,7 +65,7 @@ export default function AdvancedFilters(){
                     <div className='flex slice-y-2'>
                         <input className="w-20 sm:text-center
         form-control block w-full  px-3 py-1.5 text-base  font-normal  text-gray-700  bg-white bg-clip-padding  border border-solid border-gray-30  rounded  transition  ease-in-out  m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none "  id='minPrice' value={state.price.min} onChange={stateHandleChange} name='price-min' placeholder="Desde"/>
-                        <p>...</p>
+                        <p>_</p>
                         <input className="w-20 sm:text-center
         form-control block w-full  px-3 py-1.5 text-base  font-normal  text-gray-700  bg-white bg-clip-padding  border border-solid border-gray-30  rounded  transition  ease-in-out  m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none " id='maxPrice' value={state.price.max} onChange={stateHandleChange} name='price-max' placeholder="Hasta"/>
                     </div>
@@ -108,7 +108,7 @@ export default function AdvancedFilters(){
                     onChange={stateHandleChange}
                     value={state.environments}
                 >
-                    <option value="">environments</option>
+                    <option value="">cantidad de ambientes</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -121,7 +121,7 @@ export default function AdvancedFilters(){
                     name="floors" 
                     onChange={stateHandleChange}
                 >
-                    <option value="">floors</option>
+                    <option value="">cantidad de pisos</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -135,7 +135,7 @@ export default function AdvancedFilters(){
                     name="rooms"
                     onChange={stateHandleChange} 
                 >
-                    <option value="">rooms</option>
+                    <option value="">cantidad de cuartos</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -149,7 +149,7 @@ export default function AdvancedFilters(){
                     name="bathrooms" 
                     onChange={stateHandleChange}
                 >
-                    <option value="">bathrooms</option>
+                    <option value="">cantidad de baños</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -163,7 +163,7 @@ export default function AdvancedFilters(){
                     name="garage" 
                     onChange={stateHandleChange}
                 >
-                    <option value="">garage</option>
+                    <option value="">cantidad de cocheras</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                 </select> 
@@ -171,22 +171,22 @@ export default function AdvancedFilters(){
             
             <br/>
             <div className="flex flex-col p-2">
-                <label className="sm-text-xl 2xl-text-3xl italic font-semibold text-center text-gray-900 dark:text-white" htmlFor="area">Area</label>
+                <label className="sm-text-xl 2xl-text-3xl italic font-semibold text-center text-gray-900 dark:text-white" htmlFor="area">Area (en metros²)</label>
                     <div className='flex slice-y-2'>
                         <input className="w-20 sm:text-center
         form-control block w-full  px-3 py-1.5 text-base  font-normal  text-gray-700  bg-white bg-clip-padding  border border-solid border-gray-30  rounded  transition  ease-in-out  m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none " id='minArea' value={state.area.min} onChange={stateHandleChange} name='area-min'placeholder="Desde"/>
-                        <p>...</p>
+                        <p>_</p>
                         <input className="w-20 sm:text-center
         form-control block w-full  px-3 py-1.5 text-base  font-normal  text-gray-700  bg-white bg-clip-padding  border border-solid border-gray-30  rounded  transition  ease-in-out  m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none " id='maxArea' value={state.area.max} onChange={stateHandleChange} name='area-max' placeholder="Hasta"/>
                     </div>
             </div>
             <br/>
             <div className="flex flex-col p-2">
-                <label className="sm-text-xl 2xl-text-3xl italic font-semibold text-center text-gray-900 dark:text-white" htmlFor="price">Antiquity</label>
+                <label className="sm-text-xl 2xl-text-3xl italic font-semibold text-center text-gray-900 dark:text-white" htmlFor="price">Antiguedad (en años)</label>
                     <div className='flex slice-y-2'>
                         <input className="w-20 sm:text-center
         form-control block w-full  px-3 py-1.5 text-base  font-normal  text-gray-700  bg-white bg-clip-padding  border border-solid border-gray-30  rounded  transition  ease-in-out  m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none " id='minAntiquity' value={state.antiquity.min} onChange={stateHandleChange} name='antiquity-min' placeholder="Desde"/>
-                        <p>...</p>
+                        <p>_</p>
                         <input className="w-20 sm:text-center
         form-control block w-full  px-3 py-1.5 text-base  font-normal  text-gray-700  bg-white bg-clip-padding  border border-solid border-gray-30  rounded  transition  ease-in-out  m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none " id='maxAntiquity' value={state.antiquity.max} onChange={stateHandleChange} name='antiquity-max' placeholder="Hasta"/>
                     </div>

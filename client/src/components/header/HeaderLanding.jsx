@@ -69,7 +69,7 @@ export function slider(
 
     transform: translate(-50%, -50%);
     border-radius: 10px;
-    transition: all 2s;
+    transition: all 1s;
     animation: slide 40s ease infinite;
     @keyframes slide {
       25% {
