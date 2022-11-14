@@ -8,7 +8,7 @@ export function valuesCities(object) {
 }
 
 export function findNameCity(object, id) {
-  let name = "hola";
+  let name = "";
 
   for (const key in object) {
     if (object[key].id === id) {

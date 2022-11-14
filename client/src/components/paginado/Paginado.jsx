@@ -3,8 +3,8 @@ import React from "react";
 export default function Paginado({propertiesPage, properties, setCurrentPage, currentPage, paginado,}){
     const pageNumbers = []
 
-    for(let i = 1; i < Math.ceil(properties/propertiesPage); i++){
-        pageNumbers.push(i)
+    for(let i = 0; i < Math.ceil(properties/propertiesPage); i++){
+        pageNumbers.push(i + 1)
     }
     const porPagina = 5
     let maximo = Math.round( properties/ porPagina)
