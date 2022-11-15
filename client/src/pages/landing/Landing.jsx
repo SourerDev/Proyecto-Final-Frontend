@@ -1,20 +1,13 @@
-import {useEffect} from 'react';
-import {useDispatch} from 'react-redux';
-import {getallProperties, getCities} from '../../redux/actions';
 import Footer from "../../components/footer/Footer.jsx";
 import HeaderLanding from "../../components/header/HeaderLanding.jsx";
-import Carousel from '../../components/carousel/Carousel';
+import CardsLanding from "../../components/infoLanding/InfoLanding"
 
 export default function Landing() {
-  const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(getallProperties())
-        dispatch(getCities())
-    }, [])
+  
   return (
-    <div>
+    <div >
       <HeaderLanding/>
-      <Carousel/>
+      <CardsLanding/>
       <Footer />
     </div>
   );

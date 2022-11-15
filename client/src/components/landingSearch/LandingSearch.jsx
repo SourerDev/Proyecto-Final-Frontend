@@ -1,51 +1,94 @@
-import {useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {Link} from 'react-router-dom';
-import {basicFilter} from '../../redux/actions/index';
-import {filterLanding} from "../../utils/filters.js";
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { filter } from "../../utils/filters.js";
+import { filterProperties } from '../../redux/actions/index';
+import AutocompleteSearch from '../autocomplete-search/autocompleteSearch';
+
 
 export default function LandingSearch() {
   const dispatch = useDispatch();
-  const {properties, cities} = useSelector(state => state);
-  
-  const [operation, setOperation] = useState(null);
-  const [propertyType, setPropertyType] = useState(null);
-  const [city, setCity] = useState(null);
-  
+  const { properties, cities, citiesA } = useSelector(state => state);
+
+  const [state, setState] = useState({
+    operation: "",
+    propertyType: "",
+    city: "",
+    idCity: null
+  })
+
+  const stateHandleChange = (evt) => {
+    const { name, value } = evt.target;
+    if (name === 'city') {
+      setState((previus) => {
+        return {
+          ...previus,
+          [name]: value,
+          idCity: citiesA[value] ? citiesA[value].id : null
+        };
+      });
+    }
+    else {
+      setState((previus) => {
+        return {
+          ...previus,
+          [name]: value
+        };
+      });
+    }
+  }
+
+
   return (
-    <div>
-      <select 
+    <div className=' m-2 sm:flex items-center '>
+      <select
+        className='border-4  rounded m-2'
         name="operation"
-        onChange={(e) => setOperation(e.target.value)}
+        onChange={stateHandleChange}
+        value={state.operation}
       >
-        <option value="default">Operación</option>
+        <option value="" disabled hidden>Operación</option>
         <option value="Venta">Comprar</option>
         <option value="Alquiler">Alquilar</option>
       </select>
-      <select 
+      <select
+        className='m-2 border-4 rounded'
         name="propertyType"
-        onChange={(e) => setPropertyType(e.target.value)}
+        onChange={stateHandleChange}
+        value={state.propertyType}
       >
-        <option value="default">Tipo de propiedad</option>
+        <option value="" disabled hidden>Tipo de propiedad</option>
         <option value="Casa">Casa</option>
         <option value="Departamento">Departamento</option>
         <option value="PH">PH</option>
         <option value="Finca">Finca</option>
       </select>
-      <select 
-        name="location"
-        onChange={(e) => setCity(e.target.value)}
-      >
-        <option value="default">Ubicacion</option>
-        {cities.map(c => <option key={c.idCity} value={c.idCity}>{`${c.city}, ${c.provincia}`}</option>)}
-      </select>
+
+      <div className=' border-4 rounded'>
+        <AutocompleteSearch
+
+          apiData={citiesA}
+          city={state.city}
+          stateHandleChange={stateHandleChange}
+
+        />
+      </div>
+      
+
+      
       <Link to='/home'>
-        <button 
-          onClick={ () => dispatch(basicFilter(filterLanding(properties, operation, propertyType, city))) }
+        <button
+          className='  relative m-2 inline-flex items-center justify-center p-0 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800'
+          disabled={citiesA[state.city] || !state.city ? false : true}
+          onClick={() => dispatch(filterProperties(filter(properties, state)))}
         >
-          Buscar
+          <span class="  px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+            Buscar </span>
+
         </button>
       </Link>
+     
+
     </div>
   )
 }
