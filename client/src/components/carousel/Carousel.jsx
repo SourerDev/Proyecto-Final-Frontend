@@ -1,143 +1,128 @@
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
 
-export default function Carousel() {
-  const images = [
-    "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/casa-de-campo-moderna30-1639245321.jpg",
-    "https://i.pinimg.com/originals/27/51/cc/2751cc959a1ecb2ec3ff304791f1c86a.jpg",
-    "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/casa-de-campo-moderna30-1639245321.jpg",
-    "https://i.pinimg.com/originals/27/51/cc/2751cc959a1ecb2ec3ff304791f1c86a.jpg",
-    "https://images.unsplash.com/photo-1667802132853-7549c1ff0c17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-  ];
+export default function Carousel({ title, images }) {
+  const slideshow = useRef(null);
+  let interval = useRef(null);
+  const next = () => {
+    if (slideshow.current.children.length > 0) {
+      const firstElement = slideshow.current.children[0];
+      slideshow.current.style.transition = `300ms ease-out all`;
 
-  const next = ()=>{
+      const size = slideshow.current.children[0].offsetWidth;
 
-  }
+      slideshow.current.style.transform = `translatex(-${size}px)`;
+
+      const transicion = () => {
+        slideshow.current.style.transition = `none`;
+        slideshow.current.style.transform = `translatex(0px)`;
+
+        slideshow.current.appendChild(firstElement);
+        slideshow.current.removeEventListener("transitionend", transicion);
+      };
+
+      slideshow.current.addEventListener("transitionend", transicion);
+    }
+  };
+
+  const previus = () => {
+    if (slideshow.current.children.length > 0) {
+      const endElement =
+        slideshow.current.children[slideshow.current.children.length - 1];
+      slideshow.current.insertBefore(endElement, slideshow.current.firstChild);
+
+      slideshow.current.style.transition = `none`;
+
+      const size = slideshow.current.children[0].offsetWidth;
+      slideshow.current.style.transform = `translate(-${size}px)`;
+
+      setTimeout(() => {
+        slideshow.current.style.transition = `300ms ease-out all`;
+        slideshow.current.style.transform = `translatex(0)`;
+      }, 30);
+    }
+  };
+
+  useEffect(() => {
+     let interval = setInterval(()=>{
+       next()
+     },5000)
+
+     slideshow.current.addEventListener('mouseenter',()=>{
+      console.log('entre'); 
+      clearInterval(interval);
+    })
+
+     slideshow.current.addEventListener('mouseleave',()=>{
+      console.log('sali'); 
+      interval = setInterval(()=>{
+         next()
+       },5000);
+     })
+  }, []);
 
   return (
-    <div className="w-full overflow-hidden flex justify-center items-center">
-      <Main>
-        <Slideshow>
-          <Slide>
-            <a href="">
-              <img src={images[4]} alt="" className="" width={340} />
-            </a>
-            <TextSlide>
+    <div className="w-full overflow-hidden flex flex-col justify-center items-center">
+      <div className="flex justify-between sm:w-11/12 sm:px-3 px-1 w-full">
+        <Title>{title || "Title"}</Title>
+        <p className="hidden sm:block">Ver Mas »</p>
+      </div>
+      {images?.length && (
+        <Main>
+          <Slideshow ref={slideshow}>
+            {images.map((element, i) => (
+              <Slide key={i}>
+                <a href="">
+                  <img src={element.image} alt={element.id} className="" />
+                </a>
+                {element?.id && (
+                  <TextSlide>
+                    <svg
+                      className=""
+                      fill="#fff"
+                      width="24"
+                      height="24"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                    >
+                      <path d="M12 10c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2m0-5c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3m-7 2.602c0-3.517 3.271-6.602 7-6.602s7 3.085 7 6.602c0 3.455-2.563 7.543-7 14.527-4.489-7.073-7-11.072-7-14.527m7-7.602c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602" />
+                    </svg>
+                    <p>{false || "Ubicacion"}</p>
+                  </TextSlide>
+                )}
+              </Slide>
+            ))}
+          </Slideshow>
+          <Controls>
+            <Button r className="left-0" onClick={previus}>
               <svg
-                className=""
-                fill="#fff"
                 width="24"
                 height="24"
                 xmlns="http://www.w3.org/2000/svg"
                 fill-rule="evenodd"
                 clip-rule="evenodd"
               >
-                <path d="M12 10c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2m0-5c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3m-7 2.602c0-3.517 3.271-6.602 7-6.602s7 3.085 7 6.602c0 3.455-2.563 7.543-7 14.527-4.489-7.073-7-11.072-7-14.527m7-7.602c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602" />
+                <path d="M20 .755l-14.374 11.245 14.374 11.219-.619.781-15.381-12 15.391-12 .609.755z" />
               </svg>
-              <p>San marcos</p>
-            </TextSlide>
-          </Slide>
-          <Slide>
-            <a href="">
-              <img src={images[1]} alt="" className="" width={340} />
-            </a>
-            <TextSlide>
-              <svg
-                className=""
-                fill="#fff"
-                width="24"
-                height="24"
-                xmlns="http://www.w3.org/2000/svg"
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-              >
-                <path d="M12 10c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2m0-5c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3m-7 2.602c0-3.517 3.271-6.602 7-6.602s7 3.085 7 6.602c0 3.455-2.563 7.543-7 14.527-4.489-7.073-7-11.072-7-14.527m7-7.602c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602" />
-              </svg>
-              <p>San marcos</p>
-            </TextSlide>
-          </Slide>
-          <Slide>
-            <a href="">
-              <img src={images[2]} alt="" className="" width={340} />
-            </a>
-            <TextSlide>
-              <svg
-                className=""
-                fill="#fff"
-                width="24"
-                height="24"
-                xmlns="http://www.w3.org/2000/svg"
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-              >
-                <path d="M12 10c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2m0-5c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3m-7 2.602c0-3.517 3.271-6.602 7-6.602s7 3.085 7 6.602c0 3.455-2.563 7.543-7 14.527-4.489-7.073-7-11.072-7-14.527m7-7.602c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602" />
-              </svg>
-              <p>San marcos</p>
-            </TextSlide>
-          </Slide>
-          <Slide>
-            <a href="">
-              <img src={images[3]} alt="" className="" width={340} />
-            </a>
-            <TextSlide>
-              <svg
-                className=""
-                fill="#fff"
-                width="24"
-                height="24"
-                xmlns="http://www.w3.org/2000/svg"
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-              >
-                <path d="M12 10c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2m0-5c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3m-7 2.602c0-3.517 3.271-6.602 7-6.602s7 3.085 7 6.602c0 3.455-2.563 7.543-7 14.527-4.489-7.073-7-11.072-7-14.527m7-7.602c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602" />
-              </svg>
-              <p>San marcos</p>
-            </TextSlide>
-          </Slide>
-          <Slide>
-            <a href="">
-              <img src={images[4]} alt="" className="" width={340} />
-            </a>
-            <TextSlide>
-              <svg
-                className=""
-                fill="#fff"
-                width="24"
-                height="24"
-                xmlns="http://www.w3.org/2000/svg"
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-              >
-                <path d="M12 10c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2m0-5c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3m-7 2.602c0-3.517 3.271-6.602 7-6.602s7 3.085 7 6.602c0 3.455-2.563 7.543-7 14.527-4.489-7.073-7-11.072-7-14.527m7-7.602c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602" />
-              </svg>
-              <p>San marcos</p>
-            </TextSlide>
-          </Slide>
-        </Slideshow>
-        <Controls>
-          <Button r className="left-0">
-            <svg
-              width="24"
-              height="24"
-              xmlns="http://www.w3.org/2000/svg"
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+            </Button>
+            <Button
+              className="right-0 flex items-center justify-end"
+              onClick={next}
             >
-              <path d="M20 .755l-14.374 11.245 14.374 11.219-.619.781-15.381-12 15.391-12 .609.755z" />
-            </svg>
-          </Button>
-          <Button className="right-0 flex items-center justify-end">
-            <svg
-              width="24"
-              height="24"
-              xmlns="http://www.w3.org/2000/svg"
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-            >
-              <path d="M4 .755l14.374 11.245-14.374 11.219.619.781 15.381-12-15.391-12-.609.755z" />
-            </svg>
-          </Button>
-        </Controls>
-      </Main>
+              <svg
+                width="24"
+                height="24"
+                xmlns="http://www.w3.org/2000/svg"
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+              >
+                <path d="M4 .755l14.374 11.245-14.374 11.219.619.781 15.381-12-15.391-12-.609.755z" />
+              </svg>
+            </Button>
+          </Controls>
+        </Main>
+      )}
     </div>
   );
 }
@@ -146,8 +131,8 @@ const Main = styled.div`
   overflow: hidden;
   position: relative;
   width: 90%;
-  border-radius: .2rem;
-  @media screen and (max-width:630px){
+  border-radius: 0.2rem;
+  @media screen and (max-width: 640px) {
     width: 100%;
   }
 `;
@@ -158,7 +143,7 @@ const Slideshow = styled.div`
 `;
 
 const Slide = styled.div`
-  min-width: 100%;
+  min-width: 50%;
   overflow: hidden;
   transition: 0.3s ease all;
   z-index: 10;
@@ -166,8 +151,20 @@ const Slide = styled.div`
   position: relative;
 
   img {
+    padding: 0 1px;
     width: 100%;
+    height: 100%;
     vertical-align: top;
+  }
+
+  @media screen and (min-width: 400px) {
+    min-width: 50%;
+  }
+  @media screen and (min-width: 800px) {
+    min-width: 33.33333333%;
+  }
+  @media screen and (min-width: 1200px) {
+    min-width: 25%;
   }
 `;
 
@@ -219,4 +216,9 @@ const Button = styled.button`
         ? "drop-shadow(-2px 0px 0px #fff)"
         : "drop-shadow(2px 0px 0px #fff)"};
   }
+`;
+
+const Title = styled.h1`
+  font-size: medium;
+  font-weight: 600;
 `;
