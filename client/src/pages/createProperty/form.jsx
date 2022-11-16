@@ -31,6 +31,7 @@ export default function Form() {
     observation: "",
     price: "",
   });
+  console.log(data.modality)
   const [services, setServices] = useState({})
   const [errs, setErrs] = useState({});
 
@@ -219,19 +220,146 @@ export default function Form() {
       </form>
     </div>
      
-    <div className="flex flex-col items-center justify-around hover:auto-cols-min gap-4 basis-1/2">
-      <div className="mb-4">
-        <img src="https://images.unsplash.com/photo-1628745277862-bc0b2d68c50c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" className="max-w-xs h-auto rounded-lg" alt="" />
-      </div>
-      <div className="mb-4">
-        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80" className="max-w-xs h-auto rounded-lg" alt="" />
-      </div>
-      <div className="mb-4">
-        <img src="https://images.unsplash.com/photo-1613977257365-aaae5a9817ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" className="max-w-xs h-auto rounded-full" alt="" />
-      </div>
-      <div className="mb-7">
-        <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" className="max-w-xs h-auto rounded-full" alt="" />
-      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+    <div class=" ">
+                        <div class="  col-start-1 col-end-3 row-start-1 " >
+                            <img src={data.images} alt="" class="w-full  h-full object-cover rounded-lg  " loading="lazy"></img>
+                        </div>
+                        <div class="relative p-3 col-start-1 row-start-1 flex flex-col-reverse rounded-lg bg-gradient-to-t from-black/75 via-black/0">
+                            <h1 class="mt-1 text-lg font-semibold text-white sm:text-slate-900  dark:sm:text-black">{data.city}</h1>
+                            <h1 class="mt-1 text-lg font-semibold text-white sm:text-slate-900  dark:sm:text-black">
+                                {data.adressName}  {data.adressNumber}
+                                
+                                </h1>
+                            <p class="mt-1 text-lg font-semibold text-white sm:text-slate-900  dark:sm:text-black ">{data.modality}</p>
+                        </div>
+                        <dl class="mt-4 text-xs font-medium drop-shadow-2xl row-start-2  ">
+                            <dl >
+
+                                <dd class="text-blue-300 flex items-center dark:text-blue-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+
+                                    <span class="text-xl">{data.price} <span class="text-blue-300 font-normal">(usd)</span></span>
+                                </dd>
+                            </dl>
+                            <div className="grid bg-blue-50 items-center col-start-1 col-end-3 row-start-1 sm:mb-3 sm:grid-cols-2">
+                                <dd class="text-black m-3 p-1 flex items-center  dark:text-black">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
+                                    </svg>
+
+                                    <span class="m-3 text-xl p-0">{data.floors} <spam></spam> <span class="text-black font-normal">(pisos)</span></span>
+
+
+                                </dd>
+                                <dd class="text-black m-3 p-1 flex items-center  dark:text-black">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+                                    </svg>
+
+
+                                    <span class="m-3 text-xl p-0">{data.garage} <span class="text-black font-normal">(garage)</span></span>
+
+
+                                </dd>
+                                <dd class="text-black m-3 p-1 flex items-center   dark:text-black">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819" />
+                                    </svg>
+
+
+
+                                    <span class="m-3 text-xl p-0">{data.enviroments} <span class="text-black font-normal">ambientes</span></span>
+
+
+                                </dd>
+                                <dd class="text-black m-3 p-1 flex items-center  dark:text-black">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-2.25-1.313M21 7.5v2.25m0-2.25l-2.25 1.313M3 7.5l2.25-1.313M3 7.5l2.25 1.313M3 7.5v2.25m9 3l2.25-1.313M12 12.75l-2.25-1.313M12 12.75V15m0 6.75l2.25-1.313M12 21.75V19.5m0 2.25l-2.25-1.313m0-16.875L12 2.25l2.25 1.313M21 14.25v2.25l-2.25 1.313m-13.5 0L3 16.5v-2.25" />
+                                    </svg>
+
+
+
+
+                                    <span class="m-3 text-xl p-0">{data.area} <span class="text-black text-l">.mt2</span></span>
+
+
+                                </dd>
+                                <dd class="text-black m-3 p-1 flex items-center  dark:text-black">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819" />
+                                    </svg>
+
+
+
+                                    <span class="m-3 text-xl p-0">{data.rooms} <span class="text-black font-normal">cuartos</span></span>
+
+
+                                </dd>
+                                <dd class="text-black m-3 p-1 flex items-center dark:text-black">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+
+
+
+
+                                    <span class="m-3 text-xl p-0">{data.antiquity} </span><span class="text-black text-xl font-normal">antiguedad</span>
+
+
+                                </dd>
+
+
+                            </div>
+                        </dl>
+
+
+                        <p
+                            class="mt-4 text-sm leading-6 col-start-1  dark:text-slate-400">
+                         <h1 class="dark:text-black text-xl m-5"> Descripcion </h1>
+                           {data.description}
+                        </p>
+
     </div>
 
   </div>

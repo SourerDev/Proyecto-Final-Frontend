@@ -6,9 +6,10 @@ import LandingSearch from "../landingSearch/LandingSearch";
 const HeaderLanding = () => {
   const Slider = slider();
   return (
-    <div className=" justify-center m-1 sm:min-h-screen">
-      <div className="flex flex row justify-between p-4 relative shadow">
-        <div className="text-2xl  font-bold sm:text-3xl sm:font-extrabold tracking-wide flex space-x-4">
+    <div className="flex flex-col m-1 sm:min-h-screen">
+      <div className="flex flex-row justify-between p-4 relative shadow">
+        <div className="text-2xl font-bold sm:text-3xl sm:font-extrabold tracking-wide flex space-x-4">
+
           <img
             className="h-8 w-auto sm:h-12"
             src="https://images.vexels.com/media/users/3/142719/isolated/preview/f07a4b2d673e9935e58e6ff8262d4a1d-icono-de-casas-de-triangulo.png"
