@@ -7,6 +7,8 @@ import Home from './pages/home/Home.jsx';
 import Detail from "./pages/detail/Detail.jsx";
 import Form from "./pages/createProperty/form.jsx";
 import Nav from "./components/nav-bar/Nav.jsx"
+import LogIn from "./pages/logIn/LogIn";
+import SignUp from "./pages/signup/SignUp";
 
 function App() {
   const dispatch = useDispatch()
@@ -23,6 +25,8 @@ function App() {
         <Route path="/home" element={<><Nav/><Home/></>}/>
         <Route path="/detail/:id" element={<><Nav/><Detail/></>}/>
         <Route path="/createProperty" element={<><Nav/><Form/></>}/>
+        <Route path="/login" element={<LogIn/>}/>
+        <Route path="/signup" element={<SignUp/>}/>
       </Routes>
     </div>
   );
