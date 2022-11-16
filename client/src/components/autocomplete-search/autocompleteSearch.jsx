@@ -4,9 +4,9 @@ export default function AutocompleteSearch({apiData, city, stateHandleChange,}) 
 
   return (
     <div>
-      <div className="border-1 rounded justify item-center ">
+      <div className="border-1 roundedjustify item-center ">
         <input
-        className=" w-full"
+        className=" w-full placeholder:text-black "
           list="ubications"
           name="city"
           value={city}

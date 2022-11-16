@@ -28,8 +28,8 @@ export default function Home(){
 
     return(
         <div>
-            <div class="flex justify-center bg-red-200">
-                <ul className='my-8'>                  
+            <div class="flex justify-center  bg-sky-200 ">
+                <ul className='my-8 '>                  
                     <Paginado
                     propertiesPage={propertiesPage}
                     properties={newProperties.length}
@@ -42,16 +42,16 @@ export default function Home(){
             <br />
         <div className='flex lg:flex-row flex-col '>
         
-        <div >
+        <div className='px-2'>
         <AdvancedFilters/>
         </div>
         
             
-            <div className='grid lg:grid-cols-2 flex sm:flex-col bg-gray-300'>
+            <div className='grid  my-3 bg-gray-300  lg:grid-cols-2 lg:my-0  sm:flex-col justify-center lg:bg-gray-300 '>
 
             {
                 currentProperties?.length && currentProperties.map((el)=> {
-                    return( <div className='  lg:m-6 '>
+                    return( <div className=' my-2 px-4 lg:px-9 '>
                         <Card
                         
                         key={el.id} id={el.id}
