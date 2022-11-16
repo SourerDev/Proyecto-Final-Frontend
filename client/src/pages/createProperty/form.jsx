@@ -16,6 +16,7 @@ export default function Form() {
     modality: "",
     type: "",
     city: "",
+    idCity: null,
     adressName: "",
     adressNumber: "",
     images: "",
@@ -44,6 +45,11 @@ export default function Form() {
           idCity: citiesA[value] ? citiesA[value].id : null
         };
       });
+      setErrs(isValidForm({
+        ...data,
+        [name]: value,
+        idCity: citiesA[value] ? citiesA[value].id : null
+      }))
     }
     else {
       setData({
@@ -66,17 +72,17 @@ export default function Form() {
   }
 
   useEffect(() => {
-  }, [data])
-  return (
-  
-  <div className="grid sm:grid-cols-1 lg:grid-cols-2">
+    console.log(data)
+    console.log(errs)
+  }, [data, errs])
+  return (<div className="flex flex-row  ">
     <div className="bg-blue-50 basis-1/2">
       <h4 className="sm-text-xl 2xl-text-3xl italic font-semibold text-center text-gray-900 dark:text-white">Rellene el siguiente formulario para publicar su propiedad</h4>
       <form
         onSubmit={(e) => {
           e.preventDefault()
           dispatch(postPorperty(data, services))
-          navigate("/home")
+          navigate("/redirect")
         }}
       >
         <div className="xl px-48">
@@ -106,7 +112,7 @@ export default function Form() {
             stateHandleChange={handleChange}
           />
         </div>
-        {errs.city && <p className=" text-center mt-2 text-sm text-red-600 dark:text-red-500">{errs.city}</p>}
+        {errs.idCity && <p className=" text-center mt-2 text-sm text-red-600 dark:text-red-500">{errs.idCity}</p>}
         <br />
 
         <div className="flex flex-row px-2 justify-center">
