@@ -57,12 +57,12 @@ export default function AdvancedFilters(){
     }
 
     return(
-        <div className='bg-gray-300'>
+        <div className= ' h-full   bg-gray-300'>
             <div >
              <br/>
-            <div className="flex flex-col p-2 pb-20">
+            <div className=" h-0  flex flex-col p-2 pb-20">
                 <label className="sm-text-xl 2xl-text-3xl italic font-semibold text-center text-gray-900 dark:text-white" htmlFor="price">Precio</label>
-                    <div className='flex slice-y-2'>
+                    <div className='flex h-10 mb-5 slice-y-2'>
                         <input className="w-20 sm:text-center
         form-control block w-full  px-3 py-1.5 text-base  font-normal  text-gray-700  bg-white bg-clip-padding  border border-solid border-gray-30  rounded  transition  ease-in-out  m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none "  id='minPrice' value={state.price.min} onChange={stateHandleChange} name='price-min' placeholder="Desde"/>
                         <p>_</p>
@@ -71,8 +71,8 @@ export default function AdvancedFilters(){
                     </div>
                 </div>
                 <br/>
-            <div>
-                <select className=" pb-6 sm:text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            <div className=" px-2 h-9 ">
+                <select className="pb-6 sm:text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 name="operation"
                 onChange={stateHandleChange}
                 value = {state.operation}
@@ -82,7 +82,7 @@ export default function AdvancedFilters(){
                     <option value="Alquiler">Alquilar</option>
                 </select>
             </div> <br/>
-            <div>
+            <div className="px-2">
                 <select className="sm:text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 name="propertyType"
                 onChange={stateHandleChange}
@@ -95,14 +95,15 @@ export default function AdvancedFilters(){
                     <option value="Finca">Finca</option>
                 </select>
             </div> <br/>
-            <div>
+            <div className=" px-2 flex justify-center ">
                 <AutocompleteSearch 
+                
                     apiData={citiesA}
                     city={state.city}
                     stateHandleChange={stateHandleChange}
                 />
             </div> <br/>
-            <div>
+            <div className="px-2 h-5">
                 <select className="sm:text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     name="environments"
                     onChange={stateHandleChange}
@@ -116,7 +117,7 @@ export default function AdvancedFilters(){
                     <option value="5">5</option>
                 </select>
             </div> <br/>
-            <div>
+            <div className="px-2 h-5">
                 <select className="sm:text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     name="floors" 
                     onChange={stateHandleChange}
@@ -130,7 +131,7 @@ export default function AdvancedFilters(){
                 </select>
             </div>
             <br/>
-            <div>
+            <div className="px-2 h-5">
                 <select className="sm:text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     name="rooms"
                     onChange={stateHandleChange} 
@@ -144,7 +145,7 @@ export default function AdvancedFilters(){
                 </select>
             </div>
             <br/>
-            <div>
+            <div className="px-2 h-5">
                 <select className="sm:text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     name="bathrooms" 
                     onChange={stateHandleChange}
@@ -158,7 +159,7 @@ export default function AdvancedFilters(){
                 </select> 
             </div>
             <br/>
-            <div>
+            <div className="px-2 h-5">
                 <select className="sm:text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     name="garage" 
                     onChange={stateHandleChange}
@@ -170,10 +171,10 @@ export default function AdvancedFilters(){
             </div>    
             
             <br/>
-            <div className="flex flex-col p-2">
+            <div className=" px-2 h-11 flex flex-col p-2">
                 <label className="sm-text-xl 2xl-text-3xl italic font-semibold text-center text-gray-900 dark:text-white" htmlFor="area">Area (en metros²)</label>
                     <div className='flex slice-y-2'>
-                        <input className="w-20 sm:text-center
+                        <input className=" w-20 sm:text-center
         form-control block w-full  px-3 py-1.5 text-base  font-normal  text-gray-700  bg-white bg-clip-padding  border border-solid border-gray-30  rounded  transition  ease-in-out  m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none " id='minArea' value={state.area.min} onChange={stateHandleChange} name='area-min'placeholder="Desde"/>
                         <p>_</p>
                         <input className="w-20 sm:text-center
