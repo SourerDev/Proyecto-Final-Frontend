@@ -1,12 +1,13 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 export default function Carousel({ title, images }) {
   const slideshow = useRef(null);
-  let interval = useRef(null);
+  const interval = useRef(null);
+  
   const next = () => {
-    if (slideshow.current.children.length > 0) {
-      const firstElement = slideshow.current.children[0];
+    if (slideshow?.current?.children?.length > 0) {
+      const firstElement = slideshow?.current?.children[0];
       slideshow.current.style.transition = `300ms ease-out all`;
 
       const size = slideshow.current.children[0].offsetWidth;
@@ -26,10 +27,13 @@ export default function Carousel({ title, images }) {
   };
 
   const previus = () => {
-    if (slideshow.current.children.length > 0) {
+    if (slideshow?.current?.children.length > 0) {
       const endElement =
         slideshow.current.children[slideshow.current.children.length - 1];
-      slideshow.current.insertBefore(endElement, slideshow.current.firstChild);
+      slideshow.current.insertBefore(
+        endElement,
+        slideshow?.current?.firstChild
+      );
 
       slideshow.current.style.transition = `none`;
 
@@ -44,32 +48,28 @@ export default function Carousel({ title, images }) {
   };
 
   useEffect(() => {
-     let interval = setInterval(()=>{
-       next()
-     },5000)
-
-     slideshow.current.addEventListener('mouseenter',()=>{
-      console.log('entre'); 
-      clearInterval(interval);
-    })
-
-     slideshow.current.addEventListener('mouseleave',()=>{
-      console.log('sali'); 
-      interval = setInterval(()=>{
-         next()
-       },5000);
-     })
   }, []);
 
   return (
-    <div className="w-full overflow-hidden flex flex-col justify-center items-center">
+    <div className="w-full overflow-hidden flex flex-col justify-center items-center py-2">
       <div className="flex justify-between sm:w-11/12 sm:px-3 px-1 w-full">
         <Title>{title || "Title"}</Title>
         <p className="hidden sm:block">Ver Mas »</p>
       </div>
       {images?.length && (
         <Main>
-          <Slideshow ref={slideshow}>
+          <Slideshow
+            ref={slideshow}
+            onMouseEnter={(e) => {
+              clearInterval(interval.current);
+              interval.current = null;
+            }}
+            onMouseLeave={(e) => {
+              interval.current = setInterval(() => {
+                next();
+              }, 5000);
+            }}
+          >
             {images.map((element, i) => (
               <Slide key={i}>
                 <a href="">
@@ -143,7 +143,7 @@ const Slideshow = styled.div`
 `;
 
 const Slide = styled.div`
-  min-width: 50%;
+  min-width: 100%;
   overflow: hidden;
   transition: 0.3s ease all;
   z-index: 10;
@@ -155,6 +155,10 @@ const Slide = styled.div`
     width: 100%;
     height: 100%;
     vertical-align: top;
+  }
+  
+  @media screen and (min-width: 200px) {
+    min-width: 100%;
   }
 
   @media screen and (min-width: 400px) {
@@ -179,9 +183,12 @@ const TextSlide = styled.div`
   font-weight: 900;
   display: flex;
   justify-content: right;
+  align-items: center;
   @media screen and (max-width: 700px) {
-    position: relative;
-    background: black;
+    font-size: small;
+    svg{
+      display: none;
+    }
   }
 `;
 
@@ -216,9 +223,18 @@ const Button = styled.button`
         ? "drop-shadow(-2px 0px 0px #fff)"
         : "drop-shadow(2px 0px 0px #fff)"};
   }
+  @media screen and (max-width: 400px) {
+    svg{
+      display:none;
+    }
+  }
 `;
 
 const Title = styled.h1`
-  font-size: medium;
+  font-size: large;
   font-weight: 600;
+  @media screen and (max-width: 700px) {
+    font-size: medium;
+    font-weight: 600;
+  }
 `;
