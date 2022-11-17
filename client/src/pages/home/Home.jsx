@@ -4,10 +4,11 @@ import Paginado from "../../components/paginado/Paginado.jsx"
 import Card from '../../components/card/Card'
 import { getallProperties } from '../../redux/actions/index.js';
 import AdvancedFilters from '../../components/advanced-filters/AdvancedFilters.jsx';
+import  {findNameCity} from '../../utils/autocompleteUtils'
 
 export default function Home(){
 
-    const {properties, cities, filteredProperties} = useSelector(state => state);
+    const {properties,citiesA, filteredProperties} = useSelector(state => state);
     const paginado = (pageNumbers) =>{
         setCurrentPage(pageNumbers)
     }
@@ -24,6 +25,8 @@ export default function Home(){
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getallProperties())
+        console.log(currentProperties[0]);
+
     }, [])
 
     return(
@@ -53,8 +56,9 @@ export default function Home(){
                 currentProperties?.length && currentProperties.map((el)=> {
                     return( <div className=' my-2 px-4 lg:px-9 '>
                         <Card
-                        
                         key={el.id} id={el.id}
+                        city={findNameCity(citiesA,el.idCity)}
+                        modality ={el.modality}
                         address={el.address}
                         price={el.price}
                         images={el.images}
