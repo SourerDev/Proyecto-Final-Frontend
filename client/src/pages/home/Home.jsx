@@ -8,7 +8,7 @@ import  {findNameCity} from '../../utils/autocompleteUtils'
 
 export default function Home(){
 
-    const {properties,citiesA, filteredProperties} = useSelector(state => state);
+    const {properties,citiesA, filteredProperties,favorites} = useSelector(state => state);
     const paginado = (pageNumbers) =>{
         setCurrentPage(pageNumbers)
     }
@@ -25,9 +25,13 @@ export default function Home(){
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getallProperties())
-        console.log(currentProperties[0]);
+        let item = favorites?.join('&')
+        if (item?.length > 0) {
+            localStorage.setItem('favorite',`${item}`)
+        }
+        if(!localStorage.getItem('favorite')?.length) localStorage.setItem('favorite',``) 
 
-    }, [])
+    }, [favorites])
 
     return(
         <div>
@@ -53,10 +57,11 @@ export default function Home(){
             <div className='grid  my-3 bg-gray-300  lg:grid-cols-2 lg:my-0  sm:flex-col justify-center lg:bg-gray-300 '>
 
             {
-                currentProperties?.length && currentProperties.map((el)=> {
-                    return( <div className=' my-2 px-4 lg:px-9 '>
+                currentProperties?.length && currentProperties.map((el,i)=> {
+                    return( <div key={i} className=' my-2 px-4 lg:px-9 '>
                         <Card
-                        key={el.id} id={el.id}
+                        id={el.id}
+                        favorite={favorites.includes(el.id)}
                         city={findNameCity(citiesA,el.idCity)}
                         modality ={el.modality}
                         address={el.address}

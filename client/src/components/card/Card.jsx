@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { icons } from "../../images";
+import { removeFavorite,addFavorites} from '../../redux/actions/index'
 
 export default function Card({
   address,
@@ -13,6 +15,7 @@ export default function Card({
   user,
   favorite = false
 }) {
+  const dispatch = useDispatch()
   const { Heart, HeartBorder, User } = icons;
 
   const [state,setState] = useState({
@@ -30,10 +33,13 @@ export default function Card({
 
   }
 useEffect(()=>{
-  return ()=>{
-    console.log('Desmontado');
-  }
-})
+    if((favorite && state.favorite) || (!favorite && !state.favorite)) return
+    if((favorite && !state.favorite)){
+      dispatch(removeFavorite(id))
+    }else if((!favorite && state.favorite)){
+      dispatch(addFavorites([id]))
+    }
+},[state])
 
   return (
     <div className="flex flex-col justify-center items-center max-w-sm bg-white shadow p-2">
