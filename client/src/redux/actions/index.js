@@ -87,3 +87,29 @@ export function getCitiesA() {
     }
 }
 
+export function postSignUp(formData) {
+    return async function(dispatch) {
+        let { email, userName,  password, photo,
+            cellphone } = formData;
+        const fixedData = {
+            email,
+             userName,
+               password,
+               photo,
+              cellphone 
+      
+        }
+        console.log(fixedData)
+        await axios.post("http://localhost:3001/users/signUp", fixedData)
+        dispatch({type: "POST_SIGNUP", payload: fixedData})
+    }
+}
+
+
+
+// export function postSignUp(payload){
+//     return async function(dispatch){
+//        const postVideogame = await axios.post('http://localhost:3001/users/signUp',payload);
+//        return postVideogame;
+//     };
+// }
