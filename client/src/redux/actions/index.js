@@ -120,7 +120,22 @@ export function postSignUp(formData) {
     }
 }
 
-
+export function postLogin(formData) {
+    return async function(dispatch) {
+        let { email,   password
+             } = formData;
+        const fixedData = {
+            email,
+       password
+           
+              
+      
+        }
+        console.log(fixedData)
+        await axios.post("http://localhost:3001/users/login", fixedData)
+        dispatch({type: "POST_SIGNUP", payload: fixedData})
+    }
+}
 
 // export function postSignUp(payload){
 //     return async function(dispatch){

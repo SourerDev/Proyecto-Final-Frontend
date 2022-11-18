@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { postSignUp } from '../../redux/actions/index'
-import { isValidForm } from "../../utils/isValidForm.js";
+import { GoogleLogin } from '@react-oauth/google';
 
 export default function SignUp() {
     const navigate = useNavigate();
@@ -58,19 +58,28 @@ export default function SignUp() {
                             <form   
                             onSubmit={(e) => {
                          e.preventDefault()
-                         dispatch(postSignUp(data))
+                        
                          alert("users Creado")
                         // navigate("/redirect")
         }}>
                                 <div class="flex flex-row items-center justify-center lg:justify-start">
                                     <p class="text-lg mb-0 mr-4">Registrarse con:</p>
-                                    <button
+                                    {/* <button
                                         type="button"
                                         data-mdb-ripple="true"
                                         data-mdb-ripple-color="light"
-                                        class="inline-block p-3 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-1">
-
-                                        <svg viewBox="0 0 256 262" version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" className="w-5 h-5">
+                                        class="inline-block p-3 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-1"> */}
+<GoogleLogin
+  onSuccess={credentialResponse => {
+    dispatch(postSignUp())
+    console.log(credentialResponse);
+    console.log(GoogleLogin)
+  }}
+  onError={() => {
+    console.log('Login Failed');
+  }}
+/>
+                                        {/* <svg viewBox="0 0 256 262" version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" className="w-5 h-5">
                                             <g>
                                                 <path d="M255.878,133.451 C255.878,122.717 255.007,114.884 253.122,106.761 L130.55,106.761 L130.55,155.209 L202.497,155.209 C201.047,167.249 193.214,185.381 175.807,197.565 L175.563,199.187 L214.318,229.21 L217.003,229.478 C241.662,206.704 255.878,173.196 255.878,133.451" fill="#4285F4"></path>
                                                 <path d="M130.55,261.1 C165.798,261.1 195.389,249.495 217.003,229.478 L175.807,197.565 C164.783,205.253 149.987,210.62 130.55,210.62 C96.027,210.62 66.726,187.847 56.281,156.37 L54.75,156.5 L14.452,187.687 L13.925,189.152 C35.393,231.798 79.49,261.1 130.55,261.1" fill="#34A853"></path>
@@ -78,7 +87,7 @@ export default function SignUp() {
                                                 <path d="M130.55,50.479 C155.064,50.479 171.6,61.068 181.029,69.917 L217.873,33.943 C195.245,12.91 165.798,0 130.55,0 C79.49,0 35.393,29.301 13.925,71.947 L56.136,104.73 C66.726,73.253 96.027,50.479 130.55,50.479" fill="#EB4335"></path>
                                             </g>
                                         </svg>
-                                    </button>
+                                    </button> */}
 
 
 
