@@ -28,15 +28,33 @@ export function filterProperties(filteredProperties) {
     return {type: "FILTER_PROPERTIES", payload: filteredProperties}
 }
 
-export function postPorperty(formData, services) {
+export function postPorperty(data, services, files) {
     return async function(dispatch) {
-        let {antiquity, area, bathrooms, idCity, enviroments, floors, garage, rooms, adressName, adressNumber, images, modality, type, description, observation, price} = formData;
+        let realFiles = Object.values(files)
+        realFiles = realFiles.map((f) => {
+            const formData = new FormData()
+            formData.append('file', f)
+            formData.append('upload_preset', "unlnkewq")
+            return formData;
+        })
+        console.log(realFiles)
+
+        /* const formData = new FormData()
+        formData.append('file', realFiles[0])
+        formData.append('upload_preset', "unlnkewq")
+        const res = await axios.post("https://api.cloudinary.com/v1_1/deauhmx0e/image/upload", formData)
+        console.log(res) */
+
+
+        let {antiquity, area, bathrooms, idCity, enviroments, floors, garage, rooms, adressName, adressNumber,  modality, type, description, observation, price} = data;
         let trueServices = []
         for(const s in services) {
             if(services[s]) trueServices.push(s)
         }
+        
         const fixedData = {
-            images: [images],
+            /* images: ["https://res.cloudinary.com/dtzesfyt1/image/upload/v1667930749/casa1_kplpkg.jpg"], */
+            images: realFiles,
             modality,
             type,
             address: `${adressName} ${adressNumber}`,
@@ -54,6 +72,10 @@ export function postPorperty(formData, services) {
             observation,
         }
         console.log(fixedData)
+
+        
+        
+
         await axios.post("http://localhost:3001/properties/createProperty", fixedData)
         dispatch({type: "POST_PROPERTY", payload: fixedData})
     }
@@ -87,3 +109,21 @@ export function getCitiesA() {
     }
 }
 
+
+
+
+export function postCloudinary(files) {
+    return async function(dispatch) {
+        console.log("entro a la ction")
+        let realFiles = Object.values(files)
+        realFiles = realFiles.map((f) => {
+            const formData = new FormData()
+            formData.append('file', f)
+            formData.append('upload_preset', "unlnkewq")
+            return formData;
+        })
+        await axios.post("http://localhost:3001/properties/image", {image: realFiles[0]})
+        console.log(realFiles)
+        return {type: "CLOUD", payload: null}
+    }
+}
