@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {GET_CITIES_A,ADD_FAVORITES,REMOVE_FAVORITE} from './actionTypes'
+import {GET_CITIES_A,ADD_FAVORITES,REMOVE_FAVORITE, RESET_FILTERS} from './actionTypes'
 
 export function getallProperties(){
     return async function(dispatch){
@@ -109,7 +109,22 @@ export function postSignUp(formData) {
     }
 }
 
-
+export function postLogin(formData) {
+    return async function(dispatch) {
+        let { email,   password
+             } = formData;
+        const fixedData = {
+            email,
+       password
+           
+              
+      
+        }
+        console.log(fixedData)
+        await axios.post("http://localhost:3001/users/login", fixedData)
+        dispatch({type: "POST_SIGNUP", payload: fixedData})
+    }
+}
 
 // export function postSignUp(payload){
 //     return async function(dispatch){
@@ -117,3 +132,7 @@ export function postSignUp(formData) {
 //        return postVideogame;
 //     };
 // }
+
+export function resetFilters() {
+    return {type: RESET_FILTERS, payload: []}
+}
