@@ -1,1 +1,3 @@
 export const GET_CITIES_A = 'GET_CITIES_A'
+export const ADD_FAVORITES = 'SET_FAVORITES'
+export const REMOVE_FAVORITE = 'REMOVE_FAVORITE'

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {GET_CITIES_A} from './actionTypes'
+import {GET_CITIES_A,ADD_FAVORITES,REMOVE_FAVORITE} from './actionTypes'
 
 export function getallProperties(){
     return async function(dispatch){
@@ -84,6 +84,21 @@ export function getCitiesA() {
         };
     });
         dispatch({type:GET_CITIES_A, payload: cities})
+    }
+}
+
+
+export function addFavorites(values) {
+    return{
+        type: ADD_FAVORITES,
+        payload: values
+    }
+}
+
+export function removeFavorite(value){
+    return{
+        type: REMOVE_FAVORITE,
+        payload: value
     }
 }
 

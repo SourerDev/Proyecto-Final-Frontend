@@ -1,7 +1,7 @@
 import { Route,Routes } from "react-router-dom";
 import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
-import {getallProperties, getCities,getCitiesA} from './redux/actions/index';
+import {getallProperties, getCities,getCitiesA,addFavorites} from './redux/actions/index';
 import Landing from "./pages/landing/Landing.jsx";
 import Home from './pages/home/Home.jsx';
 import Detail from "./pages/detail/Detail.jsx";
@@ -16,6 +16,11 @@ function App() {
         dispatch(getallProperties())
         dispatch(getCities())
         dispatch(getCitiesA())
+        const StorageFavorite = localStorage.getItem('favorite')
+        if (StorageFavorite?.length) {
+          dispatch(addFavorites(StorageFavorite.split('&')))
+          localStorage.setItem('favorite',``)
+        }
     }, [])
 
   return (
