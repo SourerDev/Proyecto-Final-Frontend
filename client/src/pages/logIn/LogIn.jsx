@@ -1,7 +1,34 @@
 import { Link } from "react-router-dom";
-
-
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { postLogin } from '../../redux/actions/index'
+// import { useGoogleLogin } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
 export default function LogIn() {
+    // const login = useGoogleLogin({
+    //     onSuccess: tokenResponse => console.log(tokenResponse),
+    //   });
+    const dispatch = useDispatch();
+    const [data, setData] = useState({
+        email: "",   password : ""
+    });
+    console.log(data)
+    // const [errs, setErrs] = useState({});
+
+
+    
+    function handleChange(event) {
+        setData({    
+        ...data,
+                [event.target.name]: event.target.value
+            }) 
+          }
+        
+          useEffect(() => {
+            // console.log(data)
+           
+          }, [data])
     return (
         <div>
             <div className="flex flex-row justify-between p-4 relative shadow">
@@ -46,10 +73,23 @@ export default function LogIn() {
                             />
                         </div>
                         <div class="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
-                            <form>
+                            <form     onSubmit={(e) => {
+                         e.preventDefault()
+                         dispatch(postLogin(data))
+                        }}>
                                 <div class="flex flex-row items-center justify-center lg:justify-start">
                                     <p class="text-lg mb-0 mr-4">Iniciar sesion con:</p>
-                                    <button
+                                    <GoogleLogin
+  onSuccess={credentialResponse => {
+    
+    console.log(credentialResponse);
+  }}
+  onError={() => {
+    console.log('Login Failed');
+  }}
+/>;
+                                    <button 
+                                    // onClick={() => login()}
                                         type="button"
                                         data-mdb-ripple="true"
                                         data-mdb-ripple-color="light"
@@ -63,7 +103,7 @@ export default function LogIn() {
                                                 <path d="M130.55,50.479 C155.064,50.479 171.6,61.068 181.029,69.917 L217.873,33.943 C195.245,12.91 165.798,0 130.55,0 C79.49,0 35.393,29.301 13.925,71.947 L56.136,104.73 C66.726,73.253 96.027,50.479 130.55,50.479" fill="#EB4335"></path>
                                             </g>
                                         </svg>
-                                    </button>
+                                        </button>;
 
 
 
@@ -80,20 +120,24 @@ export default function LogIn() {
 
                                 <div class="mb-6">
                                     <input
+                                    name="email"
                                         type="text"
                                         class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                         id="exampleFormControlInput2"
                                         placeholder="Email address"
+                                        onChange={(e) => handleChange(e)}
                                     />
                                 </div>
 
 
                                 <div class="mb-6">
                                     <input
+                                    name="password"
                                         type="password"
                                         class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                         id="exampleFormControlInput2"
                                         placeholder="Password"
+                                        onChange={(e) => handleChange(e)}
                                     />
                                 </div>
 
@@ -109,14 +153,14 @@ export default function LogIn() {
                                 </div>
 
                                 <div class="text-center lg:text-left">
-                                    <Link to="/">
+                                    {/* <Link to="/"> */}
                                         <button
-                                            type="button"
+                                            type="submit"
                                             class="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                                         >
                                             Iniciar sesion
                                         </button>
-                                    </Link>
+                                    {/* </Link> */}
                                 </div>
                             </form>
                         </div>
