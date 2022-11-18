@@ -3,27 +3,31 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { postSignUp } from '../../redux/actions/index'
-import { isValidForm } from "../../utils/isValidForm.js";
+import { isValidSingUp} from "../../utils/isValidSingUp";
 
 export default function SignUp() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [data, setData] = useState({
-        email: "", userName: "",  password : "", cellphone:"" , photo:""
+        email: "", userName: "",  password : "", password2: "", 
     });
-    console.log(data)
-    // const [errs, setErrs] = useState({});
+    
+    const [errs, setErrs] = useState({});
     function handleChange(event) {
         setData({    
-        ...data,
-                [event.target.name]: event.target.value
-            }) 
-          }
-        
-          useEffect(() => {
-            // console.log(data)
-           
-          }, [data])
+            ...data,
+            [event.target.name]: event.target.value
+        })
+        setErrs(isValidSingUp({    
+            ...data,
+            [event.target.name]: event.target.value
+        })) 
+    }
+    
+    useEffect(() => {
+        console.log(data)
+        console.log(errs)
+    }, [data, errs])
     return (
         <div>
             <div className="flex flex-row justify-between p-4 relative shadow">
@@ -59,7 +63,7 @@ export default function SignUp() {
                             onSubmit={(e) => {
                          e.preventDefault()
                          dispatch(postSignUp(data))
-                         alert("users Creado")
+                         alert("usuario creado con exito")
                         // navigate("/redirect")
         }}>
                                 <div class="flex flex-row items-center justify-center lg:justify-start">
@@ -99,11 +103,23 @@ export default function SignUp() {
                                         type="email"
                                         class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                         id="FormControlInput1"
-                                        placeholder="Email address"
+                                        placeholder="e-mail"
                                         onChange={(e) => handleChange(e)}
                                     />
+                                    {errs.email && <p>{errs.email}</p>}
                                 </div>
 
+                                <div class="mb-6">
+                                    <input
+                                        name="userName"
+                                        type="userName"
+                                        class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                        id="FormControlInput3"
+                                        placeholder="nombre de usuario"
+                                        onChange={(e) => handleChange(e)}
+                                    />
+                                    {errs.userName && <p>{errs.userName}</p>}
+                                </div>
 
                                 <div class="mb-6">
                                     <input
@@ -111,29 +127,23 @@ export default function SignUp() {
                                         type="password"
                                         class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                         id="FormControlInput2"
-                                        placeholder="Password"
+                                        placeholder="contraseña"
                                         onChange={(e) => handleChange(e)}
                                     />
+                                    {errs.password && <p>{errs.password}</p>}
                                 </div>
                                 <div class="mb-6">
                                     <input
-                                    name="userName"
-                                        type="userName"
+                                    name="password2"
+                                        type="password"
                                         class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                        id="FormControlInput3"
-                                        placeholder="userName"
+                                        id="FormControlInput2"
+                                        placeholder="repita la contraseña"
                                         onChange={(e) => handleChange(e)}
                                     />
                                 </div>
+                                
                                 {/* <div class="mb-6">
-                                    <input
-                                        type="surname"
-                                        class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                        id="FormControlInput4"
-                                        placeholder="surname"
-                                    />
-                                </div> */}
-                                <div class="mb-6">
                                     <input
                                         name="cellphone"
                                         type="cellphone"
@@ -142,15 +152,13 @@ export default function SignUp() {
                                         placeholder="cellphone"
                                         onChange={(e) => handleChange(e)}
                                     />
-                                </div>
+                                </div> */}
 
-                                <div><input type="text" 
-                                name="photo"
-                             onChange={(e) => handleChange(e)} placeholder="ingrese link de la img..." /></div>
 
                                 <div class="text-center lg:text-left">
                                     {/* <Link to="/home"> */}
                                         <button
+                                            disabled={Object.keys(errs).length ? true : false}
                                             type="submit"
                                             class="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                                         >

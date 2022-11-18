@@ -104,19 +104,8 @@ export function removeFavorite(value){
 
 export function postSignUp(formData) {
     return async function(dispatch) {
-        let { email, userName,  password, photo,
-            cellphone } = formData;
-        const fixedData = {
-            email,
-             userName,
-               password,
-               photo,
-              cellphone 
-      
-        }
-        console.log(fixedData)
-        await axios.post("http://localhost:3001/users/signUp", fixedData)
-        dispatch({type: "POST_SIGNUP", payload: fixedData})
+        await axios.post("http://localhost:3001/users/signUp", formData)
+        dispatch({type: "POST_SIGNUP", payload: formData})
     }
 }
 
