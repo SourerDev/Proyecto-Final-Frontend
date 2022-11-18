@@ -2,9 +2,12 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import LandingSearch from "../landingSearch/LandingSearch";
 //className="flex justify-center items-center bg-cover bg-no-repeat bg-center shadow min-h-screen bg-[url('https://i.pinimg.com/originals/2f/9d/84/2f9d84d72b045ecb50399e9177b73288.jpg
+import { useSelector } from "react-redux";
+import UserIcon from "../user-icon/UserIcon";
 
 const HeaderLanding = () => {
   const Slider = slider();
+  const {user} = useSelector(state => state);
   return (
     <div className="flex flex-col m-1 sm:min-h-screen">
       <div className="flex flex-row justify-between p-4 relative shadow">
@@ -18,17 +21,18 @@ const HeaderLanding = () => {
           <h1 className="self-start">Properties & You</h1>
           
         </div>
-        <div className="">
           <div className="flex items-center space-x-4">
-            <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-              <Link to="/login">
-              <button className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-500">
-                Log in
-              </button>
-              </Link>
+            <div className="hidden items-center justify-end md:flex md:flex-1 w-14 lg:m-0">
+              {
+                user.email ? <UserIcon user={user}/> :
+                <Link to="/login">
+                  <button className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-500">
+                    Log in
+                  </button>
+                </Link>
+              }
             </div>
           </div>
-        </div>
       </div>
       <div className="  border-1 rounded relative w-full h-96 sm:h-[32rem] lg:h-[40rem]">
         <Slider>

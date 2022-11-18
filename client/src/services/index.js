@@ -3,12 +3,15 @@ import {apiProperties} from './api/baseApi.js';
 const property = 'properties';
 const user = 'users'
 
-const callsApis = {
-    getProperties: function(params) {
+const callsApi = {
+    getProperties: function() {
         return apiProperties.get(`${property}/createProperty`)
     },
+    login: function (data) {
+        return apiProperties.post(`${user}/login`,data)
+    }
 }
 
 
 
-export default callsApis;
+export default callsApi;
