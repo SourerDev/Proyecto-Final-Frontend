@@ -13,11 +13,11 @@ import SignUp from "./pages/signup/SignUp";
 function App() {
   const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(getallProperties())
-        dispatch(getCities())
-        dispatch(getCitiesA())
-        const StorageFavorite = localStorage.getItem('favorite')
-        if (StorageFavorite?.length) {
+      dispatch(getallProperties())
+      dispatch(getCities())
+      dispatch(getCitiesA())
+      const StorageFavorite = localStorage.getItem('favorite')
+      if (StorageFavorite?.length) {
           dispatch(addFavorites(StorageFavorite.split('&')))
           localStorage.setItem('favorite',``)
         }
