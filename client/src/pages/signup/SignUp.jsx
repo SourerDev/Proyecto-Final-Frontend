@@ -66,7 +66,7 @@ export default function SignUp() {
                          e.preventDefault()
                          dispatch(postSignUp(data))
                          alert("usuario creado con exito")
-                        // navigate("/redirect")
+                         navigate("/login")
         }}>
                                 <div class="flex flex-row items-center justify-center lg:justify-start">
                                     <p class="text-lg mb-0 mr-4">Registrarse con:</p>
@@ -148,7 +148,7 @@ export default function SignUp() {
                                     name="password2"
                                         type="password"
                                         class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                        id="FormControlInput2"
+                                        id="FormControlInput56"
                                         placeholder="repita la contraseña"
                                         onChange={(e) => handleChange(e)}
                                     />
