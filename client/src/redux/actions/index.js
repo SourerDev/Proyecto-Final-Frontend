@@ -104,8 +104,15 @@ export function removeFavorite(value){
 
 export function postSignUp(formData) {
     return async function(dispatch) {
-        await axios.post("http://localhost:3001/users/signUp", formData)
-        dispatch({type: "POST_SIGNUP", payload: formData})
+        let {email, password} = formData
+        let data = {
+            user_type: "userLogged",
+            email,
+            password,
+        }
+        const res = await axios.post("http://localhost:3001/users/createUser", data)
+        console.log(res)
+        dispatch({type: "POST_SIGNUP", payload: data})
     }
 }
 
@@ -115,14 +122,14 @@ export function postLogin(formData) {
              } = formData;
         const fixedData = {
             email,
-       password
-           
-              
+            password
+               
       
         }
         console.log(fixedData)
-        await axios.post("http://localhost:3001/users/login", fixedData)
-        dispatch({type: "POST_SIGNUP", payload: fixedData})
+        const res = await axios.post("http://localhost:3001/users/login", fixedData)
+        console.log(res.data)
+        dispatch({type: "POST_SIGNUP", payload: res.data})
     }
 }
 
@@ -135,4 +142,8 @@ export function postLogin(formData) {
 
 export function resetFilters() {
     return {type: RESET_FILTERS, payload: []}
+}
+
+export function loadUser(userData) {
+    return {type: "LOAD_USER", payload: userData}
 }

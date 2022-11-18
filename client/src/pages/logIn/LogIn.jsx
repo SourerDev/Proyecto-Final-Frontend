@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { postLogin } from '../../redux/actions/index'
 // import { useGoogleLogin } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
+import axios from "axios";
 export default function LogIn() {
     // const login = useGoogleLogin({
     //     onSuccess: tokenResponse => console.log(tokenResponse),
@@ -26,9 +27,9 @@ export default function LogIn() {
           }
         
           useEffect(() => {
-            // console.log(data)
-           
+            
           }, [data])
+
     return (
         <div>
             <div className="flex flex-row justify-between p-4 relative shadow">
