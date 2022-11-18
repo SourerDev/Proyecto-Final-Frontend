@@ -60,6 +60,7 @@ export default function Home(){
                 currentProperties?.length && currentProperties.map((el,i)=> {
                     return( <div key={i} className=' my-2 px-4 lg:px-9 '>
                         <Card
+                        key={el.id}
                         id={el.id}
                         favorite={favorites.includes(el.id)}
                         city={findNameCity(citiesA,el.idCity)}
