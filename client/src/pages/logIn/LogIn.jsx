@@ -1,22 +1,23 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useState} from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { postLogin } from '../../redux/actions/index'
-// import { useGoogleLogin } from '@react-oauth/google';
+import {loadUserInfo} from '../../redux/actions/index'
+import callsApi from '../../services'
 import { GoogleLogin } from '@react-oauth/google';
-import axios from "axios";
+// import { useGoogleLogin } from '@react-oauth/google';
+
 export default function LogIn() {
     // const login = useGoogleLogin({
     //     onSuccess: tokenResponse => console.log(tokenResponse),
     //   });
+    const navigate = useNavigate()
     const dispatch = useDispatch();
     const [data, setData] = useState({
         email: "",   password : ""
     });
-    console.log(data)
-    // const [errs, setErrs] = useState({});
-
+    const [response, setResponse] = useState({state: false, msg: ""})
+    
 
     
     function handleChange(event) {
@@ -24,11 +25,29 @@ export default function LogIn() {
         ...data,
                 [event.target.name]: event.target.value
             }) 
-          }
-        
-          useEffect(() => {
+    }
+     function handleSubmit(data) {
+        try {
+            callsApi.login(data).then(r => {
+                if(r.data.user){
+                    dispatch(loadUserInfo(r.data.user))
+                    setResponse({state: true, msg: ""})
+                    navigate("/")
+                }
+            }).catch(err =>{
+                console.log(err.response.data.Error)
+                let msg = err.response.data.Error
+                console.log(msg)
+                if(msg) setResponse({state: false, msg})
+            })
             
-          }, [data])
+        }
+        catch(e) {
+            console.log(e)
+            
+        }
+    }
+
 
     return (
         <div>
@@ -74,41 +93,22 @@ export default function LogIn() {
                             />
                         </div>
                         <div class="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
-                            <form     onSubmit={(e) => {
-                         e.preventDefault()
-                         dispatch(postLogin(data))
-                        }}>
+                            <form  onSubmit={(e) => {
+                                e.preventDefault()
+                                handleSubmit(data)
+                            }}>
                                 <div class="flex flex-row items-center justify-center lg:justify-start">
                                     <p class="text-lg mb-0 mr-4">Iniciar sesion con:</p>
                                     <GoogleLogin
-  onSuccess={credentialResponse => {
-    
-    console.log(credentialResponse);
-  }}
-  onError={() => {
-    console.log('Login Failed');
-  }}
-/>;
-                                    <button 
-                                    // onClick={() => login()}
-                                        type="button"
-                                        data-mdb-ripple="true"
-                                        data-mdb-ripple-color="light"
-                                        class="inline-block p-3 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-1">
-
-                                        <svg viewBox="0 0 256 262" version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" className="w-5 h-5">
-                                            <g>
-                                                <path d="M255.878,133.451 C255.878,122.717 255.007,114.884 253.122,106.761 L130.55,106.761 L130.55,155.209 L202.497,155.209 C201.047,167.249 193.214,185.381 175.807,197.565 L175.563,199.187 L214.318,229.21 L217.003,229.478 C241.662,206.704 255.878,173.196 255.878,133.451" fill="#4285F4"></path>
-                                                <path d="M130.55,261.1 C165.798,261.1 195.389,249.495 217.003,229.478 L175.807,197.565 C164.783,205.253 149.987,210.62 130.55,210.62 C96.027,210.62 66.726,187.847 56.281,156.37 L54.75,156.5 L14.452,187.687 L13.925,189.152 C35.393,231.798 79.49,261.1 130.55,261.1" fill="#34A853"></path>
-                                                <path d="M56.281,156.37 C53.525,148.247 51.93,139.543 51.93,130.55 C51.93,121.556 53.525,112.853 56.136,104.73 L56.063,103 L15.26,71.312 L13.925,71.947 C5.077,89.644 0,109.517 0,130.55 C0,151.583 5.077,171.455 13.925,189.152 L56.281,156.37" fill="#FBBC05"></path>
-                                                <path d="M130.55,50.479 C155.064,50.479 171.6,61.068 181.029,69.917 L217.873,33.943 C195.245,12.91 165.798,0 130.55,0 C79.49,0 35.393,29.301 13.925,71.947 L56.136,104.73 C66.726,73.253 96.027,50.479 130.55,50.479" fill="#EB4335"></path>
-                                            </g>
-                                        </svg>
-                                        </button>;
-
-
-
-
+                                        onSuccess={credentialResponse => {
+                                            
+                                            console.log(credentialResponse);
+                                        }}
+                                        onError={() => {
+                                            console.log('Login Failed');
+                                        }}
+                                />
+                                    
 
                                 </div>
 
@@ -136,7 +136,7 @@ export default function LogIn() {
                                     name="password"
                                         type="password"
                                         class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                        id="exampleFormControlInput2"
+                                        id="exampleFormControlInput26"
                                         placeholder="Password"
                                         onChange={(e) => handleChange(e)}
                                     />
@@ -155,6 +155,7 @@ export default function LogIn() {
 
                                 <div class="text-center lg:text-left">
                                     {/* <Link to="/"> */}
+                                    {(!response.state && response.msg.length > 0) && <p className='px-2 m-2 text-red-700 bg-red-200 rounded-md'>{response.msg}</p>}
                                         <button
                                             type="submit"
                                             class="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"

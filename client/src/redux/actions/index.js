@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {GET_CITIES_A,ADD_FAVORITES,REMOVE_FAVORITE, RESET_FILTERS} from './actionTypes'
+import {GET_CITIES_A,ADD_FAVORITES,REMOVE_FAVORITE, RESET_FILTERS,LOAD_USER_INFO} from './actionTypes'
 
 export function getallProperties(){
     return async function(dispatch){
@@ -104,12 +104,14 @@ export function removeFavorite(value){
 
 export function postSignUp(formData) {
     return async function(dispatch) {
-        let {email, password} = formData
+        let {email, password, userName} = formData
         let data = {
             user_type: "userLogged",
-            email,
-            password,
+            email:email,
+            userName: userName,
+            password: password,
         }
+        console.log(data)
         const res = await axios.post("http://localhost:3001/users/createUser", data)
         console.log(res)
         dispatch({type: "POST_SIGNUP", payload: data})
@@ -144,6 +146,6 @@ export function resetFilters() {
     return {type: RESET_FILTERS, payload: []}
 }
 
-export function loadUser(userData) {
-    return {type: "LOAD_USER", payload: userData}
+export function loadUserInfo(userData) {
+    return {type: LOAD_USER_INFO, payload: userData}
 }

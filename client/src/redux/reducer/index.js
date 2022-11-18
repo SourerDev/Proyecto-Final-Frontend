@@ -1,4 +1,4 @@
-import {GET_CITIES_A, ADD_FAVORITES,REMOVE_FAVORITE, RESET_FILTERS} from '../actions/actionTypes.js';
+import {GET_CITIES_A, ADD_FAVORITES,REMOVE_FAVORITE, RESET_FILTERS,LOAD_USER_INFO} from '../actions/actionTypes.js';
 
 const initialState = {
     properties : [],
@@ -7,6 +7,7 @@ const initialState = {
     cities: [],
     citiesA:{},
     favorites: [],
+    user: {},
 }
 
 
@@ -54,6 +55,11 @@ export default function rootReducer(state = initialState,action){
             return {
                 ...state,
                 filteredProperties: []
+            }
+        case LOAD_USER_INFO: 
+            return {
+                ...state,
+                user: action.payload
             }
             default:
                return state
