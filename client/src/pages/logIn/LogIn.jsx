@@ -4,13 +4,16 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {loadUserInfo} from '../../redux/actions/index'
 import callsApi from '../../services'
-import { GoogleLogin } from '@react-oauth/google';
-// import { useGoogleLogin } from '@react-oauth/google';
+import LoginButton from "../login";
+import Prueva from "../butoon";
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 export default function LogIn() {
     // const login = useGoogleLogin({
     //     onSuccess: tokenResponse => console.log(tokenResponse),
     //   });
+    // const {user} = useAuth0();
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const [data, setData] = useState({
@@ -18,8 +21,8 @@ export default function LogIn() {
     });
     const [response, setResponse] = useState({state: false, msg: ""})
     
-
-    
+console.log(data)
+    console.log(data)
     function handleChange(event) {
         setData({    
         ...data,
@@ -28,7 +31,7 @@ export default function LogIn() {
     }
      function handleSubmit(data) {
         try {
-            callsApi.login(data).then(r => {
+            callsApi.login(data ).then(r => {
                 if(r.data.user){
                     dispatch(loadUserInfo(r.data.user))
                     setResponse({state: true, msg: ""})
@@ -99,15 +102,9 @@ export default function LogIn() {
                             }}>
                                 <div class="flex flex-row items-center justify-center lg:justify-start">
                                     <p class="text-lg mb-0 mr-4">Iniciar sesion con:</p>
-                                    <GoogleLogin
-                                        onSuccess={credentialResponse => {
-                                            
-                                            console.log(credentialResponse);
-                                        }}
-                                        onError={() => {
-                                            console.log('Login Failed');
-                                        }}
-                                />
+                                  <Prueva
+                                  
+                                  />
                                     
 
                                 </div>
@@ -121,7 +118,8 @@ export default function LogIn() {
 
                                 <div class="mb-6">
                                     <input
-                                    name="email"
+                                    
+                                        name="email"
                                         type="text"
                                         class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                         id="exampleFormControlInput2"
