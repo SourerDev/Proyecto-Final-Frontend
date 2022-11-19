@@ -3,7 +3,7 @@ import {GET_CITIES_A,ADD_FAVORITES,REMOVE_FAVORITE, RESET_FILTERS,LOAD_USER_INFO
 
 export function getallProperties(){
     return async function(dispatch){
-        const resu = await axios.get('http://localhost:3001/properties/getAll')
+        const resu = await axios.get('/properties/getAll')
         dispatch({
             type:"GET_ALL_PROPERTIES",
             payload: resu.data.payload
@@ -13,7 +13,7 @@ export function getallProperties(){
 
 export function getCities() {
     return async function(dispatch) {
-        const result = await axios.get('http://localhost:3001/cities')
+        const result = await axios.get('/cities')
         const sortedCities = result.data.payload.sort((a, b) => {
             if(a.city > b.city) return 1;
             if(a.city < b.city) return - 1;
@@ -54,7 +54,7 @@ export function postPorperty(formData, services) {
             observation,
         }
         console.log(fixedData)
-        await axios.post("http://localhost:3001/properties/createProperty", fixedData)
+        await axios.post("/properties/createProperty", fixedData)
         dispatch({type: "POST_PROPERTY", payload: fixedData})
     }
 }
@@ -62,7 +62,7 @@ export function postPorperty(formData, services) {
 export function getIdProperties(id){
     return async function (dispatch){
         
-            let json = await axios.get(`http://localhost:3001/properties/findById/${id}`)
+            let json = await axios.get(`/properties/findById/${id}`)
             console.log(json)
             return dispatch({
                 type:"GET_ID_PROPERTIES",
@@ -73,7 +73,7 @@ export function getIdProperties(id){
 
 export function getCitiesA() {
     return async function(dispatch) {
-        const result = await axios.get('http://localhost:3001/cities')
+        const result = await axios.get('/cities')
         let infoApiData = result.data.payload;
         const cities = {};
         infoApiData.forEach((element) => {
@@ -112,7 +112,7 @@ export function postSignUp(formData) {
             password: password,
         }
         console.log(data)
-        const res = await axios.post("http://localhost:3001/users/createUser", data)
+        const res = await axios.post("/users/createUser", data)
         console.log(res)
         dispatch({type: "POST_SIGNUP", payload: data})
     }
@@ -129,7 +129,7 @@ export function postLogin(formData) {
       
         }
         console.log(fixedData)
-        const res = await axios.post("http://localhost:3001/users/login", fixedData)
+        const res = await axios.post("/users/login", fixedData)
         console.log(res.data)
         dispatch({type: "POST_SIGNUP", payload: res.data})
     }
