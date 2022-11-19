@@ -26,12 +26,12 @@ function App() {
   return (
     <div className="flex flex-col ">
       <Routes>
-        <Route path="/" element={<><Landing/></>}/>
+        <Route path="/" element={<><Nav rutes={false} /><Landing/></>}/>
         <Route path="/home" element={<><Nav/><Home/></>}/>
         <Route path="/detail/:id" element={<><Nav/><Detail/></>}/>
         <Route path="/createProperty" element={<><Nav/><Form/></>}/>
-        <Route path="/login" element={<LogIn/>}/>
-        <Route path="/signup" element={<SignUp/>}/>
+        <Route path="/login" element={<><Nav login={false}/><LogIn/></>}/>
+        <Route path="/signup" element={<><Nav login={false}/><SignUp/></>}/>
       </Routes>
     </div>
   );
