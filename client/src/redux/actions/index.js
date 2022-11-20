@@ -21,7 +21,7 @@ export function getallProperties() {
 export function getCities() {
   return async function (dispatch) {
     const result = callsApi.getCities()
-    const sortedCities = result.data.payload.sort((a, b) => {
+    const sortedCities = result.data?.payload.sort((a, b) => {
       if (a.city > b.city) return 1;
       if (a.city < b.city) return -1;
       return 0;
