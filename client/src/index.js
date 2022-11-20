@@ -5,9 +5,7 @@ import App from "./App";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { store } from "./redux/store/index";
-import axios from "axios";
-axios.defaults.baseURL = process.env.CLIENT_PF || "http://localhost:3001/";
+import { store } from "./redux/store/index";  
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
