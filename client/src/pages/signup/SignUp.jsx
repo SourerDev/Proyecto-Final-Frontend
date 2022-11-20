@@ -28,42 +28,16 @@ export default function SignUp() {
     
     
     return (
-        <div>
-            <div className="flex flex-row justify-between p-4 relative shadow">
-                <div className="text-2xl font-bold sm:text-3xl sm:font-extrabold tracking-wide flex space-x-4">
-
-                    <img
-                        className="h-8 w-auto sm:h-12"
-                        src="https://images.vexels.com/media/users/3/142719/isolated/preview/f07a4b2d673e9935e58e6ff8262d4a1d-icono-de-casas-de-triangulo.png"
-                        alt=""
-                    />
-                    <h1 className="self-start md:flex justify-center">Properties & You</h1>
-
-                </div>
-                <nav className="space-x-10 lg:flex items-center  lg:basis-1/2">
-                    <Link
-                        to="/"
-                        className=" text-base font-medium text-gray-500 hover:text-gray-900 "
-                    >
-                        INICIO
-                    </Link>
-                    <Link
-                        to="/home"
-                        className="text-base font-medium text-gray-500 hover:text-gray-900"
-                    >
-                        HOME
-                    </Link>
-                </nav>
-            </div>
+        <div className="h-[87vh]">
             
-            <section className="h-screen">
+            <section className="h-full">
 
                 <div className="px-6 h-full text-gray-800">
                     <div
                         className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6"
                     >
                         <div
-                            className="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0"
+                            className=" hidden lg:flex grow-0 shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0"
                         >
                             <img
                                 src="https://img.freepik.com/vector-premium/registro-linea-o-registro-inicie-sesion-obtener-cuenta-aplicacion-telefono-inteligente-interfaz-usuario-aplicacion-movil-contrasena-segura-interfaz-usuario-banner-web-acceso-ilustracion-vector-gente-dibujos-animados_2175-1060.jpg?w=2000"
@@ -168,7 +142,7 @@ export default function SignUp() {
                                         <button
                                             disabled={!Object.keys(errs).length && data.email.length ? false : true}
                                             type="submit"
-                                            className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out disabled:bg-red-400"
+                                            className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out disabled:bg-red-400 disabled:cursor-not-allowed"
                                         >
                                             Registrarme
                                         </button>

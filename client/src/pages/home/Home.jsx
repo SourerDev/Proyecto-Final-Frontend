@@ -49,12 +49,12 @@ export default function Home(){
             <br />
         <div className='flex lg:flex-row flex-col '>
         
-        <div className='px-2'>
+        <div className='px-2 lg:w-1/4'>
         <AdvancedFilters/>
         </div>
         
             
-            <div className='grid  my-3 bg-gray-300  lg:grid-cols-2 lg:my-0  sm:flex-col justify-center lg:bg-gray-300 '>
+            <div className='lg:w-3/4 grid  my-3 bg-gray-300  lg:grid-cols-2 lg:my-0  sm:flex-col justify-center lg:bg-gray-300 '>
 
             {
                 currentProperties?.length && currentProperties.map((el,i)=> {
