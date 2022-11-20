@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
   GET_CITIES_A,
   ADD_FAVORITES,
@@ -7,9 +6,11 @@ import {
   LOAD_USER_INFO,
 } from "./actionTypes";
 
+import callsApi from '../../services'
+
 export function getallProperties() {
   return async function (dispatch) {
-    const resu = await axios.get("/properties/getAll");
+    const resu = await callsApi.getProperties()
     dispatch({
       type: "GET_ALL_PROPERTIES",
       payload: resu.data.payload,
@@ -19,8 +20,8 @@ export function getallProperties() {
 
 export function getCities() {
   return async function (dispatch) {
-    const result = await axios.get("/cities");
-    const sortedCities = result.data.payload.sort((a, b) => {
+    const result = callsApi.getCities()
+    const sortedCities = result.data?.payload.sort((a, b) => {
       if (a.city > b.city) return 1;
       if (a.city < b.city) return -1;
       return 0;
@@ -77,14 +78,14 @@ export function postPorperty(formData, services) {
       observation,
     };
     console.log(fixedData);
-    await axios.post("/createProperty", fixedData);
+    await callsApi.postPorperty(fixedData);
     dispatch({ type: "POST_PROPERTY", payload: fixedData });
   };
 }
 
 export function getIdProperties(id) {
   return async function (dispatch) {
-    let json = await axios.get(`/properties/findById/${id}`);
+    let json = await callsApi.getIdProperties(id);
     console.log(json);
     return dispatch({
       type: "GET_ID_PROPERTIES",
@@ -93,9 +94,11 @@ export function getIdProperties(id) {
   };
 }
 
+
+
 export function getCitiesA() {
   return async function (dispatch) {
-    const result = await axios.get("/cities");
+    const result = await callsApi.getCities();
     let infoApiData = result.data.payload;
     const cities = {};
     infoApiData.forEach((element) => {
@@ -133,7 +136,8 @@ export function postSignUp(formData) {
       password: password,
     };
     console.log(data);
-    const res = await axios.post("/users/createUser", data);
+    
+    const res = await callsApi.postSignUp(data)
     console.log(res);
     dispatch({ type: "POST_SIGNUP", payload: data });
   };
@@ -147,7 +151,7 @@ export function postLogin(formData) {
       password,
     };
     console.log(fixedData);
-    const res = await axios.post("/users/login", fixedData);
+    const res = await callsApi.login(fixedData)
     console.log(res.data);
     dispatch({ type: "POST_SIGNUP", payload: res.data });
   };
