@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import FormCheckbox from "../../components/form-checkbox/FormCheckbox.jsx";
 import FormInputNumber from "../../components/form-input-number/FormInputNumber.jsx";
-import { postCloudinary, postPorperty } from '../../redux/actions/index';
+import {postPorperty} from '../../redux/actions/index';
 import { isValidForm } from "../../utils/isValidForm.js";
 import { inputNumber, inputServices } from "../../utils/formInputs.js";
 import AutocompleteSearch from "../../components/autocomplete-search/autocompleteSearch.jsx";
@@ -16,7 +16,7 @@ export default function Form() {
     modality: "",
     type: "",
     city: "",
-    idCity: null,
+    idCity: "",
     adressName: "",
     adressNumber: "",
     floors: "",
@@ -31,10 +31,9 @@ export default function Form() {
     price: "",
   });
   const [services, setServices] = useState({});
-  
-  const [files, setFiles] = useState({})
-  const [fileName, setFileName] = useState({})
-  const [arrFileNames, setArrFileNames] = useState([])
+  const [files, setFiles] = useState({});
+  const [fileName, setFileName] = useState({});
+  const [arrFileNames, setArrFileNames] = useState([]);
   const [errs, setErrs] = useState({});
   
   function handleChange(event) {
@@ -75,10 +74,7 @@ export default function Form() {
 
     function onFileChange(e) {
       let file = e.target.files[0]
-      
-      if(["png", "jpg", "jpeg"].includes(file.type.split("/")[1])) {
-        console.log(e)
-        console.log(file)
+      if(["png", "jpg", "jpeg"].includes(file.type.split("/")[1]) && arrFileNames.length < 7) {
         setFiles({
           ...files,
           [file.name] : file
@@ -87,6 +83,7 @@ export default function Form() {
         setArrFileNames(Object.values({...fileName, [file.name]: file.name}))
       }
     }
+
     function onDeleteFile(e, name) {
       e.preventDefault()
       delete files[name]
@@ -95,14 +92,7 @@ export default function Form() {
       setFileName({...fileName})
       setArrFileNames(Object.values({...fileName}))
     } 
-    
-    useEffect(() => {
-      console.log('use effect')
-      console.log(files)
-      console.log(fileName)
-      console.log(arrFileNames)
-    }, [files])
-    
+      
     
   return (<div className="flex flex-row  ">
     <div className="bg-blue-50 basis-1/2">
@@ -111,9 +101,8 @@ export default function Form() {
         encType="multipart/form-data"
         onSubmit={(e) => {
           e.preventDefault()
-          //dispatch(postPorperty(data, services, files))
-          dispatch(postCloudinary(files))
-          //navigate("/home")
+          dispatch(postPorperty(data, services, files))
+          navigate("/home")
         }}
       >
         <div className="xl px-48">
@@ -134,7 +123,7 @@ export default function Form() {
             <option value="Finca">Finca</option>
           </select></div>
         {errs.type && <p className=" text-center mt-2 text-sm text-red-600 dark:text-red-500">{errs.type}</p>}
-        <br />
+        <br/>
         <div className="px-48">
 
           <AutocompleteSearch
@@ -175,10 +164,6 @@ export default function Form() {
               </div>
             </>
           }
-
-
-
-
         </div>
         <br />
         <p>Imagenes de la propiedad (.JPG, .JPEG, .PNG)</p>
@@ -191,32 +176,14 @@ export default function Form() {
         {!arrFileNames.length ? <p>Elija un archivo</p> 
           : arrFileNames.map((name) => {
             return (
-              <div>
+              <div key={name}>
                 <button onClick={(e) => onDeleteFile(e, name)}>x</button>
                 <p>{name}</p>
               </div>
             )
           })
         }
-        {/* <label htmlFor="images" className=" after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 text-base italic font-semibold text-center text-gray-600 dark:text-white" >Imagen de la propiedad </label> */}
-        {/* <input type="text" className="sm:text-center
-        form-control
-        block
-        w-full
-        px-3
-        py-1.5
-        text-base
-        font-normal
-        text-gray-700
-        bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-      " name="images" onChange={(e) => handleChange(e)} placeholder="ingrese link de la img..." />
-        {errs.images && <p className=" text-center mt-2 text-sm text-red-600 dark:text-red-500">{errs.images}</p>} */}
+        {!arrFileNames.length && <p className=" text-center mt-2 text-sm text-red-600 dark:text-red-500">suba por lo menos una imagen</p>}
         <br />
 
         <p className="text-base italic font-semibold text-center text-gray-600 dark:text-white">A continuacion ingrese la cantidad en cada campo segun su propiedad</p>
@@ -266,46 +233,7 @@ export default function Form() {
 
       </form>
     </div>
-     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-     
+      
     <div class=" ">
                         <div class="  col-start-1 col-end-3 row-start-1 " >
                             <img src={data.images} alt="" class="w-full  h-full object-cover rounded-lg  " loading="lazy"></img>
@@ -392,15 +320,9 @@ export default function Form() {
 
 
                                     <span class="m-3 text-xl p-0">{data.antiquity} </span><span class="text-black text-xl font-normal">antiguedad</span>
-
-
                                 </dd>
-
-
                             </div>
                         </dl>
-
-
                         <p
                             class="mt-4 text-sm leading-6 col-start-1  dark:text-slate-400">
                          <h1 class="dark:text-black text-xl m-5"> Descripcion </h1>
