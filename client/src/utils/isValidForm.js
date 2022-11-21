@@ -4,7 +4,7 @@ export function isValidForm(data, allAdress) {
   if(!data.modality.length) errs.modality = 'seleccione un tipo de operacion';
   if(!data.type.length) errs.type = 'seleccione un tipo de propiedad';
   if(!data.idCity) {
-    console.log('desde valid', data.idCity) 
+    
     errs.idCity = 'seleccione la ciudad donde se encuentra la propiedad'
   } ;
 
@@ -14,8 +14,6 @@ export function isValidForm(data, allAdress) {
   else if (data.adressNumber.length > 5) errs.adressNumber = 'el numero es muy largo';
   /* if(allAdress.includes(`${data.adressName} ${data.adressNumber}`)) errs.adressName = 'la direccion ya esta asociada a una propiedad'; */
 
-  if(!data.images.length) errs.images = 'ingrese link a una imagen';
-  
   if(!data.floors.length) errs.floors = 'ingrese la cantidad de pisos';
   else if(parseInt(data.floors) < 1) errs.floors = 'debe disponer de almenos un piso';
   else if(parseInt(data.floors) > 54) errs.floors = 'supera el limite de pisos';
