@@ -37,8 +37,8 @@ export default function Paginado({propertiesPage, properties, setCurrentPage, cu
         </a>
     </li>
     </button>         
-            {pageNumbers && pageNumbers.map(number =>(
-           <button  className="boton"  onClick={()=>paginado(number)}>  <li>
+            {pageNumbers && pageNumbers.map((number,i) =>(
+           <button key={i}  className="boton"  onClick={()=>paginado(number)}>  <li>
            <a href="#" class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-red-100 hover:red-gray-700 dark:bg-red-800 dark:border-red-700 dark:text-red-400 dark:hover:bg-grared-700 dark:hover:text-white">{number}</a>
          </li></button> 
             ))} 
