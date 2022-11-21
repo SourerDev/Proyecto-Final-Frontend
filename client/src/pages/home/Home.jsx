@@ -35,6 +35,7 @@ export default function Home(){
 
     return(
         <div>
+            
             <div class="flex justify-center  bg-sky-200 ">
                 <ul className='my-8 '>                  
                     <Paginado
@@ -49,7 +50,7 @@ export default function Home(){
             <br />
         <div className='flex lg:flex-row flex-col '>
         
-        <div className='px-2 lg:w-1/4'>
+        <div className='px-2 mb-10 lg:w-1/4'>
         <AdvancedFilters/>
         </div>
         
