@@ -68,25 +68,19 @@ export default function LogIn() {
       [event.target.name]: event.target.value,
     });
   }
-  function handleSubmit(data) {
+  async function handleSubmit(data) {
     try {
-      callsApi
-        .login(data)
-        .then((r) => {
-          if (r.data.user) {
-            dispatch(loadUserInfo(r.data.user));
-            setResponse({ state: true, msg: "" });
-            navigate("/");
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          let msg = err.response.data.Error;
-          console.log(msg);
-          if (msg) setResponse({ state: false, msg });
-        });
-    } catch (e) {
-      console.log(e);
+      const response = await callsApi.login(data);
+      const { Message, token } = response.data;
+      dispatch(loadUserInfo(Message))
+      setResponse({state:true, msg:""})
+      navigate("/");
+
+      
+    } catch (error) {
+      const msg = error.response.data.Error
+      if (msg) setResponse({ state: false, msg });
+      console.log(error.response)
     }
   }
 
@@ -160,12 +154,11 @@ export default function LogIn() {
                       {response.msg}
                     </p>
                   )}
-                  <button
+                  <input
                     type="submit"
                     className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                  >
-                    Iniciar sesion
-                  </button>
+                    value={"Iniciar Sesión"}
+                  />
                   {/* </Link> */}
                 </div>
               </form>
