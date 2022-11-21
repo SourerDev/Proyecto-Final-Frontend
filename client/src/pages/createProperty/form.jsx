@@ -166,26 +166,32 @@ export default function Form() {
           }
         </div>
         <br />
-        <p>Imagenes de la propiedad (.JPG, .JPEG, .PNG)</p>
+       
+        
+      <p className=" flex justify-center text-base italic font-semibold text-center text-gray-600">Imagenes de la propiedad (.JPG, .JPEG, .PNG)</p>
+      <div className=" flex justify-center mt-4">
         <input 
+          className="flex justify-center"
           type="file"
           name="images"
           id="images"
           onChange={onFileChange}
           />
-        {!arrFileNames.length ? <p>Elija un archivo</p> 
+          </div>
+        {!arrFileNames.length ? <p className=" flex justify-center mt-2">Elija dos archivo</p> 
           : arrFileNames.map((name) => {
             return (
-              <div key={name}>
-                <button onClick={(e) => onDeleteFile(e, name)}>x</button>
-                <p>{name}</p>
+              <div className="flex justify-center my-2 px-2" key={name}>
+                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={(e) => onDeleteFile(e, name)}><svg className="w-2 h-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" /></svg></button>
+                <p className="px-2">{name}</p>
               </div>
             )
           })
         }
+        
         {!arrFileNames.length && <p className=" text-center mt-2 text-sm text-red-600 dark:text-red-500">suba por lo menos una imagen</p>}
         <br />
-
+      
         <p className="text-base italic font-semibold text-center text-gray-600 dark:text-white">A continuacion ingrese la cantidad en cada campo segun su propiedad</p>
         <br />
         {inputNumber.map(i =>
