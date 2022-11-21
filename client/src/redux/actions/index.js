@@ -150,8 +150,9 @@ export function removeFavorite(value) {
 
 export function postSignUp(formData) {
   return async function (dispatch) {
-    let { email, password, userName } = formData;
+    let { email, password, userName, photo } = formData;
     let data = {
+      photo: photo,
       user_type: "userLogged",
       email: email,
       userName: userName,
