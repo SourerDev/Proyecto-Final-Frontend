@@ -18,7 +18,14 @@ export default function LogIn() {
     });
     const [response, setResponse] = useState({state: false, msg: ""})
     
-
+    function mostrarContrasena(){
+        var tipo = document.getElementById("exampleFormControlInput26");
+        if(tipo.type == "password"){
+            tipo.type = "text";
+        }else{
+            tipo.type = "password";
+        }
+    }
     
     function handleChange(event) {
         setData({    
@@ -105,14 +112,17 @@ export default function LogIn() {
 
 
                                 <div className="mb-6">
-                                    <input
+                                   <div> <input
                                     name="password"
                                         type="password"
                                         className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                         id="exampleFormControlInput26"
                                         placeholder="Password"
                                         onChange={(e) => handleChange(e)}
-                                    />
+
+                                    /></div>
+                                    <div> <button  type="button" onClick={(e) => mostrarContrasena(e)}>Mostrar Contraseña</button></div>
+                                  
                                 </div>
 
                                 <div className="flex justify-between items-center mb-6">

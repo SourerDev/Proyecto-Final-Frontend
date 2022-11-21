@@ -5,8 +5,9 @@ const HeaderLanding = (images) => {
   const Slider = slider();
   return (
       <div className="  border-1 rounded relative w-full h-96 sm:h-[32rem] lg:h-[40rem]">
+       
         <Slider>
-          <div className="flex justify-center items-center">
+          <div className="flex justify-center items-center mt-96">
             <LandingSearch />
           </div>
         </Slider>
