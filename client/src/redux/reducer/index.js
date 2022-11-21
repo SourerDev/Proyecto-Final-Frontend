@@ -1,4 +1,4 @@
-import {GET_CITIES_A, ADD_FAVORITES,REMOVE_FAVORITE, RESET_FILTERS,LOAD_USER_INFO} from '../actions/actionTypes.js';
+import {GET_CITIES_A, ADD_FAVORITES,REMOVE_FAVORITE, RESET_FILTERS,LOAD_USER_INFO, UPDATE_USER} from '../actions/actionTypes.js';
 
 const initialState = {
     properties : [],

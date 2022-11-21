@@ -5,6 +5,7 @@ import {
   REMOVE_FAVORITE,
   RESET_FILTERS,
   LOAD_USER_INFO,
+  UPDATE_USER
 } from "./actionTypes";
 
 import callsApi from "../../services";
@@ -33,7 +34,7 @@ export function getCities() {
 
 export function filterProperties(filteredProperties) {
   console.log(filteredProperties);
-  return { type: "FILTER_PROPERTIES", payload: filteredProperties };
+  return { type: "FILTER_PROPERTIES", payload: filteredProperties.length ? filteredProperties : "No se encontraron propiedades con los filtros indicados" };
 }
 
 export function postPorperty(data, services, files) {
@@ -194,3 +195,4 @@ export function resetFilters() {
 export function loadUserInfo(userData) {
   return { type: LOAD_USER_INFO, payload: userData };
 }
+

@@ -100,7 +100,7 @@ export default function Nav({ rutes = true, login = true }) {
               <div className="mt-6">
                 <nav className="flex flex-col">
                   {user.email && (
-                    <Link className="">
+                    <Link to={"/user"} className="">
                       <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50 text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
                         <img
                           className="w-12 h-12 rounded-full"
