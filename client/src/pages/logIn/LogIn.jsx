@@ -4,12 +4,33 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {loadUserInfo} from '../../redux/actions/index'
 import callsApi from '../../services'
-import LoginButton from "../login";
-import Prueva from "../butoon";
-import { useAuth0 } from "@auth0/auth0-react";
+import { authentication } from "../../firebase/config/firebase-config";
+import {
+  signInWithPopup,
+  GoogleAuthProvider,
+  GithubAuthProvider,
+} from "firebase/auth"
+
+
 
 
 export default function LogIn() {
+
+    const handleClickGoogle = async () => {
+        const provider = new GoogleAuthProvider();
+        signInWithPopup(authentication, provider)
+          .then((result) => {
+            console.log(result);
+            localStorage.setItem(
+              "accessToken",
+              JSON.stringify(result.user.accessToken)
+            );
+           
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      };
     // const login = useGoogleLogin({
     //     onSuccess: tokenResponse => console.log(tokenResponse),
     //   });
@@ -102,10 +123,10 @@ console.log(data)
                             }}>
                                 <div class="flex flex-row items-center justify-center lg:justify-start">
                                     <p class="text-lg mb-0 mr-4">Iniciar sesion con:</p>
-                                  <Prueva
-                                  
-                                  />
-                                    
+                                 
+                                    <button onClick={handleClickGoogle}>
+                  <p>Google</p>
+                </button>
 
                                 </div>
 

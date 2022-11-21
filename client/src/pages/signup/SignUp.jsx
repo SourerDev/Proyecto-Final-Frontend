@@ -4,8 +4,12 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { postSignUp } from '../../redux/actions/index';
 import { isValidSingUp} from "../../utils/isValidSingUp";
-
-import Prueva from "../butoon";
+import { authentication } from "../../firebase/config/firebase-config";
+import {
+  signInWithPopup,
+  GoogleAuthProvider,
+ 
+} from "firebase/auth"
 
 
 export default function SignUp() {
@@ -14,7 +18,22 @@ export default function SignUp() {
     const [data, setData] = useState({
         email: "", userName: "",  password : "", password2: "", 
     });
-    
+    console.log(data)
+    const handleClickGoogle = async () => {
+        const provider = new GoogleAuthProvider();
+        signInWithPopup(provider)
+          .then((result) => {
+            
+            console.log(result);
+        
+           
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      };
+
+     
     const [errs, setErrs] = useState({});
     function handleChange(event) {
         setData({    
@@ -83,7 +102,10 @@ export default function SignUp() {
                                 <div className="flex flex-row items-center justify-center lg:justify-start">
                                     <p className="text-lg mb-0 mr-4">Registrarse con:</p>
                                     
-                                  <Prueva/>
+                                        <button onClick={handleClickGoogle}>
+                  <p>Google</p>
+                </button>
+
                                         
                                 </div>
 
@@ -158,7 +180,7 @@ export default function SignUp() {
                                     </Link>
                                     
                                         <button
-                                            disabled={!Object.keys(errs).length && data.email.length ? false : true}
+                                            // disabled={!Object.keys(errs).length && data.email.length ? false : true}
                                             type="submit"
                                             className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out disabled:bg-red-400"
                                         >
