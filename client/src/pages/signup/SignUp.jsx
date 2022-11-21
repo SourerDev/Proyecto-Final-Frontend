@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { postSignUp } from '../../redux/actions/index';
 import { isValidSingUp} from "../../utils/isValidSingUp";
-import { GoogleLogin } from '@react-oauth/google';
+
 
 
 export default function SignUp() {
@@ -56,16 +56,7 @@ export default function SignUp() {
                                 <div className="flex flex-row items-center justify-center lg:justify-start">
                                     <p className="text-lg mb-0 mr-4">Registrarse con:</p>
                                     
-                                    <GoogleLogin
-                                        onSuccess={credentialResponse => {
-                                            dispatch(postSignUp())
-                                            console.log(credentialResponse);
-                                            console.log(GoogleLogin)
-                                        }}
-                                        onError={() => {
-                                            console.log('Login Failed');
-                                        }}
-                                    />
+                                    <p>aqui</p>
                                         
                                 </div>
 

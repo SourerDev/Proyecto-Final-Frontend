@@ -2,15 +2,17 @@ import { Link } from "react-router-dom";
 import { useState} from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {loadUserInfo} from '../../redux/actions/index'
+import {loadUserInfo, postSignUp} from '../../redux/actions/index'
 import callsApi from '../../services'
-import { GoogleLogin } from '@react-oauth/google';
-// import { useGoogleLogin } from '@react-oauth/google';
+import { authentication } from "../../firabase/Firabase.Config.jsx";
+import {
+  signInWithPopup,
+  GoogleAuthProvider,
+  GithubAuthProvider,
+} from "firebase/auth"
 
 export default function LogIn() {
-    // const login = useGoogleLogin({
-    //     onSuccess: tokenResponse => console.log(tokenResponse),
-    //   });
+    
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const [data, setData] = useState({
@@ -18,7 +20,30 @@ export default function LogIn() {
     });
     const [response, setResponse] = useState({state: false, msg: ""})
     
+    const handleClickGoogle = async () => {
+        const provider = new GoogleAuthProvider();
+        let data = {} 
+        signInWithPopup(authentication, provider)
+          .then((result) => {
+            data ={
+                email: result.user.email,
+                photo: result.user.photoURL,
+                userName: result.user.displayName,
+                password: result.user.uid
+            }
+            postSignUp(data);
+            console.log(result.user)
+            console.log('Data: »',data);
+            localStorage.setItem(
+              "accessToken",
+              JSON.stringify(result.user.accessToken)
+            );
 
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      };
     
     function handleChange(event) {
         setData({    
@@ -35,16 +60,14 @@ export default function LogIn() {
                     navigate("/")
                 }
             }).catch(err =>{
-                console.log(err.response.data.Error)
+                console.log(err)
                 let msg = err.response.data.Error
                 console.log(msg)
                 if(msg) setResponse({state: false, msg})
-            })
-            
+            }) 
         }
         catch(e) {
-            console.log(e)
-            
+            console.log(e)     
         }
     }
 
@@ -72,17 +95,9 @@ export default function LogIn() {
                             }}>
                                 <div className="flex flex-row items-center justify-center lg:justify-start">
                                     <p className="text-lg mb-0 mr-4">Iniciar sesion con:</p>
-                                    <GoogleLogin
-                                        onSuccess={credentialResponse => {
-                                            
-                                            console.log(credentialResponse);
-                                        }}
-                                        onError={() => {
-                                            console.log('Login Failed');
-                                        }}
-                                />
-                                    
-
+                                    <div onClick={handleClickGoogle}>
+                                        <p>Google</p>
+                                    </div>  
                                 </div>
 
                                 <div
