@@ -32,6 +32,7 @@ function App() {
         <Route path="/createProperty" element={<><Nav/><Form/></>}/>
         <Route path="/login" element={<><Nav login={false}/><LogIn/></>}/>
         <Route path="/signup" element={<><Nav login={false}/><SignUp/></>}/>
+
       </Routes>
     </div>
   );
