@@ -31,6 +31,7 @@ export default function LogIn() {
       password: user.uid,
     };
     let loginValue = false;
+   
     try {
       const post = await callsApi.postSignUp(data);
       if (post?.data === "Usuario creado") {
@@ -39,6 +40,7 @@ export default function LogIn() {
     } catch (error) {
       let msg = error.response.data;
       if (msg === "User already exist") {
+        console.log('google: »',msg);
         loginValue = true;
       }
     }
@@ -48,8 +50,8 @@ export default function LogIn() {
         email: data.email,
         password: data.password,
       });
-      const { user, token } = login.data;
-      dispatch(loadUserInfo(user));
+      const { Message, token } = login.data;
+      dispatch(loadUserInfo(Message));
       setResponse({ state: true, msg: "" });
       navigate("/");
     }

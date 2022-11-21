@@ -12,7 +12,9 @@ export default function Home(){
     const paginado = (pageNumbers) =>{
         setCurrentPage(pageNumbers)
     }
-    const newProperties = filteredProperties?.length ? filteredProperties : properties;
+    
+
+    const newProperties = filteredProperties?.length && typeof(filteredProperties) !== "string" ? filteredProperties : properties;
     
     const [currentPage, setCurrentPage] = useState(1);
     const [propertiesPage, setPropertiesPage] = useState(4);
@@ -24,6 +26,7 @@ export default function Home(){
     
     const dispatch = useDispatch()
     useEffect(() => {
+        console.log(filteredProperties)
         dispatch(getallProperties())
         let item = favorites?.join('&')
         if (item?.length > 0) {
@@ -33,6 +36,19 @@ export default function Home(){
 
     }, [favorites])
 
+    if(typeof(filteredProperties) === "string") {
+        return ( 
+            <div className='flex lg:flex-row flex-col'>
+                <div className='px-2 lg:w-1/4'>
+                <AdvancedFilters/>
+                </div>
+
+                <div className='lg:w-3/4 flex justify-center '>
+                    <h4 className="p-2 text-lg">{filteredProperties}</h4>
+                </div>
+            </div>
+        )
+    }
     return(
         <div>
             <div class="flex justify-center  bg-sky-200 ">
@@ -55,7 +71,6 @@ export default function Home(){
         
             
             <div className='lg:w-3/4 grid  my-3 bg-gray-300  lg:grid-cols-2 lg:my-0  sm:flex-col justify-center lg:bg-gray-300 '>
-
             {
                 currentProperties?.length && currentProperties.map((el,i)=> {
                     return( <div key={i} className=' my-2 px-4 lg:px-9 '>

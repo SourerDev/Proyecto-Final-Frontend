@@ -28,7 +28,7 @@ export default function UserIcon({ user }) {
           <div className="flex flex-col divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 p-2">
             <h1 className="text-center w-full text-lg">{user.name || "Username"}</h1>
             <div className="w-full flex flex-col py-1">
-              <Link className="w-full py-1 text-gray-500 hover:text-gray-900 text-center">
+              <Link to={"/user"} className="w-full py-1 text-gray-500 hover:text-gray-900 text-center">
                 Ver perfil
               </Link>
               <Link className="w-full py-1 text-center">
