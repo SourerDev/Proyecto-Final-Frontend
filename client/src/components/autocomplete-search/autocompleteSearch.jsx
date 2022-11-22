@@ -6,7 +6,7 @@ export default function AutocompleteSearch({apiData, city, stateHandleChange, re
     <div>
       <div className="border-1 roundedjustify item-center ">
         <input ref={refCity}
-        className=" w-full placeholder:text-black "
+        className=" w-full placeholder:text-black p-2"
           list="ubications"
           name="city"
           value={city}
