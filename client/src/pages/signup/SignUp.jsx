@@ -4,10 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { postSignUp } from '../../redux/actions/index';
 import { isValidSingUp} from "../../utils/isValidSingUp";
-
+import swal from 'sweetalert'
 
 
 export default function SignUp() {
+
+    
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [data, setData] = useState({
@@ -50,21 +52,26 @@ export default function SignUp() {
                                 onSubmit={(e) => {
                                 e.preventDefault()
                                 dispatch(postSignUp(data))
-                                alert("usuario creado con exito")
+                                swal({
+                                    title: "Exelente",
+                                    text: "Usuario Creado!",
+                                    icon: "success",
+                                  })
                                 navigate("/login")
                             }}>
-                                <div className="flex flex-row items-center justify-center lg:justify-start">
-                                    <p className="text-lg mb-0 mr-4">Registrarse con:</p>
+                                <div class="h-20 grid grid-cols-3 gap-4 content-center">
+                                     <div>  <Link to="/login">
+                                        <button className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out disabled:bg-red-400 disabled:cursor-not-allowed">Iniciar sesión</button>
+                                           </Link>
+                                     </div>
+                                     <div><Link to="/signup">
+                                        <button className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out disabled:bg-red-400 disabled:cursor-not-allowed">registrarse</button>
+                                          </Link>
+                                     </div>
+                                </div>
+                               
+                              
                                     
-                                    <p>aqui</p>
-                                        
-                                </div>
-
-                                <div
-                                    className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"
-                                >
-                                    <p className="text-center font-semibold mx-4 mb-0">Or</p>
-                                </div>
 
 
                                 <div className="mb-6">
@@ -126,17 +133,16 @@ export default function SignUp() {
 
 
                                 <div className="flex flex-col items-start text-center lg:text-left">
-                                    <Link to="/login">
-                                        <button className="px-2 py-1">Iniciar sesión</button>
-                                    </Link>
-                                    
-                                        <button
+                                    <button
                                             disabled={!Object.keys(errs).length && data.email.length ? false : true}
                                             type="submit"
                                             className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out disabled:bg-red-400 disabled:cursor-not-allowed"
-                                        >
-                                            Registrarme
+                                       
+                                       >
+                                            Crear Usuario
                                         </button>
+                                    
+                                        
                                     
                                 </div>
                             </form>
