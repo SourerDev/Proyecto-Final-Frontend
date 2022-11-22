@@ -4,9 +4,9 @@ import LandingSearch from "../landingSearch/LandingSearch";
 const HeaderLanding = (images) => {
   const Slider = slider();
   return (
-      <div className="  border-1 rounded relative w-full h-96 sm:h-[32rem] lg:h-[40rem]">
+      <div className="  border-1 rounded relative w-full h-96 sm:h-[32rem] lg:h-[20rem]">
         <Slider>
-          <div className="flex justify-center items-center">
+          <div className="flex justify-center items-center mt-80">
             <LandingSearch />
           </div>
         </Slider>
@@ -23,12 +23,12 @@ export function slider(
   ]
 ) {
   return styled.div`
-    width: 90%;
-    height: 95%;
+    width: 80%;
+    height: 75%;
     background-image: url(${images[3]});
     background-size: 100% 100%;
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 50%;
     display: flex;
     align-items: center;
@@ -36,8 +36,8 @@ export function slider(
 
     transform: translate(-50%, -50%);
     border-radius: 10px;
-    transition: all 1s;
-    animation: slide 40s ease infinite;
+    transition: all 3s;
+    animation: slide 10s ease infinite;
     @keyframes slide {
       25% {
         background-image: url(${images[0]});

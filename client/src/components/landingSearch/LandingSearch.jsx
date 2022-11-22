@@ -40,19 +40,19 @@ export default function LandingSearch() {
 
 
   return (
-    <div className=' m-2 sm:flex items-center '>
+    <div className=' m-2 sm:flex items-center  bg-gray-800 px-8 py-2 '>
       <select
-        className='border-4  rounded m-2'
+        className='border-4  rounded m-2 p-2'
         name="operation"
         onChange={stateHandleChange}
         value={state.operation}
       >
-        <option value="" disabled hidden>Operación</option>
+        <option  value="" disabled hidden>Operación</option>
         <option value="Venta">Comprar</option>
         <option value="Alquiler">Alquilar</option>
       </select>
       <select
-        className='m-2 border-4 rounded'
+        className='m-2 border-4 rounded p-2'
         name="propertyType"
         onChange={stateHandleChange}
         value={state.propertyType}
@@ -82,7 +82,7 @@ export default function LandingSearch() {
           disabled={citiesA[state.city] || !state.city ? false : true}
           onClick={() => dispatch(filterProperties(filter(properties, state)))}
         >
-          <span class="  px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+          <span class=" p-2  px-7 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 " >
             Buscar </span>
 
         </button>
