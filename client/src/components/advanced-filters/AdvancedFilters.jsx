@@ -93,17 +93,17 @@ export default function AdvancedFilters(){
     
 
     return(
-        <>
+        < >
         
-        <div className="flex justify-center">
+        <div className=" flex justify-center   bg-gray-300">
             <button 
-                className="p-2 bg-blue-500 rounded-full"
+                className="p-2 m-2 bg-blue-500 rounded-full"
                 onClick={() => dispatch(filterProperties(filter(properties, state)))}
             >
                 Aplicar filtros
             </button>
             <button 
-                className="p-2 bg-blue-500 rounded-full"
+                className="p-2  m-2 bg-blue-500 rounded-full"
                 onClick={() => {
                     /* dispatch(resetFilters()) */
                     reset([refPrecioMin, refPrecioMax, refOperation, refType, refEnviroments, refFloors, refRooms, refBathrooms, refGarage, refAreaMin, refAreMax, refAntiquityMin, refAntiquityMax, refCity]);
