@@ -7,6 +7,8 @@ import {postPorperty} from '../../redux/actions/index';
 import { isValidForm } from "../../utils/isValidForm.js";
 import { inputNumber, inputServices } from "../../utils/formInputs.js";
 import AutocompleteSearch from "../../components/autocomplete-search/autocompleteSearch.jsx";
+import { useEffect } from "react";
+import { } from "../../images/inTimeHouse.jpg"
 
 export default function Form() {
   const navigate = useNavigate();
@@ -75,6 +77,9 @@ export default function Form() {
     function onFileChange(e) {
       let file = e.target.files[0]
       if(["png", "jpg", "jpeg"].includes(file.type.split("/")[1]) && arrFileNames.length < 7) {
+        console.log(e)
+        file.value = e.target.value
+        console.log(file)
         setFiles({
           ...files,
           [file.name] : file
@@ -93,6 +98,9 @@ export default function Form() {
       setArrFileNames(Object.values({...fileName}))
     } 
       
+    useEffect(() => {
+      console.log(files)
+    },[files])
     
   return (<div className="flex flex-row  ">
     <div className="bg-blue-50 basis-1/2">
@@ -242,7 +250,7 @@ export default function Form() {
       
     <div class=" ">
                         <div class="  col-start-1 col-end-3 row-start-1 " >
-                            <img src={data.images} alt="" class="w-full  h-full object-cover rounded-lg  " loading="lazy"></img>
+                            <img src="https://i.pinimg.com/564x/52/fd/81/52fd81d9aaa47e6ff7d3f1daa0c5136a.jpg" alt="" class="w-full  h-full object-cover rounded-lg  " loading="lazy"></img>
                         </div>
                         <div class="relative p-3 col-start-1 row-start-1 flex flex-col-reverse rounded-lg bg-gradient-to-t from-black/75 via-black/0">
                             <h1 class="mt-1 text-lg font-semibold text-white sm:text-slate-900  dark:sm:text-black">{data.city}</h1>
