@@ -2,6 +2,7 @@ import Footer from "../../components/footer/Footer.jsx";
 import HeaderLanding from "../../components/header/HeaderLanding.jsx";
 import CardsLanding from "../../components/infoLanding/InfoLanding";
 import  Carousel from "../../components/carousel/Carousel"
+import ServiciosExtras from "../../components/ServiciosExtras/serviciosExtras.jsx";
 
 const images = [
   "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/casa-de-campo-moderna30-1639245321.jpg",
@@ -24,8 +25,9 @@ export default function Landing() {
   return (
     <div >
       <HeaderLanding/>
-      <Carousel title={'Venta'} images={images2}/>
-      <Carousel title={'Alquiler'} images={images2}/>
+      <div className="mb-auto">  <Carousel  title={'Venta'} images={images2}/>
+      <Carousel title={'Alquiler'} images={images2}/></div>
+      <ServiciosExtras/>
       <CardsLanding/>
       <Footer />
     </div>
