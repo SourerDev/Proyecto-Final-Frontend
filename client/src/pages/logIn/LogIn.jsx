@@ -159,21 +159,22 @@ export default function LogIn() {
                  
                 </div>
 
-                <div className="text-center lg:text-left h-20 grid grid-cols-3 gap-4 content-center">
+                <div className="flex flex-col mr-20 items-start text-center lg:text-left lg:h-20 grid lg:grid-cols-3 lg:gap-4 lg:content-center">
                   {/* <Link to="/"> */}
                   {!response.state && response.msg.length > 0 && (
                     <p classNameName="px-2 m-2 text-red-700 bg-red-200 rounded-md">
                       {response.msg}
                     </p>
                   )}
+                  <br />
                   <input
                     type="submit"
                     className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                     value={"Iniciar Sesión"}
                   />
-                  {/* </Link> */} 
+                  
                    <Link to="/signup">
-                      <button className=" inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out disabled:bg-red-400 disabled:cursor-not-allowed">
+                      <button className=" mt-8 inline-block px-7 py-3 bg-red-400 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out disabled:bg-red-400 disabled:cursor-not-allowed">
                         Registrarme
                       </button>
                     </Link>
