@@ -9,5 +9,7 @@ module.exports = {
         'regal-blue': '#e63946',
       }},
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar'),
+  ],
 }
