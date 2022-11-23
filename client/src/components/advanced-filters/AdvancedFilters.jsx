@@ -95,7 +95,7 @@ export default function AdvancedFilters(){
     return(
         < >
         
-        <div className=" flex justify-center   bg-gray-300">
+        <div className=" flex justify-center ">
             <button 
                 className="p-2 m-2 bg-blue-500 rounded-full"
                 onClick={() => dispatch(filterProperties(filter(properties, state)))}
@@ -112,7 +112,7 @@ export default function AdvancedFilters(){
                 Limpiar filtros
             </button>
         </div>
-        <div className= ' h-full   bg-gray-300'>
+        <div className= ' h-full '>
             <div >
              <br/>
             <div className=" h-0  flex flex-col p-2 pb-20">
