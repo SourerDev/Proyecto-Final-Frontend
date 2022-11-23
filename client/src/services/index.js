@@ -22,6 +22,13 @@ const callsApi = {
     },
     postSignUp: function(data){
         return apiProperties.post(`${user}/createuser`,data)
+    },
+
+
+
+
+    postComment: function(data) {
+        return apiProperties.put("in_process_url", data)
     }
 }
 
