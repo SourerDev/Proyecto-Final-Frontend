@@ -11,7 +11,7 @@ export default function ModalAF({ setModalOn }) {
 
     return (
         <div className="fixed top-0 inset-0 z-50 p-2 backdrop-blur-sm flex justify-center items-center" onDoubleClick={handleCancelClick}>
-                <div className="h-[97vh] w-[30rem] overflow-hidden flex flex-col justify-center  bg-white p-12  border-4 border-sky-500 rounded-xl scrollbar">
+                <div className="h-[97vh] w-[30rem] overflow-hidden flex flex-col justify-center  bg-white p-12  border-4 border-sky-500 rounded-xl scrollbar-thin scrollbar-thumb-blue-700/5 scrollbar-track-blue-300/5 overflow-y-scroll">
                     <div className="relative w-full h-full">
                     <button onClick={handleCancelClick} className=" rounded
                                                                     w-10
