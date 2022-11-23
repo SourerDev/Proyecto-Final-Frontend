@@ -10,7 +10,7 @@ export default function ModalAF({ setModalOn }) {
 
 
     return (
-        <div className="fixed top-0 inset-0 z-50 p-2 backdrop-blur-sm flex justify-center items-center">
+        <div className="fixed top-0 inset-0 z-50 p-2 backdrop-blur-sm flex justify-center items-center" onClick={handleCancelClick}>
                 <div className="h-[97vh] w-[30rem] overflow-hidden flex flex-col justify-center  bg-white p-12  border-4 border-sky-500 rounded-xl scrollbar ">
                     <div className="relative w-full h-full">
                     <button onClick={handleCancelClick} className=" rounded
@@ -24,7 +24,7 @@ export default function ModalAF({ setModalOn }) {
                                 
                                                                    ">
                         X</button>
-                    <div className="w-full absolute top-1"><AdvancedFilters /></div>
+                    <div className="w-full absolute top-1"><AdvancedFilters setModalOn={setModalOn} /></div>
                     </div>
                     
                     {/* <button onClick={handleCancelClick} className=" rounded
