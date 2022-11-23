@@ -8,7 +8,7 @@ import { isValidForm } from "../../utils/isValidForm.js";
 import { inputNumber, inputServices } from "../../utils/formInputs.js";
 import AutocompleteSearch from "../../components/autocomplete-search/autocompleteSearch.jsx";
 import { useEffect } from "react";
-import { } from "../../images/inTimeHouse.jpg"
+
 
 export default function Form() {
   const navigate = useNavigate();
