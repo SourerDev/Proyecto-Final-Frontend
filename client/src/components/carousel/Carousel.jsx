@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { findNameCity } from "../../utils/autocompleteUtils";
 import { Link } from "react-router-dom";
+//import {useD}
 
 export default function Carousel({ title, images }) {
   const { citiesA } = useSelector((state) => state);
