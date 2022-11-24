@@ -1,42 +1,44 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { getIdProperties, postComment } from "../../redux/actions/index";
-import { useEffect, useState } from "react";
+import { getIdProperties, postComment} from "../../redux/actions/index";
+import { useEffect, useState, useRef } from "react";
 import { findNameCity } from "../../utils/autocompleteUtils";
 import Question from "../../components/question/Question";
 
 
-export default function Detail() {
 
+export default function Detail() {
+    const refQuestion = useRef()
     let { id } = useParams();
     const dispatch = useDispatch()
 
     const payload = useSelector((state) => state.detail)
     const city = useSelector((state) => state.citiesA)
-    const ciudad = findNameCity(city, payload.idCity)
+    const user =  useSelector(state => state.user)
+    const ciudad = findNameCity(city, payload?.idCity)
     const [comment, setComment] = useState("")
     
 
     useEffect(() => {
-        if (payload && !payload.address) {
-            dispatch(getIdProperties(id)) 
-        }
-        console.log(comment)
-        console.log(payload)
-    }, [ id, payload, comment])
+        dispatch(getIdProperties(id)) 
+    }, [id])
 
-    function commentSumbit(e) {
-        //e.preventDefault()
+     function commentSumbit(e) {
+        e.preventDefault()
         const data = {
             id,
-            id_User: "325c1472-31fc-475f-8894-b12daf86b8ee",
+            id_User: user.id_User,
             questions: comment,
             answer: ""
         }
         console.log(data)
         dispatch(postComment(data))
+        refQuestion.current.value = ""
         setComment("")
+        setTimeout(() => {
+            dispatch(getIdProperties(id)) 
+        }, 500)
     }
     return (
         <div>
@@ -169,7 +171,7 @@ export default function Detail() {
             <div class="mb-4 w-full bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600">
                 <div class="py-2 px-4 bg-white rounded-t-lg dark:bg-gray-800">
                     <label htmlFor="comment" className="text-xl m-5">Preguntarle al publicador</label>
-                    <textarea onChange={(e) => setComment(e.target.value)} name="comment" rows="4" class="rounded px-0 w-full text-sm text-gray-900 bg-white border-2 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400 " placeholder="escriba aquí su pregunta..." ></textarea>
+                    <textarea ref={refQuestion} onChange={(e) => setComment(e.target.value)} name="comment" rows="4" class="rounded px-0 w-full text-sm text-gray-900 bg-white border-2 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400 " placeholder="escriba aquí su pregunta..." ></textarea>
                 </div>
                 <div class="flex justify-between items-center py-2 px-3 border-t dark:border-gray-600">
                     <input

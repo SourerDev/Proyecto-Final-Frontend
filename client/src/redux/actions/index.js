@@ -115,7 +115,7 @@ export function getIdProperties(id) {
     console.log(json)
     return dispatch({
       type: "GET_ID_PROPERTIES",
-      payload: json.data.paylaod[0],
+      payload: json.data.paylaod
     });
   };
 }
@@ -222,3 +222,4 @@ export function postComment(data) {
     dispatch({type: POST_COMMENT, paylaod: res.data.payload})
   }
 }
+
