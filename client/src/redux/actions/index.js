@@ -112,10 +112,10 @@ export function postPorperty(data, services, files) {
 export function getIdProperties(id) {
   return async function (dispatch) {
     let json = await callsApi.getIdProperties(id);
-    console.log(json);
+    console.log(json)
     return dispatch({
       type: "GET_ID_PROPERTIES",
-      payload: json.data.paylaod,
+      payload: json.data.paylaod[0],
     });
   };
 }
@@ -216,10 +216,9 @@ export function loadUserInfo(userData) {
 
 
 
-export function postComment(comment) {
+export function postComment(data) {
   return async function(dispatch) {
-    const res = await callsApi.postComment(comment)
-
-    dispatch({type: "GET_ID_PROPERTIES", paylaod: res.data.payload})
+    const res = await callsApi.postComment(data)
+    dispatch({type: POST_COMMENT, paylaod: res.data.payload})
   }
 }

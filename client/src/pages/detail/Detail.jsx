@@ -15,20 +15,27 @@ export default function Detail() {
     const payload = useSelector((state) => state.detail)
     const city = useSelector((state) => state.citiesA)
     const ciudad = findNameCity(city, payload.idCity)
-    
     const [comment, setComment] = useState("")
     
 
     useEffect(() => {
-        if(payload && !payload.address) {
+        if (payload && !payload.address) {
             dispatch(getIdProperties(id)) 
         }
         console.log(comment)
-    }, [dispatch, id, comment])
+        console.log(payload)
+    }, [ id, payload, comment])
 
     function commentSumbit(e) {
         //e.preventDefault()
-        dispatch(postComment(comment))
+        const data = {
+            id,
+            id_User: "325c1472-31fc-475f-8894-b12daf86b8ee",
+            questions: comment,
+            answer: ""
+        }
+        console.log(data)
+        dispatch(postComment(data))
         setComment("")
     }
     return (
@@ -134,7 +141,7 @@ export default function Detail() {
 
 
 
-
+                                           
                         
     <p class="mt-4 text-sm leading-6 col-start-1 sm:col-span-2 lg:mt-6 lg:row-start-4 lg:col-span-4 dark:text-slate-400">
         <article>
@@ -149,10 +156,15 @@ export default function Detail() {
                     <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Third star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                     <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fourth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                     <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fifth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    {/* Descripcion, hay que reacomodarla */}
+                    {/* <div>
+                        <h1 class="dark:text-black text-xl m-5"> Descripcion </h1>
+                        <p>{payload.description}</p>
+                    </div> */} 
                 </div>
             </div>
         </article>
-
+                                
         <form  onSubmit={commentSumbit}>
             <div class="mb-4 w-full bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600">
                 <div class="py-2 px-4 bg-white rounded-t-lg dark:bg-gray-800">
@@ -166,19 +178,22 @@ export default function Detail() {
                         type="submit" 
                         class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
                     />
-                    {/* payload.questions?.map(q => <p>{q}</p>) */}
+                <p class="ml-auto text-xs text-gray-500 dark:text-gray-400">
+                    Cumpla con nuestras políticas sobre el uso indebido del vocabulario.
+                    <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Properties & you</a>.
+                </p>
                 </div>
             </div>
-            <Question/>
-        </form>
-            <p class="ml-auto text-xs text-gray-500 dark:text-gray-400">
-                Cumpla con nuestras política sobre el uso indebido del vocabulario.
-                <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Properties & you</a>.
-            </p>
-                           
-                <h1 class="dark:text-black text-xl m-5"> Descripcion </h1>
-                {payload.description}
-            </p>
+            {payload.Feedbacks ? (
+                <div>
+                    <h4 className="text-xl">Otros usuarios preguntaron</h4>
+                   {payload.Feedbacks?.map(f => <Question question={f.questions} answer={f.answer}/>)}
+                </div>
+            ): null}
+            
+        </form>           
+                
+        </p>
         </div>
 
 

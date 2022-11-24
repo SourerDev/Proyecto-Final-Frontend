@@ -28,7 +28,7 @@ const callsApi = {
 
 
     postComment: function(data) {
-        return apiProperties.put("in_process_url", data)
+        return apiProperties.post("/feedback/createFeedback", data)
     }
 }
 
