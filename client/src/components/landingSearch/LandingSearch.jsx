@@ -40,7 +40,7 @@ export default function LandingSearch() {
 
 
   return (
-    <div className=' m-2 lg:flex items-center  grid sm:justify-items-center bg-gray-800 mt-96 px-8 py-2 '>
+    <div className=' m-2 lg:flex items-center  grid sm:justify-items-center  px-8 py-2'>
       <select
         className='border-4  rounded lg:m-2 lg:p-2'
         name="operation"

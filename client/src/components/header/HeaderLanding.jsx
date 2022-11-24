@@ -4,10 +4,12 @@ import LandingSearch from "../landingSearch/LandingSearch";
 const HeaderLanding = (images) => {
   const Slider = slider();
   return (
-      <div className="  border-1 rounded relative w-full h-96 sm:h-[32rem] lg:h-[20rem]">
+      <div className="border-1 rounded relative w-full h-96 sm:h-[32rem] lg:h-screen">
         <Slider>
-          <div className="flex justify-center items-center mt-90">
-            <LandingSearch />
+          <div className="h-full w-full relative flex justify-center items-center">
+            <div className="absolute -bottom-10 z-50 bg-gray-800/70 w-full flex justify-center">
+              <LandingSearch />
+            </div>
           </div>
         </Slider>
       </div>
