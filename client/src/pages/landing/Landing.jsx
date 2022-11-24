@@ -25,10 +25,11 @@ export default function Landing() {
   return (
     <div >
       <HeaderLanding/>
+      <CardsLanding/>
       <div className="mb-auto">  <Carousel  title={'Venta'} images={images2}/>
       <Carousel title={'Alquiler'} images={images2}/></div>
       <ServiciosExtras/>
-      <CardsLanding/>
+      
       <Footer />
     </div>
   );
