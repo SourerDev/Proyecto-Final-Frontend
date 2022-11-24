@@ -55,7 +55,7 @@ export default function Carousel({ title, images }) {
   };
 
   return (
-    <div className="w-full overflow-hidden flex flex-col justify-center items-center py-2">
+    <div className="w-full overflow-hidden flex flex-col justify-center items-center py-2 h-[250px]">
       <div className="relative flex justify-between sm:w-11/12 sm:px-3 px-1 w-full">
         <Title>{title || "Title"}</Title>
         <button className="hidden sm:block hover:text-blue-500 hover:p-1"
@@ -254,13 +254,8 @@ const Title = styled.h1`
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 1.7rem;
   font-weight: 600;
-  color: transparent;
+  color: #3c52c3;
   text-shadow: 0px 0px 9px #5f95d6;
-  background-image: url('https://media.tenor.com/zUfqlNV6nKMAAAAC/color-explosion-rainbow.gif');
-  background-size: cover;
-  background-clip: text;
-  -webkit-background-clip: text;
-
   @media screen and (max-width: 700px) {
     position: absolute;
     font-size: larger;
