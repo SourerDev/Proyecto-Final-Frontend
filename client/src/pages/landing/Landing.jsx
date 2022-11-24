@@ -4,14 +4,13 @@ import CardsLanding from "../../components/infoLanding/InfoLanding";
 import  Carousel from "../../components/carousel/Carousel"
 import ServiciosExtras from "../../components/ServiciosExtras/serviciosExtras.jsx";
 
-const images = [
-  "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/casa-de-campo-moderna30-1639245321.jpg",
-  "https://i.pinimg.com/originals/27/51/cc/2751cc959a1ecb2ec3ff304791f1c86a.jpg",
-  "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/casa-de-diseno-contemporaneo26-1637602658.jpg",
-  "https://i.pinimg.com/originals/27/51/cc/2751cc959a1ecb2ec3ff304791f1c86a.jpg",
-  "https://images.unsplash.com/photo-1667802132853-7549c1ff0c17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-];
+import { useSelector } from "react-redux";
+import { filter } from "../../utils/filters.js";
+import { useEffect } from "react";
 
+
+
+/* 
 const images2=[
   {image:images[0],id:25486},
   {image:images[1],id:25486},
@@ -19,17 +18,26 @@ const images2=[
   {image:images[1],id:25486},
   {image:images[4],id:25486}
 ]
-
+ */
 export default function Landing() {
+
+  const {properties} = useSelector(state => state)
+  const sale = filter(properties,{operation:"Venta"})
+  const rental = filter(properties,{operation:"Alquiler"})
+
+
+  useEffect(()=>{
+    console.log(sale)
+    console.log(rental)
+  })
   
   return (
     <div >
       <HeaderLanding/>
-      <CardsLanding/>
-      <div className="mb-auto">  <Carousel  title={'Venta'} images={images2}/>
-      <Carousel title={'Alquiler'} images={images2}/></div>
+      <div className="mb-auto"> 
+        <Carousel  title={'Venta'} all={sale} images={sale?.length > 15 ? sale.slice(0,15): sale}/>
+        <Carousel title={'Alquiler'} all={rental} images={rental?.length > 15 ? rental.slice(0,15):rental}/></div>
       <ServiciosExtras/>
-      
       <Footer />
     </div>
   );

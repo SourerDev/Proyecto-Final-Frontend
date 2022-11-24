@@ -4,11 +4,11 @@ export function filter(properties, filter) {
   if(filter?.operation.length) {
     properties = properties.filter(p => p.modality === filter.operation)
   }
-  if(filter?.propertyType.length) {
+  if(filter?.propertyType?.length) {
     properties = properties.filter(p => p.type === filter.propertyType)
   }
   if(filter?.idCity) {
-    properties = properties.filter(p => p.idCity === filter.idCity)
+    properties = properties?.filter(p => p.idCity === filter.idCity)
   }
   if(filter?.environments?.length) {
     properties = properties.filter(p => p.environments === parseInt(filter.environments))
