@@ -5,7 +5,7 @@ import {filter} from "../../utils/filters.js";
 import {filterProperties, resetFilters} from "../../redux/actions/index.js";
 import { useEffect } from "react";
 
-export default function AdvancedFilters(){
+export default function AdvancedFilters({setModalOn}){
     const dispatch = useDispatch()
     const {properties, citiesA, filteredProperties} = useSelector(state => state)
     const [state,setState]=useState({
@@ -23,6 +23,12 @@ export default function AdvancedFilters(){
       price:{min:null, max:null}, 
     })
     
+    const handleCancelClick = () => {
+
+        setModalOn(false)
+    }
+
+
     const stateHandleChange = (evt) => {
         const { name, value} = evt.target;
         const [nameA,nameB] = name.split('-');
@@ -95,10 +101,12 @@ export default function AdvancedFilters(){
     return(
         < >
         
-        <div className=" flex justify-center   bg-gray-300">
+        <div className=" flex justify-center ">
             <button 
                 className="p-2 m-2 bg-blue-500 rounded-full"
-                onClick={() => dispatch(filterProperties(filter(properties, state)))}
+                onClick={() => {
+                    dispatch(filterProperties(filter(properties, state)))
+                    handleCancelClick()}}
             >
                 Aplicar filtros
             </button>
@@ -107,12 +115,13 @@ export default function AdvancedFilters(){
                 onClick={() => {
                     /* dispatch(resetFilters()) */
                     reset([refPrecioMin, refPrecioMax, refOperation, refType, refEnviroments, refFloors, refRooms, refBathrooms, refGarage, refAreaMin, refAreMax, refAntiquityMin, refAntiquityMax, refCity]);
+                    handleCancelClick()
                 }}
             >
                 Limpiar filtros
             </button>
         </div>
-        <div className= ' h-full   bg-gray-300'>
+        <div className= ' h-full '>
             <div >
              <br/>
             <div className=" h-0  flex flex-col p-2 pb-20">

@@ -38,7 +38,6 @@ export default function Landing() {
         <Carousel  title={'Venta'} all={sale} images={sale?.length > 15 ? sale.slice(0,15): sale}/>
         <Carousel title={'Alquiler'} all={rental} images={rental?.length > 15 ? rental.slice(0,15):rental}/></div>
       <ServiciosExtras/>
-      <CardsLanding/>
       <Footer />
     </div>
   );
