@@ -1,11 +1,13 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { findNameCity } from "../../utils/autocompleteUtils";
-import { Link } from "react-router-dom";
-//import {useD}
+import { Link,useNavigate } from "react-router-dom";
+import {filterProperties} from '../../redux/actions'
 
 export default function Carousel({ title, images }) {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { citiesA } = useSelector((state) => state);
   const slideshow = useRef(null);
   const interval = useRef(null);
@@ -52,13 +54,16 @@ export default function Carousel({ title, images }) {
     }
   };
 
-  useEffect(() => {}, []);
-
   return (
     <div className="w-full overflow-hidden flex flex-col justify-center items-center py-2">
       <div className="relative flex justify-between sm:w-11/12 sm:px-3 px-1 w-full">
         <Title>{title || "Title"}</Title>
-        <button className="hidden sm:block hover:text-blue-500 hover:p-1">Ver Mas »</button>
+        <button className="hidden sm:block hover:text-blue-500 hover:p-1"
+          onClick={()=>{
+            dispatch(filterProperties(images))
+            navigate('/home')
+          }}
+        >Ver Mas »</button>
       </div>
       {images?.length > 0 && (
         <Main className="shadow">
