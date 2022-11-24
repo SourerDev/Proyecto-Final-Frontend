@@ -33,6 +33,7 @@ export default function LogIn() {
 
   const handleClickGoogle = async () => {
     const provider = new GoogleAuthProvider();
+    provider.addScope('email')
     const { user } = await signInWithPopup(authentication, provider);
     let data = {
       email: user.email,
@@ -50,12 +51,11 @@ export default function LogIn() {
     } catch (error) {
       let msg = error.response.data;
       if (msg === "User already exist") {
-        console.log('google: »',msg);
         loginValue = true;
       }
     }
 
-    if (loginValue) {
+    if (loginValue && data.email) {
       const login = await callsApi.login({
         email: data.email,
         password: data.password,
@@ -92,7 +92,6 @@ export default function LogIn() {
     } catch (error) {
       const msg = error.response.data.Error
       if (msg) setResponse({ state: false, msg });
-      console.log(error.response)
     }
   }
 
