@@ -1,25 +1,29 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import {useParams, useNavigate, useSearchParams} from "react-router-dom"
+import { useNavigate, useLocation} from "react-router-dom"
 import {useSelector} from "react-redux"
 
 export default function BePremium() {
   const navigate = useNavigate()
+  const location = useLocation()
   
-  let {collection_id, collection_status ,status} = useParams()
   
-  let [searchParams, setSearchParams] = useSearchParams()
   const [linkPago, setLinkPago] = useState("#")
   const {user} = useSelector(state => state)
 
+  const url = new URLSearchParams(location.search)
+  console.log(url)
+  console.log(location)
+  console.log(location.search)
 
-  console.log(searchParams)
   useEffect(() => {
     console.log("vercelll pai")
     axios.post("http://localhost:3001/payments")
     .then(r => setLinkPago(r.data))
-    console.log(searchParams)
-  }, [user, status, searchParams])
+
+    console.log(location)
+    console.log(location.search)
+  }, [user, location])
 
   
 
