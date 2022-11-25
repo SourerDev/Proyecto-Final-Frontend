@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { resetUser } from "../../redux/actions"
-
+import {Link} from "react-router-dom"
 
 export default function Redirect() {
   const dispatch = useDispatch()
