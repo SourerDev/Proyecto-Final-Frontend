@@ -5,11 +5,13 @@ import {useSelector} from "react-redux"
 
 export default function BePremium() {
   const navigate = useNavigate()
-  const {status} = useParams()
+  const {collection_id, collection_status ,status} = useParams()
   const [linkPago, setLinkPago] = useState("#")
   const {user} = useSelector(state => state)
 
   console.log(status)
+  console.log(collection_id)
+  console.log(collection_status)
   useEffect(() => {
     /* if(user.user_type === "userLogged") {
       axios.post("http://localhost:3001/payments")
@@ -17,6 +19,8 @@ export default function BePremium() {
     } */
     console.log("vercelll pai")
     console.log(status)
+    console.log(collection_id)
+    console.log(collection_status)
     axios.post("http://localhost:3001/payments")
     .then(r => setLinkPago(r.data))
     
