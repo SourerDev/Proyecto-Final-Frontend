@@ -19,8 +19,15 @@ export default function BePremium() {
   console.log(location.search)
   console.log(status)
   
-  if(status === "approved") {
-    navigate("/")
+  if(status) {
+    if(status === "approved") {
+      // modal
+      navigate("/")
+    }
+    else {
+      console.log("ocurrio un error inesperado")
+      console.log(status)
+    }
   }
 
   return (
