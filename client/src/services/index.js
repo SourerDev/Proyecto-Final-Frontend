@@ -22,6 +22,28 @@ const callsApi = {
     },
     postSignUp: function(data){
         return apiProperties.post(`${user}/createuser`,data)
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    payPremium: function(data) {
+        return apiProperties.post("http://localhost:3001/payments")
     }
 }
 
