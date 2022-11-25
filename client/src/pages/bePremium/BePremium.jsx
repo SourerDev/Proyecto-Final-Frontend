@@ -8,6 +8,7 @@ export default function BePremium() {
   const location = useLocation()
   
   const [linkPago, setLinkPago] = useState("#")
+  const [redirect, setRedirect] = useState(false)
   const {user} = useSelector(state => state)
 
   useEffect(() => {
@@ -17,6 +18,10 @@ export default function BePremium() {
     }
   }, [user, location])
 
+  if(redirect) {
+    navigate("/redirect")
+  }
+
   const status = new URLSearchParams(location.search).get("status")
   console.log(location.search)
   console.log(status)
@@ -24,9 +29,9 @@ export default function BePremium() {
   if(status) {
     if(status === "approved") {
       // modal
-      //navigate("/login")
+      //navigate("/redirect")
       console.log(user)
-      axios.put(`http://localhost:3001/users/upDate/${user.id_User}`)
+      axios.put(`http://localhost:3001/users/upDate/:${user.id_User}`)
     }
     else {
       console.log("ocurrio un error inesperado")
@@ -49,7 +54,7 @@ export default function BePremium() {
               <a 
                 className="border-solid border-2 border-sky-500"
                 href={linkPago}
-                onClick={set}
+                onClick={setRedirect(true)}
                 target="_blank"
               >
                 hacerme premium!
