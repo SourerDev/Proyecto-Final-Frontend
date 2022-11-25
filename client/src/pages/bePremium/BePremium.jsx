@@ -11,18 +11,15 @@ export default function BePremium() {
   const [linkPago, setLinkPago] = useState("#")
   const {user} = useSelector(state => state)
 
-  const url = new URLSearchParams(location.search)
-  console.log(url)
-  console.log(location)
+  const status = new URLSearchParams(location.search).get("status")
   console.log(location.search)
+  console.log(status)
 
   useEffect(() => {
     console.log("vercelll pai")
     axios.post("http://localhost:3001/payments")
     .then(r => setLinkPago(r.data))
-
-    console.log(location)
-    console.log(location.search)
+    console.log(status)
   }, [user, location])
 
   
