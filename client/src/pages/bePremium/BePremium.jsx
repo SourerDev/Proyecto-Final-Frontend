@@ -2,7 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate, useLocation} from "react-router-dom"
 import {useSelector} from "react-redux"
-import Redirect from "../../components/redirect/Redirect"
+
 
 export default function BePremium() {
   const navigate = useNavigate()
@@ -20,11 +20,7 @@ export default function BePremium() {
   }, [user, location])
 
   if(redirect) {
-    
-    //navigate("/redirect")
-    return (
-      <Redirect/>
-    )
+    navigate("/redirect")
   }
 
   const status = new URLSearchParams(location.search).get("status")
