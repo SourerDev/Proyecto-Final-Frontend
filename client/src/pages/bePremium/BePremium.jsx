@@ -37,7 +37,7 @@ export default function BePremium() {
       axios.put(`http://localhost:3001/users/upDate/${user_id}`)
       .then((r) => {
         console.log(r)
-        dispatch(loadUserInfo(r.Message))
+        dispatch(loadUserInfo(r.data.Message))
       })
     }
     else {
