@@ -31,8 +31,7 @@ export default function BePremium() {
   
   if(status) {
     if(status === "approved") {
-      // modal
-      console.log(user)
+      // modal donde lo haga loguearse de vuelta
       axios.put(`http://localhost:3001/users/upDate/${user_id}`)
     }
     else {
