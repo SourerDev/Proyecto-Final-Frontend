@@ -1,10 +1,12 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate, useLocation} from "react-router-dom"
-import {useSelector} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
+import { loadUserInfo } from "../../redux/actions"
 
 
 export default function BePremium() {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
   
@@ -33,6 +35,10 @@ export default function BePremium() {
     if(status === "approved") {
       // modal donde lo haga loguearse de vuelta
       axios.put(`http://localhost:3001/users/upDate/${user_id}`)
+      .then((r) => {
+        console.log(r)
+        dispatch(loadUserInfo(r.Message))
+      })
     }
     else {
       console.log("ocurrio un error inesperado")
