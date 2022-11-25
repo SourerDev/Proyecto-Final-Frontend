@@ -7,22 +7,21 @@ export default function BePremium() {
   const navigate = useNavigate()
   const location = useLocation()
   
-  
   const [linkPago, setLinkPago] = useState("#")
   const {user} = useSelector(state => state)
+
+  useEffect(() => {
+    axios.post("http://localhost:3001/payments")
+    .then(r => setLinkPago(r.data))
+  }, [user, location])
 
   const status = new URLSearchParams(location.search).get("status")
   console.log(location.search)
   console.log(status)
-
-  useEffect(() => {
-    console.log("vercelll pai")
-    axios.post("http://localhost:3001/payments")
-    .then(r => setLinkPago(r.data))
-    console.log(status)
-  }, [user, location])
-
   
+  if(status === "approved") {
+    navigate("/")
+  }
 
   return (
     <div>
@@ -47,7 +46,7 @@ export default function BePremium() {
             )
             : (
                 <button disabled={true}>
-                  no podes
+                  hacerme premium!
                 </button>
               )
           }
