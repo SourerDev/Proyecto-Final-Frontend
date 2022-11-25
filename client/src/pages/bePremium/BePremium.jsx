@@ -18,6 +18,7 @@ export default function BePremium() {
       axios.post("http://localhost:3001/payments")
       .then(r => setLinkPago(r))
     } */
+    const {collection_id, collection_status ,status} = useParams()
     console.log("vercelll pai")
     console.log(status)
     console.log(collection_id)
