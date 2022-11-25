@@ -5,7 +5,8 @@ import {
   REMOVE_FAVORITE,
   RESET_FILTERS,
   LOAD_USER_INFO,
-  UPDATE_USER
+  UPDATE_USER,
+  POST_COMMENT
 } from "./actionTypes";
 
 import callsApi from "../../services";
@@ -111,10 +112,10 @@ export function postPorperty(data, services, files) {
 export function getIdProperties(id) {
   return async function (dispatch) {
     let json = await callsApi.getIdProperties(id);
-    console.log(json);
+    console.log(json)
     return dispatch({
       type: "GET_ID_PROPERTIES",
-      payload: json.data.paylaod,
+      payload: json.data.paylaod
     });
   };
 }
@@ -194,5 +195,31 @@ export function resetFilters() {
 
 export function loadUserInfo(userData) {
   return { type: LOAD_USER_INFO, payload: userData };
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export function postComment(data) {
+  return async function(dispatch) {
+    const res = await callsApi.postComment(data)
+    dispatch({type: POST_COMMENT, paylaod: res.data.payload})
+  }
 }
 

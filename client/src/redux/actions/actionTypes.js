@@ -4,3 +4,4 @@ export const REMOVE_FAVORITE = 'REMOVE_FAVORITE'
 export const RESET_FILTERS = "RESET_FILTERS"
 export const LOAD_USER_INFO = "LOAD_USER_INFO"
 export const UPDATE_USER = "UPDATE_USER"
+export const POST_COMMENT = "POST_COMMENT"

@@ -1,35 +1,45 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { getIdProperties } from "../../redux/actions/index";
-import { useEffect } from "react";
+import { getIdProperties, postComment} from "../../redux/actions/index";
+import { useEffect, useState, useRef } from "react";
 import { findNameCity } from "../../utils/autocompleteUtils";
-
+import Question from "../../components/question/Question";
 
 
 
 export default function Detail() {
-
+    const refQuestion = useRef()
     let { id } = useParams();
-
     const dispatch = useDispatch()
-
 
     const payload = useSelector((state) => state.detail)
     const city = useSelector((state) => state.citiesA)
+    const user =  useSelector(state => state.user)
+    const ciudad = findNameCity(city, payload?.idCity)
+    const [comment, setComment] = useState("")
+    
 
     useEffect(() => {
-        dispatch(getIdProperties(id))
+        dispatch(getIdProperties(id)) 
+    }, [id])
 
-    }, [dispatch, id])
-
-    
-   
-   const ciudad = findNameCity(city, payload.idCity)
-
-
-
-
+     function commentSumbit(e) {
+        e.preventDefault()
+        const data = {
+            id,
+            id_User: user.id_User,
+            questions: comment,
+            answer: ""
+        }
+        console.log(data)
+        dispatch(postComment(data))
+        refQuestion.current.value = ""
+        setComment("")
+        setTimeout(() => {
+            dispatch(getIdProperties(id)) 
+        }, 500)
+    }
     return (
         <div>
             {
@@ -133,48 +143,60 @@ export default function Detail() {
 
 
 
-
-                        <p
-                            class="mt-4 text-sm leading-6 col-start-1 sm:col-span-2 lg:mt-6 lg:row-start-4 lg:col-span-4 dark:text-slate-400">
-                            <article>
-                                <div class="flex items-center mb-4 space-x-7">
-                                    <img class="w-10 h-10 rounded-full" src="https://media.istockphoto.com/id/1392910304/es/vector/ilustraci%C3%B3n-de-la-parte-superior-del-cuerpo-de-un-joven-con-camisa-blanca-y-gafas.jpg?s=612x612&w=0&k=20&c=hFEftbzCFT39SDiGG3aGPpzOPClN_LeHAns2gW2HJNU=" alt=""></img>
-                                    <div class="space-y-1 font-medium dark:text-black">
-                                        <p>Jese Leos <time datetime="2014-08-16 19:00" class="block text-sm text-gray-500 dark:text-gray-400">Joined on August 2014</time></p>
-                                    </div>
-                                    <div class="flex items-center mb-1">
-        <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>First star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-        <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Second star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-        <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Third star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-        <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fourth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-        <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fifth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-        
-    </div>
-                                </div>
-                            </article>
-
-<form>
-   <div class="mb-4 w-full bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600">
-       <div class="py-2 px-4 bg-white rounded-t-lg dark:bg-gray-800">
-           <label for="comment" class="sr-only">comentarip</label>
-           <textarea id="comment" rows="4" class="px-0 w-full text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Escriba un comentario..." required=""></textarea>
-       </div>
-       <div class="flex justify-between items-center py-2 px-3 border-t dark:border-gray-600">
-           <button type="submit" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
-               Comentar
-           </button>
-           
-       </div>
-   </div>
-</form>
-<p class="ml-auto text-xs text-gray-500 dark:text-gray-400">Cumpla con nuestras política sobre el uso indebido del vocabulario.<a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Properties & you</a>.</p>
-
-                            <h1 class="dark:text-black text-xl m-5"> Descripcion </h1>
-                            
-                            {payload.description}
-                        </p>
-
-                    </div>
+                                           
+                        
+    <p class="mt-4 text-sm leading-6 col-start-1 sm:col-span-2 lg:mt-6 lg:row-start-4 lg:col-span-4 dark:text-slate-400">
+        <article>
+            <div class="flex items-center mb-4 space-x-7">
+                <img class="w-10 h-10 rounded-full" src="https://media.istockphoto.com/id/1392910304/es/vector/ilustraci%C3%B3n-de-la-parte-superior-del-cuerpo-de-un-joven-con-camisa-blanca-y-gafas.jpg?s=612x612&w=0&k=20&c=hFEftbzCFT39SDiGG3aGPpzOPClN_LeHAns2gW2HJNU=" alt=""></img>
+                <div class="space-y-1 font-medium dark:text-black">
+                    <p>Jese Leos <time datetime="2014-08-16 19:00" class="block text-sm text-gray-500 dark:text-gray-400">Joined on August 2014</time></p>
+                </div>
+                <div class="flex items-center mb-1">
+                    <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>First star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Second star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Third star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fourth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fifth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    {/* Descripcion, hay que reacomodarla */}
+                    {/* <div>
+                        <h1 class="dark:text-black text-xl m-5"> Descripcion </h1>
+                        <p>{payload.description}</p>
+                    </div> */} 
+                </div>
+            </div>
+        </article>
+                                
+        <form  onSubmit={commentSumbit}>
+            <div class="mb-4 w-full bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600">
+                <div class="py-2 px-4 bg-white rounded-t-lg dark:bg-gray-800">
+                    <label htmlFor="comment" className="text-xl m-5">Preguntarle al publicador</label>
+                    <textarea ref={refQuestion} onChange={(e) => setComment(e.target.value)} name="comment" rows="4" class="rounded px-0 w-full text-sm text-gray-900 bg-white border-2 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400 " placeholder="escriba aquí su pregunta..." ></textarea>
+                </div>
+                <div class="flex justify-between items-center py-2 px-3 border-t dark:border-gray-600">
+                    <input
+                        value="Preguntar" 
+                        disabled={comment.length ? false : true} 
+                        type="submit" 
+                        class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
+                    />
+                <p class="ml-auto text-xs text-gray-500 dark:text-gray-400">
+                    Cumpla con nuestras políticas sobre el uso indebido del vocabulario.
+                    <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Properties & you</a>.
+                </p>
+                </div>
+            </div>
+            {payload.Feedbacks ? (
+                <div>
+                    <h4 className="text-xl">Otros usuarios preguntaron</h4>
+                   {payload.Feedbacks?.map(f => <Question question={f.questions} answer={f.answer}/>)}
+                </div>
+            ): null}
+            
+        </form>           
+                
+        </p>
+        </div>
 
 
 
@@ -183,7 +205,6 @@ export default function Detail() {
                     <div>
                         <p> Propiedad inexistente</p>
                     </div>
-
             }
         </div>
     )

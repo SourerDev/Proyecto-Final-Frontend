@@ -51,7 +51,7 @@ export default function Home() {
         <div className=''>
 
         <div className=" flex px-3 flex-col sm:flex-row justify-between shadow-2xl m-4 bg-gray-800">
-            <div className=' sm:w-3/4 lg:flex items-center'>
+            <div className=' sm:w-3/4 lg:flex items-center '>
                  <LandingSearch/>
             </div>
             <div className='flex  justify-center sm:justify-end sm:w-1/4 lg:my-3'>

@@ -1,14 +1,21 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+import { findNameCity } from "../../utils/autocompleteUtils";
+import { Link,useNavigate } from "react-router-dom";
+import {filterProperties} from '../../redux/actions'
 
 export default function Carousel({ title, images }) {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const { citiesA } = useSelector((state) => state);
   const slideshow = useRef(null);
   const interval = useRef(null);
-  
+
   const next = () => {
     if (slideshow?.current?.children?.length > 0) {
       const firstElement = slideshow?.current?.children[0];
-      slideshow.current.style.transition = `300ms ease-out all`;
+      slideshow.current.style.transition = `300ms ease-out all`; 
 
       const size = slideshow.current.children[0].offsetWidth;
 
@@ -47,17 +54,19 @@ export default function Carousel({ title, images }) {
     }
   };
 
-  useEffect(() => {
-  }, []);
-
   return (
-    <div className="w-full overflow-hidden flex flex-col justify-center items-center py-2">
-      <div className="flex justify-between sm:w-11/12 sm:px-3 px-1 w-full">
+    <div className="w-full overflow-hidden flex flex-col justify-center items-center py-2 h-[250px]">
+      <div className="relative flex justify-between sm:w-11/12 sm:px-3 px-1 w-full">
         <Title>{title || "Title"}</Title>
-        <p className="hidden sm:block">Ver Mas »</p>
+        <button className="hidden sm:block hover:text-blue-500 hover:p-1"
+          onClick={()=>{
+            dispatch(filterProperties(images))
+            navigate('/home')
+          }}
+        >Ver Mas »</button>
       </div>
-      {images?.length && (
-        <Main>
+      {images?.length > 0 && (
+        <Main className="shadow">
           <Slideshow
             ref={slideshow}
             onMouseEnter={(e) => {
@@ -70,29 +79,35 @@ export default function Carousel({ title, images }) {
               }, 5000);
             }}
           >
-            {images.map((element, i) => (
-              <Slide key={i}>
-                <a href="">
-                  <img src={element.image} alt={element.id} className="" />
-                </a>
-                {element?.id && (
-                  <TextSlide>
-                    <svg
+            {images?.length > 0 && (
+              images.map((element, i) => (
+                <Slide key={i}>
+                  <Link to={`/detail/${element.id}`}>
+                    <img
+                      src={element.images[0]}
+                      alt={element.id}
                       className=""
-                      fill="#fff"
-                      width="24"
-                      height="24"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
-                    >
-                      <path d="M12 10c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2m0-5c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3m-7 2.602c0-3.517 3.271-6.602 7-6.602s7 3.085 7 6.602c0 3.455-2.563 7.543-7 14.527-4.489-7.073-7-11.072-7-14.527m7-7.602c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602" />
-                    </svg>
-                    <p>{false || "Ubicacion"}</p>
-                  </TextSlide>
-                )}
-              </Slide>
-            ))}
+                    />
+                  </Link>
+                  {element?.id && (
+                    <TextSlide>
+                      <svg
+                        className=""
+                        fill="#fff"
+                        width="24"
+                        height="24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                      >
+                        <path d="M12 10c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2m0-5c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3m-7 2.602c0-3.517 3.271-6.602 7-6.602s7 3.085 7 6.602c0 3.455-2.563 7.543-7 14.527-4.489-7.073-7-11.072-7-14.527m7-7.602c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602" />
+                      </svg>
+                      <p>{findNameCity(citiesA, element.idCity)}</p>
+                    </TextSlide>
+                  )}
+                </Slide>
+              ))
+            )}
           </Slideshow>
           <Controls>
             <Button r className="left-0" onClick={previus}>
@@ -147,7 +162,7 @@ const Slide = styled.div`
   overflow: hidden;
   transition: 0.3s ease all;
   z-index: 10;
-  max-height: 500px;
+  max-height: 250px;
   position: relative;
 
   img {
@@ -155,8 +170,13 @@ const Slide = styled.div`
     width: 100%;
     height: 100%;
     vertical-align: top;
+    transition: all 1s ease-in-out;
+    &:hover {
+      transform: scale(1.1);
+      filter: grayscale(80%);
+    }
   }
-  
+
   @media screen and (min-width: 200px) {
     min-width: 100%;
   }
@@ -186,7 +206,7 @@ const TextSlide = styled.div`
   align-items: center;
   @media screen and (max-width: 700px) {
     font-size: small;
-    svg{
+    svg {
       display: none;
     }
   }
@@ -224,17 +244,24 @@ const Button = styled.button`
         : "drop-shadow(2px 0px 0px #fff)"};
   }
   @media screen and (max-width: 400px) {
-    svg{
-      display:none;
+    svg {
+      display: none;
     }
   }
 `;
 
 const Title = styled.h1`
-  font-size: large;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 1.7rem;
   font-weight: 600;
+  color: #3c52c3;
+  text-shadow: 0px 0px 9px #5f95d6;
   @media screen and (max-width: 700px) {
-    font-size: medium;
+    position: absolute;
+    font-size: larger;
     font-weight: 600;
+    left: 5px;
+    bottom: -25px;
+    z-index: 10;
   }
 `;
