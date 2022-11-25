@@ -9,7 +9,7 @@ export default function BePremium() {
   const [linkPago, setLinkPago] = useState("#")
   const {user} = useSelector(state => state)
 
-
+  console.log(status)
   useEffect(() => {
     /* if(user.user_type === "userLogged") {
       axios.post("http://localhost:3001/payments")
@@ -20,7 +20,7 @@ export default function BePremium() {
     axios.post("http://localhost:3001/payments")
     .then(r => setLinkPago(r.data))
     
-  }, [user])
+  }, [user, status])
 
   
 
