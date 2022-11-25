@@ -49,7 +49,7 @@ export default function BePremium() {
   return (
     <div>
       <h1>hola haste premiu</h1>
-      <div className="">
+      <div className="d">
         <p>Al volverte usuario premium pagando la membresía mensual podras subir tus publicaciones para la venta o alquiler, posicionarte en el mercado de propiedades, interactuar con los usuarios y comunicarte con los interesados en tu publicación.</p>
       </div>
       <div>
