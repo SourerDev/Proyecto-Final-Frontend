@@ -48,7 +48,7 @@ export default function BePremium() {
               <a 
                 className="border-solid border-2 border-sky-500"
                 href={linkPago}
-                disabled={true}
+                onClick={e => console.log(e)}
                 target="_blank"
               >
                 hacerme premium!
