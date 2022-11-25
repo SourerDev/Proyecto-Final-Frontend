@@ -2,6 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate, useLocation} from "react-router-dom"
 import {useSelector} from "react-redux"
+import Redirect from "../../components/redirect/Redirect"
 
 export default function BePremium() {
   const navigate = useNavigate()
@@ -19,7 +20,11 @@ export default function BePremium() {
   }, [user, location])
 
   if(redirect) {
-    navigate("/redirect")
+    
+    //navigate("/redirect")
+    return (
+      <Redirect/>
+    )
   }
 
   const status = new URLSearchParams(location.search).get("status")
@@ -29,7 +34,6 @@ export default function BePremium() {
   if(status) {
     if(status === "approved") {
       // modal
-      //navigate("/redirect")
       console.log(user)
       axios.put(`http://localhost:3001/users/upDate/:${user.id_User}`)
     }
@@ -52,9 +56,10 @@ export default function BePremium() {
             linkPago !== "#" ?
             (
               <a 
+                onCl
                 className="border-solid border-2 border-sky-500"
                 href={linkPago}
-                onClick={setRedirect(true)}
+                onClick={(e) => setRedirect(true)}
                 target="_blank"
               >
                 hacerme premium!
