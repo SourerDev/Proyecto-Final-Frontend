@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = "https://testing-url-mercadopago-git-testing-url-mercadopago-jhoniernem.vercel.app/"
+const API_URL = "http://localhost:3001"
 
 
 export const apiProperties = axios.create({
