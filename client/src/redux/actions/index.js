@@ -6,7 +6,8 @@ import {
   RESET_FILTERS,
   LOAD_USER_INFO,
   UPDATE_USER,
-  POST_COMMENT
+  POST_COMMENT,
+  RESET_USER
 } from "./actionTypes";
 
 import callsApi from "../../services";
@@ -195,6 +196,24 @@ export function resetFilters() {
 
 export function loadUserInfo(userData) {
   return { type: LOAD_USER_INFO, payload: userData };
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export function resetUser() {
+  return {type: RESET_USER, paylaod: {}}
 }
 
 

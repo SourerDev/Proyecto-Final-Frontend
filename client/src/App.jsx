@@ -12,6 +12,7 @@ import SignUp from "./pages/signup/SignUp";
 import EditUser from "./pages/editUser/EditUser";
 import Footer from "./components/footer/Footer";
 import BePremium from "./pages/bePremium/BePremium";
+import Redirect from "./components/redirect/Redirect";
 
 function App() {
   const dispatch = useDispatch()
@@ -38,6 +39,7 @@ function App() {
         <Route path="/signup" element={<><Nav login={false}/><SignUp/></>}/>
         <Route path="/user" element={<><Nav login={false}/><EditUser/></>}/>
         <Route path="/bePremium" element={<><Nav/><BePremium/></>} />
+        <Route path="/redirect" element={<><Redirect/></>} />
       </Routes>
     </div>
   );

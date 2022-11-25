@@ -31,7 +31,7 @@ export default function UserIcon({ user }) {
               <Link to={"/user"} className="w-full py-1 text-gray-500 hover:text-gray-900 text-center">
                 Ver perfil
               </Link>
-              <Link className="w-full py-1 text-center">
+              <Link to={"/bePremium"} className="w-full py-1 text-center">
                 <span className="bg-yellow-300/75 text-yellow-700 bg- rounded-lg p-1 hover:bg-yellow-300/20">
                   Premium
                 </span>
