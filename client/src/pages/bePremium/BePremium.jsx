@@ -5,6 +5,7 @@ import {useSelector} from "react-redux"
 
 export default function BePremium() {
   const navigate = useNavigate()
+  console.log(useParams)
   const {collection_id, collection_status ,status} = useParams()
   const [linkPago, setLinkPago] = useState("#")
   const {user} = useSelector(state => state)
