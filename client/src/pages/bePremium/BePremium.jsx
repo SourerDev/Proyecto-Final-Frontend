@@ -15,6 +15,7 @@ export default function BePremium() {
       axios.post("http://localhost:3001/payments")
       .then(r => setLinkPago(r))
     } */
+    console.log("vercelll pai")
       axios.post("http://localhost:3001/payments")
       .then(r => setLinkPago(r.data))
     
