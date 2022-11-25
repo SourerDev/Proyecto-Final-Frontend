@@ -30,13 +30,10 @@ export default function BePremium() {
 
   const status = new URLSearchParams(location.search).get("status")
   const user_id = new URLSearchParams(location.search).get("external_reference")
-  console.log(location.search)
-  console.log(status)
-  console.log(user_id)
+  
   
   if(status) {
     if(status === "approved") {
-      // modal donde lo haga loguearse de vuelta
       axios.put(`http://localhost:3001/users/upDate/${user_id}`)
       .then((r) => {
         console.log(r)
