@@ -24,6 +24,9 @@ export default function BePremium() {
   if(redirect) {
     navigate("/redirect")
   }
+  if(user && user.user_type === "userPremiun") {
+    navigate("/home")
+  }
 
   const status = new URLSearchParams(location.search).get("status")
   const user_id = new URLSearchParams(location.search).get("external_reference")
