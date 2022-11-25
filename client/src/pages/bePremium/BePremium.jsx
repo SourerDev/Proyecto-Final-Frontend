@@ -25,6 +25,7 @@ export default function BePremium() {
     if(status === "approved") {
       // modal
       //navigate("/login")
+      console.log(user)
       axios.put(`http://localhost:3001/users/upDate/${user.id_User}`)
     }
     else {
@@ -48,7 +49,7 @@ export default function BePremium() {
               <a 
                 className="border-solid border-2 border-sky-500"
                 href={linkPago}
-                onClick={e => console.log(e)}
+                onClick={set}
                 target="_blank"
               >
                 hacerme premium!
