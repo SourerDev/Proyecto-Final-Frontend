@@ -41,10 +41,6 @@ const callsApi = {
 
 
 
-
-    payPremium: function(data) {
-        return apiProperties.post("http://localhost:3001/payments")
-    }
 }
 
 
