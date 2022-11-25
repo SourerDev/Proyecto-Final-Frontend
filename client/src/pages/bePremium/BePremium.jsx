@@ -14,7 +14,7 @@ export default function BePremium() {
 
   useEffect(() => {
     if(user.user_type === "userLogged") {
-      axios.post("http://localhost:3001/payments")
+      axios.post("http://localhost:3001/payments", {user_id: user.id_User})
       .then(r => setLinkPago(r.data))
     }
   }, [user, location])
@@ -24,14 +24,16 @@ export default function BePremium() {
   }
 
   const status = new URLSearchParams(location.search).get("status")
+  const user_id = new URLSearchParams(location.search).get("external_reference")
   console.log(location.search)
   console.log(status)
+  console.log(user_id)
   
   if(status) {
     if(status === "approved") {
       // modal
       console.log(user)
-      axios.put(`http://localhost:3001/users/upDate/:${user.id_User}`)
+      axios.put(`http://localhost:3001/users/upDate/${user_id}`)
     }
     else {
       console.log("ocurrio un error inesperado")
