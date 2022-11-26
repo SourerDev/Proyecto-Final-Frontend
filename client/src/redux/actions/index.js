@@ -7,7 +7,9 @@ import {
   LOAD_USER_INFO,
   UPDATE_USER,
   POST_COMMENT,
-  RESET_USER
+  RESET_USER,
+  FILTER_NORMAL,
+  FILTER_CITY
 } from "./actionTypes";
 
 import callsApi from "../../services";
@@ -35,7 +37,6 @@ export function getCities() {
 }
 
 export function filterProperties(filteredProperties) {
-  console.log(filteredProperties);
   return { type: "FILTER_PROPERTIES", payload: filteredProperties.length ? filteredProperties : "No se encontraron propiedades con los filtros indicados" };
 }
 
@@ -242,3 +243,15 @@ export function postComment(data) {
   }
 }
 
+
+
+
+
+// Logica de filtros
+
+export function filterNormal(values ={}) {
+  return{
+    type:FILTER_NORMAL,
+    payload:values
+  }
+}

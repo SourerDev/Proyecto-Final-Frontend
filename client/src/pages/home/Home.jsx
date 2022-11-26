@@ -40,6 +40,9 @@ export default function Home() {
     useEffect(() => {
         console.log(filteredProperties)
         dispatch(getallProperties());
+        return ()=>{
+            
+        }
     }, [favorites])
 
     return (

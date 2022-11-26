@@ -6,5 +6,6 @@ export const LOAD_USER_INFO = "LOAD_USER_INFO"
 export const UPDATE_USER = "UPDATE_USER"
 export const POST_COMMENT = "POST_COMMENT"
 
-
 export const RESET_USER = "RESET_USER"
+
+export const FILTER_NORMAL = 'FILTER_NORMAL'
