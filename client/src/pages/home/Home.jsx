@@ -11,7 +11,7 @@ import LandingSearch from '../../components/landingSearch/LandingSearch.jsx';
 
 export default function Home() {
 
-    const { properties, citiesA, filteredProperties, favorites } = useSelector(state => state);
+    const { properties, citiesA, filteredProperties, favorites, user} = useSelector(state => state);
     const paginado = (pageNumbers) => {
         setCurrentPage(pageNumbers)
     }
@@ -38,31 +38,16 @@ export default function Home() {
     const dispatch = useDispatch()
     useEffect(() => {
         console.log(filteredProperties)
-        dispatch(getallProperties())
-        let item = favorites?.join('&')
-        if (item?.length > 0) {
-            localStorage.setItem('favorite', `${item}`)
-        }
-        if (!localStorage.getItem('favorite')?.length) localStorage.setItem('favorite', ``)
-
+        dispatch(getallProperties());
     }, [favorites])
 
     return (
         <div className=''>
 
-        <div className=" flex px-3 flex-col sm:flex-row justify-between shadow-2xl m-4 bg-gray-800">
-            <div className=' sm:w-3/4 lg:flex items-center '>
-                 <LandingSearch/>
-            </div>
-            <div className='flex  justify-center sm:justify-end sm:w-1/4 lg:my-3'>
-                <button className="cursor-pointer bg-blue-400 p-3 rounded-md text-white " onClick={clicked}>
-                    Busqueda avanzada
-                </button>
+        <div className="bg-gray-900 m-2 rounded overflow-hidden">
+                 <LandingSearch clicked={clicked}/>
         </div>
            
-          
-
-        </div>
   
       
   
@@ -107,6 +92,7 @@ export default function Home() {
                     price={el.price}
                     images={el.images}
                     garage={el.garage}
+                    existUser={user?.email ? true : false}
                     />
                     </div>
                 )

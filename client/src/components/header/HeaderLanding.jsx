@@ -4,12 +4,10 @@ import LandingSearch from "../landingSearch/LandingSearch";
 const HeaderLanding = (images) => {
   const Slider = slider();
   return (
-      <div className="border-1 rounded relative w-full h-96 sm:h-[32rem] lg:h-screen">
+      <div className="h-[60vh] relative my-2 overflow-hidden rounded-sm shadow-sm sm:h-[80vh] sm:px-4 lg:h-[86vh] xl:px-[5%] transition-all ease-in-out duration-200 ">
         <Slider>
-          <div className="h-full w-full relative flex justify-center items-center">
-            <div className="absolute -bottom-10 z-50 bg-gray-800/70 w-full flex justify-center">
-              <LandingSearch />
-            </div>
+          <div className="h-full w-full flex justify-center items-end">
+            <LandingSearch />
           </div>
         </Slider>
       </div>
@@ -18,47 +16,28 @@ const HeaderLanding = (images) => {
 
 export function slider(
   images = [
-    "https://img.freepik.com/foto-gratis/feliz-familia-silueta-puesta-sol_1303-22466.jpg",
-    "https://www.forofamilia.org/wp-content/uploads/2016/04/Familia-unida.jpg",
-    "https://www.carlosllanocatedra.org/hs-fs/hubfs/Stock%20images/Portrait%20of%20an%20extended%20family%20with%20their%20pet%20dog%20sitting%20at%20the%20park.jpeg?width=600&name=Portrait%20of%20an%20extended%20family%20with%20their%20pet%20dog%20sitting%20at%20the%20park.jpeg",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaPEJtzuJt6ZNqCt2ZMQ9sy4DaHpzC9iVzTF24JtFgHdTt9_BAJ_1SmGrzU5s5r32evrc&usqp=CAU",
+    "https://img.freepik.com/foto-gratis/familia-moviendose-usando-cajas_1157-35480.jpg?w=2000",
+    "https://amarilo.com.co/blog/wp-content/uploads/2019/07/Como-elegir-la-casa-ideal-para-vivir-en-familia.jpg",
   ]
 ) {
   return styled.div`
-    width: 90%;
-    height: 85%;
-    background-image: url(${images[3]});
+    width: 100%;
+    height: 100%;
+    background-image: url(${images[1]});
     background-size: 100% 100%;
-    position: absolute;
-    top: 40%;
-    left: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
 
-    transform: translate(-50%, -50%);
     border-radius: 10px;
-    transition: all 3s;
-    animation: slide 10s ease infinite;
+    animation: slide 60s normal infinite;
     @keyframes slide {
-      25% {
+      50% {
         background-image: url(${images[0]});
       }
-      50% {
+      100% {
         background-image: url(${images[1]});
       }
-      75% {
-        background-image: url(${images[2]});
-      }
-      100% {
-        background-image: url(${images[3]});
-      }
-    }
-    @media screen and (max-width: 650px) {
-      width: 100%;
-      border-radius: 0%;
-      width: 80%;
-       height: 55%;
     }
   `;
 }

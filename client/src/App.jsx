@@ -20,17 +20,13 @@ function App() {
       dispatch(getallProperties())
       dispatch(getCities())
       dispatch(getCitiesA())
-      const StorageFavorite = localStorage.getItem('favorite')
-      if (StorageFavorite?.length) {
-          dispatch(addFavorites(StorageFavorite.split('&')))
-          localStorage.setItem('favorite',``)
-        }
+      
+      localStorage.setItem('favorite',``)
     }, [])
 
   return (
     <div className="flex flex-col ">
       <Routes>
-        
         <Route path="/home" element={<><Nav/><Home/><Footer/></>}/>
         <Route path="/" element={<><Nav rutes={true} /><Landing/></>}/>
         <Route path="/detail/:id" element={<><Nav/><Detail/><Footer/></>}/>

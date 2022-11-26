@@ -13,7 +13,8 @@ export default function Card({
   modality = "Operación",
   city,
   user,
-  favorite = false
+  favorite = false,
+  existUser
 }) {
   const dispatch = useDispatch()
   const { Heart, HeartBorder, User } = icons;
@@ -50,7 +51,7 @@ useEffect(()=>{
             <h3>{modality}</h3>
           </div>
         )}
-        {
+        {existUser &&
           <button className="absolute  bottom-1 right-1 bg-white rounded-full p-1 flex justify-center items-center hover:bg-zinc-100"
             onClick={addFavorite}
           >
