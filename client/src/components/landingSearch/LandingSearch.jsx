@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { filter } from "../../utils/filters.js";
-import { filterProperties } from "../../redux/actions/index";
+import { filterProperties, filterNormal } from "../../redux/actions/index";
 import AutocompleteSearch from "../autocomplete-search/autocompleteSearch";
+
+//logica de filtrado
 
 export default function LandingSearch({ clicked }) {
   const dispatch = useDispatch();
-  const { properties, cities, citiesA } = useSelector((state) => state);
+  const { properties, citiesA} = useSelector((state) => state);
+  const { operation, propertyType,city,idCity} = useSelector((state) => state.filters);
 
   const [state, setState] = useState({
     operation: "",
@@ -35,6 +38,27 @@ export default function LandingSearch({ clicked }) {
       });
     }
   };
+
+
+  const applyFilters = () =>{
+    if(state.operation || state.propertyType || state.idCity){
+      dispatch(filterProperties(filter(properties, state)))
+      dispatch(filterNormal(state))
+    }
+
+  }
+
+  useEffect(() => {
+    if(true){
+      setState(previus=>{return{
+        ...previus,
+        operation:operation,
+        propertyType:propertyType,
+        city:city,
+        idCity:idCity
+      }})
+    }
+  }, [operation, propertyType, city, idCity]);
 
   return (
     <div className="flex flex-col w-full  p-2 space-y-2 rounded bg-slate-900/70 backdrop-blur-sm lg:p-6 xl:flex-row xl:space-y-0 ">
@@ -83,9 +107,7 @@ export default function LandingSearch({ clicked }) {
             <button
               className="h-full w-full p-2 text-lg font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
               disabled={citiesA[state.city] || !state.city ? false : true}
-              onClick={() =>
-                dispatch(filterProperties(filter(properties, state)))
-              }
+              onClick={applyFilters}
             >
               Buscar{" "}
             </button>
@@ -103,9 +125,7 @@ export default function LandingSearch({ clicked }) {
           <button
             className="w-1/2 xl:w-4/5 flex text-lg font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
             disabled={citiesA[state.city] || !state.city ? false : true}
-            onClick={() =>
-              dispatch(filterProperties(filter(properties, state)))
-            }
+            onClick={applyFilters}
           >
             <span className="w-full p-2 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 ">
               Buscar{" "}
