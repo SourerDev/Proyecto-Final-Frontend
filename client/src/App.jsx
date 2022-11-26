@@ -34,8 +34,8 @@ function App() {
         <Route path="/login" element={<><Nav login={false}/><LogIn/></>}/>
         <Route path="/signup" element={<><Nav login={false}/><SignUp/></>}/>
         <Route path="/user" element={<><Nav login={false}/><EditUser/></>}/>
-        <Route path="/bePremium" element={<><Nav/><BePremium/></>} />
-        <Route path="/redirect" element={<><Redirect/></>} />
+        <Route path="/bePremium" element={<><Nav/><BePremium/><Footer/></>} />
+        <Route path="/redirect" element={<><Redirect/><Footer/></>} />
       </Routes>
     </div>
   );
