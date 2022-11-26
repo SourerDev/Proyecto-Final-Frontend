@@ -9,6 +9,8 @@ export default function Carousel({ title, images }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { citiesA } = useSelector((state) => state);
+
+
   const slideshow = useRef(null);
   const interval = useRef(null);
 
@@ -55,7 +57,7 @@ export default function Carousel({ title, images }) {
   };
 
   return (
-    <div className="w-full overflow-hidden flex flex-col justify-center items-center py-2 h-[250px]">
+    <div className="w-full overflow-hidden flex flex-col justify-center items-center py-2">
       <div className="relative flex justify-between sm:w-11/12 sm:px-3 px-1 w-full">
         <Title>{title || "Title"}</Title>
         <button className="hidden sm:block hover:text-blue-500 hover:p-1"
@@ -143,7 +145,7 @@ export default function Carousel({ title, images }) {
 }
 
 const Main = styled.div`
-  overflow: hidden;
+   overflow: hidden; 
   position: relative;
   width: 90%;
   border-radius: 0.2rem;
@@ -159,7 +161,7 @@ const Slideshow = styled.div`
 
 const Slide = styled.div`
   min-width: 100%;
-  overflow: hidden;
+  overflow: hidden; 
   transition: 0.3s ease all;
   z-index: 10;
   max-height: 250px;

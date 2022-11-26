@@ -1,28 +1,30 @@
 import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 
-import {
-  Bars3Icon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import UserIcon from "../user-icon/UserIcon.jsx";
-import {loadUserInfo} from "../../redux/actions"
-
+import { loadUserInfo,filterProperties } from "../../redux/actions";
+import { icons } from "../../images/index.js";
 
 export default function Nav({ rutes = true, login = true }) {
-  const dispatch = useDispatch()
-  const { user } = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const { user,properties } = useSelector((state) => state);
+  
+  const { Lightning, HeartBorder } = icons;
+  
+  const setFilters= (type)=>{
+    const prop = filterProperties(properties,type)
+    console.log('Nav»', prop);
+  }
 
   return (
     <Popover className="relative bg-white ">
       <div className="-mx-auto max-w-8xl px-4 sm:px-6">
         <div className="flex items-center justify-between border-b-2 border-gray-100 py-4 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
-            <Link to="/"
-              className="flex items-center"
-            >
+            <Link to="/" className="flex items-center">
               <span className="sr-only">Properties & You</span>
               <img
                 className="h-8 w-auto sm:h-10"
@@ -44,8 +46,29 @@ export default function Nav({ rutes = true, login = true }) {
               <Link
                 to="/home"
                 className="text-base font-medium text-gray-500 hover:text-gray-900"
+                onClick={()=>setFilters("Venta")}
               >
-                INICIO
+                VENTA
+              </Link>
+              <Link
+                to="/home"
+                className="text-base font-medium text-gray-500 hover:text-gray-900"
+              >
+                ALQUILER
+              </Link>
+              <Link
+                to="/home"
+                className="W-40 text-base text-center font-medium text-gray-500 hover:text-gray-900"
+              >
+                {/* <span className="p-0 m-0">TODAS LAS </span>
+                <br className="p-0 m-0"/> */}
+                <span className="p-0 m-0">PROPIEDADES</span>
+              </Link>
+              <Link
+                to="/home"
+                className="text-base font-medium text-gray-500 hover:text-gray-900"
+              >
+                PREMIUM
               </Link>
             </Popover.Group>
           )}
@@ -88,7 +111,9 @@ export default function Nav({ rutes = true, login = true }) {
                     src="https://images.vexels.com/media/users/3/142719/isolated/preview/f07a4b2d673e9935e58e6ff8262d4a1d-icono-de-casas-de-triangulo.png"
                     alt="Your Company"
                   />
-                  <span className="mx-2 text-xl sm:text-2xl">Properties & You</span>
+                  <span className="mx-2 text-xl sm:text-2xl">
+                    Properties & You
+                  </span>
                 </div>
                 <div className="-mr-2">
                   <Popover.Button className="outline-0 inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-0 focus:ring-2 focus:ring-inset">
@@ -107,46 +132,78 @@ export default function Nav({ rutes = true, login = true }) {
                           src={user.photo}
                           alt="No Found"
                         />
-                        <span className="mx-2">{user.name || "Username"}</span>
+                        <span className="mx-2">
+                          {user.userName || "Username"}
+                        </span>
                       </Popover.Button>
                     </Link>
                   )}
+
+                  <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
+                    <span>VENTA</span>
+                  </Popover.Button>
+                  <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
+                    <span>ALQUILER</span>
+                  </Popover.Button>
                   <Link to="/home" className="">
                     <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
-                      <span>INICIO</span>
+                      <span>TODAS LAS PROPIEDADES</span>
                     </Popover.Button>
                   </Link>
                   {user.email && (
-                    <Link to="/home" className="">
+                    <>
+                      <Link to="/home" className="">
+                        <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
+                          <Lightning
+                            width={"24"}
+                            fill="#8d6b06ce"
+                            hover={"#8d6b06ce"}
+                          />
+                          <span className="pl-3">Acceso Premium</span>
+                        </Popover.Button>
+                      </Link>
                       <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
-                        <span>Acceso Premium</span>
+                        <HeartBorder
+                          width="25"
+                          hover={"#ea2d98"}
+                          fill="#9c9c9c"
+                        />
+
+                        <span className="pl-3">Favoritos</span>
                       </Popover.Button>
-                    </Link>
+                    </>
                   )}
                 </nav>
               </div>
             </div>
             <div className="space-y-6 py-6 px-5">
               <div>
-                {user.email ? <>
-                  <Popover.Button className="w-full text-center font-semibold bg-red-600/80 rounded p-2 text-red-900 hover:bg-red-700/75 hover:text-white" onClick={()=>dispatch(loadUserInfo({}))}>
-                    <span className="">Cerrar Sesión</span>
-                  </Popover.Button>
-                </> : <>
-                <Link to="/signup">
-                  <Popover.Button className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
-                    Acceder
-                  </Popover.Button>
-                </Link>
-                <p className="mt-6 text-center text-base font-medium text-gray-500">
-                  Tienes cuenta?{" "}
-                  <Link to="/login">
-                    <Popover.Button className="text-indigo-600 hover:text-indigo-500">
-                      Iniciar Sesión
+                {user.email ? (
+                  <>
+                    <Popover.Button
+                      className="w-full text-center font-semibold bg-red-600/80 rounded p-2 text-red-900 hover:bg-red-700/75 hover:text-white"
+                      onClick={() => dispatch(loadUserInfo({}))}
+                    >
+                      <span className="">Cerrar Sesión</span>
                     </Popover.Button>
-                  </Link>
-                </p>
-                </>}
+                  </>
+                ) : (
+                  <>
+                    <Link to="/signup">
+                      <Popover.Button className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
+                        Acceder
+                      </Popover.Button>
+                    </Link>
+                    <p className="mt-6 text-center text-base font-medium text-gray-500">
+                      Tienes cuenta?{" "}
+                      <Link to="/login">
+                        <Popover.Button className="text-indigo-600 hover:text-indigo-500">
+                          Iniciar Sesión
+                        </Popover.Button>
+                      </Link>
+                    </p>
+                  </>
+                )}
               </div>
             </div>
           </div>

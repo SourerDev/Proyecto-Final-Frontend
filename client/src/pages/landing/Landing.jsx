@@ -24,15 +24,9 @@ export default function Landing() {
   const {properties} = useSelector(state => state)
   const sale = filter(properties,{operation:"Venta"})
   const rental = filter(properties,{operation:"Alquiler"})
-
-
-  useEffect(()=>{
-    console.log(sale)
-    console.log(rental)
-  })
   
   return (
-    <div >
+    <div className="px-1" >
       <HeaderLanding/>
       <div className="mb-auto"> 
         <Carousel  title={'Venta'} all={sale} images={sale?.length > 15 ? sale.slice(0,15): sale}/>
