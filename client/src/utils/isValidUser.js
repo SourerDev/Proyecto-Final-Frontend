@@ -5,7 +5,7 @@ export function isValidUser(user) {
   if(!user.email.length) errs.email = "debe ingresar un nuevo email o dejar el actual"
   else if(!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(user.email)) errs.email = "ingrese un email valido";
 
-  if(!user.userName.length) errs.userName = 'ingrese un nuevo nombre de usuario';
+  if(!user.userName.length) errs.userName = 'ingrese un nombre de usuario';
 
   return errs
 }

@@ -116,7 +116,7 @@ export default function LogIn() {
                 }}
               >
                 <div className="flex flex-row items-center justify-center lg:justify-start">
-                  <p className="text-lg mb-0 mr-4">Iniciar sesion con:</p>
+                  <p className="text-lg mb-0 mr-4">Iniciar sesión con :</p>
                   <div onClick={handleClickGoogle}>
                     <button class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
                       GOOGLE
@@ -134,7 +134,7 @@ export default function LogIn() {
                     type="email"
                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     id="exampleFormControlInput2"
-                    placeholder="Email address"
+                    placeholder="correo electronico"
                     onChange={(e) => handleChange(e)}
                   />
                 </div>
@@ -145,7 +145,7 @@ export default function LogIn() {
                       type="password"
                       className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       id="exampleFormControlInput26"
-                      placeholder="Password"
+                      placeholder="contraseña"
                       onChange={(e) => handleChange(e)}
                     />
                     <button

@@ -2,8 +2,13 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { loadUserInfo } from "../../redux/actions/index";
 import { isValidUser } from "../../utils/isValidUser";
+import {useNavigate} from "react-router-dom"
+import axios from "axios";
 
 export default function EditUser() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
+
   const { user } = useSelector((state) => state);
   const [newUser, setNewUser] = useState({
     userName: user.userName,
@@ -11,7 +16,6 @@ export default function EditUser() {
     photo: user.photo,
   });
   const [errs, setErrs] = useState({})
-  const dispatch = useDispatch();
 
   useEffect(() => {
     console.log(newUser);
@@ -45,12 +49,12 @@ export default function EditUser() {
         <input
           type="text"
           name="userName"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder={user?.userName || "sin nombre de usuario"}
           value={newUser.userName}
           onChange={(e) => onUserChange(e)}
         />
-        {errs.userName && <p className=" text-left px-6 mt-2 text-sm text-red-600 dark:text-red-500">{errs.userName}</p>}
+        {errs.userName && <p className="text-red-600 dark:text-red-500">{errs.userName}</p>}
       </div>
       <div>
       <label
@@ -67,7 +71,7 @@ export default function EditUser() {
           value={newUser.email}
           onChange={(e) => onUserChange(e)}
         />
-        {errs.email && <p className=" text-left px-6 mt-2 text-sm text-red-600 dark:text-red-500">{errs.email}</p>}
+        {errs.email && <p className="text-red-600 dark:text-red-500">{errs.email}</p>}
       </div>
       <div>
       <label
@@ -95,7 +99,12 @@ export default function EditUser() {
               ...newUser,
               photo: newUser.photo.length ? newUser.photo : "https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png"
             }))
-            
+            axios.put(`http://localhost:3001/users/edit/${user.id_User}`, {
+              ...user,
+              ...newUser,
+              photo: newUser.photo.length ? newUser.photo : "https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png"
+            })
+            navigate("/")
           }}>actualizar</button>
     </div>
   );
