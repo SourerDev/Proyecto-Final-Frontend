@@ -92,7 +92,7 @@ export default function EditUser() {
       </div>
         <button  
           disabled={Object.values(errs).length ? true : false} 
-          className="m-2 p-2 border rounded-sm hover:rounded-lg" 
+          className="hover:bg-gradient-to-br from-cyan-500 to-blue-500 hover:text-white m-2 p-2 border rounded-lg hover:rounded-lg" 
           onClick={() => {
             dispatch(loadUserInfo({
               ...user,
