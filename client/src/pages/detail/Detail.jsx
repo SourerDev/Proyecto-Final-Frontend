@@ -5,7 +5,7 @@ import { getIdProperties, postComment} from "../../redux/actions/index";
 import { useEffect, useState, useRef } from "react";
 import { findNameCity } from "../../utils/autocompleteUtils";
 import Question from "../../components/question/Question";
-
+import CarrouselDetail from "../../components/carousel/CarrouselDetail"
 
 
 export default function Detail() {
@@ -40,6 +40,12 @@ export default function Detail() {
             dispatch(getIdProperties(id)) 
         }, 500)
     }
+   let images1 = [
+        "https://img.freepik.com/foto-gratis/feliz-familia-silueta-puesta-sol_1303-22466.jpg",
+        "https://www.forofamilia.org/wp-content/uploads/2016/04/Familia-unida.jpg",
+        "https://www.carlosllanocatedra.org/hs-fs/hubfs/Stock%20images/Portrait%20of%20an%20extended%20family%20with%20their%20pet%20dog%20sitting%20at%20the%20park.jpeg?width=600&name=Portrait%20of%20an%20extended%20family%20with%20their%20pet%20dog%20sitting%20at%20the%20park.jpeg",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaPEJtzuJt6ZNqCt2ZMQ9sy4DaHpzC9iVzTF24JtFgHdTt9_BAJ_1SmGrzU5s5r32evrc&usqp=CAU",
+      ]
     return (
         <div>
             {
@@ -47,7 +53,7 @@ export default function Detail() {
 
                     <div class="max-w-4xl m-1 p-2 mx-auto  grid grid-cols-1 lg:max-w-5xl lg:gap-x-20 lg:grid-cols-2">
                         <div class="  col-start-1 col-end-3 row-start-1 sm:mb-6 sm:grid-cols-4  lg:col-start-2  lg:row-span-2 lg:mb-3">
-                            <img src={payload.images} alt="" class="w-full  h-full object-cover rounded-lg sm:h- " loading="lazy"></img>
+                        <CarrouselDetail  images={[...payload.images, ...images1]}/>
                         </div>
                         <div class="relative p-3 col-start-1 row-start-1 flex flex-col-reverse rounded-lg bg-gradient-to-t from-black/75 via-black/0 sm:bg-none sm:row-start-2 sm:p-0 lg:row-start-1">
                             <h1 class="mt-1 text-lg font-semibold text-white sm:text-slate-900 md:text-2xl dark:sm:text-black">{payload.address}</h1>
