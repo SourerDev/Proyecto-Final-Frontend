@@ -42,7 +42,7 @@ export default function UserIcon({ user }) {
                   <HeartBorder width="25" hover={"#ea2d98"} fill="#9c9c9c"/>
                   <span className="pl-2">Favoritos</span>
               </Popover.Button>
-              <Link className="">
+              <Link to={"/bePremium"} className="">
                 <Popover.Button className="w-full py-1 text-center">
                   <span className="flex bg-yellow-300/75 text-yellow-700 bg- rounded-lg p-1 hover:bg-yellow-300/20">
                     <Lightning width={"24"} fill="#8d6b06ce" hover={"#8d6b06ce"}/>
