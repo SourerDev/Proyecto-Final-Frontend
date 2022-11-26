@@ -73,7 +73,7 @@ export default function Nav({ rutes = true, login = true }) {
             </Popover.Group>
           )}
           <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-            {user.email ? (
+            {user?.email ? (
               <UserIcon user={user} />
             ) : (
               login && (
@@ -124,7 +124,7 @@ export default function Nav({ rutes = true, login = true }) {
               </div>
               <div className="mt-6">
                 <nav className="flex flex-col">
-                  {user.email && (
+                  {user?.email && (
                     <Link to={"/user"} className="">
                       <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50 text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
                         <img
@@ -150,7 +150,7 @@ export default function Nav({ rutes = true, login = true }) {
                       <span>TODAS LAS PROPIEDADES</span>
                     </Popover.Button>
                   </Link>
-                  {user.email && (
+                  {user?.email && (
                     <>
                       <Link to="/home" className="">
                         <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
@@ -178,7 +178,7 @@ export default function Nav({ rutes = true, login = true }) {
             </div>
             <div className="space-y-6 py-6 px-5">
               <div>
-                {user.email ? (
+                {user?.email ? (
                   <>
                     <Popover.Button
                       className="w-full text-center font-semibold bg-red-600/80 rounded p-2 text-red-900 hover:bg-red-700/75 hover:text-white"

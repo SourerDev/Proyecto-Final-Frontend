@@ -16,7 +16,9 @@ const initialState = {
   cities: [],
   citiesA: {},
   favorites: [],
-  user: {},
+  user: {
+    favorites:[],
+  },
   filters: {
     operation: "",
     propertyType: "",
@@ -57,48 +59,51 @@ export default function rootReducer(state = initialState, action) {
         detail: action.payload,
       };
 
-    case GET_CITIES_A:
-      return {
-        ...state,
-        citiesA: action.payload,
-      };
-    case ADD_FAVORITES:
-      return {
-        ...state,
-        favorites: [...state.favorites, ...action.payload],
-      };
-    case REMOVE_FAVORITE:
-      return {
-        ...state,
-        favorites: state.favorites.filter(
-          (element) => element !== action.payload
-        ),
-      };
-    case RESET_FILTERS:
-      return {
-        ...state,
-        filteredProperties: [],
-      };
-    case LOAD_USER_INFO:
-      return {
-        ...state,
-        user: action.payload,
-      };
-    case RESET_USER:
-      return {
-        ...state,
-        user: {},
-      };
-
-    case FILTER_NORMAL:
-      return {
-        ...state,
-        filters: {
-          ...state.filters,
-          ...action.payload
-        },
-      };
-    default:
-      return state;
-  }
+        case GET_CITIES_A:
+            return{
+                ...state,
+                citiesA: action.payload
+            }
+        case ADD_FAVORITES:
+            return{
+                ...state,
+                user:{
+                    ...state.user,
+                    favorites: [...state.user.favorites,...action.payload]
+                }
+            }
+        case REMOVE_FAVORITE:
+            return{
+                ...state,
+                user:{
+                    ...state.user,
+                    favorites: state.favorites.filter(element => element !== action.payload)
+                }
+            }
+        case RESET_FILTERS:
+            return {
+                ...state,
+                filteredProperties: []
+            }
+        case LOAD_USER_INFO: 
+            return {
+                ...state,
+                user: action.payload
+            }
+        case RESET_USER: 
+            return {
+                ...state,
+                user: {}
+            }
+        case FILTER_NORMAL:
+          return {
+          ...state,
+          filters: {
+            ...state.filters,
+            ...action.payload
+          },
+        };
+            default:
+               return state
+    }
 }

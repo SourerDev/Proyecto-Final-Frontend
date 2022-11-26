@@ -24,8 +24,11 @@ const callsApi = {
         return apiProperties.post(`${user}/createuser`,data)
     },
 
- postComment: function(data) {
+    postComment: function(data) {
         return apiProperties.post("/feedback/createFeedback", data)
+    },
+    postFavorite: function(data){
+        return apiProperties.post("/favorites/createFavorite",data)
     }
 
 }

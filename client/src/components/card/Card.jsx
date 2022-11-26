@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { icons } from "../../images";
-import { removeFavorite,addFavorites} from '../../redux/actions/index'
+import { removeFavorite,addFavorites} from '../../redux/actions/index';
+import callsApi from "../../services";
 
 export default function Card({
   address,
@@ -14,7 +15,7 @@ export default function Card({
   city,
   user,
   favorite = false,
-  existUser
+  idUser
 }) {
   const dispatch = useDispatch()
   const { Heart, HeartBorder, User } = icons;
@@ -39,6 +40,7 @@ useEffect(()=>{
       dispatch(removeFavorite(id))
     }else if((!favorite && state.favorite)){
       dispatch(addFavorites([id]))
+      callsApi.postFavorite({id_User:idUser,id_Property:id}).then((res)=>{console.log("AddFavorite",res.data)}).catch((err)=>{console.log("AddFavorite",err.response)})
     }
 },[state])
 
@@ -51,7 +53,7 @@ useEffect(()=>{
             <h3>{modality}</h3>
           </div>
         )}
-        {existUser &&
+        {idUser &&
           <button className="absolute  bottom-1 right-1 bg-white rounded-full p-1 flex justify-center items-center hover:bg-zinc-100"
             onClick={addFavorite}
           >

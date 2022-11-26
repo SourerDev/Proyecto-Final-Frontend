@@ -39,6 +39,7 @@ export default function LogIn() {
       photo: user.photoURL,
       userName: user.displayName,
       password: user.uid,
+      user_type:"userLogged"
     };
     let loginValue = false;
 
@@ -60,7 +61,7 @@ export default function LogIn() {
         password: data.password,
       });
       const { Message, token } = login.data;
-      dispatch(loadUserInfo(Message));
+      dispatch(loadUserInfo({...Message,favorites:Message.favorites.map(el=>el.id_Property)}));
       setResponse({ state: true, msg: "" });
       navigate("/");
     }
@@ -80,20 +81,21 @@ export default function LogIn() {
     });
   }
   async function handleSubmit(data) {
-    if(!data.email) return
+    if (!data.email) return;
     try {
       const response = await callsApi.login(data);
       const { Message, token } = response.data;
-      dispatch(loadUserInfo(Message));
-      setResponse({ state: true, msg: "" });
-      navigate("/");
+      if (Message) {
+        dispatch(loadUserInfo({...Message,favorites:Message.favorites.map(el=>el.id_Property)}));
+        setResponse({ state: true, msg: "" });
+        console.log(response.data);
+        navigate("/");
+      }else{
+        setResponse({ state: false, msg: response.data.Error });
+      }    
     } catch (error) {
-      const msg = error.response.data?.Error;
-      const msg2 = error.response.data?.err?.message;
-    
-      if (msg?.length) setResponse({state:false, msg: msg });
-      else if(msg2?.length)  setResponse({state:false, msg: msg2 });
-    } 
+      setResponse({ state: false, msg: error.message });
+    }
   }
 
   return (
@@ -178,12 +180,12 @@ export default function LogIn() {
                 </div>
 
                 <div className="flex flex-col sm:items-center">
-                    {/* <Link to="/"> */}
-                    {!response.state &&
-                      <p className="px-2 my-2 text-red-700 bg-red-200 rounded-md w-full sm:w-auto">
-                        {response.msg}
-                      </p>
-                    }
+                  {/* <Link to="/"> */}
+                  {!response.state && (
+                    <p className="px-2 my-2 text-red-700 bg-red-200 rounded-md w-full sm:w-auto">
+                      {response.msg}
+                    </p>
+                  )}
                   <div className="flex flex-col sm:flex-row sm:space-x-4 sm:justify-center">
                     <input
                       type="submit"
