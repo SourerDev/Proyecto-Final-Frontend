@@ -66,10 +66,10 @@ export default function SignUp() {
                                         type="email"
                                         className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                         id="FormControlInput1"
-                                        placeholder="e-mail"
+                                        placeholder="correo electronico"
                                         onChange={(e) => handleChange(e)}
                                     />
-                                    {errs.email && <p>{errs.email}</p>}
+                                    {errs.email && <p className="text-red-600">{errs.email}</p>}
                                 </div>
 
                                 <div className="mb-6">
@@ -81,7 +81,7 @@ export default function SignUp() {
                                         placeholder="nombre de usuario"
                                         onChange={(e) => handleChange(e)}
                                     />
-                                    {errs.userName && <p>{errs.userName}</p>}
+                                    {errs.userName && <p className="text-red-600">{errs.userName}</p>}
                                 </div>
 
                                 <div className="mb-6">
@@ -93,7 +93,7 @@ export default function SignUp() {
                                         placeholder="contraseña"
                                         onChange={(e) => handleChange(e)}
                                     />
-                                    {errs.password && <p>{errs.password}</p>}
+                                    {errs.password && <p className="text-red-600">{errs.password}</p>}
                                 </div>
                                 <div className="mb-6">
                                     <input
