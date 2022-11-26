@@ -11,7 +11,8 @@ import LandingSearch from '../../components/landingSearch/LandingSearch.jsx';
 
 export default function Home() {
 
-    const { properties, citiesA, filteredProperties, favorites, user} = useSelector(state => state);
+    const { properties, citiesA, filteredProperties, user} = useSelector(state => state);
+    const {favorites}  = useSelector(state => state.user)
     const paginado = (pageNumbers) => {
         setCurrentPage(pageNumbers)
     }
@@ -92,7 +93,7 @@ export default function Home() {
                     price={el.price}
                     images={el.images}
                     garage={el.garage}
-                    existUser={user?.email ? true : false}
+                    idUser={user?.id_User ?  user?.id_User : false} 
                     />
                     </div>
                 )

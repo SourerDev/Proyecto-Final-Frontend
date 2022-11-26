@@ -6,8 +6,9 @@ const initialState = {
     detail:{},
     cities: [],
     citiesA:{},
-    favorites: [],
-    user: {},
+    user: {
+        favorites:[],
+    },
 }
 
 
@@ -44,12 +45,18 @@ export default function rootReducer(state = initialState,action){
         case ADD_FAVORITES:
             return{
                 ...state,
-                favorites: [...state.favorites,...action.payload]
+                user:{
+                    ...state.user,
+                    favorites: [...state.user.favorites,...action.payload]
+                }
             }
         case REMOVE_FAVORITE:
             return{
                 ...state,
-                favorites: state.favorites.filter(element => element !== action.payload)
+                user:{
+                    ...state.user,
+                    favorites: state.favorites.filter(element => element !== action.payload)
+                }
             }
         case RESET_FILTERS:
             return {
