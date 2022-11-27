@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = "https://proyecto-final-production-e0fd.up.railway.app/"
+const API_URL = "http://localhost:3001"
 
 
 export const apiProperties = axios.create({
