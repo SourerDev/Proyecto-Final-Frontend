@@ -30,6 +30,16 @@ export default function LogIn() {
   });
   const [response, setResponse] = useState({ state: true, msg: "" });
 
+  const setNavigate =()=>{
+     const saveProperty = localStorage.getItem('property');
+
+    if(saveProperty?.length){
+      navigate(`/detail/${saveProperty}`)
+    } else{
+      navigate('/')
+     }
+  }
+
   const handleClickGoogle = async () => {
     const provider = new GoogleAuthProvider();
     provider.addScope("email");
@@ -63,7 +73,7 @@ export default function LogIn() {
       const { Message, token } = login.data;
       dispatch(loadUserInfo({...Message,favorites:Message.favorites.map(el=>el.id_Property)}));
       setResponse({ state: true, msg: "" });
-      navigate("/");
+      setNavigate()
     }
 
     /* 
@@ -89,7 +99,7 @@ export default function LogIn() {
         dispatch(loadUserInfo({...Message,favorites:Message.favorites.map(el=>el.id_Property)}));
         setResponse({ state: true, msg: "" });
         console.log(response.data);
-        navigate("/");
+        setNavigate()
       }else{
         setResponse({ state: false, msg: response.data.Error });
       }    

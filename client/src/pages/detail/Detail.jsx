@@ -6,7 +6,9 @@ import { useEffect, useState, useRef } from "react";
 import { findNameCity } from "../../utils/autocompleteUtils";
 import Question from "../../components/question/Question";
 import CarrouselDetail from "../../components/carousel/CarrouselDetail"
-
+import { saveIdInLocalStorage } from "../../utils/saveIdInLocalStorage";
+import swal from 'sweetalert2'
+import {mustBeLogged, alert} from "../../sweetAlerts/sweetAlerts"
 
 export default function Detail() {
     const refQuestion = useRef()
@@ -58,6 +60,15 @@ export default function Detail() {
                     </button>
                 </div>
             </Link>
+            <button
+            onClick={() => {
+                //swal.fire(mustBeLogged("para hacer una pregunta debes iniciar sesión primero"))
+                alert('p-4 rounded text-lg','p-4 rounded text-lg').fire(mustBeLogged("para hacer una pregunta debes iniciar sesión primero"))
+
+            }} 
+            >
+                sweet Alert
+            </button>
             {
                 payload ? (
 
@@ -198,7 +209,10 @@ export default function Detail() {
                                        
                                         <div className="px-4">
                                             <button 
-                                                onClick={() => dispatch(contactOwner(user.id_User, id))}
+                                                onClick={() => {
+                                                    //condicional de usuario
+                                                    dispatch(contactOwner(user.id_User, id))
+                                                }}
                                                 className=" px-2 py-2.5  text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
                                                 Contactar al vendedor
                                             </button>
@@ -208,7 +222,10 @@ export default function Detail() {
                                 </div>
                             </article>
 
-                            <form onSubmit={commentSumbit}>
+                            <form onSubmit={(e) => {
+                                //condicional de usuario
+                                commentSumbit(e)
+                            }}>
                                 <div class="mb-4 w-full bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600">
                                     <div class="py-2 px-4 bg-white rounded-t-lg dark:bg-gray-800">
                                         <label htmlFor="comment" className="text-xl m-5">Preguntarle al publicador</label>
