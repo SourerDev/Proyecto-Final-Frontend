@@ -1,3 +1,4 @@
+
 import {apiProperties} from './api/baseApi.js';
 
 const property = 'properties';
@@ -29,8 +30,10 @@ const callsApi = {
     },
     postFavorite: function(data){
         return apiProperties.post("/favorites/createFavorite",data)
+    },
+    contactOwner: function(data) {
+        return apiProperties.post("/interested/userInterested", data)
     }
-
 }
 
 

@@ -9,7 +9,9 @@ import {
   POST_COMMENT,
   RESET_USER,
   FILTER_NORMAL,
-  FILTER_CITY
+  FILTER_CITY,
+  RESET_DETAIL,
+  CONTACT_OWNER
 } from "./actionTypes";
 
 import callsApi from "../../services";
@@ -200,25 +202,25 @@ export function loadUserInfo(userData) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 export function resetUser() {
   return {type: RESET_USER, paylaod: {}}
 }
 
+export function resetDetail() {
+  return {type: RESET_DETAIL, paylaod: {}}
+}
 
-
+export function contactOwner(id_User, id_property) {
+  return async function(dispatch) {
+    console.log(id_User, "entroo ", id_property)
+    const res =  await callsApi.contactOwner({
+      id_User,
+      id: id_property
+    })
+    console.log(res.data)
+    dispatch({type: CONTACT_OWNER, paylaod: ""})
+  }
+}
 
 
 

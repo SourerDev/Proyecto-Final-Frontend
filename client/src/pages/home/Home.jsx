@@ -89,7 +89,7 @@ export default function Home() {
                     <Card
                     key={el.id}
                     id={el.id}
-                    favorite={favorites.includes(el.id)}
+                    favorite={favorites?.includes(el.id)}
                     city={findNameCity(citiesA,el.idCity)}
                     modality ={el.modality}
                     address={el.address}

@@ -7,6 +7,7 @@ import {
   UPDATE_USER,
   RESET_USER,
   FILTER_NORMAL,
+  RESET_DETAIL,
 } from "../actions/actionTypes.js";
 
 const initialState = {
@@ -103,6 +104,11 @@ export default function rootReducer(state = initialState, action) {
             ...action.payload
           },
         };
+        case RESET_DETAIL:
+          return {
+            ...state,
+            detail: {}
+          }
             default:
                return state
     }
