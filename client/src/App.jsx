@@ -33,7 +33,7 @@ function App() {
         <Route path="/createProperty" element={<><Nav/><Form/></>}/>
         <Route path="/login" element={<><Nav login={false}/><LogIn/></>}/>
         <Route path="/signup" element={<><Nav login={false}/><SignUp/></>}/>
-        <Route path="/user" element={<><Nav login={false}/><EditUser/></>}/>
+        <Route path="/user" element={<><Nav login={false}/><EditUser/><Footer/></>}/>
         <Route path="/bePremium" element={<><Nav/><BePremium/><Footer/></>} />
         <Route path="/redirect" element={<><Redirect/><Footer/></>} />
       </Routes>

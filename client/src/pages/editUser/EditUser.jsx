@@ -34,12 +34,18 @@ export default function EditUser() {
   }
 
   return (
-    <div className="flex h-[87] flex-col items-center">
-      <p className="self-right">Editar usuario</p>
+    <div className="flex justify-center flex-col items-center h-[40rem] sm:h-[43rem] lg:[4rem] bg-sky-200">
+      
+
+      
+     
+      <p className="self-right text-2xl">Editar usuario</p>
       <div className="w-16 h-16 rounded-full overflow-hidden">
         <img className="w-full rounded-full" src={newUser.photo || "https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png"} alt="" />
       </div>
-      <div>
+      <div className="flex justify-center flex-col ">
+
+        
         <label
           for="userName"
           className="block m-1 text-sm font-medium text-gray-900 dark:text-white"
@@ -49,13 +55,14 @@ export default function EditUser() {
         <input
           type="text"
           name="userName"
-          className="  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder={user?.userName || "sin nombre de usuario"}
           value={newUser.userName}
           onChange={(e) => onUserChange(e)}
         />
-        {errs.userName && <p className="text-red-600 dark:text-red-500">{errs.userName}</p>}
+       
       </div>
+       {errs.userName && <p className="text-red-600 dark:text-red-500">{errs.userName}</p>}
       <div>
       <label
           for="email"
@@ -83,16 +90,19 @@ export default function EditUser() {
         <input
           type="text"
           name="photo"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="bg-gray-50 border mb-4  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder={"se le asignara un avatar por defecto"}
           value={newUser.photo}
           onChange={(e) => onUserChange(e)}
         />
 
       </div>
+      <div className="">
+
+      
         <button  
           disabled={Object.values(errs).length ? true : false} 
-          className="hover:bg-gradient-to-br from-cyan-500 to-blue-500 hover:text-white m-2 p-2 border rounded-lg hover:rounded-lg" 
+          className="hover:bg-gradient-to-br px-4 py-3  text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800" 
           onClick={() => {
             dispatch(loadUserInfo({
               ...user,
@@ -106,6 +116,8 @@ export default function EditUser() {
             })
             navigate("/")
           }}>actualizar</button>
+          </div>
+          
     </div>
   );
 }
