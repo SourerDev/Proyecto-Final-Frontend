@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams,useNavigate} from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { contactOwner, getIdProperties, postComment, resetDetail } from "../../redux/actions/index";
 import { useEffect, useState, useRef } from "react";
@@ -14,6 +14,7 @@ export default function Detail() {
     const refQuestion = useRef()
     let { id } = useParams();
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const payload = useSelector((state) => state.detail)
     const city = useSelector((state) => state.citiesA)
@@ -62,8 +63,14 @@ export default function Detail() {
             </Link>
             <button
             onClick={() => {
-                //swal.fire(mustBeLogged("para hacer una pregunta debes iniciar sesión primero"))
-                alert('p-4 rounded text-lg','p-4 rounded text-lg').fire(mustBeLogged("para hacer una pregunta debes iniciar sesión primero"))
+                if(!user?.email){
+                    swal.fire(mustBeLogged("Debes Iniciar Sesión","Para poder contactar primero debes iniciar sesión")).then(result=>{
+                        if (result.isConfirmed) {
+                            saveIdInLocalStorage(id,true)
+                            navigate('/login')
+                        }
+                    })
+                }
 
             }} 
             >

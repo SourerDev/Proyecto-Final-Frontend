@@ -11,6 +11,7 @@ import {
   GithubAuthProvider,
 } from "firebase/auth";
 import { async } from "@firebase/util";
+import {saveIdInLocalStorage} from '../../utils/saveIdInLocalStorage'
 
 export default function LogIn() {
   function mostrarContrasena() {
@@ -35,6 +36,7 @@ export default function LogIn() {
 
     if(saveProperty?.length){
       navigate(`/detail/${saveProperty}`)
+      saveIdInLocalStorage(false)
     } else{
       navigate('/')
      }
