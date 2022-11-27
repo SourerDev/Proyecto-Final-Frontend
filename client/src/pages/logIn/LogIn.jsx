@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loadUserInfo, postSignUp } from "../../redux/actions/index";
@@ -11,6 +11,7 @@ import {
   GithubAuthProvider,
 } from "firebase/auth";
 import { async } from "@firebase/util";
+import {getOfStorage} from '../../utils/saveIdInLocalStorage'
 
 export default function LogIn() {
   function mostrarContrasena() {
@@ -29,6 +30,19 @@ export default function LogIn() {
     password: "",
   });
   const [response, setResponse] = useState({ state: true, msg: "" });
+
+  const setNavigate =()=>{
+     const save = getOfStorage('detail');
+     console.log(save)
+
+    if(save?.id){
+      navigate(`/detail/${save.id}`)
+    } 
+    else{
+      console.log()
+      navigate('/')
+    }
+  }
 
   const handleClickGoogle = async () => {
     const provider = new GoogleAuthProvider();
@@ -63,7 +77,7 @@ export default function LogIn() {
       const { Message, token } = login.data;
       dispatch(loadUserInfo({...Message,favorites:Message.favorites.map(el=>el.id_Property)}));
       setResponse({ state: true, msg: "" });
-      navigate("/");
+      setNavigate()
     }
 
     /* 
@@ -89,7 +103,7 @@ export default function LogIn() {
         dispatch(loadUserInfo({...Message,favorites:Message.favorites.map(el=>el.id_Property)}));
         setResponse({ state: true, msg: "" });
         console.log(response.data);
-        navigate("/");
+        setNavigate()
       }else{
         setResponse({ state: false, msg: response.data.Error });
       }    
