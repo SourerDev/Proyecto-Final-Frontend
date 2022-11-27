@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loadUserInfo, postSignUp } from "../../redux/actions/index";
@@ -11,7 +11,7 @@ import {
   GithubAuthProvider,
 } from "firebase/auth";
 import { async } from "@firebase/util";
-import {saveIdInLocalStorage} from '../../utils/saveIdInLocalStorage'
+import {getOfStorage} from '../../utils/saveIdInLocalStorage'
 
 export default function LogIn() {
   function mostrarContrasena() {
@@ -32,14 +32,16 @@ export default function LogIn() {
   const [response, setResponse] = useState({ state: true, msg: "" });
 
   const setNavigate =()=>{
-     const saveProperty = localStorage.getItem('property');
+     const save = getOfStorage('detail');
+     console.log(save)
 
-    if(saveProperty?.length){
-      navigate(`/detail/${saveProperty}`)
-      saveIdInLocalStorage(false)
-    } else{
+    if(save?.id){
+      navigate(`/detail/${save.id}`)
+    } 
+    else{
+      console.log()
       navigate('/')
-     }
+    }
   }
 
   const handleClickGoogle = async () => {

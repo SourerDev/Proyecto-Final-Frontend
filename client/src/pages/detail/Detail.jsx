@@ -6,9 +6,9 @@ import { useEffect, useState, useRef } from "react";
 import { findNameCity } from "../../utils/autocompleteUtils";
 import Question from "../../components/question/Question";
 import CarrouselDetail from "../../components/carousel/CarrouselDetail"
-import { saveIdInLocalStorage } from "../../utils/saveIdInLocalStorage";
+import { saveIdInLocalStorage,saveInStorage,getOfStorage} from "../../utils/saveIdInLocalStorage";
 import swal from 'sweetalert2'
-import {mustBeLogged, alert} from "../../sweetAlerts/sweetAlerts"
+import {mustBeLogged, alert, completePayment, paymentOk} from "../../sweetAlerts/sweetAlerts"
 
 export default function Detail() {
     const refQuestion = useRef()
@@ -25,6 +25,11 @@ export default function Detail() {
 
     useEffect(() => {
         dispatch(getIdProperties(id))
+        let save = getOfStorage('detail')
+        if(save?.id?.length && save?.id === id) {
+            setComment(save?.question)
+            saveInStorage("detail",null,true)
+        }
         return () => {
             dispatch(resetDetail())
         }
@@ -61,21 +66,7 @@ export default function Detail() {
                     </button>
                 </div>
             </Link>
-            <button
-            onClick={() => {
-                if(!user?.email){
-                    swal.fire(mustBeLogged("Debes Iniciar Sesión","Para poder contactar primero debes iniciar sesión")).then(result=>{
-                        if (result.isConfirmed) {
-                            saveIdInLocalStorage(id,true)
-                            navigate('/login')
-                        }
-                    })
-                }
-
-            }} 
-            >
-                sweet Alert
-            </button>
+            
             {
                 payload ? (
 
@@ -218,7 +209,18 @@ export default function Detail() {
                                             <button 
                                                 onClick={() => {
                                                     //condicional de usuario
-                                                    dispatch(contactOwner(user.id_User, id))
+                                                    if(!user?.user_type || user.user_type === "userNotLogged"){
+                                                        swal.fire(mustBeLogged("Debes Iniciar Sesión","Para poder contactar primero debes iniciar sesión")).then(result=>{
+                                                            if (result.isConfirmed) {
+                                                                //saveIdInLocalStorage(id,true)
+                                                                saveInStorage("detail", {id, question: comment})
+                                                                navigate('/login')
+                                                            }
+                                                        })
+                                                    }
+                                                    else {
+                                                        dispatch(contactOwner(user.id_User, id))
+                                                    }
                                                 }}
                                                 className=" px-2 py-2.5  text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
                                                 Contactar al vendedor
@@ -231,12 +233,31 @@ export default function Detail() {
 
                             <form onSubmit={(e) => {
                                 //condicional de usuario
-                                commentSumbit(e)
+                                if(!user?.user_type || user.user_type === "userNotLogged"){
+                                    e.preventDefault()
+                                    swal.fire(mustBeLogged("Debes Iniciar Sesión","Para poder realizar una pregunta primero debes iniciar sesión")).then(result=>{
+                                        if (result.isConfirmed) {
+                                            //saveIdInLocalStorage(id,true)
+                                            saveInStorage("detail", {id, question: comment})
+                                            navigate('/login')
+                                        }
+                                    })
+                                }
+                                else {
+                                    commentSumbit(e)
+                                }
                             }}>
                                 <div class="mb-4 w-full bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600">
                                     <div class="py-2 px-4 bg-white rounded-t-lg dark:bg-gray-800">
                                         <label htmlFor="comment" className="text-xl m-5">Preguntarle al publicador</label>
-                                        <textarea ref={refQuestion} onChange={(e) => setComment(e.target.value)} name="comment" rows="4" class="rounded px-0 w-full text-sm text-gray-900 bg-white border-2 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400 " placeholder="escriba aquí su pregunta..." ></textarea>
+                                        <textarea 
+                                            ref={refQuestion} 
+                                            onChange={(e) => setComment(e.target.value)} 
+                                            name="comment" rows="4" 
+                                            value={comment}
+                                            class="rounded px-0 w-full text-sm text-gray-900 bg-white border-2 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400 " 
+                                            placeholder="escriba aquí su pregunta..." ></textarea>
+                                            
                                     </div>
                                     <div class="flex justify-between items-center py-2 px-3 border-t dark:border-gray-600">
                                         <input
