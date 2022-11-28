@@ -5,15 +5,16 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import UserIcon from "../user-icon/UserIcon.jsx";
-import { loadUserInfo,filterProperties } from "../../redux/actions";
+import { loadUserInfo, filterProperties } from "../../redux/actions";
 import { icons } from "../../images/index.js";
 import {filter} from '../../utils/filters'
 
 export default function Nav({ rutes = true, login = true }) {
   const dispatch = useDispatch();
-  const { user,properties } = useSelector((state) => state);
-  
+  const { user, properties } = useSelector((state) => state);
+
   const { Lightning, HeartBorder } = icons;
+
   
   const setFilters= (type)=>{
     const prop = filter(properties,{operation:type})
@@ -47,7 +48,7 @@ export default function Nav({ rutes = true, login = true }) {
               <Link
                 to="/home"
                 className="text-base font-medium text-gray-500 hover:text-gray-900"
-                onClick={()=>setFilters("Venta")}
+                onClick={() => setFilters("Venta")}
               >
                 VENTA
               </Link>
@@ -73,6 +74,14 @@ export default function Nav({ rutes = true, login = true }) {
               >
                 PREMIUM
               </Link>
+              {/* BACKEND TRABAJANDO */}
+              <Link
+                to="/dashboard"
+                className="W-40 text-base text-center font-medium text-gray-500 hover:text-gray-900"
+              >
+                <span className="p-0 m-0">DASHBOARD</span>
+              </Link>
+              {/* BACKEND TRABAJANDO */}
             </Popover.Group>
           )}
           <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
