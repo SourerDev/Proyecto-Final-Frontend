@@ -25,6 +25,19 @@ export default function BePremium() {
         setLinkPago(r.data)
       })
     }
+    if(status) {
+      if(status === "approved") {
+        axios.put(`${API_URL}/users/upDate/${user_id}`)
+        .then((r) => {
+          console.log(r)
+          return dispatch(loadUserInfo(r.data.Message))
+        })
+      }
+      else {
+        console.log("ocurrio un error inesperado")
+        console.log(status)
+      }
+    }
   }, [user, location])
 
   if(redirect) {
@@ -41,6 +54,7 @@ export default function BePremium() {
   const user_id = new URLSearchParams(location.search).get("external_reference")
 
   if(status && status === "aproved") {
+    console.log(status)
     swal.fire(paymentOk())
     .then(res => navigate("/"))
   }
@@ -49,7 +63,7 @@ export default function BePremium() {
   }
   
   
-  if(status) {
+  /* if(status) {
     if(status === "approved") {
       axios.put(`${API_URL}/users/upDate/${user_id}`)
       .then((r) => {
@@ -61,7 +75,7 @@ export default function BePremium() {
       console.log("ocurrio un error inesperado")
       console.log(status)
     }
-  }
+  } */
 console.log(user)
   return (
     <div className="bg-gray-300">
