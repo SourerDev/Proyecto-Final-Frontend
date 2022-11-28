@@ -1,7 +1,8 @@
 
 
 export function filter(properties, filter) {
-  if(filter?.operation.length) {
+
+  if(filter?.operation?.length) {
     properties = properties.filter(p => p.modality === filter.operation)
   }
   if(filter?.propertyType?.length) {

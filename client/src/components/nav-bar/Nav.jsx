@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import UserIcon from "../user-icon/UserIcon.jsx";
 import { loadUserInfo,filterProperties } from "../../redux/actions";
 import { icons } from "../../images/index.js";
+import {filter} from '../../utils/filters'
 
 export default function Nav({ rutes = true, login = true }) {
   const dispatch = useDispatch();
@@ -15,8 +16,8 @@ export default function Nav({ rutes = true, login = true }) {
   const { Lightning, HeartBorder } = icons;
   
   const setFilters= (type)=>{
-    const prop = filterProperties(properties,type)
-    console.log('Nav»', prop);
+    const prop = filter(properties,{operation:type})
+    dispatch(filterProperties(prop))
   }
 
   return (
@@ -53,12 +54,14 @@ export default function Nav({ rutes = true, login = true }) {
               <Link
                 to="/home"
                 className="text-base font-medium text-gray-500 hover:text-gray-900"
+                onClick={()=>setFilters("Alquiler")}
               >
                 ALQUILER
               </Link>
               <Link
                 to="/home"
                 className="W-40 text-base text-center font-medium text-gray-500 hover:text-gray-900"
+                onClick={()=>dispatch(filterProperties(properties))}
               >
                 {/* <span className="p-0 m-0">TODAS LAS </span>
                 <br className="p-0 m-0"/> */}
@@ -139,14 +142,14 @@ export default function Nav({ rutes = true, login = true }) {
                     </Link>
                   )}
 
-                  <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
+                  <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200" onClick={()=>setFilters("Venta")}>
                     <span>VENTA</span>
                   </Popover.Button>
-                  <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
+                  <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200" onClick={()=>setFilters("Alquiler")}>
                     <span>ALQUILER</span>
                   </Popover.Button>
                   <Link to="/home" className="">
-                    <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
+                    <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200" onClick={()=>dispatch(filterProperties(properties))}>
                       <span>TODAS LAS PROPIEDADES</span>
                     </Popover.Button>
                   </Link>
