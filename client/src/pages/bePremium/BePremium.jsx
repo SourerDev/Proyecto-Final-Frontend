@@ -17,8 +17,11 @@ export default function BePremium() {
 
   useEffect(() => {
     if(user.user_type === "userLogged") {
-      axios.post(API_URL, {user_id: user.id_User})
-      .then(r => setLinkPago(r.data))
+      axios.post(`${API_URL}/payments`, {user_id: user.id_User})
+      .then(r => {
+        console.log(r)
+        setLinkPago(r.data)
+      })
     }
   }, [user, location])
 
