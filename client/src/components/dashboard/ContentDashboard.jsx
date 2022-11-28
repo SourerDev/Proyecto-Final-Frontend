@@ -20,16 +20,9 @@ const ContentDashboard = () => {
               <thead class="bg-gray-800 text-white-500">
                 <tr className="bg-indigo-600">
                   <th class="p-3">Propiedades</th>
-                  <th class="p-3 text-left">Direccion</th>
-                  <th class="p-3 text-left">Metros cuadrados</th>
-                  <th class="p-3 text-left">Baños</th>
-                  <th class="p-3 text-left">Pisos</th>
-                  <th class="p-3 text-left">Garages</th>
-                  <th class="p-3 text-left">Antiguedad</th>
-                  <th class="p-3 text-left">Propiedad</th>
                   <th class="p-3 text-left">Disponible</th>
-                  <th class="p-3 text-left">Datos propietario</th>
-                  <th class="p-3 text-left">Actualizar/Borrar</th>
+                  <th class="p-3 text-left">Propietario</th>
+                  <th class="p-3 text-left">Borrar/Bloquear</th>
                 </tr>
               </thead>
               <tbody>
@@ -43,11 +36,6 @@ const ContentDashboard = () => {
           </div>
         </div>
       </div>
-      {!properties.length ? (
-        <h1>No hay propeidades</h1>
-      ) : (
-        properties.map((el) => <Dashboard data={el} key={el.id} />)
-      )}
     </>
   );
 };
