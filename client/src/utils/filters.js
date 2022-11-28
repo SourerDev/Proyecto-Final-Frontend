@@ -1,7 +1,8 @@
 
 
 export function filter(properties, filter) {
-  if(filter?.operation.length) {
+
+  if(filter?.operation?.length) {
     properties = properties.filter(p => p.modality === filter.operation)
   }
   if(filter?.propertyType?.length) {
@@ -38,7 +39,6 @@ export function filter(properties, filter) {
   if(filter?.antiquity?.min && filter?.antiquity?.max) {
     properties = properties.filter(p => p.antiquity >= filter.antiquity.min && p.antiquity <= filter.antiquity.max)
   }
-  console.log(properties)
   return properties
 }
 

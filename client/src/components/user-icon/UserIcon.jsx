@@ -12,7 +12,7 @@ export default function UserIcon({ user }) {
     <Popover className="relative bg-white ">
       <Popover.Button className=" w-12 h-12 border-1  rounded-full inline-flex items-center justify-center bg-white hover:bg-gray-100 focus:border-1">
         <span className="sr-only">user</span>
-        <img className="w-full h-full rounded-full" src={user.photo} alt="" />
+        <img className="w-full h-full rounded-full" src={user?.photo && user?.photo} alt="" />
       </Popover.Button>
       <Transition
         as={Fragment}

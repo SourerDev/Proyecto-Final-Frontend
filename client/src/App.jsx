@@ -34,106 +34,19 @@ function App() {
   return (
     <div className="flex flex-col ">
       <Routes>
-        <Route
-          path="/home"
-          element={
-            <>
-              <Nav />
-              <Home />
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path="/"
-          element={
-            <>
-              <Nav rutes={true} />
-              <Landing />
-            </>
-          }
-        />
-        <Route
-          path="/detail/:id"
-          element={
-            <>
-              <Nav />
-              <Detail />
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path="/createProperty"
-          element={
-            <>
-              <Nav />
-              <Form />
-            </>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <>
-              <Nav login={false} />
-              <LogIn />
-            </>
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            <>
-              <Nav login={false} />
-              <SignUp />
-            </>
-          }
-        />
-        <Route
-          path="/user"
-          element={
-            <>
-              <Nav login={false} />
-              <EditUser />
-            </>
-          }
-        />
-        <Route
-          path="/bePremium"
-          element={
-            <>
-              <Nav />
-              <BePremium />
-            </>
-          }
-        />
-        <Route
-          path="/redirect"
-          element={
-            <>
-              <Redirect />
-            </>
-          }
-        />
+        <Route path="/home" element={<><Nav/><Home/><Footer/></>}/>
+        <Route path="/" element={<><Nav rutes={true} /><Landing/></>}/>
+        <Route path="/detail/:id" element={<><Nav/><Detail/><Footer/></>}/>
+        <Route path="/createProperty" element={<><Nav/><Form/></>}/>
+        <Route path="/login" element={<><Nav login={false}/><LogIn/></>}/>
+        <Route path="/signup" element={<><Nav login={false}/><SignUp/></>}/>
+        <Route path="/user" element={<><Nav login={false}/><EditUser/><Footer/></>}/>
+        <Route path="/bePremium" element={<><Nav/><BePremium/><Footer/></>} />
+        <Route path="/redirect" element={<><Redirect/><Footer/></>} />
         {/* BACKEND TRABAJANDO */}
-        <Route
-          path="/dashboard"
-          element={
-            <>
-              <ContentDashboard />
-            </>
-          }
-        />
-        <Route
-          path="/ownerData/:id_User"
-          element={
-            <>
-              <OwnerData />
-            </>
-          }
-        />
-        {/* BACKEND TRABAJANDO */}
+        <Route path="/dashboard" element={<><ContentDashboard /></>}/>
+        <Route path="/ownerData/:id_User" element={<><OwnerData /></>}/>
+
       </Routes>
     </div>
   );

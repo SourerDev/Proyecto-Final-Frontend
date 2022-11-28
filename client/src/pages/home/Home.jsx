@@ -11,7 +11,8 @@ import LandingSearch from '../../components/landingSearch/LandingSearch.jsx';
 
 export default function Home() {
 
-    const { properties, citiesA, filteredProperties, favorites, user} = useSelector(state => state);
+    const { properties, citiesA, filteredProperties, user} = useSelector(state => state);
+    const {favorites}  = useSelector(state => state.user)
     const paginado = (pageNumbers) => {
         setCurrentPage(pageNumbers)
     }
@@ -39,6 +40,9 @@ export default function Home() {
     useEffect(() => {
         console.log(filteredProperties)
         dispatch(getallProperties());
+        return ()=>{
+            
+        }
     }, [favorites])
 
     return (
@@ -85,14 +89,15 @@ export default function Home() {
                     <Card
                     key={el.id}
                     id={el.id}
-                    favorite={favorites.includes(el.id)}
+                    favorite={favorites?.includes(el.id)}
                     city={findNameCity(citiesA,el.idCity)}
                     modality ={el.modality}
                     address={el.address}
                     price={el.price}
                     images={el.images}
                     garage={el.garage}
-                    existUser={user?.email ? true : false}
+                    idUser={user?.id_User ?  user?.id_User : false}
+                    userProperty={el.User}
                     />
                     </div>
                 )

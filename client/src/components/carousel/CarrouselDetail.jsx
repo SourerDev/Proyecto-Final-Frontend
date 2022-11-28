@@ -52,7 +52,7 @@ export default function CarrouselDetail({ images }) {
   };
 
   return (
-    <div className="w-full overflow-hidden flex flex-col justify-center items-center py-2 h-full">
+    <div className="lg:w-[41rem]  flex flex-col justify-center items-center h-4/4 ">
       
       {images?.length > 0 && (
         <Main className="shadow">
@@ -76,7 +76,7 @@ export default function CarrouselDetail({ images }) {
                     
                       src={element}
                       alt={element}
-                      className=""
+                      className="rounded-lg"
                     />
                   
                   
@@ -137,7 +137,7 @@ const Slide = styled.div`
   overflow: hidden;
   transition: 0.3s ease all;
   z-index: 10;
-  max-height: 300px;
+  max-height: 500px;
   position: relative;
 
   img {
@@ -148,7 +148,7 @@ const Slide = styled.div`
     transition: all 1s ease-in-out;
     &:hover {
       transform: scale(1.1);
-      filter: grayscale(80%);
+     
     }
   }
 

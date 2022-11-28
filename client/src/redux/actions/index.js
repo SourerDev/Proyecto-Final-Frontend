@@ -7,7 +7,11 @@ import {
   LOAD_USER_INFO,
   UPDATE_USER,
   POST_COMMENT,
-  RESET_USER
+  RESET_USER,
+  FILTER_NORMAL,
+  FILTER_CITY,
+  RESET_DETAIL,
+  CONTACT_OWNER
 } from "./actionTypes";
 
 import callsApi from "../../services";
@@ -35,7 +39,6 @@ export function getCities() {
 }
 
 export function filterProperties(filteredProperties) {
-  console.log(filteredProperties);
   return { type: "FILTER_PROPERTIES", payload: filteredProperties.length ? filteredProperties : "No se encontraron propiedades con los filtros indicados" };
 }
 
@@ -199,25 +202,25 @@ export function loadUserInfo(userData) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 export function resetUser() {
   return {type: RESET_USER, paylaod: {}}
 }
 
+export function resetDetail() {
+  return {type: RESET_DETAIL, paylaod: {}}
+}
 
-
+export function contactOwner(id_User, id_property) {
+  return async function(dispatch) {
+    console.log(id_User, "entroo ", id_property)
+    const res =  await callsApi.contactOwner({
+      id_User,
+      id: id_property
+    })
+    console.log(res.data)
+    dispatch({type: CONTACT_OWNER, paylaod: ""})
+  }
+}
 
 
 
@@ -242,3 +245,15 @@ export function postComment(data) {
   }
 }
 
+
+
+
+
+// Logica de filtros
+
+export function filterNormal(values ={}) {
+  return{
+    type:FILTER_NORMAL,
+    payload:values
+  }
+}

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loadUserInfo, postSignUp } from "../../redux/actions/index";
@@ -11,6 +11,7 @@ import {
   GithubAuthProvider,
 } from "firebase/auth";
 import { async } from "@firebase/util";
+import {getOfStorage} from '../../utils/saveIdInLocalStorage'
 
 export default function LogIn() {
   function mostrarContrasena() {
@@ -30,6 +31,19 @@ export default function LogIn() {
   });
   const [response, setResponse] = useState({ state: true, msg: "" });
 
+  const setNavigate =()=>{
+     const save = getOfStorage('detail');
+     console.log(save)
+
+    if(save?.id){
+      navigate(`/detail/${save.id}`)
+    } 
+    else{
+      console.log()
+      navigate('/')
+    }
+  }
+
   const handleClickGoogle = async () => {
     const provider = new GoogleAuthProvider();
     provider.addScope("email");
@@ -39,6 +53,7 @@ export default function LogIn() {
       photo: user.photoURL,
       userName: user.displayName,
       password: user.uid,
+      user_type:"userLogged"
     };
     let loginValue = false;
 
@@ -60,9 +75,9 @@ export default function LogIn() {
         password: data.password,
       });
       const { Message, token } = login.data;
-      dispatch(loadUserInfo(Message));
+      dispatch(loadUserInfo({...Message,favorites:Message.favorites.map(el=>el.id_Property)}));
       setResponse({ state: true, msg: "" });
-      navigate("/");
+      setNavigate()
     }
 
     /* 
@@ -80,20 +95,21 @@ export default function LogIn() {
     });
   }
   async function handleSubmit(data) {
-    if(!data.email) return
+    if (!data.email) return;
     try {
       const response = await callsApi.login(data);
       const { Message, token } = response.data;
-      dispatch(loadUserInfo(Message));
-      setResponse({ state: true, msg: "" });
-      navigate("/");
+      if (Message) {
+        dispatch(loadUserInfo({...Message,favorites:Message.favorites.map(el=>el.id_Property)}));
+        setResponse({ state: true, msg: "" });
+        console.log(response.data);
+        setNavigate()
+      }else{
+        setResponse({ state: false, msg: response.data.Error });
+      }    
     } catch (error) {
-      const msg = error.response.data?.Error;
-      const msg2 = error.response.data?.err?.message;
-    
-      if (msg?.length) setResponse({state:false, msg: msg });
-      else if(msg2?.length)  setResponse({state:false, msg: msg2 });
-    } 
+      setResponse({ state: false, msg: error.message });
+    }
   }
 
   return (
@@ -116,7 +132,7 @@ export default function LogIn() {
                 }}
               >
                 <div className="flex flex-row items-center justify-center lg:justify-start">
-                  <p className="text-lg mb-0 mr-4">Iniciar sesion con:</p>
+                  <p className="text-lg mb-0 mr-4">Iniciar sesión con :</p>
                   <div onClick={handleClickGoogle}>
                     <button class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
                       GOOGLE
@@ -134,7 +150,7 @@ export default function LogIn() {
                     type="email"
                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     id="exampleFormControlInput2"
-                    placeholder="Email address"
+                    placeholder="correo electronico"
                     onChange={(e) => handleChange(e)}
                   />
                 </div>
@@ -145,7 +161,7 @@ export default function LogIn() {
                       type="password"
                       className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       id="exampleFormControlInput26"
-                      placeholder="Password"
+                      placeholder="contraseña"
                       onChange={(e) => handleChange(e)}
                     />
                     <button
@@ -178,12 +194,12 @@ export default function LogIn() {
                 </div>
 
                 <div className="flex flex-col sm:items-center">
-                    {/* <Link to="/"> */}
-                    {!response.state &&
-                      <p className="px-2 my-2 text-red-700 bg-red-200 rounded-md w-full sm:w-auto">
-                        {response.msg}
-                      </p>
-                    }
+                  {/* <Link to="/"> */}
+                  {!response.state && (
+                    <p className="px-2 my-2 text-red-700 bg-red-200 rounded-md w-full sm:w-auto">
+                      {response.msg}
+                    </p>
+                  )}
                   <div className="flex flex-col sm:flex-row sm:space-x-4 sm:justify-center">
                     <input
                       type="submit"
