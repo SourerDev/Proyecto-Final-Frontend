@@ -53,7 +53,7 @@ export default function BePremium() {
   const status = new URLSearchParams(location.search).get("status")
   const user_id = new URLSearchParams(location.search).get("external_reference")
 
-  if(status && status === "aproved") {
+  if(status && status === "approved") {
     console.log(status)
     swal.fire(paymentOk())
     .then(res => navigate("/"))
