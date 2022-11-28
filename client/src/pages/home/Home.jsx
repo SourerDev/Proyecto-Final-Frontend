@@ -96,7 +96,8 @@ export default function Home() {
                     price={el.price}
                     images={el.images}
                     garage={el.garage}
-                    idUser={user?.id_User ?  user?.id_User : false} 
+                    idUser={user?.id_User ?  user?.id_User : false}
+                    userProperty={el.User}
                     />
                     </div>
                 )

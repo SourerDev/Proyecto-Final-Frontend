@@ -31,6 +31,9 @@ const callsApi = {
     postFavorite: function(data){
         return apiProperties.post("/favorites/createFavorite",data)
     },
+    removeFavorite: function(id){
+        return apiProperties.delete(`/favorite/delete/${id}`)
+    },
     contactOwner: function(data) {
         return apiProperties.post("/interested/userInterested", data)
     }
