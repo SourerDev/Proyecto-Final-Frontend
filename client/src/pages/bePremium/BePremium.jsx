@@ -16,10 +16,10 @@ export default function BePremium() {
   const [linkPago, setLinkPago] = useState("#")
   const [redirect, setRedirect] = useState(false)
   const {user} = useSelector(state => state)
-/
+
   useEffect(() => {
-    if(user.user_type === "userLogged") {
-      axios.post(`${API_URL}/payments`, {user_id: user.id_User})
+    if(user?.user_type === "userLogged") {
+      axios.post(`${API_URL}/payments`, {user_id: user?.id_User})
       .then(r => {
         console.log(r)
         setLinkPago(r.data)
