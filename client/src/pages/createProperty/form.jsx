@@ -8,7 +8,10 @@ import { isValidForm } from "../../utils/isValidForm.js";
 import { inputNumber, inputServices } from "../../utils/formInputs.js";
 import AutocompleteSearch from "../../components/autocomplete-search/autocompleteSearch.jsx";
 import { useEffect } from "react";
-
+import Loading from '../../components/loading/Loading.jsx'
+import postingProperty from "../../utils/postingProperty.js";
+import swal from "sweetalert2";
+import {property} from "../../sweetAlerts/sweetAlerts"
 
 export default function Form() {
   const navigate = useNavigate();
@@ -37,7 +40,8 @@ export default function Form() {
   const [fileName, setFileName] = useState({});
   const [arrFileNames, setArrFileNames] = useState([]);
   const [errs, setErrs] = useState({});
-  
+  const [loader, setLoader] = useState(false)
+
   function handleChange(event) {
     if (event.target.name === 'city') {
       const { name, value } = event.target;
@@ -109,9 +113,27 @@ export default function Form() {
         encType="multipart/form-data"
         onSubmit={(e) => {
           e.preventDefault()
-          dispatch(postPorperty(data, services, files))
-          navigate("/home")
+          //loader true
+          setLoader(true)
+          postingProperty(data, services, files)
+          .then(r => {
+            //loader false
+            setLoader(false)
+            const res = r.data.Message
+            swal.fire(property(res))
+            .then(r => navigate("/home"))
+          })
         }}
+        /* onSubmit={(e) => {
+          e.preventDefault()
+          //loader true
+          dispatch(postPorperty(data, services, files))
+          .then(t => {
+            //loader false
+            
+            navigate("/home")
+          })
+        }} */
       >
         <div className="xl px-48">
           <select className="sm:text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="modality" onChange={(e) => handleChange(e)}>
@@ -344,7 +366,11 @@ export default function Form() {
                         </p>
 
     </div>
-
+    {loader && (
+      <div className="fixed w-full h-screen top-0 z-50 opacity-1" onClick={()=>{}}>
+        <Loading/>
+      </div>
+    )}
   </div>
   )
 }

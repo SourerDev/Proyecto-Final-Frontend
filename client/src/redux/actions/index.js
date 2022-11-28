@@ -11,7 +11,8 @@ import {
   FILTER_NORMAL,
   FILTER_CITY,
   RESET_DETAIL,
-  CONTACT_OWNER
+  CONTACT_OWNER,
+  RESET_ALERT,
 } from "./actionTypes";
 import { API_URL } from "../../services/api/baseApi";
 import callsApi from "../../services";
@@ -256,4 +257,8 @@ export function filterNormal(values ={}) {
     type:FILTER_NORMAL,
     payload:values
   }
+}
+
+export function resetAlert() {
+  return {type: RESET_ALERT, paylaod: []}
 }

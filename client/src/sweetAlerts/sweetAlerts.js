@@ -71,3 +71,27 @@ export const paymentError = (status) => {
     reverseButtons: true
   }
 }
+
+export const noProperties = () => {
+  return {
+    title:`Lo Sentimos!`,
+    text: `No se encontraron propiedades`,
+    icon: 'question',
+    showCancelButton: false,
+    confirmButtonText: 'Ok',
+    cancelButtonText: '',
+    reverseButtons: true
+  }
+}
+
+export const property = () => {
+  return {
+    title:`Lo Sentimos!`,
+    text: `No se encontraron propiedades`,
+    icon: 'question',
+    showCancelButton: false,
+    confirmButtonText: 'Ok',
+    cancelButtonText: '',
+    reverseButtons: true
+  }
+}
