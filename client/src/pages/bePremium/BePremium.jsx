@@ -11,12 +11,12 @@ export default function BePremium() {
   
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const location = useLocation()
+  
   
   const [linkPago, setLinkPago] = useState("#")
   const [redirect, setRedirect] = useState(false)
   const {user} = useSelector(state => state)
-
+/
   useEffect(() => {
     if(user.user_type === "userLogged") {
       axios.post(`${API_URL}/payments`, {user_id: user.id_User})
@@ -38,7 +38,7 @@ export default function BePremium() {
         console.log(status)
       }
     }
-  }, [user, location])
+  }, [])
 
   if(redirect) {
     //navigate("/redirect")
@@ -76,7 +76,7 @@ export default function BePremium() {
       console.log(status)
     }
   } */
-console.log(user)
+
   return (
     <div className="bg-gray-300">
       <div className=" h-20 text-center text-2xl mt-14"><h1>bienvenido {user.userName} aste <a className="underline decoration-pink-500 text-2xl">premium</a></h1></div>
