@@ -79,7 +79,7 @@ export default function BePremium() {
 
   return (
     <div className="bg-gray-300">
-      <div className=" h-20 text-center text-2xl mt-14"><h1>bienvenido {user.userName} aste <a className="underline decoration-pink-500 text-2xl">premium</a></h1></div>
+      <div className=" h-20 text-center text-2xl mt-14"><h1>bienvenido {user?.userName} aste <a className="underline decoration-pink-500 text-2xl">premium</a></h1></div>
       <div className="flex lg:flex-row justify-center self-center flex-col h-5/6">
       <div className="text-center w-64 flex justify-center ml-16 lg:mr-20 lg:mt-6 h-64">
         <p className="text-lg">Al volverte usuario premium pagando la membresía mensual podras subir tus publicaciones para la venta o alquiler, posicionarte en el mercado de propiedades, interactuar con los usuarios y comunicarte con los interesados en tu publicación.</p>
