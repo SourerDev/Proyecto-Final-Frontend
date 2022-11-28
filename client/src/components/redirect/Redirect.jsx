@@ -3,13 +3,27 @@ import { useDispatch } from "react-redux"
 import { resetUser } from "../../redux/actions"
 import {Link} from "react-router-dom"
 import Loading from "../Loading-mercadopago/Loading"
+import swal from 'sweetalert2'
+import {paymentOk, paymentError} from "../../sweetAlerts/sweetAlerts"
 
 export default function Redirect() {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(resetUser())
   })
+
   
+  return (
+    <>
+    <h1>redirecttt
+    <button
+    onClick={() => swal.fire(paymentError())}
+    >
+      clickeame
+    </button>
+    </h1>
+    </>
+  )
   /* return (
     <div>
       <Loading/>

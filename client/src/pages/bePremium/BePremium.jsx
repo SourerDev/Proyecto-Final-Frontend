@@ -5,10 +5,10 @@ import {useDispatch, useSelector} from "react-redux"
 import { loadUserInfo, resetUser} from "../../redux/actions"
 import {API_URL} from "../../services/api/baseApi"
 import swal from 'sweetalert2';
-import {completePayment} from "../../sweetAlerts/sweetAlerts"
+import {completePayment, paymentError, paymentOk} from "../../sweetAlerts/sweetAlerts"
 
 export default function BePremium() {
- 
+  
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
@@ -36,12 +36,17 @@ export default function BePremium() {
       navigate("/")
     })
   }
-  /* if(user && user.user_type === "userPremiun") {
-    navigate("/home")
-  } */
-
+  
   const status = new URLSearchParams(location.search).get("status")
   const user_id = new URLSearchParams(location.search).get("external_reference")
+
+  if(status && status === "aproved") {
+    swal.fire(paymentOk())
+    .then(res => navigate("/"))
+  }
+  else if(status && status === "rejected") {
+    swal.fire(paymentError())
+  }
   
   
   if(status) {
