@@ -52,10 +52,10 @@ export default function Detail() {
         }, 500)
     }
     let images1 = [
-        "https://img.freepik.com/foto-gratis/feliz-familia-silueta-puesta-sol_1303-22466.jpg",
-        "https://www.forofamilia.org/wp-content/uploads/2016/04/Familia-unida.jpg",
-        "https://www.carlosllanocatedra.org/hs-fs/hubfs/Stock%20images/Portrait%20of%20an%20extended%20family%20with%20their%20pet%20dog%20sitting%20at%20the%20park.jpeg?width=600&name=Portrait%20of%20an%20extended%20family%20with%20their%20pet%20dog%20sitting%20at%20the%20park.jpeg",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaPEJtzuJt6ZNqCt2ZMQ9sy4DaHpzC9iVzTF24JtFgHdTt9_BAJ_1SmGrzU5s5r32evrc&usqp=CAU",
+        "https://imgar.zonapropcdn.com/avisos/1/00/50/38/31/04/720x532/1838565724.jpg",
+        "https://static.tokkobroker.com/pictures/22195378878590399459749233039638765388563259893558223458366824765496290235011.jpg",
+        "https://static.tokkobroker.com/pictures/62097336669621611912439568172754377674026387283592863525525020166865836476845.jpg",
+        "https://static.tokkobroker.com/pictures/30641452628166825515595170899423142700348859149718156386875136195094220568629.jpg",
     ]
     return (
         <div className="bg-blue-50 px-4">
@@ -71,10 +71,10 @@ export default function Detail() {
                 payload ? (
 
                     <div class="max-w-4xl m-1 p-2 mx-auto  grid grid-cols-1 lg:max-w-[97rem] lg:gap-x-20 lg:grid-cols-2">
-                        <div class="  col-start-1 col-end-3 row-start-1 sm:mb-6 sm:grid-cols-4  lg:col-start-2  lg:row-span-2  ">
+                        <div class=" col-start-1 col-end-3 row-start-1 sm:mb-6 sm:grid-cols-4  lg:col-start-2  lg:row-span-2  ">
                             <CarrouselDetail images={[payload.images,...images1]} />
                         </div>
-                        <div class="relative my-2 shadow-2xl bg-white p-3 col-start-1 row-start-1 flex flex-col-reverse rounded-lg bg-gradient-to-t from-black/75 via-black/0 sm:bg-none sm:row-start-2 sm:p-0 lg:row-start-1">
+                        <div class="relative my-0 shadow-2xl p-3 col-start-1 row-start-1 flex flex-col-reverse rounded-lg bg-gradient-to-t from-black/75 via-black/0 sm:bg-none sm:row-start-2 sm:p-0 lg:bg-white sm:bg-white lg:row-start-1">
                             <h1 class="mt-1 my-2 flex justify-center text-lg font-semibold text-white sm:text-slate-900 md:text-2xl dark:sm:text-black">{payload.address}</h1>
                             <h1 class="mt-1 text-lg flex justify-center font-semibold text-white sm:text-slate-900 md:text-2xl dark:sm:text-black">
                                 {
@@ -83,9 +83,11 @@ export default function Detail() {
 
                                 }</h1>
                             <p class="text-xl mt-2 leading-4 flex justify-center font-medium text-white sm:text-slate-500 dark:sm:text-slate-400">{payload.modality}</p>
+                            <p class="text-xl mt-2 leading-4 flex justify-center font-medium text-white sm:text-slate-500 dark:sm:text-slate-400">{payload.type}</p>
+
                         </div>
                         <dl class="mt-4 text-xs font-medium drop-shadow-2xl row-start-2 sm:mt-1 sm:row-start-3 md:mt-2.5 lg:row-start-2">
-                            <dl className="my-4">
+                            <dl className="my-4 border-black border-2 rounded-lg shadow-2xl bg-white">
 
                                 <dd class="flex justify-center  text-black  items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -172,17 +174,17 @@ export default function Detail() {
 
                         <p class="mt-4 text-sm leading-6 col-start-1 sm:col-span-2 lg:mt-6 lg:row-start-4 lg:col-span-4 dark:text-slate-400">
                             <article>
-                                <div className="px-4 my-10">
-                                    <h1 class="dark:text-black  text-xl m-5"> Descripción </h1>
-                                    <p>{payload.description}</p>
+                                <div className="px-4 my-10 shadow-2xl bg-white rounded-lg">
+                                    <h1 class="dark:text-black underline text-2xl  m-5"> Descripción </h1>
+                                    <p className="text-xl my-4">{payload.description}</p>
                                 </div>
-                                <div className="px-4 my-10">
-                                    <h1 class="dark:text-black  text-xl m-5"> Servicios </h1>
+                                <div className="px-4 my-10 shadow-2xl bg-white rounded-lg">
+                                    <h1 class="dark:text-black  text-2xl underline m-5"> Servicios </h1>
                                     {
                                         payload.services ? payload.services.map((el) =>{
                                             return (
-                                                <div className=" flex justify-between">
-                                                    <ul className="flex justify-between my-4 m-3 ">
+                                                <div className=" flex justify-between ">
+                                                    <ul className="flex justify-between my-4 m-3 text-xl ">
                                                     <svg className="w-8 h-8 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>
                                                         {el}
                                                     </ul>
