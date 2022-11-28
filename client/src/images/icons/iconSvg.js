@@ -1,5 +1,5 @@
 import styled from "styled-components";
-export const Heart = ({ className, fill, width, height,hover }) => (
+export const Heart = ({ className, fill, width, height, hover }) => (
   <Svg
     hover={hover}
     fill={fill}
@@ -41,10 +41,10 @@ export const HeartBorder = ({ className, fill, width, height, hover }) => (
   </Svg>
 );
 
-export const User = ({ className, fill, width, height,hover }) => (
+export const User = ({ className, fill, width, height, hover }) => (
   <Svg
     hover={hover}
-    fill={fill || 'none'}
+    fill={fill || "none"}
     width={width}
     height={height}
     className={className}
@@ -61,10 +61,40 @@ export const User = ({ className, fill, width, height,hover }) => (
   </Svg>
 );
 
+export const Exit = ({ className, fill, width, height, hover }) => (
+  <Svg
+    hover={hover}
+    fill={fill || "none"}
+    width={width}
+    height={height}
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+    fstroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path d="M11 21h8.033v-2l1-1v4h-9.033v2l-10-3v-18l10-3v2h9.033v5l-1-1v-3h-8.033v18zm-1 1.656v-21.312l-8 2.4v16.512l8 2.4zm11.086-10.656l-3.293-3.293.707-.707 4.5 4.5-4.5 4.5-.707-.707 3.293-3.293h-9.053v-1h9.053z" />
+  </Svg>
+);
+
+export const Lightning = ({ className, fill, width, height, hover }) => (
+  <Svg
+    hover={hover}
+    fill={fill || "none"}
+    width={width}
+    height={height}
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+    fstroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path d="M13 9h9l-14 15 3-9h-9l14-15-3 9zm-8.699 5h8.086l-1.987 5.963 9.299-9.963h-8.086l1.987-5.963-9.299 9.963z" />
+  </Svg>
+);
+
 const Svg = styled.svg`
   &:hover {
     path {
-      fill: ${props => props.hover ? props.hover:'#000' };
+      fill: ${(props) => (props.hover ? props.hover : "#000")};
     }
   }
 `;

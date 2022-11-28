@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loadUserInfo, postSignUp } from "../../redux/actions/index";
@@ -11,17 +11,17 @@ import {
   GithubAuthProvider,
 } from "firebase/auth";
 import { async } from "@firebase/util";
+import {getOfStorage} from '../../utils/saveIdInLocalStorage'
 
 export default function LogIn() {
-
-  function mostrarContrasena(){
+  function mostrarContrasena() {
     var tipo = document.getElementById("exampleFormControlInput26");
-    if(tipo.type == "password"){
-        tipo.type = "text";
-    }else{
-        tipo.type = "password";
+    if (tipo.type == "password") {
+      tipo.type = "text";
+    } else {
+      tipo.type = "password";
     }
-}
+  }
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -29,20 +29,34 @@ export default function LogIn() {
     email: "",
     password: "",
   });
-  const [response, setResponse] = useState({ state: false, msg: "" });
+  const [response, setResponse] = useState({ state: true, msg: "" });
+
+  const setNavigate =()=>{
+     const save = getOfStorage('detail');
+     console.log(save)
+
+    if(save?.id){
+      navigate(`/detail/${save.id}`)
+    } 
+    else{
+      console.log()
+      navigate('/')
+    }
+  }
 
   const handleClickGoogle = async () => {
     const provider = new GoogleAuthProvider();
-    provider.addScope('email')
+    provider.addScope("email");
     const { user } = await signInWithPopup(authentication, provider);
     let data = {
       email: user.email,
       photo: user.photoURL,
       userName: user.displayName,
       password: user.uid,
+      user_type:"userLogged"
     };
     let loginValue = false;
-   
+
     try {
       const post = await callsApi.postSignUp(data);
       if (post?.data === "Usuario creado") {
@@ -61,9 +75,9 @@ export default function LogIn() {
         password: data.password,
       });
       const { Message, token } = login.data;
-      dispatch(loadUserInfo(Message));
+      dispatch(loadUserInfo({...Message,favorites:Message.favorites.map(el=>el.id_Property)}));
       setResponse({ state: true, msg: "" });
-      navigate("/");
+      setNavigate()
     }
 
     /* 
@@ -81,17 +95,20 @@ export default function LogIn() {
     });
   }
   async function handleSubmit(data) {
+    if (!data.email) return;
     try {
       const response = await callsApi.login(data);
       const { Message, token } = response.data;
-      dispatch(loadUserInfo(Message))
-      setResponse({state:true, msg:""})
-      navigate("/");
-
-      
+      if (Message) {
+        dispatch(loadUserInfo({...Message,favorites:Message.favorites.map(el=>el.id_Property)}));
+        setResponse({ state: true, msg: "" });
+        console.log(response.data);
+        setNavigate()
+      }else{
+        setResponse({ state: false, msg: response.data.Error });
+      }    
     } catch (error) {
-      const msg = error.response.data.Error
-      if (msg) setResponse({ state: false, msg });
+      setResponse({ state: false, msg: error.message });
     }
   }
 
@@ -115,9 +132,11 @@ export default function LogIn() {
                 }}
               >
                 <div className="flex flex-row items-center justify-center lg:justify-start">
-                  <p className="text-lg mb-0 mr-4">Iniciar sesion con:</p>
+                  <p className="text-lg mb-0 mr-4">Iniciar sesión con :</p>
                   <div onClick={handleClickGoogle}>
-                  <button class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">GOOGLE</button>
+                    <button class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+                      GOOGLE
+                    </button>
                   </div>
                 </div>
 
@@ -128,52 +147,68 @@ export default function LogIn() {
                 <div className="mb-6">
                   <input
                     name="email"
-                    type="text"
+                    type="email"
                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     id="exampleFormControlInput2"
-                    placeholder="Email address"
+                    placeholder="correo electronico"
                     onChange={(e) => handleChange(e)}
                   />
                 </div>
                 <div className="">
-                <div className="mb-6 flex flex-row">
-                  <input
-                    name="password"
-                    type="password"
-                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    id="exampleFormControlInput26"
-                    placeholder="Password"
-                    onChange={(e) => handleChange(e)}
-                  />
-                  <button className="pr-8" type="button" onClick={(e) => mostrarContrasena(e)}><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg></button>
-                 
+                  <div className="w-full relative">
+                    <input
+                      name="password"
+                      type="password"
+                      className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                      id="exampleFormControlInput26"
+                      placeholder="contraseña"
+                      onChange={(e) => handleChange(e)}
+                    />
+                    <button
+                      className="h-full absolute z-10 top-0 right-0 text-gray-600 hover:text-gray-800 px-1"
+                      type="button"
+                      onClick={(e) => mostrarContrasena(e)}
+                    >
+                      <svg
+                        className="w-6 h-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                        />
+                      </svg>
+                    </button>
                   </div>
-                  
-                  
                 </div>
 
-                <div className="flex justify-between items-center mb-6">
-                  <div>
-                  
-                 
-                </div>
-
-                <div className="flex flex-col mr-20 items-start text-center lg:text-left lg:h-20 grid lg:grid-cols-3 lg:gap-4 lg:content-center">
+                <div className="flex flex-col sm:items-center">
                   {/* <Link to="/"> */}
-                  {!response.state && response.msg.length > 0 && (
-                    <p classNameName="px-2 m-2 text-red-700 bg-red-200 rounded-md">
+                  {!response.state && (
+                    <p className="px-2 my-2 text-red-700 bg-red-200 rounded-md w-full sm:w-auto">
                       {response.msg}
                     </p>
                   )}
-                  <br />
-                  <input
-                    type="submit"
-                    className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                    value={"Iniciar Sesión"}
-                  />
-                  
-                   <Link to="/signup">
-                      <button className=" mt-8 inline-block px-7 py-3 bg-red-400 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out disabled:bg-red-400 disabled:cursor-not-allowed">
+                  <div className="flex flex-col sm:flex-row sm:space-x-4 sm:justify-center">
+                    <input
+                      type="submit"
+                      className="mt-2 sm:my-2 inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                      value={"Iniciar Sesión"}
+                    />
+
+                    <Link to="/signup">
+                      <button className="w-full my-2 inline-block px-7 py-3 bg-red-400 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out disabled:bg-red-400 disabled:cursor-not-allowed">
                         Registrarme
                       </button>
                     </Link>

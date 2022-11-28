@@ -3,10 +3,10 @@ import { valuesCities} from "../../utils/autocompleteUtils";
 export default function AutocompleteSearch({apiData, city, stateHandleChange, refCity}) {
 
   return (
-    <div>
-      <div className="border-1 roundedjustify item-center ">
+    <div className="">
+      <div className="border-1 rounded item-center ">
         <input ref={refCity}
-        className=" w-full placeholder:text-black p-2"
+        className="w-full placeholder:text-black p-2"
           list="ubications"
           name="city"
           value={city}

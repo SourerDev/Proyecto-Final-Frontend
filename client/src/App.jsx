@@ -11,6 +11,8 @@ import LogIn from "./pages/logIn/LogIn";
 import SignUp from "./pages/signup/SignUp";
 import EditUser from "./pages/editUser/EditUser";
 import Footer from "./components/footer/Footer";
+import BePremium from "./pages/bePremium/BePremium";
+import Redirect from "./components/redirect/Redirect";
 
 function App() {
   const dispatch = useDispatch()
@@ -18,24 +20,22 @@ function App() {
       dispatch(getallProperties())
       dispatch(getCities())
       dispatch(getCitiesA())
-      const StorageFavorite = localStorage.getItem('favorite')
-      if (StorageFavorite?.length) {
-          dispatch(addFavorites(StorageFavorite.split('&')))
-          localStorage.setItem('favorite',``)
-        }
+      
+      localStorage.setItem('favorite',``)
     }, [])
 
   return (
     <div className="flex flex-col ">
       <Routes>
-        
         <Route path="/home" element={<><Nav/><Home/><Footer/></>}/>
         <Route path="/" element={<><Nav rutes={true} /><Landing/></>}/>
-        <Route path="/detail/:id" element={<><Nav/><Detail/></>}/>
+        <Route path="/detail/:id" element={<><Nav/><Detail/><Footer/></>}/>
         <Route path="/createProperty" element={<><Nav/><Form/></>}/>
         <Route path="/login" element={<><Nav login={false}/><LogIn/></>}/>
         <Route path="/signup" element={<><Nav login={false}/><SignUp/></>}/>
-        <Route path="/user" element={<><Nav login={false}/><EditUser/></>}/>
+        <Route path="/user" element={<><Nav login={false}/><EditUser/><Footer/></>}/>
+        <Route path="/bePremium" element={<><Nav/><BePremium/><Footer/></>} />
+        <Route path="/redirect" element={<><Redirect/><Footer/></>} />
       </Routes>
     </div>
   );

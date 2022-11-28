@@ -1,16 +1,11 @@
 import { useRef } from "react";
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-import { findNameCity } from "../../utils/autocompleteUtils";
-import { Link,useNavigate } from "react-router-dom";
-import {filterProperties} from '../../redux/actions'
+import {  useDispatch } from "react-redux";
 
-export default function Carousel({ title, images }) {
+
+export default function CarrouselDetail({ images }) {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const { citiesA } = useSelector((state) => state);
-
-
+  
   const slideshow = useRef(null);
   const interval = useRef(null);
 
@@ -57,16 +52,8 @@ export default function Carousel({ title, images }) {
   };
 
   return (
-    <div className="w-full overflow-hidden flex flex-col justify-center items-center py-2">
-      <div className="relative flex justify-between sm:w-11/12 sm:px-3 px-1 w-full">
-        <Title>{title || "Title"}</Title>
-        <button className="hidden sm:block hover:text-blue-500 hover:p-1"
-          onClick={()=>{
-            dispatch(filterProperties(images))
-            navigate('/home')
-          }}
-        >Ver Mas »</button>
-      </div>
+    <div className="lg:w-[41rem]  flex flex-col justify-center items-center h-4/4 ">
+      
       {images?.length > 0 && (
         <Main className="shadow">
           <Slideshow
@@ -84,29 +71,15 @@ export default function Carousel({ title, images }) {
             {images?.length > 0 && (
               images.map((element, i) => (
                 <Slide key={i}>
-                  <Link to={`/detail/${element.id}`}>
+                 
                     <img
-                      src={element.images[0]}
-                      alt={element.id}
-                      className=""
+                    
+                      src={element}
+                      alt={element}
+                      className="rounded-lg"
                     />
-                  </Link>
-                  {element?.id && (
-                    <TextSlide>
-                      <svg
-                        className=""
-                        fill="#fff"
-                        width="24"
-                        height="24"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                      >
-                        <path d="M12 10c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2m0-5c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3m-7 2.602c0-3.517 3.271-6.602 7-6.602s7 3.085 7 6.602c0 3.455-2.563 7.543-7 14.527-4.489-7.073-7-11.072-7-14.527m7-7.602c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602" />
-                      </svg>
-                      <p>{findNameCity(citiesA, element.idCity)}</p>
-                    </TextSlide>
-                  )}
+                  
+                  
                 </Slide>
               ))
             )}
@@ -145,9 +118,9 @@ export default function Carousel({ title, images }) {
 }
 
 const Main = styled.div`
-   overflow: hidden; 
+  overflow: hidden;
   position: relative;
-  width: 90%;
+  width: 100%;
   border-radius: 0.2rem;
   @media screen and (max-width: 640px) {
     width: 100%;
@@ -161,10 +134,10 @@ const Slideshow = styled.div`
 
 const Slide = styled.div`
   min-width: 100%;
-  overflow: hidden; 
+  overflow: hidden;
   transition: 0.3s ease all;
   z-index: 10;
-  max-height: 250px;
+  max-height: 500px;
   position: relative;
 
   img {
@@ -175,7 +148,7 @@ const Slide = styled.div`
     transition: all 1s ease-in-out;
     &:hover {
       transform: scale(1.1);
-      filter: grayscale(80%);
+     
     }
   }
 
@@ -184,35 +157,17 @@ const Slide = styled.div`
   }
 
   @media screen and (min-width: 400px) {
-    min-width: 50%;
+    min-width: 100%;
   }
   @media screen and (min-width: 800px) {
-    min-width: 33.33333333%;
+    min-width: 100%;
   }
   @media screen and (min-width: 1200px) {
-    min-width: 25%;
+    min-width: 100%;
   }
 `;
 
-const TextSlide = styled.div`
-  background: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  width: 100%;
-  padding: 10px 5px;
-  text-align: center;
-  position: absolute;
-  bottom: 0px;
-  font-weight: 900;
-  display: flex;
-  justify-content: right;
-  align-items: center;
-  @media screen and (max-width: 700px) {
-    font-size: small;
-    svg {
-      display: none;
-    }
-  }
-`;
+
 
 const Controls = styled.div`
   position: absolute;
