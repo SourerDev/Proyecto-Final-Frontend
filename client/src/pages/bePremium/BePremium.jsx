@@ -2,8 +2,10 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate, useLocation} from "react-router-dom"
 import {useDispatch, useSelector} from "react-redux"
-import { loadUserInfo } from "../../redux/actions"
+import { loadUserInfo, resetUser} from "../../redux/actions"
 import {API_URL} from "../../services/api/baseApi"
+import swal from 'sweetalert2';
+import {completePayment} from "../../sweetAlerts/sweetAlerts"
 
 export default function BePremium() {
  
@@ -26,11 +28,17 @@ export default function BePremium() {
   }, [user, location])
 
   if(redirect) {
-    navigate("/redirect")
+    //navigate("/redirect")
+    
+    swal.fire(completePayment())
+    .then(res => {
+      dispatch(resetUser())
+      navigate("/")
+    })
   }
-  if(user && user.user_type === "userPremiun") {
+  /* if(user && user.user_type === "userPremiun") {
     navigate("/home")
-  }
+  } */
 
   const status = new URLSearchParams(location.search).get("status")
   const user_id = new URLSearchParams(location.search).get("external_reference")

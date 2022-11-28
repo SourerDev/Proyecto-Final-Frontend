@@ -9,7 +9,8 @@ export default function Redirect() {
   useEffect(() => {
     dispatch(resetUser())
   })
-  return (
+  
+  /* return (
     <div>
       <Loading/>
       <div className="text-center my-8"><h1 className="text-gray-900 text-3xl">Por favor termine el pago en la ventana emergente</h1></div>
@@ -19,5 +20,5 @@ export default function Redirect() {
         </button>
       </Link>
     </div>
-  )
+  ) */
 }
