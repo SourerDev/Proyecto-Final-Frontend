@@ -11,7 +11,7 @@ export default function BePremium() {
   
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  
+  const location = useLocation()
   
   const [linkPago, setLinkPago] = useState("#")
   const [redirect, setRedirect] = useState(false)
