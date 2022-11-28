@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { useNavigate, useLocation} from "react-router-dom"
 import {useDispatch, useSelector} from "react-redux"
 import { loadUserInfo } from "../../redux/actions"
-
+import {API_URL} from "../../services/api/baseApi"
 
 export default function BePremium() {
  
@@ -17,7 +17,7 @@ export default function BePremium() {
 
   useEffect(() => {
     if(user.user_type === "userLogged") {
-      axios.post("http://localhost:3001/payments", {user_id: user.id_User})
+      axios.post(API_URL, {user_id: user.id_User})
       .then(r => setLinkPago(r.data))
     }
   }, [user, location])
@@ -35,7 +35,7 @@ export default function BePremium() {
   
   if(status) {
     if(status === "approved") {
-      axios.put(`http://localhost:3001/users/upDate/${user_id}`)
+      axios.put(`${API_URL}/users/upDate/${user_id}`)
       .then((r) => {
         console.log(r)
         dispatch(loadUserInfo(r.data.Message))
