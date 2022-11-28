@@ -2,11 +2,13 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate, useLocation} from "react-router-dom"
 import {useDispatch, useSelector} from "react-redux"
-import { loadUserInfo } from "../../redux/actions"
-
+import { loadUserInfo, resetUser} from "../../redux/actions"
+import {API_URL} from "../../services/api/baseApi"
+import swal from 'sweetalert2';
+import {completePayment, paymentError, paymentOk} from "../../sweetAlerts/sweetAlerts"
 
 export default function BePremium() {
- 
+  
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
@@ -17,25 +19,39 @@ export default function BePremium() {
 
   useEffect(() => {
     if(user.user_type === "userLogged") {
-      axios.post("http://localhost:3001/payments", {user_id: user.id_User})
-      .then(r => setLinkPago(r.data))
+      axios.post(`${API_URL}/payments`, {user_id: user.id_User})
+      .then(r => {
+        console.log(r)
+        setLinkPago(r.data)
+      })
     }
   }, [user, location])
 
   if(redirect) {
-    navigate("/redirect")
+    //navigate("/redirect")
+    
+    swal.fire(completePayment())
+    .then(res => {
+      dispatch(resetUser())
+      navigate("/")
+    })
   }
-  if(user && user.user_type === "userPremiun") {
-    navigate("/home")
-  }
-
+  
   const status = new URLSearchParams(location.search).get("status")
   const user_id = new URLSearchParams(location.search).get("external_reference")
+
+  if(status && status === "aproved") {
+    swal.fire(paymentOk())
+    .then(res => navigate("/"))
+  }
+  else if(status && status === "rejected") {
+    swal.fire(paymentError())
+  }
   
   
   if(status) {
     if(status === "approved") {
-      axios.put(`http://localhost:3001/users/upDate/${user_id}`)
+      axios.put(`${API_URL}/users/upDate/${user_id}`)
       .then((r) => {
         console.log(r)
         dispatch(loadUserInfo(r.data.Message))

@@ -51,12 +51,23 @@ export const completePayment = () => {
 
 export const paymentOk = (status) => {
   return {
-    title:`Pago exitoso`,
-    text: `ya eres usuario premium`,
+    title:`Pago exitoso!`,
+    text: `Ya eres usuario premium`,
     icon: 'success',
+    showCancelButton: false,
+    confirmButtonText: 'Finalizar',
+    reverseButtons: true
+  }
+}
+
+export const paymentError = (status) => {
+  return {
+    title:`Lo Sentimos!`,
+    text: `No se pudo procesar el pago`,
+    icon: 'error',
     showCancelButton: true,
-    confirmButtonText: 'inciar sesión',
-    cancelButtonText: 'seguir mirando',
+    confirmButtonText: 'Reintentar',
+    cancelButtonText: 'Cancelar',
     reverseButtons: true
   }
 }

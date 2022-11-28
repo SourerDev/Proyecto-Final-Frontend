@@ -13,7 +13,7 @@ import {
   RESET_DETAIL,
   CONTACT_OWNER
 } from "./actionTypes";
-
+import { API_URL } from "../../services/api/baseApi";
 import callsApi from "../../services";
 
 export function getallProperties() {
@@ -102,7 +102,7 @@ export function postPorperty(data, services, files) {
         observation,
       };
       axios
-        .post("http://localhost:3001/properties/createProperty", fixedData)
+        .post(`${API_URL}/properties/createProperty`, fixedData)
         .then((r) => {
           let state = r.data.Message
             ? "Propiedad creada con exito"
