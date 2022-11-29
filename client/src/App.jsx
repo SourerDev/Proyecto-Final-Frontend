@@ -20,7 +20,7 @@ import BePremium from "./pages/bePremium/BePremium";
 import Redirect from "./components/redirect/Redirect";
 import ContentDashboard from "./components/dashboard/ContentDashboard";
 import OwnerData from "./components/dashboard/OwnerData";
-import Loading  from "./components/loading/Loading.jsx"
+
 
 function App() {
   const dispatch = useDispatch();
@@ -47,7 +47,6 @@ function App() {
         {/* BACKEND TRABAJANDO */}
         <Route path="/dashboard" element={<><ContentDashboard /></>}/>
         <Route path="/ownerData/:id_User" element={<><OwnerData /></>}/>
-        <Route path="/p" element={<><Loading /></>}/>
       </Routes>
     </div>
   );
