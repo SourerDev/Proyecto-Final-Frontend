@@ -72,7 +72,7 @@ export default function Detail() {
 
                     <div class="max-w-4xl m-1 p-2 mx-auto  grid grid-cols-1 lg:max-w-[97rem] lg:gap-x-20 lg:grid-cols-2">
                         <div class=" col-start-1 col-end-3 row-start-1 sm:mb-6 sm:grid-cols-4  lg:col-start-2  lg:row-span-2  ">
-                            <CarrouselDetail images={[payload.images,...images1]} />
+                            <CarrouselDetail images={payload.images} />
                         </div>
                         <div class="relative my-0 shadow-2xl p-3 col-start-1 row-start-1 flex flex-col-reverse rounded-lg bg-gradient-to-t from-black/75 via-black/0 sm:bg-none sm:row-start-2 sm:p-0 lg:bg-white sm:bg-white lg:row-start-1">
                             <h1 class="mt-1 my-2 flex justify-center text-lg font-semibold text-white sm:text-slate-900 md:text-2xl dark:sm:text-black">{payload.address}</h1>

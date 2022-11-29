@@ -1,23 +1,21 @@
 import { useState} from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector} from "react-redux";
 import { useNavigate } from "react-router-dom";
 import FormCheckbox from "../../components/form-checkbox/FormCheckbox.jsx";
 import FormInputNumber from "../../components/form-input-number/FormInputNumber.jsx";
-import {postPorperty} from '../../redux/actions/index';
 import { isValidForm } from "../../utils/isValidForm.js";
 import { inputNumber, inputServices } from "../../utils/formInputs.js";
 import AutocompleteSearch from "../../components/autocomplete-search/autocompleteSearch.jsx";
 import { useEffect } from "react";
 import Loading from '../../components/loading/Loading.jsx'
-import postingProperty, {getDataForm} from "../../utils/postingProperty.js";
+import {getDataForm} from "../../utils/postingProperty.js";
 import swal from "sweetalert2";
-import {property} from "../../sweetAlerts/sweetAlerts"
+import {createPropertyAlert} from "../../sweetAlerts/sweetAlerts"
 import callsApi from "../../services/index.js";
 
 export default function Form() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { cities, citiesA } = useSelector(state => state);
+  const { cities, citiesA, user } = useSelector(state => state);
   const [data, setData] = useState({
     modality: "",
     type: "",
@@ -117,37 +115,16 @@ export default function Form() {
           //loader true
           setLoader(true)
 
-          getDataForm(data,services,files).then(res=>{
+          getDataForm(data,services,files, user?.id_User).then(res=>{
             console.log(res)
             callsApi.postPorperty(res).then(res=>{
               console.log(res.data)
               setLoader(false)
+              swal.fire(createPropertyAlert())
+              .then(res => navigate("/home"))
             })
           })
-          /* callsApi.postPorperty(fixedData).then(res=>{
-
-            console.log(res.data)
-            setLoader(false)
-          }) */
-          /* postingProperty(data, services, files)
-          .then(r => {
-            //loader false
-            setLoader(false)
-            const res = r.data.Message
-            swal.fire(property(res))
-            .then(r => navigate("/home"))
-          }) */
         }}
-        /* onSubmit={(e) => {
-          e.preventDefault()
-          //loader true
-          dispatch(postPorperty(data, services, files))
-          .then(t => {
-            //loader false
-            
-            navigate("/home")
-          })
-        }} */
       >
         <div className="xl px-48">
           <select className="sm:text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="modality" onChange={(e) => handleChange(e)}>
