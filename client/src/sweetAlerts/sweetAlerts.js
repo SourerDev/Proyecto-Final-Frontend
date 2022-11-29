@@ -52,7 +52,7 @@ export const completePayment = () => {
 export const paymentOk = (status) => {
   return {
     title:`Pago exitoso!`,
-    text: `Ya eres usuario premium`,
+    text: `Ya eres usuario premium.`,
     icon: 'success',
     showCancelButton: false,
     confirmButtonText: 'Finalizar',
@@ -63,11 +63,47 @@ export const paymentOk = (status) => {
 export const paymentError = (status) => {
   return {
     title:`Lo Sentimos!`,
-    text: `No se pudo procesar el pago`,
+    text: `No se pudo procesar el pago.`,
     icon: 'error',
     showCancelButton: true,
     confirmButtonText: 'Reintentar',
     cancelButtonText: 'Cancelar',
+    reverseButtons: true
+  }
+}
+
+export const noProperties = () => {
+  return {
+    title:`Lo Sentimos!`,
+    text: `No se encontraron propiedades.`,
+    icon: 'question',
+    showCancelButton: false,
+    confirmButtonText: 'Ok',
+    cancelButtonText: '',
+    reverseButtons: true
+  }
+}
+
+export const property = () => {
+  return {
+    title:`Lo Sentimos!`,
+    text: `No se encontraron propiedades.`,
+    icon: 'question',
+    showCancelButton: false,
+    confirmButtonText: 'Ok',
+    cancelButtonText: '',
+    reverseButtons: true
+  }
+}
+
+export const createPropertyAlert = () => {
+  return {
+    title:`Propiedad publicada`,
+    text: `se cargo la informacion de su propiedad con exito.`,
+    icon: 'success',
+    showCancelButton: false,
+    confirmButtonText: 'continuar',
+    cancelButtonText: '',
     reverseButtons: true
   }
 }

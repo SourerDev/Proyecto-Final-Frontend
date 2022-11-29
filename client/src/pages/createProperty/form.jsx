@@ -1,19 +1,21 @@
 import { useState} from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector} from "react-redux";
 import { useNavigate } from "react-router-dom";
 import FormCheckbox from "../../components/form-checkbox/FormCheckbox.jsx";
 import FormInputNumber from "../../components/form-input-number/FormInputNumber.jsx";
-import {postPorperty} from '../../redux/actions/index';
 import { isValidForm } from "../../utils/isValidForm.js";
 import { inputNumber, inputServices } from "../../utils/formInputs.js";
 import AutocompleteSearch from "../../components/autocomplete-search/autocompleteSearch.jsx";
 import { useEffect } from "react";
-
+import Loading from '../../components/loading/Loading.jsx'
+import {getDataForm} from "../../utils/postingProperty.js";
+import swal from "sweetalert2";
+import {createPropertyAlert} from "../../sweetAlerts/sweetAlerts"
+import callsApi from "../../services/index.js";
 
 export default function Form() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { cities, citiesA } = useSelector(state => state);
+  const { cities, citiesA, user } = useSelector(state => state);
   const [data, setData] = useState({
     modality: "",
     type: "",
@@ -37,7 +39,8 @@ export default function Form() {
   const [fileName, setFileName] = useState({});
   const [arrFileNames, setArrFileNames] = useState([]);
   const [errs, setErrs] = useState({});
-  
+  const [loader, setLoader] = useState(false)
+
   function handleChange(event) {
     if (event.target.name === 'city') {
       const { name, value } = event.target;
@@ -107,10 +110,20 @@ export default function Form() {
       <h4 className="sm-text-xl 2xl-text-3xl italic font-semibold text-center text-gray-900 dark:text-white">Rellene el siguiente formulario para publicar su propiedad</h4>
       <form
         encType="multipart/form-data"
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault()
-          dispatch(postPorperty(data, services, files))
-          navigate("/home")
+          //loader true
+          setLoader(true)
+
+          getDataForm(data,services,files, user?.id_User).then(res=>{
+            console.log(res)
+            callsApi.postPorperty(res).then(res=>{
+              console.log(res.data)
+              setLoader(false)
+              swal.fire(createPropertyAlert())
+              .then(res => navigate("/home"))
+            })
+          })
         }}
       >
         <div className="xl px-48">
@@ -344,7 +357,11 @@ export default function Form() {
                         </p>
 
     </div>
-
+    {loader && (
+      <div className="fixed w-full h-screen top-0 z-50 opacity-1" onClick={()=>{}}>
+        <Loading/>
+      </div>
+    )}
   </div>
   )
 }
