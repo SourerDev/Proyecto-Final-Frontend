@@ -8,7 +8,7 @@ import Question from "../../components/question/Question";
 import CarrouselDetail from "../../components/carousel/CarrouselDetail"
 import { saveIdInLocalStorage,saveInStorage,getOfStorage} from "../../utils/saveIdInLocalStorage";
 import swal from 'sweetalert2'
-import {mustBeLogged, alert, completePayment, paymentOk} from "../../sweetAlerts/sweetAlerts"
+import {mustBeLogged, successContact} from "../../sweetAlerts/sweetAlerts"
 
 export default function Detail() {
     const refQuestion = useRef()
@@ -21,6 +21,7 @@ export default function Detail() {
     const user = useSelector(state => state.user)
     const ciudad = findNameCity(city, payload?.idCity)
     const [comment, setComment] = useState("")
+    const [disabled, setDisabled] = useState(false)
 
     useEffect(() => {
         dispatch(getIdProperties(id))
@@ -217,6 +218,8 @@ export default function Detail() {
 
                                         <div className="px-4">
                                             <button 
+                                                //cambiar estilos del disabled
+                                                disabled={disabled}
                                                 onClick={() => {
                                                     //condicional de usuario
                                                     if(!user?.user_type || user.user_type === "userNotLogged"){
@@ -230,6 +233,8 @@ export default function Detail() {
                                                     }
                                                     else {
                                                         dispatch(contactOwner(user.id_User, id))
+                                                        swal.fire(successContact())
+                                                        setDisabled(true)
                                                     }
                                                 }}
                                                 className="  flex flex-col py-2.5 whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700">

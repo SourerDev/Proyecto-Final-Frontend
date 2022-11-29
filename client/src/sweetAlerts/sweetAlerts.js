@@ -107,3 +107,15 @@ export const createPropertyAlert = () => {
     reverseButtons: true
   }
 }
+
+export const successContact = () => {
+  return {
+    title:`Contacto exitoso`,
+    text: `se le informo al publicador su interes sobre la propiedad, pronto se comunicara con usted.`,
+    icon: 'success',
+    showCancelButton: false,
+    confirmButtonText: 'Ok',
+    cancelButtonText: '',
+    reverseButtons: true
+  }
+}
