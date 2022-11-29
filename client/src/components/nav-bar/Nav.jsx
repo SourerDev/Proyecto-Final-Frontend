@@ -76,7 +76,7 @@ export default function Nav({ rutes = true, login = true }) {
               </Link>
               {/* BACKEND TRABAJANDO */}
               <Link
-                to="/createProperty"
+                to="/dashboard"
                 className="W-40 text-base text-center font-medium text-gray-500 hover:text-gray-900"
               >
                 <span className="p-0 m-0">DASHBOARD</span>
