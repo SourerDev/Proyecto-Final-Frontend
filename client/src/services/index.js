@@ -37,9 +37,6 @@ const callsApi = {
     contactOwner: function(data) {
         return apiProperties.post("/interested/userInterested", data)
     },
-    postProperty: function(data){
-        return apiProperties.post(`/properties/createProperty`, data)
-    }
 }
 
 

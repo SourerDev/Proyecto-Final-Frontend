@@ -9,9 +9,10 @@ import { inputNumber, inputServices } from "../../utils/formInputs.js";
 import AutocompleteSearch from "../../components/autocomplete-search/autocompleteSearch.jsx";
 import { useEffect } from "react";
 import Loading from '../../components/loading/Loading.jsx'
-import postingProperty from "../../utils/postingProperty.js";
+import postingProperty, {getDataForm} from "../../utils/postingProperty.js";
 import swal from "sweetalert2";
 import {property} from "../../sweetAlerts/sweetAlerts"
+import callsApi from "../../services/index.js";
 
 export default function Form() {
   const navigate = useNavigate();
@@ -111,18 +112,31 @@ export default function Form() {
       <h4 className="sm-text-xl 2xl-text-3xl italic font-semibold text-center text-gray-900 dark:text-white">Rellene el siguiente formulario para publicar su propiedad</h4>
       <form
         encType="multipart/form-data"
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault()
           //loader true
           setLoader(true)
-          postingProperty(data, services, files)
+
+          getDataForm(data,services,files).then(res=>{
+            console.log(res)
+            callsApi.postPorperty(res).then(res=>{
+              console.log(res.data)
+              setLoader(false)
+            })
+          })
+          /* callsApi.postPorperty(fixedData).then(res=>{
+
+            console.log(res.data)
+            setLoader(false)
+          }) */
+          /* postingProperty(data, services, files)
           .then(r => {
             //loader false
             setLoader(false)
             const res = r.data.Message
             swal.fire(property(res))
             .then(r => navigate("/home"))
-          })
+          }) */
         }}
         /* onSubmit={(e) => {
           e.preventDefault()
