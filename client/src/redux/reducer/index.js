@@ -17,9 +17,11 @@ const initialState = {
   cities: [],
   citiesA: {},
   favorites: [],
+  idFavorite: {},
   user: {
     favorites:[],
   },
+  
   filters: {
     operation: "",
     propertyType: "",
@@ -59,7 +61,12 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         detail: action.payload,
       };
-
+      case "GET_ID_FAVORITE":
+        return {
+          ...state,
+        idFavorite: action.payload,
+          
+        };
         case GET_CITIES_A:
             return{
                 ...state,

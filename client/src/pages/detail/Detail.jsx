@@ -22,7 +22,7 @@ export default function Detail() {
     const ciudad = findNameCity(city, payload?.idCity)
     const [comment, setComment] = useState("")
 
-
+console.log(payload)
     useEffect(() => {
         dispatch(getIdProperties(id))
         let save = getOfStorage('detail')

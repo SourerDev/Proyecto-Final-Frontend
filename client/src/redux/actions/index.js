@@ -227,7 +227,16 @@ export function contactOwner(id_User, id_property) {
 
 
 
-
+export function favoritesbyId_user(id_User) {
+  return async function (dispatch) {
+    let json = await callsApi.favoritesbyId_user(id_User);
+    console.log(json)
+    return dispatch({
+      type: "GET_ID_FAVORITE",
+      payload: json.data.paylaod
+    });
+  };
+}
 
 
 

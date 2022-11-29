@@ -6,6 +6,7 @@ import { loadUserInfo } from "../../redux/actions";
 import {icons} from "../../images"
 
 export default function UserIcon({ user }) {
+ 
   const dispatch = useDispatch();
   const {HeartBorder,User, Exit,Lightning} = icons
   return (
@@ -38,10 +39,12 @@ export default function UserIcon({ user }) {
                   <span className="pl-2">Ver perfil</span>
                 </Popover.Button>
               </Link>
+              <Link to={`/favorites/${user.id_User}`}>
               <Popover.Button className="flex w-full py-1 text-gray-500 hover:text-gray-900 text-center">
                   <HeartBorder width="25" hover={"#ea2d98"} fill="#9c9c9c"/>
                   <span className="pl-2">Favoritos</span>
               </Popover.Button>
+              </Link>
               <Link to={"/bePremium"} className="">
                 <Popover.Button className="w-full py-1 text-center">
                   <span className="flex bg-yellow-300/75 text-yellow-700 bg- rounded-lg p-1 hover:bg-yellow-300/20">
