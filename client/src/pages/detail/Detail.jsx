@@ -59,7 +59,7 @@ export default function Detail() {
     console.log(data)
    
     let images1 = [
-        "https://imgar.zonapropcdn.com/avisos/1/00/50/38/31/04/720x532/1838565724.jpg",
+        "https://www.lavoz.com.ar/resizer/bXgNPb2120Gp3gZ-apoXOUKAVQQ=/980x640/smart/cloudfront-us-east-1.images.arcpublishing.com/grupoclarin/E3W56UUFR5EO5CMLYV73BTTAQM.jpg",
         "https://static.tokkobroker.com/pictures/22195378878590399459749233039638765388563259893558223458366824765496290235011.jpg",
         "https://static.tokkobroker.com/pictures/62097336669621611912439568172754377674026387283592863525525020166865836476845.jpg",
         "https://static.tokkobroker.com/pictures/30641452628166825515595170899423142700348859149718156386875136195094220568629.jpg",
