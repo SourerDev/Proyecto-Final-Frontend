@@ -1,39 +1,36 @@
-import swal from "sweetalert2"
-import { areYouSure } from "../../sweetAlerts/sweetAlerts.js";
+import Swal from "sweetalert2";
+import { areYouSure,areYouSureDisabled } from "../../sweetAlerts/sweetAlerts.js";
 import callsApi from "../../services/index.js";
-import { useEffect } from "react";
-import { getallProperties } from "../../redux/actions/index.js";
-import {useDispatch} from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
-const DashboardUsers = ({ data }) => {
-  const dispatch = useDispatch();
-  
+const DashboardUsers = () => {
+  const [users, setUsers] = useState([]);
+  const [reset,setReset] = useState(false)
 
-  useEffect(() => {
-    console.log(data)
-  },[data])
-
-  const handleEditProperty = (e) => {
-    // dispatch()
-    console.log("aca se edita la propiedad");
+  const handleDisabledUser = (text1,text2,idUser,state) => {
+    Swal.fire(areYouSureDisabled(text1,text2)).then(res=>{
+      if(res.isConfirmed){
+        callsApi.disabledUser(idUser,state).then(res=>{
+          console.log(res.data)
+          setReset(reset ? false:true)
+        })
+      }
+    })
   };
 
-  const handleDeleteProperty = (e) => {
-    // dispatch()
-    console.log("Aca se elimina la propiedad");
-    swal.fire(areYouSure(" esta propiedad")).then((res)=>{
+  const handleDeleteUser = (idUser) => {
+    Swal.fire(areYouSure(" este usuario")).then(res=>{
       if(res.isConfirmed){
-        callsApi.deletePropery(data.id).then(res=>{
-          console.log(res.data)
-          dispatch(getallProperties())
-          swal.fire(
+        callsApi.deleteUser(idUser).then(res=>{
+          Swal.fire(
             'Borrado!',
-            'Tu propiedad ha sido Borrada.',
+            'Usuario Borrado Correctamente.',
             'success'
           )
+          setReset(reset ? false:true)
         }).catch(err=>{
-          console.log(err.message)
-          swal.fire(
+          Swal.fire(
             'Algo salio mal',
             `${err.message}`,
             'error'
@@ -43,68 +40,90 @@ const DashboardUsers = ({ data }) => {
     })
   };
 
-  function handleDeleteUser() {
-    
-  }
+  useEffect(() => {
+    callsApi.getAllUsers().then((res) => setUsers(res.data.payload));
+    console.log(users)
+  }, [reset]);
+
   return (
-    <>
-      <tr class="bg-gray-800">
-        <td class="p-3">
-          <div class="flex align-items-center">
-            <img
-              class="rounded-full h-12 w-12  object-cover"
-              src={data.images[0]}
-              alt="unsplash image"
-            />
-            <td class="p-3 font-bold">{data.address}</td>
-            {/* <div class="ml-3">
-              <div class="text-gray-500">{data.User.userName}</div>
-              <div class="">{data.User.email}</div>
-            </div> */}
-          </div>
-        </td>
-        <td class="p-3">
-          <span class="bg-green-400 text-gray-50 rounded-md px-2">
-            {data.state_modality}
-          </span>
-        </td>
-        <td class="p-3">
-          <div class="flex align-items-center">
-            <Link
-              to={`/ownerData/${data.User.id_User}`}
-              className="text-base font-medium text-gray-500 hover:text-gray-900 self-center mr-[10px]"
-            >
-              <img
-                class="rounded-full h-12 w-12  object-cover"
-                src={data.User.photo}
-                alt="Property image"
-              />
-            </Link>
-            <div class="flex flex-col gap-[8px]">
-              <td class="font-bold">{data.User.userName}</td>
-              <td class="font-bold">{data.User.email}</td>
-              <td class="font-bold">{data.User.cellphone}</td>
-              <a href="#" class="text-gray-400 hover:text-gray-100  ml-2">
-              <button onClick={(e) => handleDeleteUser(e)}>
-                <i class="material-icons-round text-base">delete_outline</i>
-              </button>
-          </a>
-            </div>
-          </div>
-        </td>
-        <td class="p-3 ">
-          <a href="#" class="text-gray-400 hover:text-gray-100  ml-2">
-            <button onClick={(e) => handleDeleteProperty(e)}>
-              <i class="material-icons-round">remove_circle</i>
-            </button>
-          </a>
-          <a href="#" class="text-gray-400 hover:text-gray-100  ml-2">
-            <button onClick={(e) => handleDeleteProperty(e)}>
-              <i class="material-icons-round text-base">delete_outline</i>
-            </button>
-          </a>
-        </td>{" "}
-      </tr>
-    </>
+    <div className=" flex flex-col justify-center m-2">
+      <h1>User</h1>
+      <table className="w-full text-white">
+        <HeaderTable />
+        <tbody className="w-full">
+          {users?.map((ele) => (
+            <RowTable field={ele}  disabledUser={handleDisabledUser} deleteUser={handleDeleteUser}/>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
+
+export const RowTable = ({ field,disabledUser,deleteUser}) => {
+  return (
+    <tr className="bg-gray-800 shadow shadow-white">
+      <td className="w-16 p-2" >
+        <div className="relative w-14  px-1">
+          <img className="w-full rounded-full" src={field?.photo} alt="" />
+          <span className={classNames(`absolute  right-1 bottom-0 w-3 h-3 rounded-full ${field?.state ==="Activado"?"bg-green-500":"bg-red-500"}`)}>
+          </span>
+        </div>
+      </td>
+      <td className="p-2">
+        <h1 className="text-lg font-semibold">{field?.userName}</h1>
+        <p>{field?.email}</p>
+      </td>
+      <td className="p-2 text-center border">
+        {(field?.user_type === "userNotLogged"||field?.user_type === "userLogged") && (
+          <span className="px-2 py-1 bg-yellow-900/50 text-yellow-100 text-sm rounded-md">
+            Normal
+          </span>
+        )}
+        {field?.user_type === "userPremiun" && (
+          <span className="px-2 py-1 bg-yellow-300 text-yellow-900 text-sm rounded-md">
+            Premium
+          </span>
+        )}
+
+      </td>
+      <td className="p-2 text-center">
+        <p>{field?.cellphone}</p>
+      </td>
+      <td className="w-30 p-2 text-center">
+        <a className={classNames(`ml-2 ${field?.state === "Activado" ?"text-gray-400 hover:text-gray-100":"text-red-500 hover:text-red-400"}`)} title={field.state === "Activado" ?"Bloquear":"Desbloquear"}>
+          <button onClick={()=>{disabledUser(field?.state === "Activado" ? "bloquear este usuario":" desbloquear este usuario" ,field?.state === "Activado"? "Bloquear":"Desbloquear",field?.id_User,field?.state === "Activado"?false:true)}}>
+            <i class="material-icons-round">remove_circle</i>
+          </button>
+        </a>
+        <a className="text-gray-400 hover:text-gray-100  ml-2 " title="Borrar">
+          <button onClick={()=>{deleteUser(field.id_User)}}>
+            <i class="material-icons-round text-base">delete_outline</i>
+          </button>
+        </a>
+      </td>
+    </tr>
+  );
+};
+
+export const HeaderTable = ({
+  names = ["", "Username / Email", "Tipo", "Celular", "Bloquear / Borrar"],
+}) => {
+  return (
+    <thead className="bg-gray-800 text-white-500 w-full">
+      <tr className="bg-indigo-600">
+        {names.map((header, i) => (
+          <th className="p-3" key={i}>
+            {header}
+          </th>
+        ))}
+      </tr>
+    </thead>
+  );
+};
+
+export default DashboardUsers;
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}

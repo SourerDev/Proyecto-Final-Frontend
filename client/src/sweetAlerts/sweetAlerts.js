@@ -122,11 +122,22 @@ export const successContact = () => {
 export const areYouSure = (title) => {
   return {
     title: `Estas seguro de que quieres eliminar ${title}`,
-    text: "los cambios seran irreversibles",
+    text: "Los cambios seran irreversibles",
     icon: 'warning',
     showCancelButton: true,
-    confirmButtonText: 'borrar',
-    cancelButtonText: 'cancelar',
+    confirmButtonText: 'Borrar',
+    cancelButtonText: 'Cancelar',
+    reverseButtons: true
+  }
+}
+export const areYouSureDisabled = (text1,text2) => {
+  return {
+    title:`¿Quieres ${text1}?`,
+    text: ``,
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonText: `${text2}`,
+    cancelButtonText: 'Cancelar',
     reverseButtons: true
   }
 }
