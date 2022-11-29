@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export default function Loading({w="20px", h="150px"}) {
   return (
-    <div className="w-full h-screen flex justify-center  items-center bg-white/70 m-0 p-0">
+    <div className="w-full h-screen flex justify-center  items-center bg-[#fff] m-0 p-0">
       <Loader w={w} h={h} >
         <span></span>
         <span></span>
