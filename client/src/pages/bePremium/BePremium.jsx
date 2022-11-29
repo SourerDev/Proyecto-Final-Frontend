@@ -6,6 +6,7 @@ import { loadUserInfo, resetUser} from "../../redux/actions"
 import {API_URL} from "../../services/api/baseApi"
 import swal from 'sweetalert2';
 import {completePayment, paymentError, paymentOk} from "../../sweetAlerts/sweetAlerts"
+import Footer from "../../components/footer/Footer"
 
 export default function BePremium() {
   
@@ -78,41 +79,55 @@ export default function BePremium() {
   } */
 
   return (
-    <div className="bg-gray-300">
-      <div className=" h-20 text-center text-2xl mt-14"><h1>bienvenido {user?.userName} aste <a className="underline decoration-pink-500 text-2xl">premium</a></h1></div>
-      <div className="flex lg:flex-row justify-center self-center flex-col h-5/6">
-      <div className="text-center w-64 flex justify-center ml-16 lg:mr-20 lg:mt-6 h-64">
-        <p className="text-lg">Al volverte usuario premium pagando la membresía mensual podras subir tus publicaciones para la venta o alquiler, posicionarte en el mercado de propiedades, interactuar con los usuarios y comunicarte con los interesados en tu publicación.</p>
+    <div className="h-screen px-3 lg:px-20 bg-[url('https://wrmx00.epimg.net/radio/imagenes/2022/02/22/martha_debayle/1645547060_000751_1645549058_noticia_normal.jpg')]  bg-no-repeat bg-cover bg-center ">
+      <div className=" bg-opacity-75 ">
+      <div className=" underline text-center flex justify-center text-6xl mt-20">
+        <h1 className="">Bienvenido {user?.userName}  </h1>
       </div>
+      <div className="flex   flex-col ">
+      
       
    
-      <div className=" text-center font-semibold lg:mr-20 lg:ml-16 lg:mt-6">
-        <h4>Usuario premium</h4>
-        <p>Costo mensual: $5.000 (ars)</p></div>
+      <div className=" mt-10 rounded-lg h-[10vh] text-2xl flex justify-center items-center flex-col ">
+        <div className="border-4 border-black text-gray-800 bg-white bg-opacity-30 rounded-lg shadow-2xl p-4">
+        <h4 className="flex justify-center">Usuario PREMIUM</h4>
+        <p>Costo mensual: $5.000 (ars)</p>
+        </div>
+       
+
+      </div>
          </div> 
+         <div className="p-10 mb-3 lg:mb-20 bg-opacity-30 px-10 bg-white bg  rounded-lg  flex justify-center  mt-20 ">
+        <p className="text-2xl  ">Al volverte usuario premium pagando la membresía mensual podras subir tus publicaciones para la venta o alquiler, posicionarte en el mercado de propiedades, interactuar con los usuarios y comunicarte con los interesados en tu publicación.</p>
+      </div> 
+       
+        <div className="flex justify-center">
        
           {
             linkPago !== "#" ?
             (
               <a 
                 onCl
-                className="border-solid border-2 border-sky-500"
+                className=" whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-8 py-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                 href={linkPago}
                 onClick={(e) => setRedirect(true)}
                 target="_blank"
               >
-                hacerme premium!
+                Hacerme premium!
               </a>
             )
             : (
+              <div className="flex justify-center ">
                 <button
-                class="w-full inline-block px-16 py-8 border-2 border-blue-600 text-blue-600 font-medium text-2xl leading-normal uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out" 
+                className="disabled:bg-gray-300  disabled:text-gray-700 disabled:border-gray-800 disabled:cursor-not-allowed flex mx-auto m-3 p-6 w-50 px-8 py-4 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-normal uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
                 disabled={true}>
-                  hacerme premium!
+                  Hacerme premium!
                 </button>
+                </div>
               )
           }
-      
+          </div>
+      </div>
     </div>
   )
 }
