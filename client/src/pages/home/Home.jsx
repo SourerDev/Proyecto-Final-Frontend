@@ -22,7 +22,7 @@ export default function Home() {
     const newProperties = filteredProperties?.length && typeof (filteredProperties) !== "string" ? filteredProperties : properties;
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [propertiesPage, setPropertiesPage] = useState(4);
+    const [propertiesPage, setPropertiesPage] = useState(6);
 
     const lastIndex = currentPage * propertiesPage;
     const firstIndex = lastIndex - propertiesPage;
