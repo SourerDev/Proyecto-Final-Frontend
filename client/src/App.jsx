@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Router, Routes } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import {
@@ -20,6 +20,7 @@ import BePremium from "./pages/bePremium/BePremium";
 import Redirect from "./components/redirect/Redirect";
 import ContentDashboard from "./components/dashboard/ContentDashboard";
 import OwnerData from "./components/dashboard/OwnerData";
+import Favoriteid from "./components/FaroriteId/favoriteId";
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
         <Route path="/user" element={<><Nav login={false}/><EditUser/><Footer/></>}/>
         <Route path="/bePremium" element={<><Nav/><BePremium/><Footer/></>} />
         <Route path="/redirect" element={<><Redirect/><Footer/></>} />
+        <Route path="/favorites/:id_User" element= {<><Favoriteid/></>}/>
         {/* BACKEND TRABAJANDO */}
         <Route path="/dashboard" element={<><ContentDashboard /></>}/>
         <Route path="/ownerData/:id_User" element={<><OwnerData /></>}/>
