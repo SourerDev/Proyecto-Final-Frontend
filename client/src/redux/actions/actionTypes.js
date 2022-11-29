@@ -9,4 +9,5 @@ export const RESET_USER = "RESET_USER"
 export const FILTER_NORMAL = 'FILTER_NORMAL'
 export const RESET_DETAIL = "RESET_DETAIL"
 export const CONTACT_OWNER = "CONTACT_OWNER"
+export const RESET_ALERT = "RESET_ALERT"
 
