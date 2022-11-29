@@ -1,29 +1,47 @@
 import { useSelector } from "react-redux"
-import { useDispatch } from "react-redux"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { favoritesbyId_user } from "../../redux/actions";
+import  Card from "../card/Card.jsx"
+import callsApi from "../../services";
+import { findNameCity } from "../../utils/autocompleteUtils.js";
 
 
 
 
 
 export default function Favoriteid (){
-  const dispatch = useDispatch(); 
-  let {id_User} = useParams()
- const favorite = useSelector((state) => state.idFavorite)
-console.log(favorite)
-
+    
+    let {id_User} = useParams()
+    const {properties,citiesA} = useSelector((state) => state)
+    const [favorites,setFavorites] = useState([])
     
 useEffect(() => {
-    dispatch(favoritesbyId_user(id_User))
-   
-}, [id_User])
+    callsApi.favoritesbyId_user(id_User).then(res=>{
+        const data = properties.filter(ele=> res.data.includes(ele.id))
+        setFavorites(data)
+    })
+}, [properties])
      
 
     
     
     return(
-        <div></div>
+        <div>
+
+            {favorites?.length > 0 ? (favorites.map(ele=><Card
+                key={ele.id}
+                id={ele.id}
+                favorite={true}
+                city={findNameCity(citiesA,ele.idCity)}
+                modality ={ele.modality}
+                address={ele.address}
+                price={ele.price}
+                images={ele.images}
+                garage={ele.garage}
+                idUser={id_User}
+                userProperty={ele.User}
+            />)):(<h1>Sin Favoritos</h1>)}
+
+        </div>
     )
 }

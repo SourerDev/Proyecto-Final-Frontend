@@ -94,7 +94,7 @@ export default function Card({
           </h3>
           <span className="text-sm -mt-1 pl-2">{address}</span>
           <span className="text-2xl font-bold text-gray-900 dark:text-white pt-2">
-            {`${price} USD`}
+            {`${price} US`}
           </span>
         </div>
         <div className="flex justify-center items-center">
