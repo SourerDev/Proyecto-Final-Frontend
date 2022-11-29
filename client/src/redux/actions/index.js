@@ -149,6 +149,7 @@ export function addFavorites(values) {
 }
 
 export function removeFavorite(value) {
+  console.log(value)
   return {
     type: REMOVE_FAVORITE,
     payload: value,
