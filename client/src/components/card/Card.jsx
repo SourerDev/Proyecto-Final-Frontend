@@ -68,7 +68,7 @@ export default function Card({
   return (
     <div className="flex flex-col justify-center items-center min-w-[340px] max-w-[341px] bg-white shadow p-2">
       <div className="relative z-10 overflow-hidden w-[95%] h-60 rounded-lg">
-        <img className="w-full h-full" src={images} alt={id} />
+        <img className="w-full h-full" src={images[0]} alt={id} />
         {modality && (
           <div className="flex items-center justify-center absolute z-20 bottom-1 left-1 bg-green-300/75 text-green-800 font-medium px-1 rounded-lg">
             <h3>{modality}</h3>
@@ -94,7 +94,7 @@ export default function Card({
           </h3>
           <span className="text-sm -mt-1 pl-2">{address}</span>
           <span className="text-2xl font-bold text-gray-900 dark:text-white pt-2">
-            {`${price} USD`}
+            {`${price} US`}
           </span>
         </div>
         <div className="flex justify-center items-center">

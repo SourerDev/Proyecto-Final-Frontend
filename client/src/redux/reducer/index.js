@@ -8,6 +8,7 @@ import {
   RESET_USER,
   FILTER_NORMAL,
   RESET_DETAIL,
+  RESET_ALERT
 } from "../actions/actionTypes.js";
 
 const initialState = {
@@ -17,9 +18,11 @@ const initialState = {
   cities: [],
   citiesA: {},
   favorites: [],
+  idFavorite: {},
   user: {
     favorites:[],
   },
+  
   filters: {
     operation: "",
     propertyType: "",
@@ -59,7 +62,12 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         detail: action.payload,
       };
-
+      case "GET_ID_FAVORITE":
+        return {
+          ...state,
+        idFavorite: action.payload,
+          
+        };
         case GET_CITIES_A:
             return{
                 ...state,
@@ -108,6 +116,25 @@ export default function rootReducer(state = initialState, action) {
           return {
             ...state,
             detail: {}
+          }
+        case RESET_ALERT: 
+          return {
+            ...state,
+            filteredProperties: [],
+            filters: {
+              operation: "",
+              propertyType: "",
+              city: "",
+              idCity: null,
+              rooms: 0,
+              bathrooms: 0,
+              floors: "",
+              environments: "",
+              garage: "",
+              antiquity: { min: null, max: null },
+              area: { min: null, max: null },
+              price: { min: null, max: null },
+            }
           }
             default:
                return state
