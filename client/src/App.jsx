@@ -22,6 +22,7 @@ import ContentDashboard from "./components/dashboard/ContentDashboard";
 import OwnerData from "./components/dashboard/OwnerData";
 import Favoriteid from "./components/FaroriteId/favoriteId";
 import DashboardPage from "./pages/dashboard/DashboardPage";
+import DashboardUsers from "./components/dashboard/DashboardUsers.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,8 +37,9 @@ function App() {
   return (
     <div className="flex flex-col ">
       <Routes>
-        <Route path="/home" element={<><Nav/><Home/><Footer/></>}/>
+        <Route path="/newRoute" element={<><Nav/><DashboardUsers/></>}/>
         <Route path="/" element={<><Nav rutes={true} /><Landing/></>}/>
+        <Route path="/home" element={<><Nav/><Home/><Footer/></>}/>
         <Route path="/detail/:id" element={<><Nav/><Detail/><Footer/></>}/>
         <Route path="/createProperty" element={<><Nav/><Form/><Footer/></>}/>
         <Route path="/login" element={<><Nav login={false}/><LogIn/></>}/>
@@ -47,7 +49,7 @@ function App() {
         <Route path="/redirect" element={<><Redirect/><Footer/></>} />
         <Route path="/favorites/:id_User" element= {<><Favoriteid/></>}/>
         {/* BACKEND TRABAJANDO */}
-        <Route path="/dashboard" element={<><DashboardPage/></>}/>
+        <Route path="/dashboard" element={<><Nav/><DashboardPage/></>}/>
         <Route path="/ownerData/:id_User" element={<><Nav/><OwnerData /></>}/>
       </Routes>
     </div>

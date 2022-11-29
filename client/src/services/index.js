@@ -51,6 +51,12 @@ const callsApi = {
     },
     deleteUser: function(idUser){
         return apiProperties.delete(`/users/delete/${idUser}`)
+    },
+    getAllUsers: function(){
+        return apiProperties.get(`/users/allUsers`)
+    },
+    disabledUser: function(idUser,state){
+        return apiProperties.put(`/users/upload/${idUser}`,{state:state})
     }
 }
 
