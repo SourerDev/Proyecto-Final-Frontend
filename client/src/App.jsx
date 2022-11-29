@@ -22,6 +22,7 @@ import ContentDashboard from "./components/dashboard/ContentDashboard";
 import OwnerData from "./components/dashboard/OwnerData";
 import Favoriteid from "./components/FaroriteId/favoriteId";
 
+
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -38,7 +39,7 @@ function App() {
         <Route path="/home" element={<><Nav/><Home/><Footer/></>}/>
         <Route path="/" element={<><Nav rutes={true} /><Landing/></>}/>
         <Route path="/detail/:id" element={<><Nav/><Detail/><Footer/></>}/>
-        <Route path="/createProperty" element={<><Nav/><Form/></>}/>
+        <Route path="/createProperty" element={<><Nav/><Form/><Footer/></>}/>
         <Route path="/login" element={<><Nav login={false}/><LogIn/></>}/>
         <Route path="/signup" element={<><Nav login={false}/><SignUp/></>}/>
         <Route path="/user" element={<><Nav login={false}/><EditUser/><Footer/></>}/>
@@ -48,7 +49,6 @@ function App() {
         {/* BACKEND TRABAJANDO */}
         <Route path="/dashboard" element={<><ContentDashboard /></>}/>
         <Route path="/ownerData/:id_User" element={<><OwnerData /></>}/>
-       
       </Routes>
     </div>
   );
