@@ -1,15 +1,11 @@
-import React from "react";
-import "material-icons/iconfont/material-icons.css";
-import { useDispatch, useSelector } from "react-redux"; // import useSelec
-import { Link } from "react-router-dom";
-import Tooltip from "./OwnerData.jsx";
 import swal from "sweetalert2"
 import { areYouSure } from "../../sweetAlerts/sweetAlerts.js";
 import callsApi from "../../services/index.js";
 import { useEffect } from "react";
 import { getallProperties } from "../../redux/actions/index.js";
+import {useDispatch} from "react-redux";
 
-const Dashboard = ({ data }) => {
+const DashboardUsers = ({ data }) => {
   const dispatch = useDispatch();
   
 
@@ -112,5 +108,3 @@ const Dashboard = ({ data }) => {
     </>
   );
 };
-
-export default Dashboard;

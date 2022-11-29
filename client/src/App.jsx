@@ -21,7 +21,7 @@ import Redirect from "./components/redirect/Redirect";
 import ContentDashboard from "./components/dashboard/ContentDashboard";
 import OwnerData from "./components/dashboard/OwnerData";
 import Favoriteid from "./components/FaroriteId/favoriteId";
-
+import DashboardPage from "./pages/dashboard/DashboardPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,8 +47,8 @@ function App() {
         <Route path="/redirect" element={<><Redirect/><Footer/></>} />
         <Route path="/favorites/:id_User" element= {<><Favoriteid/></>}/>
         {/* BACKEND TRABAJANDO */}
-        <Route path="/dashboard" element={<><ContentDashboard /></>}/>
-        <Route path="/ownerData/:id_User" element={<><OwnerData /></>}/>
+        <Route path="/dashboard" element={<><DashboardPage/></>}/>
+        <Route path="/ownerData/:id_User" element={<><Nav/><OwnerData /></>}/>
       </Routes>
     </div>
   );

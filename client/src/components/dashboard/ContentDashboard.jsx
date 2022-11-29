@@ -11,6 +11,7 @@ const ContentDashboard = () => {
   useEffect(() => {
     dispatch(getallProperties);
   }, [dispatch]);
+  
   return (
     <>
       <div class="flex items-center justify-center min-h-screen bg-gray-900">

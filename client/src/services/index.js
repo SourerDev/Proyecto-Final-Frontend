@@ -15,6 +15,9 @@ const callsApi = {
     postPorperty: function (data) {
         return apiProperties.post(`${property}/createProperty`,data)
     },
+    updatedProperty: function(id,newData){
+        return apiProperties.put(`/properties/uplaodProperty/${id}`,newData)
+    },
     getCities: function(){
         return apiProperties.get(`${city}`)
     },
@@ -40,6 +43,15 @@ const callsApi = {
     contactOwner: function(data) {
         return apiProperties.post("/interested/userInterested", data)
     },
+    deletePropery: function(id) {
+        return apiProperties.delete(`/properties/deleteProperty/${id}`)
+    },
+    disabledProperty: function(idProperty){
+        return apiProperties.put(`/properties/disableProperty/${idProperty}`)
+    },
+    deleteUser: function(idUser){
+        return apiProperties.delete(`/users/delete/${idUser}`)
+    }
 }
 
 

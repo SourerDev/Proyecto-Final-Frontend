@@ -119,3 +119,14 @@ export const successContact = () => {
     reverseButtons: true
   }
 }
+export const areYouSure = (title) => {
+  return {
+    title: `Estas seguro de que quieres eliminar ${title}`,
+    text: "los cambios seran irreversibles",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'borrar',
+    cancelButtonText: 'cancelar',
+    reverseButtons: true
+  }
+}
