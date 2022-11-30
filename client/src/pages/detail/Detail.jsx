@@ -42,8 +42,9 @@ export default function Detail() {
 
     useEffect(() => {
         console.log(payload.id_User)
+        console.log(user)
         console.log(user.id_User)
-        if(payload.id_User === user.id_User) setIsOwner(true)
+        if(user.id_User && payload.id_User === user?.id_User) setIsOwner(true)
     },[payload, user])
 
 
