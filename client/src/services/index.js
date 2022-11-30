@@ -43,6 +43,7 @@ const callsApi = {
     contactOwner: function(data) {
         return apiProperties.post("/interested/userInterested", data)
     },
+
     deletePropery: function(id) {
         return apiProperties.delete(`/properties/deleteProperty/${id}`)
     },
@@ -57,6 +58,9 @@ const callsApi = {
     },
     disabledUser: function(idUser,state){
         return apiProperties.put(`/users/upload/${idUser}`,{state:state})
+    },
+    postAnswer: function(data) {
+        return apiProperties.post("/feedback/answerFeedback", data)
     }
 }
 

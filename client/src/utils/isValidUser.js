@@ -6,6 +6,6 @@ export function isValidUser(user) {
   else if(!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(user.email)) errs.email = "ingrese un email valido";
 
   if(!user.userName.length) errs.userName = 'ingrese un nombre de usuario';
-
+  if(!user.cellphone.length === 10 ) errs.cellphone = "Falta numero";
   return errs
 }
