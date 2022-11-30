@@ -50,20 +50,21 @@ export default function Card({
       dispatch(removeFavorite(id));
       callsApi
         .removeFavorite(id)
-        .then((res) => {
-        })
-        .catch((err) => {
-        });
+        .then((res) => {console.log(res)})
+        .catch((err) => {console.log(err)});
     } else if (!favorite && state.favorite) {
       dispatch(addFavorites([id]));
       callsApi
         .postFavorite({ id_User: idUser, id_Property: id })
-        .then((res) => {     
+        .then((res) => {
+          console.log(res)
+
         })
         .catch((err) => {
+          console.log(err)
         });
     }
-  }, [state]);
+  }, [state.favorite]);
 
   return (
     <div className="flex flex-col justify-center items-center min-w-[340px] max-w-[341px] bg-white shadow p-2">
@@ -74,7 +75,7 @@ export default function Card({
             <h3>{modality}</h3>
           </div>
         )}
-        {idUser && (
+        {(idUser && !state.hover) && (
           <button
             className="absolute  bottom-1 right-1 bg-white rounded-full p-1 flex justify-center items-center hover:bg-zinc-100"
             onClick={addFavorite}
@@ -121,11 +122,11 @@ export default function Card({
                 >
                   <div class="p-2 z-50">
                     <div class="flex flex-col z-50 items-center justify-between mb-2">
-                        <img
-                          className="w-14 h-14 rounded-full"
-                          src={userProperty.photo}
-                          alt=""
-                        />
+                      <img
+                        className="w-14 h-14 rounded-full"
+                        src={userProperty.photo}
+                        alt=""
+                      />
                       <div>
                         <p className="text-base font-semibold leading-none text-gray-900 ">
                           {userProperty.userName}

@@ -86,7 +86,7 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 user:{
                     ...state.user,
-                    favorites: state.favorites.filter(element => element !== action.payload)
+                    favorites: state.user.favorites.filter(el => el !== action.payload)
                 }
             }
         case RESET_FILTERS:
