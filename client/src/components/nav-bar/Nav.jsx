@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import UserIcon from "../user-icon/UserIcon.jsx";
 import { loadUserInfo, filterProperties } from "../../redux/actions";
 import { icons } from "../../images/index.js";
-import {filter} from '../../utils/filters'
+import { filter } from "../../utils/filters";
 
 export default function Nav({ rutes = true, login = true }) {
   const dispatch = useDispatch();
@@ -15,11 +15,10 @@ export default function Nav({ rutes = true, login = true }) {
 
   const { Lightning, HeartBorder } = icons;
 
-  
-  const setFilters= (type)=>{
-    const prop = filter(properties,{operation:type})
-    dispatch(filterProperties(prop))
-  }
+  const setFilters = (type) => {
+    const prop = filter(properties, { operation: type });
+    dispatch(filterProperties(prop));
+  };
 
   return (
     <Popover className="relative bg-white ">
@@ -55,32 +54,37 @@ export default function Nav({ rutes = true, login = true }) {
               <Link
                 to="/home"
                 className="text-base font-medium text-gray-500 hover:text-gray-900"
-                onClick={()=>setFilters("Alquiler")}
+                onClick={() => setFilters("Alquiler")}
               >
                 ALQUILER
               </Link>
               <Link
                 to="/home"
                 className="W-40 text-base text-center font-medium text-gray-500 hover:text-gray-900"
-                onClick={()=>dispatch(filterProperties(properties))}
+                onClick={() => dispatch(filterProperties(properties))}
               >
                 {/* <span className="p-0 m-0">TODAS LAS </span>
                 <br className="p-0 m-0"/> */}
                 <span className="p-0 m-0">PROPIEDADES</span>
               </Link>
-              <Link
-                to="/bePremium"
-                className="text-base font-medium text-gray-500 hover:text-gray-900"
-              >
-                PREMIUM
-              </Link>
+              {user?.user_type === "userLogged" && (
+                <Link
+                  to="/bePremium"
+                  className="text-base font-medium text-gray-500 hover:text-gray-900"
+                >
+                  PREMIUM
+                </Link>
+              )}
               {/* BACKEND TRABAJANDO */}
-              <Link
-                to="/dashboard"
-                className="W-40 text-base text-center font-medium text-gray-500 hover:text-gray-900"
-              >
-                <span className="p-0 m-0">DASHBOARD</span>
-              </Link>
+              {(user?.user_type === "admin" ||
+                user?.user_type === "userPremiun") && (
+                <Link
+                  to="/dashboard"
+                  className="W-40 text-base text-center font-medium text-gray-500 hover:text-gray-900"
+                >
+                  <span className="p-0 m-0">DASHBOARD</span>
+                </Link>
+              )}
               {/* BACKEND TRABAJANDO */}
             </Popover.Group>
           )}
@@ -144,25 +148,37 @@ export default function Nav({ rutes = true, login = true }) {
                           src={user.photo}
                           alt="No Found"
                         />
-                        <span className="mx-2">
-                          {user.userName || "Username"}
-                        </span>
+                        <div className="mx-2 flex flex-col justify-center items-start">
+                          <span className="text-lg font-semibold">
+                            {user.userName || "Username"}
+                          </span>
+                          <span>{`\n${user.email || ""}`}</span>
+                        </div>
                       </Popover.Button>
                     </Link>
                   )}
 
-                  <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200" onClick={()=>setFilters("Venta")}>
+                  <Popover.Button
+                    className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200"
+                    onClick={() => setFilters("Venta")}
+                  >
                     <span>VENTA</span>
                   </Popover.Button>
-                  <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200" onClick={()=>setFilters("Alquiler")}>
+                  <Popover.Button
+                    className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200"
+                    onClick={() => setFilters("Alquiler")}
+                  >
                     <span>ALQUILER</span>
                   </Popover.Button>
                   <Link to="/home" className="">
-                    <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200" onClick={()=>dispatch(filterProperties(properties))}>
+                    <Popover.Button
+                      className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200"
+                      onClick={() => dispatch(filterProperties(properties))}
+                    >
                       <span>TODAS LAS PROPIEDADES</span>
                     </Popover.Button>
                   </Link>
-                  {user?.email && (
+                  {user?.user_type === "userLogged" && (
                     <>
                       <Link to="/home" className="">
                         <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
@@ -185,6 +201,16 @@ export default function Nav({ rutes = true, login = true }) {
                       </Popover.Button>
                     </>
                   )}
+                  {(user?.user_type === "admin" || user?.user_type === "userPremiun")&&<Link to="/dashboard" className="">
+                    <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
+                      <Lightning
+                        width={"24"}
+                        fill="#8d6b06ce"
+                        hover={"#8d6b06ce"}
+                      />
+                      <span className="pl-3">Dashboard</span>
+                    </Popover.Button>
+                  </Link>}
                 </nav>
               </div>
             </div>

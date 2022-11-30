@@ -2,9 +2,11 @@ import Swal from "sweetalert2";
 import { areYouSure,areYouSureDisabled } from "../../sweetAlerts/sweetAlerts.js";
 import callsApi from "../../services/index.js";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const DashboardUsers = () => {
+  const {user_type} = useSelector(state=>state.user)
   const [users, setUsers] = useState([]);
   const [reset,setReset] = useState(false)
 
@@ -50,9 +52,13 @@ const DashboardUsers = () => {
     })
   };
 
+
   useEffect(() => {
-    callsApi.getAllUsers().then((res) => setUsers(res.data.payload));
-    console.log(users)
+    if(user_type !== "admin"){
+      
+    }else{
+      callsApi.getAllUsers().then((res) => setUsers(res.data.payload));
+    }
   }, [reset]);
 
   return (
@@ -61,8 +67,8 @@ const DashboardUsers = () => {
       <table className="w-full text-white">
         <HeaderTable />
         <tbody className="w-full">
-          {users?.map((ele) => (
-            <RowTable field={ele}  disabledUser={handleDisabledUser} deleteUser={handleDeleteUser}/>
+          {users?.map((ele,i) => (
+            <RowTable key={i} field={ele}  disabledUser={handleDisabledUser} deleteUser={handleDeleteUser}/>
           ))}
         </tbody>
       </table>

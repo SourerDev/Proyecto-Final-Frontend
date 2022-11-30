@@ -59,6 +59,9 @@ const callsApi = {
     disabledUser: function(idUser,state){
         return apiProperties.put(`/users/upload/${idUser}`,{state:state})
     },
+    updatedUser: function (idUser,newData) {
+      return apiProperties.put(`/users/upload/${idUser}`,newData)  
+    },
     postAnswer: function(data) {
         return apiProperties.post("/feedback/answerFeedback", data)
     }

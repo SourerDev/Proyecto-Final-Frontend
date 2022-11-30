@@ -38,13 +38,13 @@ export const completePayment = () => {
 }
 export const error = () => {
   return {
-    title: `Falta numero de telefono`,
-    text: `agrege el telefono`,
+    title: `Falta número de teléfono`,
+    text: `Agregue el teléfono`,
     icon: 'warning',
-    showCancelButton: false,
-    confirmButtonText: 'volver al inicio',
-    cancelButtonText: '',
-    reverseButtons: false
+    showCancelButton: true,
+    confirmButtonText: 'Ingresar',
+    cancelButtonText: 'Volver',
+    reverseButtons: true
   }
 }
 /* export const payment = (status) => {
@@ -58,10 +58,10 @@ export const error = () => {
     reverseButtons: true
   }
 } */
-export const actualisar = (status) => {
+export const actualizar = (status) => {
   return {
-    title:`Actualizdo!`,
-    text: `actualización echa con exitos`,
+    title:`Actualizado!`,
+    text: `Actualización hecha con exitos`,
     icon: 'success',
     showCancelButton: false,
     confirmButtonText: 'Finalizar',
@@ -161,3 +161,4 @@ export const areYouSureDisabled = (text1,text2) => {
     reverseButtons: true
   }
 }
+

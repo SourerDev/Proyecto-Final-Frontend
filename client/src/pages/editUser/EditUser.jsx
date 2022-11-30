@@ -5,8 +5,9 @@ import { isValidUser } from "../../utils/isValidUser";
 import {useNavigate} from "react-router-dom"
 import axios from "axios";
 import swal from 'sweetalert2'
-import {actualisar} from "../../sweetAlerts/sweetAlerts"
+import {actualizar} from "../../sweetAlerts/sweetAlerts"
 import { Link } from "react-router-dom";
+import callsApi from "../../services";
 
 export default function EditUser() {
   const dispatch = useDispatch();
@@ -123,22 +124,31 @@ const axu = <Link to="/home"></Link>
       <div className="">
 
       
-       <Link to="/home"> <button  
+       <Link> <button  
           disabled={Object.values(errs).length ? true : false} 
           className="hover:bg-gradient-to-br px-4 py-3  text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800" 
           onClick={() => {
-            dispatch(loadUserInfo({
+            callsApi.updatedUser(user.id_User,{
               ...user,
               ...newUser,
               photo: newUser.photo.length ? newUser.photo : "https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png"
-            }))
-            swal.fire(actualisar(axu))
-            // setDisabled(true)
-            axios.put(`http://localhost:3001/users/edit/${user.id_User}`, {
-              ...user,
-              ...newUser,
-              photo: newUser.photo.length ? newUser.photo : "https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png"
+            }).then(res=>{
+              
+              dispatch(loadUserInfo({
+                ...user,
+                ...newUser,
+                photo: newUser.photo.length ? newUser.photo : "https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png"
+              }))
+              swal.fire(actualizar(axu))
+            }).catch(err=>{
+              swal.fire(
+                'Algo salio mal',
+                `${err.message}`,
+                'error'
+              )
             })
+            
+            // setDisabled(true)
             //navigate("/")
           }}>actualizar</button></Link>
           </div>
