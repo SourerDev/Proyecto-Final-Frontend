@@ -75,6 +75,12 @@ export default function Nav({ rutes = true, login = true }) {
                   PREMIUM
                 </Link>
               )}
+                <Link
+                  to="/nosotros"
+                  className="text-base font-medium text-gray-500 hover:text-gray-900"
+                >
+                  NOSOTROS
+                </Link>
               {/* BACKEND TRABAJANDO */}
               {(user?.user_type === "admin" ||
                 user?.user_type === "userPremiun") && (
