@@ -79,9 +79,9 @@ export default function BePremium() {
   } */
 
   return (
-    <div className="h-screen px-3 lg:px-20 bg-[url('https://wrmx00.epimg.net/radio/imagenes/2022/02/22/martha_debayle/1645547060_000751_1645549058_noticia_normal.jpg')]  bg-no-repeat bg-cover bg-center ">
+    <div className="lg:h-screen px-3 lg:px-20 bg-[url('https://wrmx00.epimg.net/radio/imagenes/2022/02/22/martha_debayle/1645547060_000751_1645549058_noticia_normal.jpg')]  bg-no-repeat bg-cover bg-center ">
       <div className=" bg-opacity-75 ">
-      <div className=" underline text-center flex justify-center text-6xl mt-20">
+      <div className=" underline text-center flex justify-center text-6xl ">
         <h1 className="">Bienvenido {user?.userName}  </h1>
       </div>
       <div className="flex   flex-col ">
@@ -89,7 +89,7 @@ export default function BePremium() {
       
    
       <div className=" mt-10 rounded-lg h-[10vh] text-2xl flex justify-center items-center flex-col ">
-        <div className="border-4 border-black text-gray-800 bg-white bg-opacity-30 rounded-lg shadow-2xl p-4">
+        <div className="border-4 border-black text-black bg-white bg-opacity-60 rounded-lg shadow-2xl p-4">
         <h4 className="flex justify-center">Usuario PREMIUM</h4>
         <p>Costo mensual: $5.000 (ars)</p>
         </div>
@@ -97,11 +97,11 @@ export default function BePremium() {
 
       </div>
          </div> 
-         <div className="p-10 mb-3 lg:mb-20 bg-opacity-30 px-10 bg-white bg  rounded-lg  flex justify-center  mt-20 ">
-        <p className="text-2xl  ">Al volverte usuario premium pagando la membresía mensual podras subir tus publicaciones para la venta o alquiler, posicionarte en el mercado de propiedades, interactuar con los usuarios y comunicarte con los interesados en tu publicación.</p>
+         <div className="p-10 mb-3 lg:mb-20 bg-opacity-60 px-10 bg-white bg  rounded-lg  flex justify-center  mt-20 ">
+        <p className="text-2xl text-black ">Al volverte usuario premium pagando la membresía mensual podras subir tus publicaciones para la venta o alquiler, posicionarte en el mercado de propiedades, interactuar con los usuarios y comunicarte con los interesados en tu publicación.</p>
       </div> 
        
-        <div className="flex justify-center">
+        <div className="flex justify-center mb-20">
        
           {
             linkPago !== "#" ?
