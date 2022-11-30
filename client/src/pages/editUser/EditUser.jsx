@@ -4,11 +4,14 @@ import { loadUserInfo } from "../../redux/actions/index";
 import { isValidUser } from "../../utils/isValidUser";
 import {useNavigate} from "react-router-dom"
 import axios from "axios";
+import swal from 'sweetalert2'
+import {actualisar} from "../../sweetAlerts/sweetAlerts"
+import { Link } from "react-router-dom";
 
 export default function EditUser() {
   const dispatch = useDispatch();
   const navigate = useNavigate()
-
+const axu = <Link to="/home"></Link>
   const { user } = useSelector((state) => state);
   console.log(user)
   const [newUser, setNewUser] = useState({
@@ -120,7 +123,7 @@ export default function EditUser() {
       <div className="">
 
       
-        <button  
+       <Link to="/home"> <button  
           disabled={Object.values(errs).length ? true : false} 
           className="hover:bg-gradient-to-br px-4 py-3  text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800" 
           onClick={() => {
@@ -129,13 +132,15 @@ export default function EditUser() {
               ...newUser,
               photo: newUser.photo.length ? newUser.photo : "https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png"
             }))
+            swal.fire(actualisar(axu))
+            // setDisabled(true)
             axios.put(`http://localhost:3001/users/edit/${user.id_User}`, {
               ...user,
               ...newUser,
               photo: newUser.photo.length ? newUser.photo : "https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png"
             })
             //navigate("/")
-          }}>actualizar</button>
+          }}>actualizar</button></Link>
           </div>
 
           

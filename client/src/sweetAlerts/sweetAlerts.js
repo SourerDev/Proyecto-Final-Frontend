@@ -58,6 +58,16 @@ export const error = () => {
     reverseButtons: true
   }
 } */
+export const actualisar = (status) => {
+  return {
+    title:`Actualizdo!`,
+    text: `actualización echa con exitos`,
+    icon: 'success',
+    showCancelButton: false,
+    confirmButtonText: 'Finalizar',
+    reverseButtons: true
+  }
+}
 
 export const paymentOk = (status) => {
   return {
