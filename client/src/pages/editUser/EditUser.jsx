@@ -10,10 +10,12 @@ export default function EditUser() {
   const navigate = useNavigate()
 
   const { user } = useSelector((state) => state);
+  console.log(user)
   const [newUser, setNewUser] = useState({
     userName: user.userName,
     email: user.email,
     photo: user.photo,
+    cellphone: user.cellphone
   });
   const [errs, setErrs] = useState({})
 
@@ -63,6 +65,23 @@ export default function EditUser() {
        
       </div>
        {errs.userName && <p className="text-red-600 dark:text-red-500">{errs.userName}</p>}
+       <div>
+      <label
+          for="email"
+          className="block m-1 text-sm font-medium text-gray-900 dark:text-white"
+        >
+          Telefono
+        </label>
+        <input
+          type="numer"
+          name="cellphone"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder={user?.cellphone}
+          value={newUser.cellphone}
+          onChange={(e) => onUserChange(e)}
+        />
+        {errs.cellphone && <p className="text-red-600 dark:text-red-500">{errs.cellphone}</p>}
+      </div>
       <div>
       <label
           for="email"
@@ -71,6 +90,7 @@ export default function EditUser() {
           Email
         </label>
         <input
+      
           type="text"
           name="email"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
