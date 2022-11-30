@@ -14,7 +14,7 @@ const Dashboard = ({ data }) => {
   
 
   useEffect(() => {
-    console.log(data)
+    
   },[data])
 
   const handleEditProperty = (e) => {
@@ -24,7 +24,6 @@ const Dashboard = ({ data }) => {
 
   const handleDeleteProperty = (e) => {
     // dispatch()
-    console.log("Aca se elimina la propiedad");
     swal.fire(areYouSure(" esta propiedad")).then((res)=>{
       if(res.isConfirmed){
         callsApi.deletePropery(data.id).then(res=>{
