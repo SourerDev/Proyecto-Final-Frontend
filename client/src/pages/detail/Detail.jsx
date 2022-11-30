@@ -8,7 +8,7 @@ import Question from "../../components/question/Question";
 import CarrouselDetail from "../../components/carousel/CarrouselDetail"
 import { saveIdInLocalStorage,saveInStorage,getOfStorage} from "../../utils/saveIdInLocalStorage";
 import swal from 'sweetalert2'
-import {mustBeLogged, successContact} from "../../sweetAlerts/sweetAlerts"
+import {mustBeLogged, successContact, error} from "../../sweetAlerts/sweetAlerts"
 
 export default function Detail() {
     const refQuestion = useRef()
@@ -22,7 +22,11 @@ export default function Detail() {
     const ciudad = findNameCity(city, payload?.idCity)
     const [comment, setComment] = useState("")
     const [disabled, setDisabled] = useState(false)
+
+
+
     const [isOwner, setIsOwner] = useState(false)
+
 
     useEffect(() => {
         dispatch(getIdProperties(id))
@@ -242,13 +246,21 @@ export default function Detail() {
                                                             }
                                                         })
                                                     }
-                                                    else {
+                                                   else  if(!user.cellphone.length === 10){ 
                                                         dispatch(contactOwner(user.id_User, id))
                                                         swal.fire(successContact())
                                                         setDisabled(true)
+                                                    }else{
+                                                        swal.fire(error())
+                                                        setDisabled(true)
                                                     }
-                                                }}
+            
+                                    }}
+
+                                                className="  flex flex-col py-2.5 whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
+
                                                 className={`${isOwner && "invisible"} flex flex-col py-2.5 whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700`}>
+
                                                 Contactar al vendedor
                                             </button>
                                         </div>

@@ -36,7 +36,17 @@ export const completePayment = () => {
     reverseButtons: false
   }
 }
-
+export const error = () => {
+  return {
+    title: `Falta numero de telefono`,
+    text: `agrege el telefono`,
+    icon: 'warning',
+    showCancelButton: false,
+    confirmButtonText: 'volver al inicio',
+    cancelButtonText: '',
+    reverseButtons: false
+  }
+}
 /* export const payment = (status) => {
   return {
     title: status === "aprove" ? `Pago exitoso` : "Pago denegado",
