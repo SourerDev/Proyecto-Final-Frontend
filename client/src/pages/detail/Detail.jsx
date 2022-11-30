@@ -43,7 +43,7 @@ export default function Detail() {
     useEffect(() => {
         console.log(payload.id_User)
         console.log(user.id_User)
-        if(payload.id_User, user.id_User) setIsOwner(true)
+        if(payload.id_User === user.id_User) setIsOwner(true)
     },[payload, user])
 
 
@@ -246,7 +246,7 @@ export default function Detail() {
                                                             }
                                                         })
                                                     }
-                                                   else  if(!user.cellphone.length === 10){ 
+                                                   else  if(user.cellphone.length === 10){ 
                                                         dispatch(contactOwner(user.id_User, id))
                                                         swal.fire(successContact())
                                                         setDisabled(true)
@@ -257,7 +257,7 @@ export default function Detail() {
             
                                     }}
 
-                                                className="  flex flex-col py-2.5 whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
+                                                // className="  flex flex-col py-2.5 whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
 
                                                 className={`${isOwner && "invisible"} flex flex-col py-2.5 whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700`}>
 
