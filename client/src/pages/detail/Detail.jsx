@@ -42,6 +42,7 @@ console.log(user)
 
     useEffect(() => {
         console.log(payload.id_User)
+        console.log(user)
         console.log(user.id_User)
         if(user.id_User && payload.id_User === user?.id_User) setIsOwner(true)
     },[payload, user])
