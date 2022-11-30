@@ -154,8 +154,19 @@ const axu = <Link to="/home"></Link>
           </div>
 
           
-          <button onClick={()=>{
-              navigate('/createProperty')
+          <button 
+          className="hover:bg-gradient-to-br px-4 py-3  text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800" 
+          onClick={()=>{ 
+ if (
+       !user?.user_type ||
+       user.user_type === "userPremiun"
+){  navigate('/createProperty')}
+else{
+  swal.fire(
+    'Algo salio mal,',
+    'deves ser usuario Premiun',
+    navigate('/bePremium'))
+}
           }}>
             Create Property
           </button>
