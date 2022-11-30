@@ -47,8 +47,8 @@ const callsApi = {
     deletePropery: function(id) {
         return apiProperties.delete(`/properties/deleteProperty/${id}`)
     },
-    disabledProperty: function(idProperty){
-        return apiProperties.put(`/properties/disableProperty/${idProperty}`)
+    disabledProperty: function(idProperty,state){
+        return apiProperties.put(`/properties/disableProperty/${idProperty}`,{state:state})
     },
     deleteUser: function(idUser){
         return apiProperties.delete(`/users/delete/${idUser}`)
