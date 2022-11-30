@@ -12,7 +12,7 @@ import {mustBeLogged, successContact, error} from "../../sweetAlerts/sweetAlerts
 
 export default function Detail() {
     const refQuestion = useRef()
-    let { id } = useParams();
+    let {id} = useParams();
     const dispatch = useDispatch()
     const navigate = useNavigate()
     
@@ -22,7 +22,12 @@ export default function Detail() {
     const ciudad = findNameCity(city, payload?.idCity)
     const [comment, setComment] = useState("")
     const [disabled, setDisabled] = useState(false)
-console.log(user)
+
+
+
+    const [isOwner, setIsOwner] = useState(false)
+
+
     useEffect(() => {
         dispatch(getIdProperties(id))
         let save = getOfStorage('detail')
@@ -34,6 +39,13 @@ console.log(user)
             dispatch(resetDetail())
         }
     }, [id])
+
+    useEffect(() => {
+        console.log(payload.id_User)
+        console.log(user.id_User)
+        if(payload.id_User, user.id_User) setIsOwner(true)
+    },[payload, user])
+
 
     function commentSumbit(e) {
         e.preventDefault()
@@ -65,6 +77,7 @@ console.log(user)
     ]
     return (
         <div className="bg-blue-50 px-4">
+           
             <Link to="/home">
                 <div className="px-4 my-4">
                     <button className=" whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
@@ -72,11 +85,13 @@ console.log(user)
                     </button>
                 </div>
             </Link>
-            
             {
                 payload ? (
 
                     <div class="max-w-4xl m-1 p-2 mx-auto  grid grid-cols-1 lg:max-w-[97rem] lg:gap-x-20 lg:grid-cols-2">
+                         
+                        
+                        
                         <div class=" col-start-1 col-end-3 row-start-1 sm:mb-6 sm:grid-cols-4  lg:col-start-2  lg:row-span-2  ">
                             <CarrouselDetail images={payload.images} />
                         </div>
@@ -90,7 +105,7 @@ console.log(user)
                                 }</h1>
                             <p class="text-xl mt-2 leading-4 flex justify-center font-medium text-white sm:text-slate-400 dark:sm:text-slate-400"> {payload.type}</p>
                             <p class="text-xl mt-2 leading-4 flex justify-center font-medium text-white sm:text-indigo-600 dark:sm:text-indigo-600">{payload.modality}</p>
-
+                            {isOwner && <p className="flex justify-center bottom-1 left-1 bg-green-300/75 text-green-800 font-medium px-1 ">Eres el propietario</p>}
                         </div>
                         <dl class="mt-4 text-xs font-medium drop-shadow-2xl row-start-2 sm:mt-1 sm:row-start-3 md:mt-2.5 lg:row-start-2">
                             <dl className="my-4 border-black border-2 rounded-lg shadow-2xl bg-white">
@@ -239,9 +254,13 @@ console.log(user)
                                                         swal.fire(error())
                                                         setDisabled(true)
                                                     }
-                                                }}
+            
+                                    }}
 
                                                 className="  flex flex-col py-2.5 whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
+
+                                                className={`${isOwner && "invisible"} flex flex-col py-2.5 whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700`}>
+
                                                 Contactar al vendedor
                                             </button>
                                         </div>
@@ -251,7 +270,7 @@ console.log(user)
                                 </div>
                             </article>
 
-                            <form onSubmit={(e) => {
+                            {!isOwner && <form onSubmit={(e) => {
                                 //condicional de usuario
                                 if(!user?.user_type || user.user_type === "userNotLogged"){
                                     e.preventDefault()
@@ -292,15 +311,14 @@ console.log(user)
                                         </p>
                                     </div>
                                 </div>
+
+                            </form>}
                                 {payload.Feedbacks?.length ? (
                                     <div>
                                         <h4 className="text-2xl underline ">Otros usuarios preguntaron:</h4>
-                                        {payload.Feedbacks?.map(f => <Question question={f.questions} answer={f.answer} />)}
+                                        {payload.Feedbacks?.map(f => <Question question={f.questions} answer={f.answer} isOwner={isOwner} id_Feedback={f.id_Feedback} id_detail={id}/>)}
                                     </div>
                                 ) : null}
-
-                            </form>
-
                         </p>
                     </div>
 

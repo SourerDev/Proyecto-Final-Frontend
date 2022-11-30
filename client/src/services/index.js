@@ -40,6 +40,15 @@ const callsApi = {
     contactOwner: function(data) {
         return apiProperties.post("/interested/userInterested", data)
     },
+
+
+
+
+
+
+    postAnswer: function(data) {
+        return apiProperties.post("/feedback/answerFeedback", data)
+    }
 }
 
 

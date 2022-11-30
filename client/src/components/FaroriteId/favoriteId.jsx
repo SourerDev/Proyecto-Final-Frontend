@@ -5,7 +5,7 @@ import  Card from "../card/Card.jsx"
 import callsApi from "../../services";
 import { findNameCity } from "../../utils/autocompleteUtils.js";
 import { Link } from "react-router-dom";
-
+import Nav from "../../components/nav-bar/Nav";
 
 
 
@@ -26,9 +26,16 @@ useEffect(() => {
     
     
     return(
-        <div>
-            <div><Link to="/home"><button class="w-full inline-block px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-normal uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out">Volver</button></Link></div>
-             <div className="text-center font-mono text-2xl bg-slate-900/70  text-white h-14 font-bold "><p className="inline-block align-middle">Mis favoritos</p></div>
+        <div className="px-4">
+            <Nav/>
+            <div className=" my-5">
+                <Link to="/home">
+                    <button class="whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
+                        Volver
+                    </button>
+                </Link>
+            </div>
+             <div className="text-center  text-3xl bg-gray-800 rounded-lg  text-white h-14 font-bold "><p className="inline-block align-middle">Mis favoritos</p></div>
             
           <div className="flex sm:flex-row flex-wrap justify-center lg:shadow-2xl ">
             {favorites?.length > 0 ? (favorites.map(ele=>
@@ -46,7 +53,14 @@ useEffect(() => {
                 garage={ele.garage}
                 idUser={id_User}
                 userProperty={ele.User}
-            /></div>)):(<h1 className="text-red-800">Sin Favoritos</h1>)}
+            /></div>)):(<h1 className="text-center m-2 flex flex-col text-2xl ">Sin Favoritos<dd>
+                 Para agregar favoritos a tu lista, seleccionelos en el inicio.
+                 <Link to="/home">
+                    <div className="">
+                    <button className="whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Inicio</button>
+                    </div>
+                </Link></dd></h1>
+            )}
             </div>
         </div>
     )
