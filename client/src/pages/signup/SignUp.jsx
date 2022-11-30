@@ -13,7 +13,7 @@ export default function SignUp() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [data, setData] = useState({
-        email: "", userName: "",  password : "", password2: "", 
+        email: "", userName: "", cellphone: "" , password : "", password2: "", 
     });
     
     const [errs, setErrs] = useState({});
@@ -83,6 +83,18 @@ export default function SignUp() {
                                     />
                                     {errs.userName && <p className="text-red-600">{errs.userName}</p>}
                                 </div>
+                                <div className="mb-6">
+                                    <input
+                                        name="cellphone"
+                                        type="number"
+                                        className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                        id="FormControlInput3"
+                                        placeholder="Telefono"
+                                        onChange={(e) => handleChange(e)}
+                                    />
+                                    {errs.cellphone && <p className="text-red-600">{errs.cellphone}</p>}
+                                </div>
+
 
                                 <div className="mb-6">
                                     <input

@@ -149,6 +149,7 @@ export function addFavorites(values) {
 }
 
 export function removeFavorite(value) {
+  console.log(value)
   return {
     type: REMOVE_FAVORITE,
     payload: value,
@@ -157,13 +158,14 @@ export function removeFavorite(value) {
 
 export function postSignUp(formData) {
   return async function (dispatch) {
-    let { email, password, userName, photo } = formData;
+    let { email, password, userName, photo , cellphone} = formData;
     let data = {
       photo: photo,
       user_type: "userLogged",
       email: email,
       userName: userName,
       password: password,
+      cellphone: cellphone
     };
     console.log(data);
 
@@ -199,6 +201,7 @@ export function resetFilters() {
 }
 
 export function loadUserInfo(userData) {
+  console.log(userData)
   return { type: LOAD_USER_INFO, payload: userData };
 }
 

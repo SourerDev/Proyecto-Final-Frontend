@@ -6,7 +6,7 @@ export default function Paginado({propertiesPage, properties, setCurrentPage, cu
     for(let i = 0; i < Math.ceil(properties/propertiesPage); i++){
         pageNumbers.push(i + 1)
     }
-    const porPagina = 4
+    const porPagina = 6
     let maximo = Math.round( properties/ porPagina)
     //////////////////////////// FUNCIONES DEL BUSCADOR ///////////////////////////////// 
     

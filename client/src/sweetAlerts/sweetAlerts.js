@@ -36,7 +36,17 @@ export const completePayment = () => {
     reverseButtons: false
   }
 }
-
+export const error = () => {
+  return {
+    title: `Falta número de teléfono`,
+    text: `Agregue el teléfono`,
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Ingresar',
+    cancelButtonText: 'Volver',
+    reverseButtons: true
+  }
+}
 /* export const payment = (status) => {
   return {
     title: status === "aprove" ? `Pago exitoso` : "Pago denegado",
@@ -48,6 +58,16 @@ export const completePayment = () => {
     reverseButtons: true
   }
 } */
+export const actualizar = (status) => {
+  return {
+    title:`Actualizado!`,
+    text: `Actualización hecha con exitos`,
+    icon: 'success',
+    showCancelButton: false,
+    confirmButtonText: 'Finalizar',
+    reverseButtons: true
+  }
+}
 
 export const paymentOk = (status) => {
   return {
@@ -107,3 +127,38 @@ export const createPropertyAlert = () => {
     reverseButtons: true
   }
 }
+
+export const successContact = () => {
+  return {
+    title:`Contacto exitoso`,
+    text: `se le informo al publicador su interes sobre la propiedad, pronto se comunicara con usted.`,
+    icon: 'success',
+    showCancelButton: false,
+    confirmButtonText: 'Ok',
+    cancelButtonText: '',
+    reverseButtons: true
+  }
+}
+export const areYouSure = (title) => {
+  return {
+    title: `Estas seguro de que quieres eliminar ${title}`,
+    text: "Los cambios seran irreversibles",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Borrar',
+    cancelButtonText: 'Cancelar',
+    reverseButtons: true
+  }
+}
+export const areYouSureDisabled = (text1,text2) => {
+  return {
+    title:`¿Quieres ${text1}?`,
+    text: ``,
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonText: `${text2}`,
+    cancelButtonText: 'Cancelar',
+    reverseButtons: true
+  }
+}
+
