@@ -6,23 +6,23 @@ import Dashboard from "./Dashboard.jsx";
 
 const ContentDashboard = () => {
   const dispatch = useDispatch();
-  const { properties } = useSelector((state) => state);
+  const { properties,user } = useSelector((state) => state);
 
   useEffect(() => {
     dispatch(getallProperties);
   }, [dispatch]);
-  
   return (
     <>
-      <div class="flex items-center justify-center min-h-screen w-full ">
-          <div class="w-full">
-            <table class="w-full text-white border-separate space-y-6 text-sm ">
+      <div class="flex items-center justify-center min-h-screen bg-gray-900">
+        <div class="col-span-12">
+          <div class="overflow-auto lg:overflow-visible ">
+            <table class="tableDashboard text-gray-400 border-separate space-y-6 text-sm ">
               <thead class="bg-gray-800 text-white-500">
                 <tr className="bg-indigo-600">
-                  <th class="p-3 text-center text-lg font-semibold" >Propiedades</th>
-                  <th class="p-3 text-center text-lg font-semibold">Disponible</th>
-                  <th class="p-3 text-center text-lg font-semibold">Propietario</th>
-                  <th class="p-3 text-center text-lg font-semibold">Borrar/Bloquear</th>
+                  <th class="p-3">Propiedades</th>
+                  <th class="p-3 text-left">Disponible</th>
+                  {user.user_type === "admin" && ( <th class="p-3 text-left">Propietario</th>)}
+                  <th class="p-3 text-left">Borrar/Bloquear</th>
                 </tr>
               </thead>
               <tbody>
@@ -34,6 +34,7 @@ const ContentDashboard = () => {
               </tbody>
             </table>
           </div>
+        </div>
       </div>
     </>
   );
