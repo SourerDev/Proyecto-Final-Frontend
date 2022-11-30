@@ -6,6 +6,7 @@ import ServiciosExtras from "../../components/ServiciosExtras/serviciosExtras.js
 import { useSelector } from "react-redux";
 import { filter } from "../../utils/filters.js";
 import { useEffect } from "react";
+import DataLanding from "../../components/dataLanding/DataLanding.jsx";
 
 
 
@@ -27,6 +28,10 @@ export default function Landing() {
   return (
     <div className="px-1" >
       <HeaderLanding/>
+      <div className="px-10">
+         <DataLanding/>
+      </div>
+     
       <div><CardsLanding/></div>
       <div className="mb-auto"> 
         <Carousel  title={'Venta'} all={sale} images={sale?.length > 15 ? sale.slice(0,15): sale}/>
