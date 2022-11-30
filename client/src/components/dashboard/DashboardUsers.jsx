@@ -12,8 +12,18 @@ const DashboardUsers = () => {
     Swal.fire(areYouSureDisabled(text1,text2)).then(res=>{
       if(res.isConfirmed){
         callsApi.disabledUser(idUser,state).then(res=>{
-          console.log(res.data)
+          Swal.fire(
+            text2 === "Bloquear" ? "Bloqueado!" : "Desbloqueado",
+            text2 === "Bloquear" ?'Usuario Bloqueado Correctamente.' : 'Usuario Desbloqueado Correctamente.',
+            'success'
+          )
           setReset(reset ? false:true)
+        }).catch(err=>{
+          Swal.fire(
+            'Algo salio mal',
+            `${err.message}`,
+            'error'
+          )
         })
       }
     })
@@ -47,7 +57,7 @@ const DashboardUsers = () => {
 
   return (
     <div className=" flex flex-col justify-center m-2">
-      <h1>User</h1>
+
       <table className="w-full text-white">
         <HeaderTable />
         <tbody className="w-full">
@@ -70,11 +80,11 @@ export const RowTable = ({ field,disabledUser,deleteUser}) => {
           </span>
         </div>
       </td>
-      <td className="p-2">
+      <td className="p-2 border-r-2">
         <h1 className="text-lg font-semibold">{field?.userName}</h1>
         <p>{field?.email}</p>
       </td>
-      <td className="p-2 text-center border">
+      <td className="p-2 text-center border-r-2">
         {(field?.user_type === "userNotLogged"||field?.user_type === "userLogged") && (
           <span className="px-2 py-1 bg-yellow-900/50 text-yellow-100 text-sm rounded-md">
             Normal
@@ -85,9 +95,10 @@ export const RowTable = ({ field,disabledUser,deleteUser}) => {
             Premium
           </span>
         )}
+        {field?.user_type === "admin" && (<span className="px-2 py-1 bg-fuchsia-400 text-fuchsia-800 text-sm rounded-md">Administrador</span>)}
 
       </td>
-      <td className="p-2 text-center">
+      <td className="p-2 text-center border-r-2">
         <p>{field?.cellphone}</p>
       </td>
       <td className="w-30 p-2 text-center">
@@ -107,7 +118,7 @@ export const RowTable = ({ field,disabledUser,deleteUser}) => {
 };
 
 export const HeaderTable = ({
-  names = ["", "Username / Email", "Tipo", "Celular", "Bloquear / Borrar"],
+  names = ["", "Usuario / Correo", "Tipo", "Celular", "Bloquear / Borrar"],
 }) => {
   return (
     <thead className="bg-gray-800 text-white-500 w-full">
