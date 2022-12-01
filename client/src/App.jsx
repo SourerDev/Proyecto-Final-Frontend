@@ -23,6 +23,7 @@ import OwnerData from "./components/dashboard/OwnerData";
 import Favoriteid from "./components/FaroriteId/favoriteId";
 import DashboardPage from "./pages/dashboard/DashboardPage";
 import DashboardUsers from "./components/dashboard/DashboardUsers.jsx";
+import Nosotros from "./components/Nosotros/nosotros";
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ function App() {
         <Route path="/bePremium" element={<><Nav/><BePremium/></>} />
         <Route path="/redirect" element={<><Redirect/><Footer/></>} />
         <Route path="/favorites/:id_User" element= {<><Favoriteid/></>}/>
+        <Route path="/nosotros" element={<><Nosotros/></>}/>
         {/* BACKEND TRABAJANDO */}
         <Route path="/dashboard" element={<><Nav/><DashboardPage/></>}/>
         <Route path="/ownerData/:id_User" element={<><Nav/><OwnerData /></>}/>
