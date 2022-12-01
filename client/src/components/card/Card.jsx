@@ -102,7 +102,7 @@ export default function Card({
             {userProperty?.email ? (
               <>
                 <img
-                  className="w-full"
+                  className="w-full rounded-full"
                   src={userProperty.photo}
                   alt={userProperty.id_User}
                   onMouseEnter={(evt) => {
@@ -120,7 +120,7 @@ export default function Card({
                   )}
                 >
                   <div class="p-2 z-50">
-                    <div class="flex flex-col z-50 items-center justify-between mb-2">
+                    <div class="flex flex-col z-50 items-center justify-between mb-2 overflow-hidden">
                         <img
                           className="w-14 h-14 rounded-full"
                           src={userProperty.photo}
