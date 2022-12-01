@@ -10,4 +10,4 @@ export const FILTER_NORMAL = 'FILTER_NORMAL'
 export const RESET_DETAIL = "RESET_DETAIL"
 export const CONTACT_OWNER = "CONTACT_OWNER"
 export const RESET_ALERT = "RESET_ALERT"
-
+export const EDIT_PROPERTY = "EDIT_PROPERTY"

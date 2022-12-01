@@ -108,7 +108,7 @@ const ContentDashboard = () => {
                   Estado
                 </th>
                 <th class="p-3 text-center text-lg font-semibold">
-                  Bloquear / Borrar
+                  {false && "Editar / "}Bloquear / Borrar
                 </th>
               </tr>
             </thead>
