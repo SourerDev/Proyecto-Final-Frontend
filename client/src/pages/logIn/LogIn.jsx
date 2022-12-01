@@ -33,13 +33,12 @@ export default function LogIn() {
 
   const setNavigate =()=>{
      const save = getOfStorage('detail');
-     console.log(save)
-
+     
     if(save?.id){
       navigate(`/detail/${save.id}`)
     } 
     else{
-      console.log()
+    
       navigate('/')
     }
   }
@@ -102,7 +101,7 @@ export default function LogIn() {
       if (Message) {
         dispatch(loadUserInfo({...Message,favorites:Message.favorites.map(el=>el.id_Property)}));
         setResponse({ state: true, msg: "" });
-        console.log(response.data);
+        
         setNavigate()
       }else{
         setResponse({ state: false, msg: response.data.Error });

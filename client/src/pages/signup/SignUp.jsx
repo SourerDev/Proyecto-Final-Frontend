@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useState} from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { postSignUp } from '../../redux/actions/index';
 import { isValidSingUp} from "../../utils/isValidSingUp";

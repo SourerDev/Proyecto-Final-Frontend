@@ -80,9 +80,9 @@ export default function Form() {
     function onFileChange(e) {
       let file = e.target.files[0]
       if(["png", "jpg", "jpeg"].includes(file.type.split("/")[1]) && arrFileNames.length < 7) {
-        console.log(e)
+        
         file.value = e.target.value
-        console.log(file)
+        
         setFiles({
           ...files,
           [file.name] : file
@@ -102,7 +102,7 @@ export default function Form() {
     } 
       
     useEffect(() => {
-      console.log(files)
+      
     },[files])
     
   return (<div className="flex  bg-blue-50 lg:flex-row md:flex-row sm:flex-row flex-col px-2 mt-0">
@@ -117,9 +117,9 @@ export default function Form() {
           setLoader(true)
 
           getDataForm(data,services,files, user?.id_User).then(res=>{
-            console.log(res)
+            
             callsApi.postPorperty(res).then(res=>{
-              console.log(res.data)
+              
               setLoader(false)
               swal.fire(createPropertyAlert())
               .then(res => navigate("/home"))
@@ -362,7 +362,7 @@ export default function Form() {
 
     </div>
     {loader && (
-      <div className="fixed w-full h-screen top-0 z-50 opacity-1" onClick={()=>{}}>
+      <div className="fixed w-full h-screen top-0 z-50 opacity-70  backdrop-blur-sm" onClick={()=>{}}>
         <Loading/>
       </div>
     )}
