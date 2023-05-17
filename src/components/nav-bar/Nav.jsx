@@ -75,12 +75,12 @@ export default function Nav({ rutes = true, login = true }) {
                   PREMIUM
                 </Link>
               )}
-                <Link
-                  to="/nosotros"
-                  className="text-base font-medium text-gray-500 hover:text-gray-900"
-                >
-                  NOSOTROS
-                </Link>
+              <Link
+                to="/nosotros"
+                className="text-base font-medium text-gray-500 hover:text-gray-900"
+              >
+                NOSOTROS
+              </Link>
               {/* BACKEND TRABAJANDO */}
               {(user?.user_type === "admin" ||
                 user?.user_type === "userPremiun") && (
@@ -207,16 +207,19 @@ export default function Nav({ rutes = true, login = true }) {
                       </Popover.Button>
                     </>
                   )}
-                  {(user?.user_type === "admin" || user?.user_type === "userPremiun")&&<Link to="/dashboard" className="">
-                    <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
-                      <Lightning
-                        width={"24"}
-                        fill="#8d6b06ce"
-                        hover={"#8d6b06ce"}
-                      />
-                      <span className="pl-3">Dashboard</span>
-                    </Popover.Button>
-                  </Link>}
+                  {(user?.user_type === "admin" ||
+                    user?.user_type === "userPremiun") && (
+                    <Link to="/dashboard" className="">
+                      <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
+                        <Lightning
+                          width={"24"}
+                          fill="#8d6b06ce"
+                          hover={"#8d6b06ce"}
+                        />
+                        <span className="pl-3">Dashboard</span>
+                      </Popover.Button>
+                    </Link>
+                  )}
                 </nav>
               </div>
             </div>

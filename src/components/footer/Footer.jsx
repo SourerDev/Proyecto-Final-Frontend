@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Footer() {
   return (
     <div className="flex sm:flex-row flex-col justify-around items-center  shadow p-4">
@@ -12,6 +14,7 @@ export default function Footer() {
       <div className="flex sm:flex-col md:flex-row flex-row  space-x-4">
         <p>Politica de Privacidad</p>
         <p>Politica de cookies</p>
+        <Link to="/nosotros">Nosotros</Link>
       </div>
       <div className="flex flex-row jutify-center items-center ">
         <a href="">
