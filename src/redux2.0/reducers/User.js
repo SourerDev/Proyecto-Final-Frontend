@@ -9,6 +9,7 @@ const user = createSlice({
   reducers: {
     setUser: (state, action) => {
       state.session = action.payload;
+      state.signIn = true;
     },
     setSignIn: (state, action) => {
       state.signIn = action.payload;

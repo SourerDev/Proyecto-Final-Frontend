@@ -70,11 +70,15 @@ const callsApi = {
 
 const routes = {
   PUBLICATION: "publish",
+  USERS: "user",
 };
 
 export const ApiPropYou = {
   getPublications: function () {
     return apiProperties.get(`/${routes.PUBLICATION}/all`);
+  },
+  signIn: function ({email, password}) {
+    return apiProperties.post(`/${routes.USERS}/signin`, {email, password});
   },
 };
 
