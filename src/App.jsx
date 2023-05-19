@@ -8,7 +8,7 @@ import Detail from "./pages/detail/Detail.jsx";
 import Form from "./pages/createProperty/form.jsx"; */
 import Nav from "./components/nav-bar/Nav.jsx";
 
-import SignUp from "./pages/session/SignUp.jsx";
+import { SignUp } from "./pages/session/SignUp.jsx";
 import { SignIn } from "./pages/session/SignIn.jsx";
 /*import EditUser from "./pages/editUser/EditUser";
 import Footer from "./components/footer/Footer";
@@ -53,7 +53,7 @@ function App() {
         <Routes>
           {/* Temporal */}
           <Route path="/" element={<Landing />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/sign-up" element={<SignUp />} />
           <Route path="/sign-in" element={<SignIn/>} />
           {/* <Route path="/newRoute" element={<><Nav/><DashboardUsers/></>}/>
           <Route path="/home" element={<><Nav/><Home/><Footer/></>}/>
@@ -71,7 +71,7 @@ function App() {
         <Route path="/ownerData/:id_User" element={<><Nav/><OwnerData /></>}/> */}
         </Routes>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
