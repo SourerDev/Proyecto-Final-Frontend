@@ -1,12 +1,3 @@
-
-export function saveInLocalStorage(id,value = true) {
-  if(value){
-    localStorage.setItem("property",id)
-  }else{
-      localStorage.setItem("property",'')
-  }
-}
-
 export const saveInStorage = (name,object,deleted=false)=>{
   if(deleted){
     localStorage.setItem(name,'')

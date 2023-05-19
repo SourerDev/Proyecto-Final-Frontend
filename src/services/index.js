@@ -77,8 +77,8 @@ export const ApiPropYou = {
   getPublications: function () {
     return apiProperties.get(`/${routes.PUBLICATION}/all`);
   },
-  signIn: function (data) {
-    return apiProperties.post(`/${routes.USERS}/signIn`, data);
+  signIn: function ({email, password}) {
+    return apiProperties.post(`/${routes.USERS}/signin`, {email, password});
   },
 };
 

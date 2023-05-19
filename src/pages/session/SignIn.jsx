@@ -12,7 +12,8 @@ import {
   GoogleAuthProvider,
   GithubAuthProvider,
 } from "firebase/auth";
-import { getOfStorage } from "../../utils/saveIdInLocalStorage";
+import { Input } from "../../components/form/inputs/Input";
+import { saveInStorage, getOfStorage} from "../../utils";
 
 export function SignIn() {
   function mostrarContrasena() {
@@ -104,7 +105,7 @@ export function SignIn() {
       const {user, token} = response.data
       console.log(response);
       dispatch(actionsUser.setUser(user));
-  
+      saveInStorage("token", token)
     } catch (error) {
       setResponse({ state: false, msg: error.message });
     }
@@ -143,14 +144,21 @@ export function SignIn() {
                 </div>
 
                 <div className="mb-6">
-                  <input
+                  <Input
+                    name="email"
+                    type="email"
+                    className=""
+                    placeholder="correo electronico"
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  {/* <input
                     name="email"
                     type="email"
                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     id="exampleFormControlInput2"
                     placeholder="correo electronico"
                     onChange={(e) => setEmail(e.target.value)}
-                  />
+                  /> */}
                 </div>
                 <div className="">
                   <div className="w-full relative">
