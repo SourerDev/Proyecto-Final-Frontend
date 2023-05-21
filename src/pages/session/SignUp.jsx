@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { postSignUp } from "../../redux/actions/index";
 import { ApiPropYou } from "../../services";
+import { actionsUser } from "../../redux2.0/reducers";
+import { saveInStorage } from "../../utils";
 import { isValidSingUp } from "../../utils/isValidSingUp";
 import { Input } from "../../components/form/inputs/Input";
 import swal from "sweetalert";
@@ -48,15 +50,26 @@ export function SignUp() {
             </div>
             <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
               <form
-                onSubmit={(e) => {
+                onSubmit={async (e) => {
                   e.preventDefault();
-                  dispatch(ApiPropYou.signUp(data));
-                  swal({
-                    title: "Exelente",
-                    text: "Usuario Creado!",
-                    icon: "success",
-                  });
-                  navigate("/login");
+                  try {
+                    const response = await ApiPropYou.signUp(data)
+
+                    console.log(response)
+                    const {user, token} = response.data
+                    dispatch(actionsUser.setUser(user))
+                    saveInStorage("token", token)
+
+                    swal({
+                      title: "Ecxelente",
+                      text: "Usuario Creado!",
+                      icon: "success",
+                    });
+                    navigate(`/user/${user.idUser}`);
+                  }
+                  catch(e) {
+                    console.log(e)
+                  }
                 }}
               >
                 <div className="mb-6">

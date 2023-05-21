@@ -9,10 +9,10 @@ import {actualizar} from "../../sweetAlerts/sweetAlerts"
 import { Link } from "react-router-dom";
 import callsApi from "../../services";
 
-export default function EditUser() {
+export function EditUser() {
   const dispatch = useDispatch();
   const navigate = useNavigate()
-const axu = <Link to="/home"></Link>
+  const axu = <Link to="/home"></Link>
   const { user } = useSelector((state) => state);
   console.log(user)
   const [newUser, setNewUser] = useState({
