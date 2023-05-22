@@ -166,28 +166,12 @@ export function SignIn() {
                     className="mt-2 sm:my-2 inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                     value={"Iniciar Sesión"}
                   />
-                </div>
 
-                <div className="flex flex-col sm:items-center">
-                  {/* <Link to="/"> */}
-                  {!response.state && (
-                    <p className="px-2 my-2 text-red-700 bg-red-200 rounded-md w-full sm:w-auto">
-                      {response.msg}
-                    </p>
-                  )}
-                  <div className="flex flex-col sm:flex-row sm:space-x-4 sm:justify-center">
-                    <input
-                      type="submit"
-                      className="mt-2 sm:my-2 inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                      value={"Iniciar Sesión"}
-                    />
-
-                    <Link to="/sign-up">
-                      <button className="w-full my-2 inline-block px-7 py-3 bg-red-400 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out disabled:bg-red-400 disabled:cursor-not-allowed">
-                        Registrarme
-                      </button>
-                    </Link>
-                  </div>
+                  <Link to="/sign-up">
+                    <button className="w-full my-2 inline-block px-7 py-3 bg-red-400 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out disabled:bg-red-400 disabled:cursor-not-allowed">
+                      Registrarme
+                    </button>
+                  </Link>
                 </div>
               </div>
             </form>

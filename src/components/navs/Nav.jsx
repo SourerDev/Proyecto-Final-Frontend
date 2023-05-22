@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import UserIcon from "../user-icon/UserIcon.jsx";
 
 //components
 import { ModalNav } from "./ModalNav.jsx";
 
 export function Nav({ rutes = true, login = true }) {
-  const { user } = useSelector((state) => state);
+  const { signIn, session } = useSelector((state) => state.user);
+  const userType = session?.userType;
 
   return (
     <div className="bg-white relative -mx-auto max-w-8xl px-2 mb-1">
-      <nav className="flex items-center justify-between border-b-2 border-gray-100 py-4 md:justify-start md:space-x-10">
+      <nav className={`flex items-center justify-between border-b-2 border-gray-100 py-4 md:justify-start md:space-x-10`}>
         <div className="flex justify-start lg:w-0 lg:flex-1">
           <Link to="/" className="flex items-center">
             <span className="sr-only">Properties & You</span>
@@ -48,16 +48,14 @@ export function Nav({ rutes = true, login = true }) {
                 to="/home"
                 className="W-40 text-base text-center font-medium text-gray-500 hover:text-gray-900"
               >
-                {/* <span className="p-0 m-0">TODAS LAS </span>
-                  <br className="p-0 m-0"/> */}
                 <span className="p-0 m-0">PROPIEDADES</span>
               </Link>
             </li>
 
-            {user?.user_type === "userLogged" && (
+            {userType === "logged" && (
               <li>
                 <Link
-                  to="/bePremium"
+                  to="/user/be-premium"
                   className="text-base font-medium text-gray-500 hover:text-gray-900"
                 >
                   PREMIUM
@@ -73,8 +71,7 @@ export function Nav({ rutes = true, login = true }) {
               </Link>
             </li>
 
-            {(user?.user_type === "admin" ||
-              user?.user_type === "userPremiun") && (
+            {(userType === "admin" || userType === "premium") && (
               <Link
                 to="/dashboard"
                 className="W-40 text-base text-center font-medium text-gray-500 hover:text-gray-900"
@@ -85,8 +82,11 @@ export function Nav({ rutes = true, login = true }) {
           </ul>
         )}
         <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-          {user?.email ? (
-            <UserIcon user={user} />
+          {signIn ? (
+            <div>
+              is logged
+              {/* <MainAvatar/> */}
+            </div>
           ) : (
             login && (
               <Link
@@ -101,7 +101,7 @@ export function Nav({ rutes = true, login = true }) {
 
         {/*Modal nav*/}
         <div className="-my-2 -mr-2 md:hidden">
-          <ModalNav />
+          <ModalNav signIn={signIn} session={session} />
         </div>
       </nav>
     </div>

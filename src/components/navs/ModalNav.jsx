@@ -4,7 +4,9 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 import { icons } from "../../images";
 
-export function ModalNav({ user }) {
+export function ModalNav({ signIn, session}) {
+  const userType = session.userType
+  
   const { HeartBorder, Lightning } = icons;
   return (
     <Popover className="relative bg-white">
@@ -47,20 +49,10 @@ export function ModalNav({ user }) {
               </div>
               <div className="mt-6">
                 <nav className="flex flex-col">
-                  {user?.email && (
+                  {signIn && (
                     <Link to={"/user"} className="">
                       <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50 text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
-                        <img
-                          className="w-12 h-12 rounded-full"
-                          src={user.photo}
-                          alt="No Found"
-                        />
-                        <div className="mx-2 flex flex-col justify-center items-start">
-                          <span className="text-lg font-semibold">
-                            {user.userName || "Username"}
-                          </span>
-                          <span>{`\n${user.email || ""}`}</span>
-                        </div>
+                        is Logged
                       </Popover.Button>
                     </Link>
                   )}
@@ -76,9 +68,9 @@ export function ModalNav({ user }) {
                       <span>TODAS LAS PROPIEDADES</span>
                     </Popover.Button>
                   </Link>
-                  {user?.user_type === "userLogged" && (
+                  {userType === "logged" && (
                     <>
-                      <Link to="/home" className="">
+                      <Link to="/user/be-premium" className="">
                         <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
                           <Lightning
                             width={"24"}
@@ -99,8 +91,8 @@ export function ModalNav({ user }) {
                       </Popover.Button>
                     </>
                   )}
-                  {(user?.user_type === "admin" ||
-                    user?.user_type === "userPremiun") && (
+                  {(userType === "admin" ||
+                    userType === "premium") && (
                     <Link to="/dashboard" className="">
                       <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
                         <Lightning
@@ -117,7 +109,7 @@ export function ModalNav({ user }) {
             </div>
             <div className="space-y-6 py-6 px-5">
               <div>
-                {user?.email ? (
+                {signIn ? (
                   <>
                     <Popover.Button className="w-full text-center font-semibold bg-red-600/80 rounded p-2 text-red-900 hover:bg-red-700/75 hover:text-white">
                       <span className="">Cerrar Sesión</span>
