@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loadUserInfo } from "../../redux/actions";
 import {icons} from "../../images"
+import { useSelector } from "react-redux";
 
-export default function UserIcon({ user }) {
- 
+export function MainAvatar() {
   const dispatch = useDispatch();
-  const {HeartBorder,User, Exit,Lightning} = icons
+  const {HeartBorder,User, Exit,Lightning} = icons;
+  const user = useSelector((state) => state.user.session)
+  
   return (
     <Popover className="relative bg-white ">
       <Popover.Button className=" w-12 h-12 border-1  rounded-full inline-flex items-center justify-center bg-white hover:bg-gray-100 focus:border-1">
@@ -39,13 +41,13 @@ export default function UserIcon({ user }) {
                   <span className="pl-2">Ver perfil</span>
                 </Popover.Button>
               </Link>
-              <Link to={`/favorites/${user.id_User}`}>
+              <Link to={`/favorites/${user.idUser}`}>
               <Popover.Button className="flex w-full py-1 text-center">
                   <HeartBorder width="25" hover={"#ea2d98"} fill="#9c9c9c"/>
                   <span className="pl-2">Favoritos</span>
               </Popover.Button>
               </Link>
-              {(user?.user_type === "userLogged")&&<Link to={"/bePremium"} className="">
+              {(user?.userType === "userLogged")&&<Link to={"/bePremium"} className="">
                 <Popover.Button className="w-full py-1 text-center">
                   <span className="flex bg-yellow-300/75 text-yellow-700 bg- rounded-lg p-1 hover:bg-yellow-300/20">
                     <Lightning width={"24"} fill="#8d6b06ce" hover={"#8d6b06ce"}/>
@@ -53,7 +55,7 @@ export default function UserIcon({ user }) {
                   </span>
                 </Popover.Button>
               </Link>}
-              {(user?.user_type === "admin" || user?.user_type === "userPremiun")&&<Link to={"/dashboard"} className="">
+              {(user?.userType === "admin" || user?.userType === "userPremiun")&&<Link to={"/dashboard"} className="">
                 <Popover.Button className="w-full py-1 text-center">
                   <span className="flex  bg- rounded-lg p-1  text-gray-500 hover:text-gray-900">
                     <Lightning width={"24"} fill="#8d6b06ce" hover={"#8d6b06ce"}/>
