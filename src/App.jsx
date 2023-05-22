@@ -49,6 +49,7 @@ function App() {
     <div className="p-1 max-w-7xl mx-auto shadow">
       <nav>
         <Nav rutes={true} />
+        
       </nav>
       <main className="min-h-screen">
         <Routes>

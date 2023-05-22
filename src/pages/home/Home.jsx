@@ -1,17 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import Paginado from "../../components/paginado/Paginado.jsx"
-import Card from '../../components/card/Card'
+import { ProyectCard } from '../../components/card/ProyectCard.jsx';
 import { getallProperties,filterProperties,resetAlert } from '../../redux/actions/index.js';
 import AdvancedFilters from '../../components/advanced-filters/AdvancedFilters.jsx';
 import { findNameCity } from '../../utils/autocompleteUtils'
 import ModalAF from '../../components/modal/ModalAdvancedFilters.jsx';
 import LandingSearch from '../../components/landingSearch/LandingSearch.jsx';
 import swal from 'sweetalert2'
-import {noProperties} from "../../sweetAlerts/sweetAlerts"
+import { noProperties } from "../../sweetAlerts/sweetAlerts"
 
 export default function Home() {
-
     const { properties, citiesA, filteredProperties, user} = useSelector(state => state);
     const {favorites}  = useSelector(state => state.user)
     const paginado = (pageNumbers) => {
@@ -83,18 +82,18 @@ export default function Home() {
                 {
                     currentProperties?.length && currentProperties.map((el,i)=> {
                         return( <div key={i} className=' my-2 px-4 lg:px-9 '>
-                            <Card
-                            key={el.id}
-                            id={el.id}
-                            favorite={favorites?.includes(el.id)}
-                            city={findNameCity(citiesA,el.idCity)}
-                            modality ={el.modality}
-                            address={el.address}
-                            price={el.price}
-                            images={el.images}
-                            garage={el.garage}
-                            idUser={user?.id_User ?  user?.id_User : false}
-                            userProperty={el.User}
+                            <ProyectCard
+                                key={el.id}
+                                id={el.id}
+                                favorite={favorites?.includes(el.id)}
+                                city={findNameCity(citiesA,el.idCity)}
+                                modality ={el.modality}
+                                address={el.address}
+                                price={el.price}
+                                images={el.images}
+                                garage={el.garage}
+                                idUser={user?.id_User ?  user?.id_User : false}
+                                userProperty={el.User}
                             />
                             </div>
                         )
