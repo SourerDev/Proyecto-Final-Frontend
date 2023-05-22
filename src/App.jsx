@@ -11,6 +11,7 @@ import Nav from "./components/nav-bar/Nav.jsx";
 import { SignUp } from "./pages/session/SignUp.jsx";
 import { SignIn } from "./pages/session/SignIn.jsx";
 import { EditUser } from "./pages/editUser/EditUser.jsx";
+import { Home } from "./pages/home/Home.jsx";
 /*
 import Footer from "./components/footer/Footer";
 import BePremium from "./pages/bePremium/BePremium";
@@ -47,10 +48,9 @@ function App() {
 
   return (
     <div className="p-1 max-w-7xl mx-auto shadow">
-      <nav>
+      {/* <nav>
         <Nav rutes={true} />
-        
-      </nav>
+      </nav> */}
       <main className="min-h-screen">
         <Routes>
           {/* Temporal */}
@@ -58,8 +58,8 @@ function App() {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/sign-in" element={<SignIn/>} />
           <Route path="/user" element={<><Nav login={false}/><EditUser/><Footer/></>}/>
+          <Route path="/home" element={<><Nav/><Home/>{/* <Footer/> */}</>}/>
           {/* <Route path="/newRoute" element={<><Nav/><DashboardUsers/></>}/>
-          <Route path="/home" element={<><Nav/><Home/><Footer/></>}/>
           <Route path="/detail/:id" element={<><Nav/><Detail/><Footer/></>}/>
           <Route path="/createProperty" element={<><Nav/><Form/><Footer/></>}/>
           <Route path="/login" element={<><Nav login={false}/><LogIn/></>}/>

@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { icons } from "../../images";
 import { removeFavorite, addFavorites } from "../../redux/actions/index";
-import { useSelector } from "react-redux";
 import callsApi from "../../services";
 
-export function ProyectCard({details, user, favorite, idUser}) {
-  const { idPublication, modality, price, address, city, photo, bedrooms, bathrooms, type} = details;
+export function ProyectCard({mainData, details, user, favorite, idUser}) {
+  const { idPublication, modality, price } = mainData;
+  const { address, city, photo, bedrooms, bathrooms, type } = details;
   const { avatar, email, active, lName, fName, rating } = user;
   const dispatch = useDispatch();
   const { Heart, HeartBorder, User } = icons;
@@ -42,17 +42,17 @@ export function ProyectCard({details, user, favorite, idUser}) {
   useEffect(() => {
     if ((favorite && state.favorite) || (!favorite && !state.favorite)) return;
     if (favorite && !state.favorite) {
-      dispatch(removeFavorite(id));
+      dispatch(removeFavorite(idPublication));
       callsApi
-        .removeFavorite(id)
+        .removeFavorite(idPublication)
         .then((res) => {
         })
         .catch((err) => {
         });
     } else if (!favorite && state.favorite) {
-      dispatch(addFavorites([id]));
+      dispatch(addFavorites([idPublication]));
       callsApi
-        .postFavorite({ id_User: idUser, id_Property: id })
+        .postFavorite({ idUser: idUser, id_Property: idPublication })
         .then((res) => {     
         })
         .catch((err) => {

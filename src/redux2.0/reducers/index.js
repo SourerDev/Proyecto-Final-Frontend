@@ -7,7 +7,7 @@ export {userRs} from "./User.js"
 export {appRs} from "./App.js"
 
 export const actionsPublications = {
-    setPublications
+    setPublications,
 }
 
 export const actionsUser = {
@@ -16,5 +16,5 @@ export const actionsUser = {
 }
 
 export const actionsApp = {
-    setPage
+    setPage,
 }
