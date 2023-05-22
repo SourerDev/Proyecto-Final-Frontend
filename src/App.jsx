@@ -20,8 +20,8 @@ import OwnerData from "./components/dashboard/OwnerData";
 import Favoriteid from "./components/FaroriteId/favoriteId";
 import DashboardPage from "./pages/dashboard/DashboardPage";
 import DashboardUsers from "./components/dashboard/DashboardUsers.jsx";
+*/
 import Nosotros from "./components/Nosotros/nosotros";
- */
 
 //Components
 import Footer from "./components/footer/Footer.jsx";
@@ -55,16 +55,8 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/sign-in" element={<SignIn />} />
-          <Route
-            path="/user"
-            element={
-              <>
-                <Nav login={false} />
-                <EditUser />
-                <Footer />
-              </>
-            }
-          />
+          <Route path="/user" element={<EditUser />} />
+          <Route path="/about-us" element={<Nosotros/>}/>
           {/* <Route path="/newRoute" element={<><Nav/><DashboardUsers/></>}/>
           <Route path="/home" element={<><Nav/><Home/><Footer/></>}/>
           <Route path="/detail/:id" element={<><Nav/><Detail/><Footer/></>}/>
@@ -74,7 +66,6 @@ function App() {
           <Route path="/bePremium" element={<><Nav/><BePremium/></>} />
           <Route path="/redirect" element={<><Redirect/><Footer/></>} />
           <Route path="/favorites/:id_User" element= {<><Favoriteid/></>}/>
-          <Route path="/nosotros" element={<><Nosotros/></>}/>
           BACKEND TRABAJANDO 
           <Route path="/dashboard" element={<><Nav/><DashboardPage/></>}/>
           <Route path="/ownerData/:id_User" element={<><Nav/><OwnerData /></>}/> */}
