@@ -8,9 +8,10 @@ import Detail from "./pages/detail/Detail.jsx";
 import Form from "./pages/createProperty/form.jsx"; */
 import Nav from "./components/nav-bar/Nav.jsx";
 
-import SignUp from "./pages/session/SignUp.jsx";
+import { SignUp } from "./pages/session/SignUp.jsx";
 import { SignIn } from "./pages/session/SignIn.jsx";
-/*import EditUser from "./pages/editUser/EditUser";
+import { EditUser } from "./pages/editUser/EditUser.jsx";
+/*
 import Footer from "./components/footer/Footer";
 import BePremium from "./pages/bePremium/BePremium";
 import Redirect from "./components/redirect/Redirect";
@@ -53,25 +54,25 @@ function App() {
         <Routes>
           {/* Temporal */}
           <Route path="/" element={<Landing />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/sign-up" element={<SignUp />} />
           <Route path="/sign-in" element={<SignIn/>} />
+          <Route path="/user" element={<><Nav login={false}/><EditUser/><Footer/></>}/>
           {/* <Route path="/newRoute" element={<><Nav/><DashboardUsers/></>}/>
           <Route path="/home" element={<><Nav/><Home/><Footer/></>}/>
-        <Route path="/detail/:id" element={<><Nav/><Detail/><Footer/></>}/>
-        <Route path="/createProperty" element={<><Nav/><Form/><Footer/></>}/>
-        <Route path="/login" element={<><Nav login={false}/><LogIn/></>}/>
-        <Route path="/signup" element={<><Nav login={false}/><SignUp/></>}/>
-        <Route path="/user" element={<><Nav login={false}/><EditUser/><Footer/></>}/>
-        <Route path="/bePremium" element={<><Nav/><BePremium/></>} />
-        <Route path="/redirect" element={<><Redirect/><Footer/></>} />
-        <Route path="/favorites/:id_User" element= {<><Favoriteid/></>}/>
-        <Route path="/nosotros" element={<><Nosotros/></>}/>
-         BACKEND TRABAJANDO 
-        <Route path="/dashboard" element={<><Nav/><DashboardPage/></>}/>
-        <Route path="/ownerData/:id_User" element={<><Nav/><OwnerData /></>}/> */}
+          <Route path="/detail/:id" element={<><Nav/><Detail/><Footer/></>}/>
+          <Route path="/createProperty" element={<><Nav/><Form/><Footer/></>}/>
+          <Route path="/login" element={<><Nav login={false}/><LogIn/></>}/>
+          <Route path="/signup" element={<><Nav login={false}/><SignUp/></>}/>
+          <Route path="/bePremium" element={<><Nav/><BePremium/></>} />
+          <Route path="/redirect" element={<><Redirect/><Footer/></>} />
+          <Route path="/favorites/:id_User" element= {<><Favoriteid/></>}/>
+          <Route path="/nosotros" element={<><Nosotros/></>}/>
+          BACKEND TRABAJANDO 
+          <Route path="/dashboard" element={<><Nav/><DashboardPage/></>}/>
+          <Route path="/ownerData/:id_User" element={<><Nav/><OwnerData /></>}/> */}
         </Routes>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

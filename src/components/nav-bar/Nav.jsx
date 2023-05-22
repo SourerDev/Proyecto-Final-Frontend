@@ -100,7 +100,7 @@ export default function Nav({ rutes = true, login = true }) {
             ) : (
               login && (
                 <Link
-                  to="/login"
+                  to="/sign-in"
                   className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                 >
                   Iniciar Sesión

@@ -80,6 +80,9 @@ export const ApiPropYou = {
   signIn: function ({email, password}) {
     return apiProperties.post(`/${routes.USERS}/signin`, {email, password});
   },
+  signUp: function({fName, lName, userName, email, password, cellphone}) {
+    return apiProperties.post(`/${routes.USERS}/signup`, {fName, lName, userName, email, password, cellphone});
+  }
 };
 
 export default callsApi;
