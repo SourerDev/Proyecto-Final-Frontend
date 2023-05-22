@@ -6,7 +6,7 @@ import Landing from "./pages/landing/Landing.jsx";
 /* import Home from "./pages/home/Home.jsx";
 import Detail from "./pages/detail/Detail.jsx";
 import Form from "./pages/createProperty/form.jsx"; */
-import Nav from "./components/nav-bar/Nav.jsx";
+import { Nav } from "./components/navs/Nav.jsx";
 
 import { SignUp } from "./pages/session/SignUp.jsx";
 import { SignIn } from "./pages/session/SignIn.jsx";
@@ -47,16 +47,24 @@ function App() {
 
   return (
     <div className="p-1 max-w-7xl mx-auto shadow">
-      <nav>
-        <Nav rutes={true} />
-      </nav>
+      <Nav />
+
       <main className="min-h-screen">
         <Routes>
           {/* Temporal */}
           <Route path="/" element={<Landing />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/sign-in" element={<SignIn/>} />
-          <Route path="/user" element={<><Nav login={false}/><EditUser/><Footer/></>}/>
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route
+            path="/user"
+            element={
+              <>
+                <Nav login={false} />
+                <EditUser />
+                <Footer />
+              </>
+            }
+          />
           {/* <Route path="/newRoute" element={<><Nav/><DashboardUsers/></>}/>
           <Route path="/home" element={<><Nav/><Home/><Footer/></>}/>
           <Route path="/detail/:id" element={<><Nav/><Detail/><Footer/></>}/>
@@ -72,7 +80,7 @@ function App() {
           <Route path="/ownerData/:id_User" element={<><Nav/><OwnerData /></>}/> */}
         </Routes>
       </main>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

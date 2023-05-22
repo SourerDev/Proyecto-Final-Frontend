@@ -1,116 +1,17 @@
 import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
-
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import UserIcon from "../user-icon/UserIcon.jsx";
-import { loadUserInfo, filterProperties } from "../../redux/actions";
-import { icons } from "../../images/index.js";
-import { filter } from "../../utils/filters";
+import { icons } from "../../images";
 
-export default function Nav({ rutes = true, login = true }) {
-  const dispatch = useDispatch();
-  const { user, properties } = useSelector((state) => state);
-
-  const { Lightning, HeartBorder } = icons;
-
-  const setFilters = (type) => {
-    const prop = filter(properties, { operation: type });
-    dispatch(filterProperties(prop));
-  };
-
+export function ModalNav({ user }) {
+  const { HeartBorder, Lightning } = icons;
   return (
-    <Popover className="relative bg-white ">
-      <div className="-mx-auto max-w-8xl px-4 sm:px-6">
-        <div className="flex items-center justify-between border-b-2 border-gray-100 py-4 md:justify-start md:space-x-10">
-          <div className="flex justify-start lg:w-0 lg:flex-1">
-            <Link to="/" className="flex items-center">
-              <span className="sr-only">Properties & You</span>
-              <img
-                className="h-8 w-auto sm:h-10"
-                src="https://images.vexels.com/media/users/3/142719/isolated/preview/f07a4b2d673e9935e58e6ff8262d4a1d-icono-de-casas-de-triangulo.png"
-                alt=""
-              />
-              <span className="mx-2 text-xl sm:text-2xl">Properties & You</span>
-            </Link>
-          </div>
-          <div className="-my-2 -mr-2 md:hidden">
-            <Popover.Button className=" outline-0 inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-0 focus:ring-2 focus:ring-inset">
-              <span className="sr-only">Menu</span>
-              <Bars3Icon className="h-6 w-6" aria-hidden="true" />
-            </Popover.Button>
-          </div>
-
-          {rutes && (
-            <Popover.Group as="nav" className="hidden space-x-10 md:flex">
-              <Link
-                to="/home"
-                className="text-base font-medium text-gray-500 hover:text-gray-900"
-                onClick={() => setFilters("Venta")}
-              >
-                VENTA
-              </Link>
-              <Link
-                to="/home"
-                className="text-base font-medium text-gray-500 hover:text-gray-900"
-                onClick={() => setFilters("Alquiler")}
-              >
-                ALQUILER
-              </Link>
-              <Link
-                to="/home"
-                className="W-40 text-base text-center font-medium text-gray-500 hover:text-gray-900"
-                onClick={() => dispatch(filterProperties(properties))}
-              >
-                {/* <span className="p-0 m-0">TODAS LAS </span>
-                <br className="p-0 m-0"/> */}
-                <span className="p-0 m-0">PROPIEDADES</span>
-              </Link>
-              {user?.user_type === "userLogged" && (
-                <Link
-                  to="/bePremium"
-                  className="text-base font-medium text-gray-500 hover:text-gray-900"
-                >
-                  PREMIUM
-                </Link>
-              )}
-              <Link
-                to="/nosotros"
-                className="text-base font-medium text-gray-500 hover:text-gray-900"
-              >
-                NOSOTROS
-              </Link>
-              {/* BACKEND TRABAJANDO */}
-              {(user?.user_type === "admin" ||
-                user?.user_type === "userPremiun") && (
-                <Link
-                  to="/dashboard"
-                  className="W-40 text-base text-center font-medium text-gray-500 hover:text-gray-900"
-                >
-                  <span className="p-0 m-0">DASHBOARD</span>
-                </Link>
-              )}
-              {/* BACKEND TRABAJANDO */}
-            </Popover.Group>
-          )}
-          <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-            {user?.email ? (
-              <UserIcon user={user} />
-            ) : (
-              login && (
-                <Link
-                  to="/sign-in"
-                  className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-                >
-                  Iniciar Sesión
-                </Link>
-              )
-            )}
-          </div>
-        </div>
-      </div>
-
+    <Popover className="relative bg-white">
+      <Popover.Button className=" outline-0 inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-0 focus:ring-2 focus:ring-inset">
+        <span className="sr-only">Menu</span>
+        <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+      </Popover.Button>
       <Transition
         as={Fragment}
         enter="duration-200 ease-out"
@@ -122,9 +23,9 @@ export default function Nav({ rutes = true, login = true }) {
       >
         <Popover.Panel
           focus
-          className="absolute inset-x-0 top-0 origin-top-right transform p-2 transition md:hidden z-50"
+          className="fixed inset-x-0 top-0 origin-top-right transform p-2 transition md:hidden z-50"
         >
-          <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+          <div className="min-h-[500px] divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
             <div className="px-5 pt-5 pb-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
@@ -164,23 +65,14 @@ export default function Nav({ rutes = true, login = true }) {
                     </Link>
                   )}
 
-                  <Popover.Button
-                    className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200"
-                    onClick={() => setFilters("Venta")}
-                  >
+                  <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
                     <span>VENTA</span>
                   </Popover.Button>
-                  <Popover.Button
-                    className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200"
-                    onClick={() => setFilters("Alquiler")}
-                  >
+                  <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
                     <span>ALQUILER</span>
                   </Popover.Button>
                   <Link to="/home" className="">
-                    <Popover.Button
-                      className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200"
-                      onClick={() => dispatch(filterProperties(properties))}
-                    >
+                    <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
                       <span>TODAS LAS PROPIEDADES</span>
                     </Popover.Button>
                   </Link>
@@ -227,10 +119,7 @@ export default function Nav({ rutes = true, login = true }) {
               <div>
                 {user?.email ? (
                   <>
-                    <Popover.Button
-                      className="w-full text-center font-semibold bg-red-600/80 rounded p-2 text-red-900 hover:bg-red-700/75 hover:text-white"
-                      onClick={() => dispatch(loadUserInfo({}))}
-                    >
+                    <Popover.Button className="w-full text-center font-semibold bg-red-600/80 rounded p-2 text-red-900 hover:bg-red-700/75 hover:text-white">
                       <span className="">Cerrar Sesión</span>
                     </Popover.Button>
                   </>
@@ -243,7 +132,7 @@ export default function Nav({ rutes = true, login = true }) {
                     </Link>
                     <p className="mt-6 text-center text-base font-medium text-gray-500">
                       Tienes cuenta?{" "}
-                      <Link to="/login">
+                      <Link to="/sign-in">
                         <Popover.Button className="text-indigo-600 hover:text-indigo-500">
                           Iniciar Sesión
                         </Popover.Button>
