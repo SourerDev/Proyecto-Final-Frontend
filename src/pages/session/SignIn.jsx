@@ -106,6 +106,7 @@ export function SignIn() {
       
       dispatch(actionsUser.setUser(user));
       saveInStorage("token", token)
+      navigate("/home")
     } catch (error) {
       setResponse({ state: false, msg: error.message });
     }
