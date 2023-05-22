@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 
 //components
 import { ModalNav } from "./ModalNav.jsx";
+import { MainAvatar } from "../avatars/MainAvatar.jsx";
 
 export function Nav({ rutes = true, login = true }) {
   const { signIn, session } = useSelector((state) => state.user);
@@ -10,7 +11,9 @@ export function Nav({ rutes = true, login = true }) {
 
   return (
     <div className="bg-white relative -mx-auto max-w-8xl px-2 mb-1">
-      <nav className={`flex items-center justify-between border-b-2 border-gray-100 py-4 md:justify-start md:space-x-10`}>
+      <nav
+        className={`flex items-center justify-between border-b-2 border-gray-100 py-4 md:justify-start md:space-x-10`}
+      >
         <div className="flex justify-start lg:w-0 lg:flex-1">
           <Link to="/" className="flex items-center">
             <span className="sr-only">Properties & You</span>
@@ -83,10 +86,7 @@ export function Nav({ rutes = true, login = true }) {
         )}
         <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
           {signIn ? (
-            <div>
-              is logged
-              {/* <MainAvatar/> */}
-            </div>
+            <MainAvatar />
           ) : (
             login && (
               <Link
@@ -99,7 +99,6 @@ export function Nav({ rutes = true, login = true }) {
           )}
         </div>
 
-        {/*Modal nav*/}
         <div className="-my-2 -mr-2 md:hidden">
           <ModalNav signIn={signIn} session={session} />
         </div>
