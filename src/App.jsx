@@ -7,7 +7,8 @@ import Landing from "./pages/landing/Landing.jsx";
 import Detail from "./pages/detail/Detail.jsx";
 import Form from "./pages/createProperty/form.jsx"; */
 import Nav from "./components/nav-bar/Nav.jsx";
-
+import UserIcon from "./components/user-icon/UserIcon.jsx";
+import { MainAvatar } from "./components/avatars/MainAvatar.jsx";
 import { SignUp } from "./pages/session/SignUp.jsx";
 import { SignIn } from "./pages/session/SignIn.jsx";
 import { EditUser } from "./pages/editUser/EditUser.jsx";
