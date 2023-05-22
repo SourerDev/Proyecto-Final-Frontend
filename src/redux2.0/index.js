@@ -1,11 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import { publicationRs, userRs } from "./reducers";
+import { appRs, publicationRs, userRs } from "./reducers";
 
 const store = configureStore({
   reducer: {
     publication: publicationRs,
-    user: userRs
+    user: userRs,
+    app: appRs
   },
 });
 
