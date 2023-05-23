@@ -4,6 +4,7 @@ const publication = createSlice({
     name: "publication",
     initialState:{
         publications:[],
+        leakedPublications: [],
         detailPublication:{}
     },
     reducers:{
