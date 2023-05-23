@@ -5,10 +5,10 @@ import { icons } from "../../images";
 import { removeFavorite, addFavorites } from "../../redux/actions/index";
 import callsApi from "../../services";
 
-export function ProyectCard({mainData, details, user, favorite, idUser}) {
+export function ProyectCard({mainData, details, user, favorite, signIn}) {
   const { idPublication, modality, price } = mainData;
   const { address, city, photo, bedrooms, bathrooms, type } = details;
-  const { avatar, email, active, lName, fName, rating } = user;
+  const { avatar, email, active, lName, fName, rating, idUser, cellphone } = user;
   const dispatch = useDispatch();
   const { Heart, HeartBorder, User } = icons;
 
@@ -70,7 +70,7 @@ export function ProyectCard({mainData, details, user, favorite, idUser}) {
           </div>
         )}
         {/* No estoy seguro que constante hay que poner en el condicional */}
-        {idUser && (
+        {signIn && (
           <button
             className="absolute  bottom-1 right-1 bg-white rounded-full p-1 flex justify-center items-center hover:bg-zinc-100"
             onClick={addFavorite}
