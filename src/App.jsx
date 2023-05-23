@@ -56,8 +56,8 @@ function App() {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/user" element={<EditUser />} />
-          <Route path="/about-us" element={<Nosotros/>}/>
-          <Route path="/home" element={<><Nav/><Home/>{/* <Footer/> */}</>}/>  
+          <Route path="/about-us" element={<Nosotros />} />
+          <Route path="/home" element={<Home />} />
           {/* <Route path="/newRoute" element={<><Nav/><DashboardUsers/></>}/>
           <Route path="/detail/:id" element={<><Nav/><Detail/><Footer/></>}/>
           <Route path="/createProperty" element={<><Nav/><Form/><Footer/></>}/>

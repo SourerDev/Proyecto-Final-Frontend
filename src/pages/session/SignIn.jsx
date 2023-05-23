@@ -28,12 +28,10 @@ export function SignIn() {
 
   const setNavigate = () => {
     const save = getOfStorage("detail");
-    console.log(save);
 
     if (save?.id) {
       navigate(`/detail/${save.id}`);
     } else {
-      console.log();
       navigate("/");
     }
   };
@@ -88,7 +86,6 @@ export function SignIn() {
   };
 
   async function handleSubmit(email, password) {
-    console.log(email, password);
     if (!email || !password) return;
     try {
       const response = await ApiPropYou.signIn({
