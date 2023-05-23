@@ -6,8 +6,8 @@ import Landing from "./pages/landing/Landing.jsx";
 /* import Home from "./pages/home/Home.jsx";
 import Detail from "./pages/detail/Detail.jsx";
 import Form from "./pages/createProperty/form.jsx"; */
-import Nav from "./components/nav-bar/Nav.jsx";
 
+import { Nav } from "./components/navs/Nav.jsx";
 import { SignUp } from "./pages/session/SignUp.jsx";
 import { SignIn } from "./pages/session/SignIn.jsx";
 import { EditUser } from "./pages/editUser/EditUser.jsx";
@@ -21,8 +21,8 @@ import OwnerData from "./components/dashboard/OwnerData";
 import Favoriteid from "./components/FaroriteId/favoriteId";
 import DashboardPage from "./pages/dashboard/DashboardPage";
 import DashboardUsers from "./components/dashboard/DashboardUsers.jsx";
+*/
 import Nosotros from "./components/Nosotros/nosotros";
- */
 
 //Components
 import Footer from "./components/footer/Footer.jsx";
@@ -48,17 +48,16 @@ function App() {
 
   return (
     <div className="p-1 max-w-7xl mx-auto shadow">
-      {/* <nav>
-        <Nav rutes={true} />
-      </nav> */}
+      <Nav />
       <main className="min-h-screen">
         <Routes>
           {/* Temporal */}
           <Route path="/" element={<Landing />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/sign-in" element={<SignIn/>} />
-          <Route path="/user" element={<><Nav login={false}/><EditUser/><Footer/></>}/>
-          <Route path="/home" element={<><Nav/><Home/>{/* <Footer/> */}</>}/>
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/user" element={<EditUser />} />
+          <Route path="/about-us" element={<Nosotros/>}/>
+          <Route path="/home" element={<><Nav/><Home/>{/* <Footer/> */}</>}/>  
           {/* <Route path="/newRoute" element={<><Nav/><DashboardUsers/></>}/>
           <Route path="/detail/:id" element={<><Nav/><Detail/><Footer/></>}/>
           <Route path="/createProperty" element={<><Nav/><Form/><Footer/></>}/>
@@ -67,13 +66,12 @@ function App() {
           <Route path="/bePremium" element={<><Nav/><BePremium/></>} />
           <Route path="/redirect" element={<><Redirect/><Footer/></>} />
           <Route path="/favorites/:id_User" element= {<><Favoriteid/></>}/>
-          <Route path="/nosotros" element={<><Nosotros/></>}/>
           BACKEND TRABAJANDO 
           <Route path="/dashboard" element={<><Nav/><DashboardPage/></>}/>
           <Route path="/ownerData/:id_User" element={<><Nav/><OwnerData /></>}/> */}
         </Routes>
       </main>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }
