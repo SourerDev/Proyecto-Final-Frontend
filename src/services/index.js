@@ -82,6 +82,9 @@ export const ApiPropYou = {
   },
   signUp: function({fName, lName, userName, email, password, cellphone}) {
     return apiProperties.post(`/${routes.USERS}/signup`, {fName, lName, userName, email, password, cellphone});
+  },
+  updateUser: function(idUser, newData) {
+    return apiProperties.put(`/${routes.USERS}/${idUser}`, newData)
   }
 };
 
