@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Paginado from "../../components/paginado/Paginado.jsx";
-import { ProyectCard } from "../../components/card/ProyectCard.jsx";
+import Paginado from "../components/paginado/Paginado.jsx";
+import { CardProperty } from "../components/cards/CardProperty.jsx";
 import {
   getallProperties,
   filterProperties,
   resetAlert,
-} from "../../redux/actions/index.js";
-import AdvancedFilters from "../../components/advanced-filters/AdvancedFilters.jsx";
-import { findNameCity } from "../../utils/autocompleteUtils";
-import ModalAF from "../../components/modal/ModalAdvancedFilters.jsx";
+} from "../redux/actions/index.js";
+import AdvancedFilters from "../components/advanced-filters/AdvancedFilters.jsx";
+import { findNameCity } from "../utils/autocompleteUtils.js";
+import ModalAF from "../components/modal/ModalAdvancedFilters.jsx";
 //import LandingSearch from '../../components/landingSearch/LandingSearch.jsx';
 import swal from "sweetalert2";
-import { noProperties } from "../../sweetAlerts/sweetAlerts";
+import { noProperties } from "../sweetAlerts/sweetAlerts.js";
 //import state from 'sweetalert/typings/modules/state.js';
 
 export function Home() {
@@ -107,7 +107,7 @@ export function Home() {
             }
             return (
               <div key={i} className=" my-2 px-4 lg:px-9 ">
-                <ProyectCard
+                <CardProperty
                   mainData={mainData}
                   details={details}
                   user={user}
