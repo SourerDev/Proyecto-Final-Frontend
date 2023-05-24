@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loadUserInfo, postSignUp } from "../../redux/actions/index";
-import callsApi from "../../services";
+import callsApi, { addAuthorizationWithToken } from "../../services";
 import { actionsUser } from "../../redux2.0/reducers";
 import { ApiPropYou } from "../../services";
 import { authentication } from "../../firabase/Firabase.Config.jsx";
@@ -96,6 +96,7 @@ export function SignIn() {
       const { user, token } = response.data;
       dispatch(actionsUser.setUser(user));
       saveInStorage("token", token);
+      addAuthorizationWithToken(token);
       navigate("/home");
     } catch (error) {
       setResponse({ state: false, msg: error.message });

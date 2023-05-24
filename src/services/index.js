@@ -1,4 +1,5 @@
 import { apiProperties } from "./api/baseApi.js";
+import { getOfStorage } from "../utils";
 
 const property = "properties";
 const user = "users";
@@ -77,15 +78,34 @@ export const ApiPropYou = {
   getPublications: function () {
     return apiProperties.get(`/${routes.PUBLICATION}/all`);
   },
-  signIn: function ({email, password}) {
-    return apiProperties.post(`/${routes.USERS}/signin`, {email, password});
+  signIn: function ({ email, password }) {
+    return apiProperties.post(`/${routes.USERS}/signin`, { email, password });
   },
-  signUp: function({fName, lName, userName, email, password, cellphone}) {
-    return apiProperties.post(`/${routes.USERS}/signup`, {fName, lName, userName, email, password, cellphone});
+  signUp: function ({ fName, lName, userName, email, password, cellphone }) {
+    return apiProperties.post(`/${routes.USERS}/signup`, {
+      fName,
+      lName,
+      userName,
+      email,
+      password,
+      cellphone,
+    });
   },
-  updateUser: function(idUser, newData) {
-    return apiProperties.put(`/${routes.USERS}/${idUser}`, newData)
-  }
+  updateUser: function ({ idUser, data }) {
+    return apiProperties.put(`/${routes.USERS}/${idUser}`, data);
+  },
 };
+
+export function addAuthorizationWithToken(token) {
+  apiProperties.interceptors.request.use(
+    (config) => {
+      config.headers.Authorization = `Bearer ${token}`;
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
+}
 
 export default callsApi;
