@@ -35,7 +35,7 @@ export function MainAvatar() {
               {user.userName && (user.userName.length > 15 ? user.userName.slice(0,10) + "...":user.userName) || "Username"}
             </h1>
             <div className="w-full flex flex-col py-1">
-              <Link to={"/user"} className="">
+              <Link to={"/profile"} className="">
                 <Popover.Button className="flex w-full py-1 text-gray-500 hover:text-gray-900 text-center">
                   <User width="25" hover={"#e5e5e5"}/>
                   <span className="pl-2">Ver perfil</span>

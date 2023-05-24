@@ -10,8 +10,8 @@ import Form from "./pages/createProperty/form.jsx"; */
 import { Nav } from "./components/navs/Nav.jsx";
 import { SignUp } from "./pages/session/SignUp.jsx";
 import { SignIn } from "./pages/session/SignIn.jsx";
-import { EditUser } from "./pages/editUser/EditUser.jsx";
 import { Home } from "./pages/home/Home.jsx";
+import { Profile } from "./pages/profile/Profile.jsx";
 /*
 import Footer from "./components/footer/Footer";
 import BePremium from "./pages/bePremium/BePremium";
@@ -55,7 +55,7 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/user" element={<EditUser />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/about-us" element={<Nosotros />} />
           <Route path="/home" element={<Home />} />
           {/* <Route path="/newRoute" element={<><Nav/><DashboardUsers/></>}/>
