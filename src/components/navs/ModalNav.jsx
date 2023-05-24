@@ -2,12 +2,11 @@ import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
-import { icons } from "../../images";
+import { Icon } from "../../assets";
 
-export function ModalNav({ signIn, session}) {
-  const userType = session.userType
-  
-  const { HeartBorder, Lightning } = icons;
+export function ModalNav({ signIn, session }) {
+  const userType = session.userType;
+
   return (
     <Popover className="relative bg-white">
       <Popover.Button className=" outline-0 inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-0 focus:ring-2 focus:ring-inset">
@@ -72,7 +71,7 @@ export function ModalNav({ signIn, session}) {
                     <>
                       <Link to="/user/be-premium" className="">
                         <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
-                          <Lightning
+                          <Icon.Lightning
                             width={"24"}
                             fill="#8d6b06ce"
                             hover={"#8d6b06ce"}
@@ -81,7 +80,7 @@ export function ModalNav({ signIn, session}) {
                         </Popover.Button>
                       </Link>
                       <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
-                        <HeartBorder
+                        <Icon.HeartBorder
                           width="25"
                           hover={"#ea2d98"}
                           fill="#9c9c9c"
@@ -91,11 +90,10 @@ export function ModalNav({ signIn, session}) {
                       </Popover.Button>
                     </>
                   )}
-                  {(userType === "admin" ||
-                    userType === "premium") && (
+                  {(userType === "admin" || userType === "premium") && (
                     <Link to="/dashboard" className="">
                       <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
-                        <Lightning
+                        <Icon.Lightning
                           width={"24"}
                           fill="#8d6b06ce"
                           hover={"#8d6b06ce"}

@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import Landing from "./pages/landing/Landing.jsx";
+import Landing from "./pages/Landing.jsx";
 /* import Home from "./pages/home/Home.jsx";
 import Detail from "./pages/detail/Detail.jsx";
 import Form from "./pages/createProperty/form.jsx"; */
@@ -10,7 +10,7 @@ import Form from "./pages/createProperty/form.jsx"; */
 import { Nav } from "./components/navs/Nav.jsx";
 import { SignUp } from "./pages/session/SignUp.jsx";
 import { SignIn } from "./pages/session/SignIn.jsx";
-import { Home } from "./pages/home/Home.jsx";
+import { Home } from "./pages/Home.jsx";
 import { Profile } from "./pages/profile/Profile.jsx";
 /*
 import Footer from "./components/footer/Footer";

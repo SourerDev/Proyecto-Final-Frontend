@@ -64,7 +64,7 @@ export function SignUp() {
                       text: "Usuario Creado!",
                       icon: "success",
                     });
-                    addAuthorizationWithToken(token)
+                    addAuthorizationWithToken(token);
                     navigate(`/user/${user.idUser}`);
                   } catch (e) {
                     console.log(e);
