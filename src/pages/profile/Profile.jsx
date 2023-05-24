@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { loadUserInfo } from "../../redux/actions/index";
+import { actionsUser } from "../../redux2.0/reducers";
 import { isValidUser } from "../../utils/isValidUser";
 import { useNavigate } from "react-router-dom";
 import { actualizar } from "../../sweetAlerts/sweetAlerts";
@@ -12,10 +12,15 @@ export function Profile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const axu = <Link to="/home"></Link>;
   const { session } = useSelector((state) => state.user);
-
-  const [newUser, setNewUser] = useState({ ...session });
+  const [newUser, setNewUser] = useState({
+    userName: session.userName,
+    fName: session.fName,
+    lName: session.lName,
+    cellphone: session.cellphone,
+    email: session.email,
+    photo: session.photo,
+  });
   const [errs, setErrs] = useState({});
 
   useEffect(() => {
@@ -157,28 +162,18 @@ export function Profile() {
       <div className="">
         <Link>
           <button
-            disabled={Object.values(errs).length ? true : false}
+            disabled={Object.values(errs)?.length ? true : false}
             className="hover:bg-gradient-to-br px-4 py-3  text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
             onClick={() => {
-              console.log(session.idUser)
-              console.log(newUser)
-              ApiPropYou.updateUser(session?.idUser, {
-                ...session,
-                ...newUser,
-                photo: newUser.photo.length
-                  ? newUser.photo
-                  : "https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png",
+              console.log(session.idUser);
+              console.log(newUser);
+              ApiPropYou.updateUser({
+                idUser: session.idUser,
+                data: { ...newUser },
               })
                 .then((res) => {
-                  dispatch(
-                    loadUserInfo({
-                      ...session,
-                      ...newUser,
-                      photo: newUser.photo.length
-                        ? newUser.photo
-                        : "https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png",
-                    })
-                  );
+                  dispatch(actionsUser.setUser(res.data.user));
+                  const axu = <Link to="/home"></Link>;
                   swal.fire(actualizar(axu));
                 })
                 .catch((err) => {
