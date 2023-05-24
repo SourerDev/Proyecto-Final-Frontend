@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { ApiPropYou } from "../../services";
+import { ApiPropYou, addAuthorizationWithToken } from "../../services";
 import { actionsUser } from "../../redux2.0/reducers";
 import { saveInStorage } from "../../utils";
 import { isValidSingUp } from "../../utils/isValidSingUp";
@@ -19,7 +19,7 @@ export function SignUp() {
     password: "",
     password2: "",
     cellphone: "",
-});
+  });
 
   const [errs, setErrs] = useState({});
   function handleChange(event) {
@@ -52,33 +52,33 @@ export function SignUp() {
                 onSubmit={async (e) => {
                   e.preventDefault();
                   try {
-                    const response = await ApiPropYou.signUp(data)
+                    const response = await ApiPropYou.signUp(data);
 
-                    console.log(response)
-                    const {user, token} = response.data
-                    dispatch(actionsUser.setUser(user))
-                    saveInStorage("token", token)
+                    console.log(response);
+                    const { user, token } = response.data;
+                    dispatch(actionsUser.setUser(user));
+                    saveInStorage("token", token);
 
                     swal({
                       title: "Ecxelente",
                       text: "Usuario Creado!",
                       icon: "success",
                     });
+                    addAuthorizationWithToken(token)
                     navigate(`/user/${user.idUser}`);
-                  }
-                  catch(e) {
-                    console.log(e)
+                  } catch (e) {
+                    console.log(e);
                   }
                 }}
               >
                 <div className="mb-6">
-                    <Input
-                        name="email"
-                        type="email"
-                        className=""
-                        placeholder="correo electronico"
-                        onChange={(e) => handleChange(e)}
-                    />
+                  <Input
+                    name="email"
+                    type="email"
+                    className=""
+                    placeholder="correo electronico"
+                    onChange={(e) => handleChange(e)}
+                  />
                   {/* <input
                     name="email"
                     type="email"
@@ -91,13 +91,13 @@ export function SignUp() {
                 </div>
 
                 <div className="mb-6">
-                    <Input 
-                        name="fName"
-                        type="fName"
-                        className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"   
-                        placeholder="first name"
-                        onChange={(e) => handleChange(e)}
-                    />
+                  <Input
+                    name="fName"
+                    type="fName"
+                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="first name"
+                    onChange={(e) => handleChange(e)}
+                  />
                   {/* <input
                     name="fName"
                     type="fName"
@@ -106,49 +106,53 @@ export function SignUp() {
                     placeholder="first name"
                     onChange={(e) => handleChange(e)}
                   /> */}
-                  {errs.fName && (<p className="text-red-600">{errs.fName}</p>)}
+                  {errs.fName && <p className="text-red-600">{errs.fName}</p>}
                 </div>
 
                 <div className="mb-6">
-                    <Input 
-                        name="lName"
-                        type="text"
-                        className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"   
-                        placeholder="last name"
-                        onChange={(e) => handleChange(e)}
-                    />
-                  {errs.lName && (<p className="text-red-600">{errs.lName}</p>)}
+                  <Input
+                    name="lName"
+                    type="text"
+                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="last name"
+                    onChange={(e) => handleChange(e)}
+                  />
+                  {errs.lName && <p className="text-red-600">{errs.lName}</p>}
                 </div>
 
                 <div className="mb-6">
-                    <Input 
-                        name="password"
-                        type="password"
-                        className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"   
-                        placeholder="password"
-                        onChange={(e) => handleChange(e)}
-                    />
-                  {errs.password && (<p className="text-red-600">{errs.password}</p>)}
+                  <Input
+                    name="password"
+                    type="password"
+                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="password"
+                    onChange={(e) => handleChange(e)}
+                  />
+                  {errs.password && (
+                    <p className="text-red-600">{errs.password}</p>
+                  )}
                 </div>
                 <div className="mb-6">
-                    <Input 
-                        name="password2"
-                        type="password"
-                        className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"   
-                        placeholder="repeat the password"
-                        onChange={(e) => handleChange(e)}
-                    />
+                  <Input
+                    name="password2"
+                    type="password"
+                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="repeat the password"
+                    onChange={(e) => handleChange(e)}
+                  />
                 </div>
-                
+
                 <div className="mb-6">
-                    <Input 
-                        name="cellphone"
-                        type="number"
-                        className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"   
-                        placeholder="cellphone"
-                        onChange={(e) => handleChange(e)}
-                    />
-                  {errs.cellphone && (<p className="text-red-600">{errs.cellphone}</p>)}
+                  <Input
+                    name="cellphone"
+                    type="number"
+                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="cellphone"
+                    onChange={(e) => handleChange(e)}
+                  />
+                  {errs.cellphone && (
+                    <p className="text-red-600">{errs.cellphone}</p>
+                  )}
                 </div>
 
                 <div className="flex flex-col items-start text-center lg:text-left lg:h-20 grid lg:grid-cols-3 lg:gap-4 lg:content-center">
