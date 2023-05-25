@@ -5,7 +5,7 @@ import { Icon } from "../../assets";
 import { removeFavorite, addFavorites } from "../../redux/actions/index";
 import callsApi from "../../services";
 
-export function CardProperty({ mainData, details, user, favorite, signIn }) {
+export function PropertyCard({ mainData, details, user, favorite, signIn }) {
   const { idPublication, modality, price } = mainData;
   const { address, city, photo, bedrooms, bathrooms, type } = details;
   const { avatar, email, active, lName, fName, rating, idUser, cellphone } =
@@ -132,7 +132,7 @@ export function CardProperty({ mainData, details, user, favorite, signIn }) {
                 </div>
               </>
             ) : (
-              <Icon.User 
+              <Icon.User
                 className="w-full text-white"
                 hover={"#fff"}
                 fill={"#fff"}

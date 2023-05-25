@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Paginado from "../components/paginado/Paginado.jsx";
-import { CardProperty } from "../components/cards/CardProperty.jsx";
+import { PropertyCard } from "../components/cards/PropertyCard.jsx";
 import {
   getallProperties,
   filterProperties,
@@ -107,7 +107,7 @@ export function Home() {
             }
             return (
               <div key={i} className=" my-2 px-4 lg:px-9 ">
-                <CardProperty
+                <PropertyCard
                   mainData={mainData}
                   details={details}
                   user={user}

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Input } from "./Input";
 
-export function InputPassword({ ...props }) {
+export function PasswordInput({ ...props }) {
   const [viewPassword, setViewPassword] = useState(true);
 
   return (

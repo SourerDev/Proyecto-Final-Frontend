@@ -16,7 +16,7 @@ import { saveInStorage, getOfStorage } from "../../utils";
 
 //components
 import { Input } from "../../components/form/inputs/Input";
-import { InputPassword } from "../../components/form/inputs/InputPassword";
+import { PasswordInput } from "../../components/form/inputs/PasswordInput";
 
 export function SignIn() {
   const navigate = useNavigate();
@@ -144,7 +144,7 @@ export function SignIn() {
                 />
               </div>
               <div className="">
-                <InputPassword
+                <PasswordInput
                   name="password"
                   placeholder="contraseña"
                   onChange={(e) => setPassword(e.target.value)}
