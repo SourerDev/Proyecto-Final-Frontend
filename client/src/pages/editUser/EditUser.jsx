@@ -41,6 +41,10 @@ const axu = <Link to="/home"></Link>
 
   return (
     <div className="flex justify-center flex-col items-center h-[40rem] sm:h-[43rem] lg:[4rem] bg-sky-200">
+      
+
+      
+     
       <p className="self-right text-2xl">Editar usuario</p>
       <div className="w-16 h-16 rounded-full overflow-hidden">
         <img className="w-full rounded-full" src={newUser.photo || "https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png"} alt="" />
@@ -148,6 +152,24 @@ const axu = <Link to="/home"></Link>
             //navigate("/")
           }}>actualizar</button></Link>
           </div>
+
+          
+          <button 
+          className="hover:bg-gradient-to-br px-4 py-3  text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800" 
+          onClick={()=>{ 
+ if (
+       !user?.user_type ||
+       user.user_type === "userPremiun"
+){  navigate('/createProperty')}
+else{
+  swal.fire(
+    'Algo salio mal,',
+    'deves ser usuario Premiun',
+    navigate('/bePremium'))
+}
+          }}>
+            Create Property
+          </button>
     </div>
   );
 }
