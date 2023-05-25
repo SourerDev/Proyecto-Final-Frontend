@@ -5,6 +5,7 @@ import { actionsPublications } from "../../redux2.0/reducers";
 import { ApiPropYou } from "../../services";
 import { GoBackButton } from "../../components/form/buttons/GoBack";
 import CarrouselDetail from "../../components/carousel/CarrouselDetail";
+import { OwnerCard } from "../../components/cards/OwnerCard";
 
 export function PropertyDetails() {
   const { id } = useParams();
@@ -204,7 +205,7 @@ export function PropertyDetails() {
           </div>
         </dl>
       </div>
+      <OwnerCard User={User}/>
     </>
   );
 }
- 
