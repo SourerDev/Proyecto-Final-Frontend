@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { actionsUser } from "../../redux2.0/reducers";
-import { isValidUser } from "../../utils/isValidUser";
+import { isValidUser } from "../../utils";
 import { useNavigate } from "react-router-dom";
 import { actualizar } from "../../sweetAlerts/sweetAlerts";
 import swal from "sweetalert2";
