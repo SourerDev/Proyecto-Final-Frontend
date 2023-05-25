@@ -5,8 +5,9 @@ import { actionsPublications } from "../../redux2.0/reducers";
 import { ApiPropYou } from "../../services";
 import { GoBackButton } from "../../components/form/buttons/GoBack";
 import CarrouselDetail from "../../components/carousel/CarrouselDetail";
+import { OwnerCard } from "../../components/cards/OwnerCard";
 
-export function DetailProperty() {
+export function PropertyDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const publication = useSelector(
@@ -204,7 +205,7 @@ export function DetailProperty() {
           </div>
         </dl>
       </div>
+      <OwnerCard User={User}/>
     </>
   );
 }
- 

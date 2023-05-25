@@ -30,7 +30,7 @@ import Footer from "./components/footer/Footer.jsx";
 import { actionsPublications } from "./redux2.0/reducers";
 
 import { ApiPropYou } from "./services";
-import { DetailProperty } from "./pages/property/DetailProperty.jsx";
+import { PropertyDetails } from "./pages/property/PropertyDetails.jsx";
 import { ScrollToTop } from "./components/ScrollToTop.jsx";
 
 function App() {
@@ -60,7 +60,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/about-us" element={<Nosotros />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/properties/:id" element={<DetailProperty />} />
+          <Route path="/properties/:id" element={<PropertyDetails />} />
           {/* <Route path="/newRoute" element={<><Nav/><DashboardUsers/></>}/>
           <Route path="/createProperty" element={<><Nav/><Form/><Footer/></>}/>
           <Route path="/bePremium" element={<><Nav/><BePremium/></>} />
