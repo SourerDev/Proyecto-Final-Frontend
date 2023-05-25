@@ -4,10 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ApiPropYou, addAuthorizationWithToken } from "../../services";
 import { actionsUser } from "../../redux2.0/reducers";
-import { saveInStorage } from "../../utils";
-import { isValidSingUp } from "../../utils/isValidSingUp";
+import { saveInStorage, isValidSingUp } from "../../utils";
 import { Input } from "../../components/form/inputs/Input";
 import swal from "sweetalert";
+import { PasswordInput } from "../../components/form/inputs/PasswordInput";
 
 export function SignUp() {
   const navigate = useNavigate();
@@ -121,10 +121,8 @@ export function SignUp() {
                 </div>
 
                 <div className="mb-6">
-                  <Input
+                  <PasswordInput
                     name="password"
-                    type="password"
-                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     placeholder="password"
                     onChange={(e) => handleChange(e)}
                   />
@@ -133,10 +131,8 @@ export function SignUp() {
                   )}
                 </div>
                 <div className="mb-6">
-                  <Input
+                  <PasswordInput
                     name="password2"
-                    type="password"
-                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     placeholder="repeat the password"
                     onChange={(e) => handleChange(e)}
                   />

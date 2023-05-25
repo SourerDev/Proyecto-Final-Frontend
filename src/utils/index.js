@@ -1,1 +1,2 @@
-export * from "./saveInStorage"
+export * from "./saveInStorage";
+export * from "./isValidForms";
