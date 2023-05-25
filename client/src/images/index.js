@@ -1,1 +1,0 @@
-export * as icons from './icons/iconSvg.js'
