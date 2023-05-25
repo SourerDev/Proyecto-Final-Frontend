@@ -1,18 +1,21 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const publication = createSlice({
-    name: "publication",
-    initialState:{
-        publications:[],
-        leakedPublications: [],
-        detailPublication:{}
+  name: "publication",
+  initialState: {
+    publications: [],
+    leakedPublications: [],
+    detailPublication: {},
+  },
+  reducers: {
+    setPublications: (state, action) => {
+      state.publications = action.payload;
     },
-    reducers:{
-        setPublications: (state, action) =>{
-            state.publications = action.payload
-        }
-    }
-})
+    setDetailPublication: (state, action) => {
+      state.detailPublication = action.payload;
+    },
+  },
+});
 
-export const publicationRs = publication.reducer
-export const {setPublications} = publication.actions 
+export const publicationRs = publication.reducer;
+export const { setPublications, setDetailPublication } = publication.actions;
