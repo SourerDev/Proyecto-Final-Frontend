@@ -1,6 +1,4 @@
-import React from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import {
   contactOwner,
   getIdProperties,
@@ -8,8 +6,8 @@ import {
   resetDetail,
   loadUserInfo,
 } from "../../redux/actions/index";
+
 import { useEffect, useState, useRef } from "react";
-import { findNameCity } from "../../utils/autocompleteUtils";
 import Question from "../../components/question/Question";
 import CarrouselDetail from "../../components/carousel/CarrouselDetail";
 import { saveInStorage, getOfStorage } from "../../utils/saveIdInLocalStorage";
@@ -19,14 +17,17 @@ import {
   successContact,
   error,
 } from "../../sweetAlerts/sweetAlerts";
-import callsApi from "../../services";
 
-export default function Detail() {
+import { ApiPropYou } from "../../services";
+import { actionsPublications } from "../../redux2.0/reducers";
+
+export function DetailProperty() {
   const refQuestion = useRef();
   let { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const { detailPublication } = useSelector((state) => state.publication);
   const payload = useSelector((state) => state.detail);
   const city = useSelector((state) => state.citiesA);
   const user = useSelector((state) => state.user);
@@ -38,22 +39,27 @@ export default function Detail() {
   const [isOwner, setIsOwner] = useState(false);
 
   useEffect(() => {
-    dispatch(getIdProperties(id));
+    ApiPropYou.getPublicationById({ idPublication: id })
+      .then((response) => {
+        const { publication } = response.data;
+        actionsPublications.setDetailPublication(publication);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+    /* dispatch(getIdProperties(id));
     let save = getOfStorage("detail");
     if (save?.id?.length && save?.id === id) {
       setComment(save?.question);
       saveInStorage("detail", null, true);
-    }
+    } */
     return () => {
-      dispatch(resetDetail());
+      dispatch(actionsPublications.setDetailPublication({}));
     };
   }, [id]);
 
   useEffect(() => {
-    console.log(payload.id_User);
-    console.log(user);
-    console.log(user.id_User);
-    if (user.id_User && payload.id_User === user?.id_User) setIsOwner(true);
+    //if (user.id_User && payload.id_User === user?.id_User) setIsOwner(true);
   }, [payload, user]);
 
   function commentSumbit(e) {
@@ -79,11 +85,6 @@ export default function Detail() {
   }
   console.log(data);
 
-  let images1 = [
-    "https://static.tokkobroker.com/pictures/22195378878590399459749233039638765388563259893558223458366824765496290235011.jpg",
-    "https://static.tokkobroker.com/pictures/62097336669621611912439568172754377674026387283592863525525020166865836476845.jpg",
-    "https://static.tokkobroker.com/pictures/30641452628166825515595170899423142700348859149718156386875136195094220568629.jpg",
-  ];
   return (
     <div className="bg-blue-50 px-4">
       <Link to="/home">
@@ -375,12 +376,12 @@ export default function Detail() {
                               confirmButtonText: "Agregar",
                               showLoaderOnConfirm: true,
                               reverseButtons: true,
-                              preConfirm: (number = 12) => {
+                              /* preConfirm: (number = 12) => {
                                 if (number.toString().length === 10) {
-                                  callsApi
+                                   callsApi
                                     .updatedUser(user?.id_User, {
                                       cellphone: number,
-                                    })
+                                    }) 
                                     .then((res) => {
                                       dispatch(
                                         loadUserInfo({
@@ -408,7 +409,7 @@ export default function Detail() {
                                   });
                                   throw new Error("");
                                 }
-                              },
+                              }, */
                             });
                           }
                         });
