@@ -19,14 +19,13 @@ import { noProperties } from "../sweetAlerts/sweetAlerts.js";
 export function Home() {
   // const { properties, citiesA, filteredProperties, user} = useSelector(state => state);
   // const {favorites}  = useSelector(state => state.user)
-  const { publications, leakedPublications, page} = useSelector(
-    (state) => state.publication
-  );
-  const { signIn } = useSelector(state => state.user)
   const dispatch = useDispatch();
+  const { publications, leakedPublications, page} = useSelector((state) => state.publication);
+  const { signIn } = useSelector(state => state.user)
 
-  const _publications = arrayPaginator(publications, 4, page);
-
+  const CARDS_PER_PAGE = 4;
+  const { newArr, nButtons } = arrayPaginator(publications, CARDS_PER_PAGE, page);
+  const _publications = newArr;
 
 
 
@@ -102,8 +101,8 @@ export function Home() {
 
       {/* {typeof (filteredProperties) === "string" &&(swal.fire(noProperties()).then(res => console.log()))} */}
       <div className="flex sm:flex-row flex-wrap justify-center lg:shadow-2xl">
-        <Pagination 
-          size={publications.length}
+        <Pagination
+          nButtons={nButtons}
           currentPage={page}
         />
         {_publications?.length &&
