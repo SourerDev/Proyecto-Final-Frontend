@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { loadUserInfo, postSignUp } from "../../redux/actions/index";
-import callsApi, { addAuthorizationWithToken } from "../../services";
+import { addAuthorizationWithToken } from "../../services";
 import { actionsUser } from "../../redux2.0/reducers";
 import { ApiPropYou } from "../../services";
 import { authentication } from "../../firabase/Firabase.Config.jsx";
@@ -17,6 +16,7 @@ import { saveInStorage, getOfStorage } from "../../utils";
 //components
 import { Input } from "../../components/form/inputs/Input";
 import { PasswordInput } from "../../components/form/inputs/PasswordInput";
+import { Button } from "../../components/form/buttons/Button";
 
 export function SignIn() {
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ export function SignIn() {
     }
   };
 
-  const handleClickGoogle = async () => {
+  /* const handleClickGoogle = async () => {
     const provider = new GoogleAuthProvider();
     provider.addScope("email");
     const { user } = await signInWithPopup(authentication, provider);
@@ -76,14 +76,13 @@ export function SignIn() {
       setResponse({ state: true, msg: "" });
       setNavigate();
     }
-
-    /* 
+ 
     localStorage.setItem(
         "accessToken",
         JSON.stringify(result.user.accessToken)
     );
-    */
-  };
+    
+  }; */
 
   async function handleSubmit(email, password) {
     if (!email || !password) return;
@@ -98,8 +97,13 @@ export function SignIn() {
       saveInStorage("token", token);
       addAuthorizationWithToken(token);
       navigate("/home");
-    } catch (error) {
-      setResponse({ state: false, msg: error.message });
+    } catch ({ response, message }) {
+      if (response)
+        setResponse({
+          state: false,
+          msg: `${response.status} - ${response.data.Error}`,
+        });
+      else setResponse({ state: false, msg: message });
     }
   }
 
@@ -123,10 +127,10 @@ export function SignIn() {
             >
               <div className="flex flex-row items-center justify-center lg:justify-start">
                 <p className="text-lg mb-0 mr-4">Iniciar sesión con :</p>
-                <div onClick={handleClickGoogle}>
-                  <button class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+                <div title="Proximamente">
+                  <span className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
                     GOOGLE
-                  </button>
+                  </span>
                 </div>
               </div>
 
@@ -158,17 +162,17 @@ export function SignIn() {
                     {response.msg}
                   </p>
                 )}
-                <div className="flex flex-col sm:flex-row sm:space-x-4 sm:justify-center">
+                <div className="flex flex-col sm:flex-row sm:gap-x-4 sm:justify-center my-2 p-2">
                   <input
                     type="submit"
-                    className="mt-2 sm:my-2 inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                    className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                     value={"Iniciar Sesión"}
                   />
 
                   <Link to="/sign-up">
-                    <button className="w-full my-2 inline-block px-7 py-3 bg-red-400 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out disabled:bg-red-400 disabled:cursor-not-allowed">
+                    <span className="w-full inline-block px-7 py-3 bg-red-400 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out disabled:bg-red-400 disabled:cursor-not-allowed">
                       Registrarme
-                    </button>
+                    </span>
                   </Link>
                 </div>
               </div>
