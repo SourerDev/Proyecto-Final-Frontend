@@ -17,53 +17,24 @@ import { noProperties } from "../sweetAlerts/sweetAlerts.js";
 //import state from 'sweetalert/typings/modules/state.js';
 
 export function Home() {
-  // const { properties, citiesA, filteredProperties, user} = useSelector(state => state);
   // const {favorites}  = useSelector(state => state.user)
   const dispatch = useDispatch();
-  const { publications, leakedPublications, page} = useSelector((state) => state.publication);
-  const { signIn } = useSelector(state => state.user)
+  const { publications, page } = useSelector((state) => state.publication);
+  const { signIn } = useSelector((state) => state.user);
 
-  const CARDS_PER_PAGE = 4;
-  const { newArr, nButtons } = arrayPaginator(publications, CARDS_PER_PAGE, page);
+  const CARDS_PER_PAGE = 2;
+  const { newArr, nButtons } = arrayPaginator(
+    publications,
+    CARDS_PER_PAGE,
+    page
+  );
   const _publications = newArr;
 
-
-
-
-
-
-
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const [propertiesPage, setPropertiesPage] = useState(6);
   const [modalOn, setModalOn] = useState(false);
-
-  const pagination = (pageNumbers) => {
-    setCurrentPage(pageNumbers);
-  };
 
   const clicked = () => {
     setModalOn(true);
   };
-
-
-  const lastIndex = currentPage * propertiesPage;
-  const firstIndex = lastIndex - propertiesPage;
-
-
-
-  //const currentProperties = newProperties?.slice(firstIndex, lastIndex);
-
-  /* useEffect(() => {
-    console.log(publications)
-    const _publications = arrayPaginator(publications, 4, 1);
-    console.log(_publications)
-  }, [publications]) */
-
-  /* useEffect(() => {
-        console.log(filteredProperties)
-        dispatch(getallProperties());
-    }, [favorites]) */
 
   /* typeof leakedPublications === "string" &&
     swal.fire(noProperties()).then((res) => {
@@ -74,22 +45,10 @@ export function Home() {
   return (
     <div>
       {/* <div className="bg-gray-900 m-2 rounded overflow-hidden">
-                 <LandingSearch clicked={clicked}/>
-        </div> */}
+        <LandingSearch clicked={clicked} />
+      </div> */}
 
       {modalOn && <ModalAF setModalOn={setModalOn} />}
-
-      {/* (<div class="flex justify-center h-10 ">
-            <ul className= "">                  
-                <Paginado
-                propertiesPage={propertiesPage}
-                properties={newProperties?.length}
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-                paginado={pagination}
-                />  </ul>
-
-        </div>) */}
       <br />
       {/* <div className='flex lg:flex-row flex-col '>
 
@@ -101,33 +60,30 @@ export function Home() {
 
       {/* {typeof (filteredProperties) === "string" &&(swal.fire(noProperties()).then(res => console.log()))} */}
       <div className="flex sm:flex-row flex-wrap justify-center lg:shadow-2xl">
-        <Pagination
-          nButtons={nButtons}
-          currentPage={page}
-        />
+        <Pagination nButtons={nButtons} currentPage={page} />
         {_publications?.length &&
           _publications.map((publication, i) => {
-            
-            const { idPublication, modality, price, id} = publication;
+            const { idPublication, modality, price, id } = publication;
             const mainData = {
               idPublication,
               modality,
               price,
             };
-            const { address, idCity, photos, bedrooms, bathrooms, type } = publication.Property;
+            const { address, idCity, photos, bedrooms, bathrooms, type } =
+              publication.Property;
             const details = {
-                address,
-                city: idCity, /* Temporal hasta refactor de autocomplete & API cities */
-                photo: photos[0],
-                bedrooms,
-                bathrooms,
-                type
+              address,
+              city: idCity /* Temporal hasta refactor de autocomplete & API cities */,
+              photo: photos[0],
+              bedrooms,
+              bathrooms,
+              type,
             };
 
             const user = {
-                ...publication.User,
-                avatar: publication.User.photo,
-            }
+              ...publication.User,
+              avatar: publication.User.photo,
+            };
             return (
               <div key={i} className=" my-2 px-4 lg:px-9 ">
                 <PropertyCard

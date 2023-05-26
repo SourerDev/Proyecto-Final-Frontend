@@ -1,4 +1,3 @@
-
 export function arrayPaginator (arr, size, page) {
   const start = page * size;
   const end = start + size;
@@ -9,4 +8,3 @@ export function arrayPaginator (arr, size, page) {
     nButtons: (arr.length / size)
   }
 }
-
