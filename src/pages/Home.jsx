@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Paginado from "../components/paginado/Paginado.jsx";
+import { Pagination } from "../components/pagination/Pagination.jsx";
 import { PropertyCard } from "../components/cards/PropertyCard.jsx";
+import { arrayPaginator } from "../utils/arrayPaginator.js";
 import {
   getallProperties,
   filterProperties,
@@ -18,11 +19,21 @@ import { noProperties } from "../sweetAlerts/sweetAlerts.js";
 export function Home() {
   // const { properties, citiesA, filteredProperties, user} = useSelector(state => state);
   // const {favorites}  = useSelector(state => state.user)
-  const { publications, leakedPublications } = useSelector(
+  const { publications, leakedPublications, page} = useSelector(
     (state) => state.publication
   );
-  const {signIn} = useSelector(state => state.user)
+  const { signIn } = useSelector(state => state.user)
   const dispatch = useDispatch();
+
+  const _publications = arrayPaginator(publications, 4, page);
+
+
+
+
+
+
+
+
 
   const [currentPage, setCurrentPage] = useState(1);
   const [propertiesPage, setPropertiesPage] = useState(6);
@@ -39,7 +50,16 @@ export function Home() {
 
   const lastIndex = currentPage * propertiesPage;
   const firstIndex = lastIndex - propertiesPage;
+
+
+
   //const currentProperties = newProperties?.slice(firstIndex, lastIndex);
+
+  /* useEffect(() => {
+    console.log(publications)
+    const _publications = arrayPaginator(publications, 4, 1);
+    console.log(_publications)
+  }, [publications]) */
 
   /* useEffect(() => {
         console.log(filteredProperties)
@@ -82,9 +102,13 @@ export function Home() {
 
       {/* {typeof (filteredProperties) === "string" &&(swal.fire(noProperties()).then(res => console.log()))} */}
       <div className="flex sm:flex-row flex-wrap justify-center lg:shadow-2xl">
-        {publications?.length &&
-          publications.map((publication, i) => {
-            //
+        <Pagination 
+          size={publications.length}
+          currentPage={page}
+        />
+        {_publications?.length &&
+          _publications.map((publication, i) => {
+            
             const { idPublication, modality, price, id} = publication;
             const mainData = {
               idPublication,

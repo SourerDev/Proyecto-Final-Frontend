@@ -1,16 +1,12 @@
 import React from "react";
+import { setPublicationPage } from "../../redux2.0/reducers/Publication";
 
-export default function Paginado({propertiesPage, properties, setCurrentPage, currentPage, paginado,}){
-    const pageNumbers = []
+export function Pagination({size, currentPage}) {
+    
 
-    for(let i = 0; i < Math.ceil(properties/propertiesPage); i++){
-        pageNumbers.push(i + 1)
-    }
-    const porPagina = 6
-    let maximo = Math.round( properties/ porPagina)
     //////////////////////////// FUNCIONES DEL BUSCADOR ///////////////////////////////// 
     
-    const disablePrev = () => {
+   /*  const disablePrev = () => {
         if (currentPage === 1) return true
         else return false
     }
@@ -25,10 +21,13 @@ export default function Paginado({propertiesPage, properties, setCurrentPage, cu
     const prevPage = () => {
         if (currentPage === 1) return
         setCurrentPage(currentPage - 1)
-    }
+    } */
 
     return(
-        <nav aria-label="Page navigation example">
+        <div>
+            <h1>Te fuiste paginado</h1>
+        </div>
+        /* <nav aria-label="Page navigation example">
         <ul className="inline-flex items-center -space-x-px" > 
          <button onClick={prevPage} disabled={disablePrev()} >  <li>
          <a href="#" className="block py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
@@ -55,6 +54,6 @@ export default function Paginado({propertiesPage, properties, setCurrentPage, cu
     </li></button>
         </ul>
 
-    </nav>
+    </nav> */
     )
 }
