@@ -65,7 +65,7 @@ export function SignUp() {
                       icon: "success",
                     });
                     addAuthorizationWithToken(token);
-                    navigate(`/user/${user.idUser}`);
+                    navigate(`/home`);
                   } catch (e) {
                     console.log(e);
                   }
