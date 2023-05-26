@@ -20,6 +20,10 @@ export function SignUp() {
     password2: "",
     cellphone: "",
   });
+  const [userName, setUserName] = useState({
+    value: "",
+    error: "",
+  });
 
   const [errs, setErrs] = useState({});
   function handleChange(event) {
@@ -38,7 +42,10 @@ export function SignUp() {
   async function onSubmitSignUp(evt) {
     evt.preventDefault();
     try {
-      const response = await ApiPropYou.signUp(data);
+      const response = await ApiPropYou.signUp({
+        userName: userName.value,
+        ...data,
+      });
 
       const { user, token } = response.data;
       dispatch(actionsUser.setUser(user));
@@ -50,7 +57,7 @@ export function SignUp() {
         icon: "success",
       });
       addAuthorizationWithToken(token);
-      navigate(`/user/${user.idUser}`);
+      navigate(`/profile`);
     } catch ({ response, ...error }) {
       let text = "...";
       if (response?.data?.Error) text = response?.data?.Error;
@@ -84,41 +91,63 @@ export function SignUp() {
               <form onSubmit={onSubmitSignUp}>
                 <div className="mb-6">
                   <Input
+                    type="text"
+                    value={userName.value}
+                    placeholder="Nombre de usuario"
+                    autoComplete="off"
+                    onChange={({ target }) => {
+                      setUserName({
+                        value: target.value,
+                        error: /^[a-zA-Z0-9_]*$/.test(target.value)
+                          ? ""
+                          : "La cadena contiene caracteres no permitidos.",
+                      });
+                    }}
+                  />
+                  <ErrorMessage error={userName.error} />
+                </div>
+                <div className="mb-6 sm:flex sm:gap-x-3">
+                  <div className="">
+                    <Input
+                      name="fName"
+                      type="fName"
+                      className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                      placeholder="first name"
+                      autoComplete="off"
+                      onChange={(e) => handleChange(e)}
+                    />
+                    <ErrorMessage error={errs.fName} />
+                  </div>
+
+                  <div className="">
+                    <Input
+                      name="lName"
+                      type="text"
+                      className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                      placeholder="last name"
+                      autoComplete="off"
+                      onChange={(e) => handleChange(e)}
+                    />
+                    <ErrorMessage error={errs.lName} />
+                  </div>
+                </div>
+
+                <div className="mb-6">
+                  <Input
                     name="email"
                     type="email"
                     className=""
-                    placeholder="correo electronico"
+                    placeholder="Correo electronico"
+                    autoComplete="new-email"
                     onChange={(e) => handleChange(e)}
                   />
                   <ErrorMessage error={errs.email} />
                 </div>
-
-                <div className="mb-6">
-                  <Input
-                    name="fName"
-                    type="fName"
-                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    placeholder="first name"
-                    onChange={(e) => handleChange(e)}
-                  />
-                  <ErrorMessage error={errs.fName} />
-                </div>
-
-                <div className="mb-6">
-                  <Input
-                    name="lName"
-                    type="text"
-                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    placeholder="last name"
-                    onChange={(e) => handleChange(e)}
-                  />
-                  <ErrorMessage error={errs.lName} />
-                </div>
-
                 <div className="mb-6">
                   <PasswordInput
                     name="password"
                     placeholder="password"
+                    autoComplete="off"
                     onChange={(e) => handleChange(e)}
                   />
                   <ErrorMessage error={errs.password} />
@@ -127,6 +156,7 @@ export function SignUp() {
                   <PasswordInput
                     name="password2"
                     placeholder="repeat the password"
+                    autoComplete="off"
                     onChange={(e) => handleChange(e)}
                   />
                 </div>
@@ -137,6 +167,7 @@ export function SignUp() {
                     type="number"
                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     placeholder="cellphone"
+                    autoComplete="off"
                     onChange={(e) => handleChange(e)}
                   />
                   <ErrorMessage error={errs.cellphone} />
