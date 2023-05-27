@@ -57,6 +57,8 @@
     ]
   },
   "devDependencies": {
-    "@reduxjs/toolkit": "1.9.5"
+    "@reduxjs/toolkit": "1.9.5",
+    "prettier": "^2.8.8",
+    "prettier-plugin-tailwindcss": "^0.3.0"
   }
 }
