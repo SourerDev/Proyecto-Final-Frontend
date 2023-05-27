@@ -30,7 +30,7 @@ jobs:
       - name: Lint
         run: npm run eslint
 
-  build:
+  test:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -41,5 +41,5 @@ jobs:
           node-version: '18'
       - name: Install dependencies
         run: npm install --no-audit --no-fund --no-optional
-      - name: Build
-        run: npm run build
+      - name: Tests
+        run: npm test
