@@ -26,8 +26,8 @@ jobs:
         with:
           node-version: '14'
       - name: Install dependecies
-        run: npm ci
-      - name: Install dependecies
+        run: npm install --no-audit --no-fund --no-optional
+      - name: Lint
         run: npm run eslint
 
   build:
@@ -40,7 +40,7 @@ jobs:
         with:
           node-version: '14'
       - name: Install dependencies
-        run: npm ci
+        run: npm install --no-audit --no-fund --no-optional
       - name: Build
         run: npm run build
       - uses: actions/upload-artifact@v2
@@ -58,7 +58,7 @@ jobs:
         with:
           node-version: '14'
       - name: Install dependencies
-        run: npm ci
+        run: npm install --no-audit --no-fund --no-optional
       - uses: actions/download-artifact@v2
         with:
           name: dist
