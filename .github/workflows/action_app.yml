@@ -24,7 +24,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
-          node-version: '17'
+          node-version: '18'
       - name: Install dependecies
         run: npm install --no-audit --no-fund --no-optional
       - name: Lint
@@ -38,7 +38,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
-          node-version: '17'
+          node-version: '18'
       - name: Install dependencies
         run: npm install --no-audit --no-fund --no-optional
       - name: Build
