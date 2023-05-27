@@ -1,19 +1,17 @@
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 //components
-import { ModalNav } from "./ModalNav.jsx";
-import { MainAvatar } from "../avatars/MainAvatar.jsx";
+import { ModalNav } from './ModalNav.jsx'
+import { MainAvatar } from '../avatars/MainAvatar.jsx'
 
 export function Nav({ rutes = true, login = true }) {
-  const { signIn, session } = useSelector((state) => state.user);
-  const userType = session?.userType;
+  const { signIn, session } = useSelector((state) => state.user)
+  const userType = session?.userType
 
   return (
-    <div className="bg-white relative -mx-auto max-w-8xl px-2 mb-1">
-      <nav
-        className={`flex items-center justify-between border-b-2 border-gray-100 py-4 md:justify-start md:space-x-10`}
-      >
+    <div className="-mx-auto max-w-8xl relative mb-1 bg-white px-2">
+      <nav className="flex items-center justify-between border-b-2 border-gray-100 py-4 md:justify-start md:space-x-10">
         <div className="flex justify-start lg:w-0 lg:flex-1">
           <Link to="/" className="flex items-center">
             <span className="sr-only">Properties & You</span>
@@ -27,7 +25,7 @@ export function Nav({ rutes = true, login = true }) {
         </div>
 
         {rutes && (
-          <ul as="nav" className="hidden space-x-10 md:flex">
+          <ul className="hidden space-x-10 md:flex">
             <li>
               <Link
                 to="/home"
@@ -49,13 +47,13 @@ export function Nav({ rutes = true, login = true }) {
             <li>
               <Link
                 to="/home"
-                className="W-40 text-base text-center font-medium text-gray-500 hover:text-gray-900"
+                className="W-40 text-center text-base font-medium text-gray-500 hover:text-gray-900"
               >
-                <span className="p-0 m-0">PROPIEDADES</span>
+                <span className="m-0 p-0">PROPIEDADES</span>
               </Link>
             </li>
 
-            {userType === "logged" && (
+            {userType === 'logged' && (
               <li>
                 <Link
                   to="/user/be-premium"
@@ -74,12 +72,12 @@ export function Nav({ rutes = true, login = true }) {
               </Link>
             </li>
 
-            {(userType === "admin" || userType === "premium") && (
+            {(userType === 'admin' || userType === 'premium') && (
               <Link
                 to="/dashboard"
-                className="W-40 text-base text-center font-medium text-gray-500 hover:text-gray-900"
+                className="W-40 text-center text-base font-medium text-gray-500 hover:text-gray-900"
               >
-                <span className="p-0 m-0">DASHBOARD</span>
+                <span className="m-0 p-0">DASHBOARD</span>
               </Link>
             )}
           </ul>
@@ -104,5 +102,5 @@ export function Nav({ rutes = true, login = true }) {
         </div>
       </nav>
     </div>
-  );
+  )
 }

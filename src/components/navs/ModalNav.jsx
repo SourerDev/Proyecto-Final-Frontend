@@ -1,15 +1,15 @@
-import { Fragment } from "react";
-import { Popover, Transition } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Link } from "react-router-dom";
-import { Icon } from "../../assets";
+import { Fragment } from 'react'
+import { Popover, Transition } from '@headlessui/react'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Link } from 'react-router-dom'
+import { Icon } from '../../assets'
 
 export function ModalNav({ signIn, session }) {
-  const userType = session.userType;
+  const userType = session.userType
 
   return (
     <Popover className="relative bg-white">
-      <Popover.Button className=" outline-0 inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-0 focus:ring-2 focus:ring-inset">
+      <Popover.Button className=" inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 outline-0 focus:outline-0 focus:ring-2 focus:ring-inset hover:bg-gray-100 hover:text-gray-500">
         <span className="sr-only">Menu</span>
         <Bars3Icon className="h-6 w-6" aria-hidden="true" />
       </Popover.Button>
@@ -24,7 +24,7 @@ export function ModalNav({ signIn, session }) {
       >
         <Popover.Panel
           focus
-          className="fixed inset-x-0 top-0 origin-top-right transform p-2 transition md:hidden z-50"
+          className="fixed inset-x-0 top-0 z-50 origin-top-right transform p-2 transition md:hidden"
         >
           <div className="min-h-[500px] divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
             <div className="px-5 pt-5 pb-6">
@@ -40,7 +40,7 @@ export function ModalNav({ signIn, session }) {
                   </span>
                 </div>
                 <div className="-mr-2">
-                  <Popover.Button className="outline-0 inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-0 focus:ring-2 focus:ring-inset">
+                  <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 outline-0 focus:outline-0 focus:ring-2 focus:ring-inset hover:bg-gray-100 hover:text-gray-500">
                     <span className="sr-only">Close menu</span>
                     <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                   </Popover.Button>
@@ -49,40 +49,40 @@ export function ModalNav({ signIn, session }) {
               <div className="mt-6">
                 <nav className="flex flex-col">
                   {signIn && (
-                    <Link to={"/user"} className="">
-                      <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50 text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
+                    <Link to={'/user'} className="">
+                      <Popover.Button className="flex w-full items-center rounded-md border border-white p-3 text-gray-600 hover:border hover:border-gray-200  hover:bg-gray-50 hover:text-gray-900">
                         is Logged
                       </Popover.Button>
                     </Link>
                   )}
 
-                  <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
+                  <Popover.Button className="flex w-full items-center rounded-md border border-white  p-3 text-gray-600 hover:border hover:border-gray-200  hover:bg-gray-50 hover:text-gray-900">
                     <span>VENTA</span>
                   </Popover.Button>
-                  <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
+                  <Popover.Button className="flex w-full items-center rounded-md border border-white  p-3 text-gray-600 hover:border hover:border-gray-200  hover:bg-gray-50 hover:text-gray-900">
                     <span>ALQUILER</span>
                   </Popover.Button>
                   <Link to="/home" className="">
-                    <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
+                    <Popover.Button className="flex w-full items-center rounded-md border border-white  p-3 text-gray-600 hover:border hover:border-gray-200  hover:bg-gray-50 hover:text-gray-900">
                       <span>TODAS LAS PROPIEDADES</span>
                     </Popover.Button>
                   </Link>
-                  {userType === "logged" && (
+                  {userType === 'logged' && (
                     <>
                       <Link to="/user/be-premium" className="">
-                        <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
+                        <Popover.Button className="flex w-full items-center rounded-md border border-white  p-3 text-gray-600 hover:border hover:border-gray-200  hover:bg-gray-50 hover:text-gray-900">
                           <Icon.Lightning
-                            width={"24"}
+                            width={'24'}
                             fill="#8d6b06ce"
-                            hover={"#8d6b06ce"}
+                            hover={'#8d6b06ce'}
                           />
                           <span className="pl-3">Acceso Premium</span>
                         </Popover.Button>
                       </Link>
-                      <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
+                      <Popover.Button className="flex w-full items-center rounded-md border border-white  p-3 text-gray-600 hover:border hover:border-gray-200  hover:bg-gray-50 hover:text-gray-900">
                         <Icon.HeartBorder
                           width="25"
-                          hover={"#ea2d98"}
+                          hover={'#ea2d98'}
                           fill="#9c9c9c"
                         />
 
@@ -90,13 +90,13 @@ export function ModalNav({ signIn, session }) {
                       </Popover.Button>
                     </>
                   )}
-                  {(userType === "admin" || userType === "premium") && (
+                  {(userType === 'admin' || userType === 'premium') && (
                     <Link to="/dashboard" className="">
-                      <Popover.Button className="flex w-full items-center rounded-md p-3 hover:bg-gray-50  text-gray-600 hover:text-gray-900 border border-white  hover:border hover:border-gray-200">
+                      <Popover.Button className="flex w-full items-center rounded-md border border-white  p-3 text-gray-600 hover:border hover:border-gray-200  hover:bg-gray-50 hover:text-gray-900">
                         <Icon.Lightning
-                          width={"24"}
+                          width={'24'}
                           fill="#8d6b06ce"
-                          hover={"#8d6b06ce"}
+                          hover={'#8d6b06ce'}
                         />
                         <span className="pl-3">Dashboard</span>
                       </Popover.Button>
@@ -109,7 +109,7 @@ export function ModalNav({ signIn, session }) {
               <div>
                 {signIn ? (
                   <>
-                    <Popover.Button className="w-full text-center font-semibold bg-red-600/80 rounded p-2 text-red-900 hover:bg-red-700/75 hover:text-white">
+                    <Popover.Button className="w-full rounded bg-red-600/80 p-2 text-center font-semibold text-red-900 hover:bg-red-700/75 hover:text-white">
                       <span className="">Cerrar Sesión</span>
                     </Popover.Button>
                   </>
@@ -121,7 +121,7 @@ export function ModalNav({ signIn, session }) {
                       </Popover.Button>
                     </Link>
                     <p className="mt-6 text-center text-base font-medium text-gray-500">
-                      Tienes cuenta?{" "}
+                      Tienes cuenta?{' '}
                       <Link to="/sign-in">
                         <Popover.Button className="text-indigo-600 hover:text-indigo-500">
                           Iniciar Sesión
@@ -136,5 +136,5 @@ export function ModalNav({ signIn, session }) {
         </Popover.Panel>
       </Transition>
     </Popover>
-  );
+  )
 }

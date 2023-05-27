@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom'
 
 export default function Footer() {
   return (
-    <div className="flex sm:flex-row flex-col justify-around items-center  shadow p-4">
-      <div className="flex space-x-4 items-center">
+    <div className="flex flex-col items-center justify-around p-4  shadow sm:flex-row">
+      <div className="flex items-center space-x-4">
         <img
           src="https://images.vexels.com/media/users/3/142719/isolated/preview/f07a4b2d673e9935e58e6ff8262d4a1d-icono-de-casas-de-triangulo.png"
           width={50}
@@ -11,18 +11,18 @@ export default function Footer() {
         />
         <h1 className="text-2xl">Propierties & You</h1>
       </div>
-      <div className="flex sm:flex-col md:flex-row flex-row  space-x-4">
+      <div className="flex flex-row space-x-4 sm:flex-col  md:flex-row">
         <p>Politica de Privacidad</p>
         <p>Politica de cookies</p>
         <Link to="/nosotros">Nosotros</Link>
       </div>
-      <div className="flex flex-row jutify-center items-center ">
+      <div className="jutify-center flex flex-row items-center ">
         <a href="">
           <svg
             className="text-zinc-500 hover:text-slate-800"
             stroke="currentColor"
             fill="currentColor"
-            stroke-width="0"
+            strokeWidth="0"
             version="1.1"
             viewBox="0 0 32 32"
             focusable="false"
@@ -38,7 +38,7 @@ export default function Footer() {
             className="text-zinc-500 hover:text-blue-600/100"
             stroke="currentColor"
             fill="currentColor"
-            stroke-width="0"
+            strokeWidth="0"
             viewBox="0 0 512 512"
             focusable="false"
             height="2.5em"
@@ -53,7 +53,7 @@ export default function Footer() {
             className="text-zinc-500 hover:text-blue-600/100"
             stroke="currentColor"
             fill="currentColor"
-            stroke-width="0"
+            strokeWidth="0"
             viewBox="0 0 512 512"
             focusable="false"
             height="2.5em"
@@ -68,7 +68,7 @@ export default function Footer() {
             className="text-zinc-500 hover:text-slate-800"
             stroke="currentColor"
             fill="currentColor"
-            stroke-width="0"
+            strokeWidth="0"
             viewBox="0 0 24 24"
             focusable="false"
             height="2.5em"
@@ -84,7 +84,7 @@ export default function Footer() {
             className="text-zinc-500 hover:text-red-600"
             stroke="currentColor"
             fill="currentColor"
-            stroke-width="0"
+            strokeWidth="0"
             viewBox="0 0 576 512"
             focusable="false"
             height="2.5em"
@@ -96,5 +96,5 @@ export default function Footer() {
         </a>
       </div>
     </div>
-  );
+  )
 }

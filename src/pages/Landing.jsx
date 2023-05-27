@@ -1,13 +1,13 @@
 //import HeaderLanding from "../../components/header/HeaderLanding.jsx";
-import CardsLanding from "../components/infoLanding/InfoLanding";
+import CardsLanding from '../components/infoLanding/InfoLanding'
 //import Carousel from "../../components/carousel/Carousel";
-import ServiciosExtras from "../components/ServiciosExtras/serviciosExtras.jsx";
+import ServiciosExtras from '../components/ServiciosExtras/serviciosExtras.jsx'
 
-import DataLanding from "../components/dataLanding/DataLanding.jsx";
+import DataLanding from '../components/dataLanding/DataLanding.jsx'
 
 export default function Landing() {
   return (
-    <div className="px-1 border">
+    <div className="border px-1">
       {/* <HeaderLanding /> */}
       <div className="px-10">
         <DataLanding />
@@ -30,5 +30,5 @@ export default function Landing() {
       </div> */}
       <ServiciosExtras />
     </div>
-  );
+  )
 }

@@ -1,3 +1,5 @@
+[![action](https://github.com/SourerDev/Proyecto-Final-Frontend/actions/workflows/action.yml/badge.svg)](https://github.com/SourerDev/Proyecto-Final-Frontend/actions/workflows/action.yml)
+
 # Properties & You
 
 Descripcion ...

@@ -1,97 +1,97 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { Icon } from "../../assets";
-import { removeFavorite, addFavorites } from "../../redux/actions/index";
-import callsApi from "../../services";
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { Icon } from '../../assets'
+import { removeFavorite, addFavorites } from '../../redux/actions/index'
+import callsApi from '../../services'
 
 export function PropertyCard({ mainData, details, user, favorite, signIn }) {
-  const { idPublication, modality, price } = mainData;
-  const { address, city, photo, bedrooms, bathrooms, type } = details;
+  const { idPublication, modality, price } = mainData
+  const { address, city, photo, bedrooms, bathrooms, type } = details
   const { avatar, email, active, lName, fName, rating, idUser, cellphone } =
-    user;
-  const dispatch = useDispatch();
+    user
+  const dispatch = useDispatch()
 
   const [state, setState] = useState({
     favorite: favorite,
     hover: false,
-  });
+  })
 
   const onHover = (evt, value) => {
-    evt.preventDefault();
+    evt.preventDefault()
     setState((previus) => {
       return {
         ...previus,
         hover: value,
-      };
-    });
-  };
+      }
+    })
+  }
   const addFavorite = (evt) => {
-    evt.preventDefault();
+    evt.preventDefault()
     setState((previus) => {
       return {
         ...previus,
         favorite: previus.favorite ? false : true,
-      };
-    });
-  };
+      }
+    })
+  }
   function classNames(...classes) {
-    return classes.filter(Boolean).join(" ");
+    return classes.filter(Boolean).join(' ')
   }
 
   useEffect(() => {
-    if ((favorite && state.favorite) || (!favorite && !state.favorite)) return;
+    if ((favorite && state.favorite) || (!favorite && !state.favorite)) return
     if (favorite && !state.favorite) {
-      dispatch(removeFavorite(idPublication));
+      dispatch(removeFavorite(idPublication))
       callsApi
         .removeFavorite(idPublication)
         .then((res) => {})
-        .catch((err) => {});
+        .catch((err) => {})
     } else if (!favorite && state.favorite) {
-      dispatch(addFavorites([idPublication]));
+      dispatch(addFavorites([idPublication]))
       callsApi
         .postFavorite({ idUser: idUser, id_Property: idPublication })
         .then((res) => {})
-        .catch((err) => {});
+        .catch((err) => {})
     }
-  }, [state]);
+  }, [state])
 
   return (
-    <div className="flex flex-col justify-center items-center min-w-[340px] max-w-[341px] bg-white shadow p-2">
-      <div className="relative z-10 overflow-hidden w-[95%] h-60 rounded-lg">
-        <img className="w-full h-full" src={photo} alt={idPublication} />
+    <div className="flex min-w-[340px] max-w-[341px] flex-col items-center justify-center bg-white p-2 shadow">
+      <div className="relative z-10 h-60 w-[95%] overflow-hidden rounded-lg">
+        <img className="h-full w-full" src={photo} alt={idPublication} />
         {modality && (
-          <div className="flex items-center justify-center absolute z-20 bottom-1 left-1 bg-green-300/75 text-green-800 font-medium px-1 rounded-lg">
+          <div className="absolute bottom-1 left-1 z-20 flex items-center justify-center rounded-lg bg-green-300/75 px-1 font-medium text-green-800">
             <h3>{modality}</h3>
           </div>
         )}
         {/* No estoy seguro que constante hay que poner en el condicional */}
         {signIn && (
           <button
-            className="absolute  bottom-1 right-1 bg-white rounded-full p-1 flex justify-center items-center hover:bg-zinc-100"
+            className="absolute  bottom-1 right-1 flex items-center justify-center rounded-full bg-white p-1 hover:bg-zinc-100"
             onClick={addFavorite}
           >
             {state.favorite ? (
-              <Icon.Heart fill={"#eb33c6"} width="20" hover={"#a20582"} />
+              <Icon.Heart fill={'#eb33c6'} width="20" hover={'#a20582'} />
             ) : (
-              <Icon.HeartBorder fill={"#eb33c6"} width="20" hover={"#a20582"} />
+              <Icon.HeartBorder fill={'#eb33c6'} width="20" hover={'#a20582'} />
             )}
           </button>
         )}
       </div>
-      <div className="flex justify-between w-full px-2 h-20">
+      <div className="flex h-20 w-full justify-between px-2">
         <div className="flex flex-col justify-center p-2">
-          <h3 className="text-xl text-gray-900 dark:text-white font-semibold tracking-tight pt-2">
-            {city || "Sin localización"}
+          <h3 className="pt-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+            {city || 'Sin localización'}
           </h3>
-          <span className="text-sm -mt-1 pl-2">{address}</span>
-          <span className="text-2xl font-bold text-gray-900 dark:text-white pt-2">
+          <span className="-mt-1 pl-2 text-sm">{address}</span>
+          <span className="pt-2 text-2xl font-bold text-gray-900 dark:text-white">
             {`${price} US`}
           </span>
         </div>
-        <div className="flex justify-center items-center">
+        <div className="flex items-center justify-center">
           {/* Implementar el uso del componente Avatar.jsx */}
-          <div className="relative flex justify-center items-center bg-slate-300 w-14 h-14 rounded-full mt-2 mr-2">
+          <div className="relative mt-2 mr-2 flex h-14 w-14 items-center justify-center rounded-full bg-slate-300">
             {email ? (
               <>
                 <img
@@ -99,23 +99,23 @@ export function PropertyCard({ mainData, details, user, favorite, signIn }) {
                   src={avatar}
                   alt={idUser}
                   onMouseEnter={(evt) => {
-                    onHover(evt, true);
+                    onHover(evt, true)
                   }}
                   onMouseLeave={(evt) => {
-                    onHover(evt, false);
+                    onHover(evt, false)
                   }}
                 />
                 <div
                   className={classNames(
                     state.hover
-                      ? "absolute rounded-xl shadow-lg  z-40 p-2 bg-white mb-2 bottom-full transition-opacity duration-300 w-[200px]"
-                      : "hidden"
+                      ? 'absolute bottom-full z-40  mb-2 w-[200px] rounded-xl bg-white p-2 shadow-lg transition-opacity duration-300'
+                      : 'hidden'
                   )}
                 >
-                  <div class="p-2 z-50">
-                    <div class="flex flex-col z-50 items-center justify-between mb-2">
+                  <div className="z-50 p-2">
+                    <div className="z-50 mb-2 flex flex-col items-center justify-between">
                       <img
-                        className="w-14 h-14 rounded-full"
+                        className="h-14 w-14 rounded-full"
                         src={avatar}
                         alt=""
                       />
@@ -123,7 +123,7 @@ export function PropertyCard({ mainData, details, user, favorite, signIn }) {
                         <p className="text-base font-semibold leading-none text-gray-900 ">
                           {fName}
                         </p>
-                        <p class="mb-3 text-sm font-normal">
+                        <p className="mb-3 text-sm font-normal">
                           <a className="underline">{email}</a>
                         </p>
                       </div>
@@ -134,33 +134,33 @@ export function PropertyCard({ mainData, details, user, favorite, signIn }) {
             ) : (
               <Icon.User
                 className="w-full text-white"
-                hover={"#fff"}
-                fill={"#fff"}
+                hover={'#fff'}
+                fill={'#fff'}
               />
             )}
           </div>
         </div>
       </div>
-      <div className="flex justify-between w-full mt-2">
+      <div className="mt-2 flex w-full justify-between">
         <Link to={`/properties/${idPublication}`}>
-          <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 hover:shadow">
+          <button className="inline-flex items-center rounded-lg bg-blue-700 px-5 py-2 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300 hover:bg-blue-800 hover:shadow dark:bg-blue-600 dark:focus:ring-blue-800 dark:hover:bg-blue-700">
             Mas Detalle
             <svg
               aria-hidden="true"
-              className="ml-2 -mr-1 w-5 h-5"
+              className="ml-2 -mr-1 h-5 w-5"
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                clip-rule="evenodd"
+                clipRule="evenodd"
               ></path>
             </svg>
           </button>
         </Link>
       </div>
     </div>
-  );
+  )
 }

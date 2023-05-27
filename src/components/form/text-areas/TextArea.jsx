@@ -1,14 +1,14 @@
-import { useCallback, useLayoutEffect, useRef } from "react";
+import { useCallback, useLayoutEffect, useRef } from 'react'
 
 export function TextArea({ value, className, ...props }) {
-  const textAreaRef = useRef();
+  const textAreaRef = useRef()
   const inputRef = useCallback((textArea) => {
-    updateTextAreaSize(textArea);
-    textAreaRef.current = textArea;
-  });
+    updateTextAreaSize(textArea)
+    textAreaRef.current = textArea
+  })
   useLayoutEffect(() => {
-    updateTextAreaSize(textAreaRef.current);
-  }, [value]);
+    updateTextAreaSize(textAreaRef.current)
+  }, [value])
 
   return (
     <textarea
@@ -17,12 +17,12 @@ export function TextArea({ value, className, ...props }) {
       className={`flex-grow resize-none overflow-hidden p-4 text-lg outline-none ${className}`}
       {...props}
     ></textarea>
-  );
+  )
 }
 
 function updateTextAreaSize(textArea) {
-  if (textArea == null) return;
+  if (textArea === null) return
 
-  textArea.style.height = "0";
-  textArea.style.height = `${textArea.scrollHeight}px`;
+  textArea.style.height = '0'
+  textArea.style.height = `${textArea.scrollHeight}px`
 }
