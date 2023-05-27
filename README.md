@@ -1,4 +1,4 @@
-[![action](https://github.com/SourerDev/Proyecto-Final-Frontend/actions/workflows/action.yml/badge.svg)](https://github.com/SourerDev/Proyecto-Final-Frontend/actions/workflows/action.yml)
+[![Action Proyect](https://github.com/SourerDev/Proyecto-Final-Frontend/actions/workflows/action_app.yml/badge.svg)](https://github.com/SourerDev/Proyecto-Final-Frontend/actions/workflows/action_app.yml)
 
 # Properties & You
 
