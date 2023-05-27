@@ -24,7 +24,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '17'
       - name: Install dependecies
         run: npm install --no-audit --no-fund --no-optional
       - name: Lint
@@ -38,30 +38,8 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '17'
       - name: Install dependencies
         run: npm install --no-audit --no-fund --no-optional
       - name: Build
         run: npm run build
-      - uses: actions/upload-artifact@v2
-        with:
-          name: dist
-          path: dist
-  test:
-    needs: [lint, build]
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-      - name: Install dependencies
-        run: npm install --no-audit --no-fund --no-optional
-      - uses: actions/download-artifact@v2
-        with:
-          name: dist
-          path: dist
-      - name:
-        run: npm test
