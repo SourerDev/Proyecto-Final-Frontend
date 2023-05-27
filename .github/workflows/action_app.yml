@@ -2,9 +2,9 @@ name: Action Proyect
 
 on:
   push:
-    branches: [master, develop, adding-github-actions]
+    branches: [master, develop, refactor]
   pull_request:
-    branches: [master, develop]
+    branches: [master, develop, refactor]
     types: [opened, synchronize]
 
 jobs:
