@@ -1,77 +1,77 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { ApiPropYou, addAuthorizationWithToken } from "../../services";
-import { actionsUser } from "../../redux2.0/reducers";
-import { saveInStorage, isValidSingUp } from "../../utils";
-import { Input } from "../../components/form/inputs/Input";
-import swal from "sweetalert";
-import { PasswordInput } from "../../components/form/inputs/PasswordInput";
+import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { ApiPropYou, addAuthorizationWithToken } from '../../services'
+import { actionsUser } from '../../redux2.0/reducers'
+import { saveInStorage, isValidSingUp } from '../../utils'
+import { Input } from '../../components/form/inputs/Input'
+import swal from 'sweetalert'
+import { PasswordInput } from '../../components/form/inputs/PasswordInput'
 
 export function SignUp() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [data, setData] = useState({
-    fName: "",
-    lName: "",
-    email: "",
-    password: "",
-    password2: "",
-    cellphone: "",
-  });
+    fName: '',
+    lName: '',
+    email: '',
+    password: '',
+    password2: '',
+    cellphone: '',
+  })
   const [userName, setUserName] = useState({
-    value: "",
-    error: "",
-  });
+    value: '',
+    error: '',
+  })
 
-  const [errs, setErrs] = useState({});
+  const [errs, setErrs] = useState({})
   function handleChange(event) {
     setData({
       ...data,
       [event.target.name]: event.target.value,
-    });
+    })
     setErrs(
       isValidSingUp({
         ...data,
         [event.target.name]: event.target.value,
       })
-    );
+    )
   }
 
   async function onSubmitSignUp(evt) {
-    evt.preventDefault();
+    evt.preventDefault()
     try {
       const response = await ApiPropYou.signUp({
         userName: userName.value,
         ...data,
-      });
+      })
 
-      const { user, token } = response.data;
-      dispatch(actionsUser.setUser(user));
-      saveInStorage("token", token);
+      const { user, token } = response.data
+      dispatch(actionsUser.setUser(user))
+      saveInStorage('token', token)
 
       swal({
-        title: "Ecxelente",
-        text: "Usuario Creado!",
-        icon: "success",
-      });
-      addAuthorizationWithToken(token);
-      navigate(`/home`);
+        title: 'Ecxelente',
+        text: 'Usuario Creado!',
+        icon: 'success',
+      })
+      addAuthorizationWithToken(token)
+      navigate('/home')
     } catch ({ response, ...error }) {
-      let text = "...";
-      if (response?.data?.Error) text = response?.data?.Error;
+      let text = '...'
+      if (response?.data?.Error) text = response?.data?.Error
       else {
-        if (response?.data === "User already exist")
-          setErrs({ email: "Correo registrado previamente" });
-        text = response?.data;
+        if (response?.data === 'User already exist')
+          setErrs({ email: 'Correo registrado previamente' })
+        text = response?.data
       }
 
       swal({
-        title: "Error",
+        title: 'Error',
         text: `Ha sucedido un error \n ${text}`,
-        icon: "error",
-      });
+        icon: 'error',
+      })
     }
   }
 
@@ -99,9 +99,9 @@ export function SignUp() {
                       setUserName({
                         value: target.value,
                         error: /^[a-zA-Z0-9_]*$/.test(target.value)
-                          ? ""
-                          : "La cadena contiene caracteres no permitidos.",
-                      });
+                          ? ''
+                          : 'La cadena contiene caracteres no permitidos.',
+                      })
                     }}
                   />
                   <ErrorMessage error={userName.error} />
@@ -195,11 +195,11 @@ export function SignUp() {
         </div>
       </section>
     </div>
-  );
+  )
 }
 
 function ErrorMessage({ error, className, ...props }) {
-  if (!error?.length) return null;
+  if (!error?.length) return null
 
   return (
     <p
@@ -208,5 +208,5 @@ function ErrorMessage({ error, className, ...props }) {
     >
       {error[0].toUpperCase() + error.slice(1)}
     </p>
-  );
+  )
 }

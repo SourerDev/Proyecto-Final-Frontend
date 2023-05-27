@@ -1,20 +1,20 @@
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { initializeApp } from 'firebase/app'
+import { getAuth } from 'firebase/auth'
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyCOCD6Go7iGVgO1M3Qs8TfQmzDi1AXkElM",
-  authDomain: "firstproyect-e4795.firebaseapp.com",
-  projectId: "firstproyect-e4795",
-  storageBucket: "firstproyect-e4795.appspot.com",
-  messagingSenderId: "416806027652",
-  appId: "1:416806027652:web:eabbf42051ea066fd85dd1",
-  measurementId: "G-SVLH871R94"
-};
+  apiKey: 'AIzaSyCOCD6Go7iGVgO1M3Qs8TfQmzDi1AXkElM',
+  authDomain: 'firstproyect-e4795.firebaseapp.com',
+  projectId: 'firstproyect-e4795',
+  storageBucket: 'firstproyect-e4795.appspot.com',
+  messagingSenderId: '416806027652',
+  appId: '1:416806027652:web:eabbf42051ea066fd85dd1',
+  measurementId: 'G-SVLH871R94',
+}
 
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig)
 
-export const authentication = getAuth(app);
+export const authentication = getAuth(app)
 
 /*
 // Import the functions you need from the SDKs you need

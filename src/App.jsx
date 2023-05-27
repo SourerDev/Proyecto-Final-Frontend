@@ -1,17 +1,17 @@
-import { Route, Routes } from "react-router-dom";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { Route, Routes } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 
-import Landing from "./pages/Landing.jsx";
+import Landing from './pages/Landing.jsx'
 /*
 import Detail from "./pages/detail/Detail.jsx";
 import Form from "./pages/createProperty/form.jsx"; */
 
-import { Nav } from "./components/navs/Nav.jsx";
-import { SignUp } from "./pages/session/SignUp.jsx";
-import { SignIn } from "./pages/session/SignIn.jsx";
-import { Home } from "./pages/Home.jsx";
-import { Profile } from "./pages/profile/Profile.jsx";
+import { Nav } from './components/navs/Nav.jsx'
+import { SignUp } from './pages/session/SignUp.jsx'
+import { SignIn } from './pages/session/SignIn.jsx'
+import { Home } from './pages/Home.jsx'
+import { Profile } from './pages/profile/Profile.jsx'
 /*
 import BePremium from "./pages/bePremium/BePremium";
 import Redirect from "./components/redirect/Redirect";
@@ -21,34 +21,32 @@ import Favoriteid from "./components/FaroriteId/favoriteId";
 import DashboardPage from "./pages/dashboard/DashboardPage";
 import DashboardUsers from "./components/dashboard/DashboardUsers.jsx";
 */
-import Nosotros from "./components/Nosotros/nosotros";
+import Nosotros from './components/Nosotros/nosotros'
 
 //Components
-import Footer from "./components/footer/Footer.jsx";
+import Footer from './components/footer/Footer.jsx'
 
 //actions
-import { actionsPublications } from "./redux2.0/reducers";
+import { actionsPublications } from './redux2.0/reducers'
 
-import { ApiPropYou } from "./services";
-import { PropertyDetails } from "./pages/property/PropertyDetails.jsx";
-import { ScrollToTop } from "./components/ScrollToTop.jsx";
+import { ApiPropYou } from './services'
+import { PropertyDetails } from './pages/property/PropertyDetails.jsx'
+import { ScrollToTop } from './components/ScrollToTop.jsx'
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   useEffect(() => {
     ApiPropYou.getPublications()
       .then((response) => {
-        const { publications } = response.data;
-        dispatch(actionsPublications.setPublications(publications));
+        const { publications } = response.data
+        dispatch(actionsPublications.setPublications(publications))
       })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  }, [dispatch]);
+      .catch((error) => {})
+  }, [dispatch])
 
   return (
-    <div className="p-1 max-w-7xl mx-auto shadow">
+    <div className="mx-auto max-w-7xl p-1 shadow">
       <Nav />
       <main className="min-h-screen">
         <ScrollToTop />
@@ -66,14 +64,14 @@ function App() {
           <Route path="/bePremium" element={<><Nav/><BePremium/></>} />
           <Route path="/redirect" element={<><Redirect/><Footer/></>} />
           <Route path="/favorites/:id_User" element= {<><Favoriteid/></>}/>
-          BACKEND TRABAJANDO 
+          BACKEND TRABAJANDO
           <Route path="/dashboard" element={<><Nav/><DashboardPage/></>}/>
           <Route path="/ownerData/:id_User" element={<><Nav/><OwnerData /></>}/> */}
         </Routes>
       </main>
       <Footer />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

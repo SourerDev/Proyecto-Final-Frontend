@@ -1,9 +1,9 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-export default function Loading({w="20px", h="150px"}) {
+export default function Loading({ w = '20px', h = '150px' }) {
   return (
-    <div className="w-full h-screen flex justify-center  items-center bg-[#fff] m-0 p-0">
-      <Loader w={w} h={h} >
+    <div className="m-0 flex h-screen w-full  items-center justify-center bg-[#fff] p-0">
+      <Loader w={w} h={h}>
         <span></span>
         <span></span>
         <span></span>
@@ -13,15 +13,15 @@ export default function Loading({w="20px", h="150px"}) {
         <span></span>
       </Loader>
     </div>
-  );
+  )
 }
 
 const Loader = styled.div`
   position: relative;
   display: flex;
   span {
-    width: ${props => props.w};
-    height: ${props => props.h};
+    width: ${(props) => props.w};
+    height: ${(props) => props.h};
     margin: 0 20px;
     background-color: #fff;
     animation: animate 1.4s linear infinite;
@@ -66,4 +66,4 @@ const Loader = styled.div`
       transform: translateX(50px) scale(1);
     }
   }
-`;
+`

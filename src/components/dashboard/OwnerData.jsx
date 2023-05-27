@@ -1,9 +1,9 @@
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { Chart } from "chart.js";
+import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Chart } from 'chart.js'
 
 const OwnerData = () => {
-  const { idUser } = useParams();
+  const { idUser } = useParams()
   // console.log(id_User);
   // const dispatch = useDispatch();
   // // const house = useSelector((state) => state.house);
@@ -11,15 +11,15 @@ const OwnerData = () => {
   // React.useEffect(() => {
   //   dispatch(getHouse(houseId));
   // }, [dispatch]);
-  const ctx = document.getElementById("myChart");
+  const ctx = document.getElementById('myChart')
 
   new Chart(ctx, {
-    type: "bar",
+    type: 'bar',
     data: {
-      labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
       datasets: [
         {
-          label: "# of Votes",
+          label: '# of Votes',
           data: [12, 19, 3, 5, 2, 3],
           borderWidth: 1,
         },
@@ -32,7 +32,7 @@ const OwnerData = () => {
         },
       },
     },
-  });
+  })
 
   return (
     <>
@@ -41,7 +41,7 @@ const OwnerData = () => {
         <canvas id="myChart"></canvas>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default OwnerData;
+export default OwnerData

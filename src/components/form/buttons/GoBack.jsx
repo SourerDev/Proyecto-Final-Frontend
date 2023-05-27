@@ -1,7 +1,7 @@
 export function GoBackButton({ className, ...props }) {
   const goBack = () => {
-    window.history.back();
-  };
+    window.history.back()
+  }
   return (
     <button
       {...props}
@@ -10,5 +10,5 @@ export function GoBackButton({ className, ...props }) {
     >
       Volver
     </button>
-  );
+  )
 }

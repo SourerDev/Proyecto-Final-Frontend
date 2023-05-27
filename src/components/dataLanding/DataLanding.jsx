@@ -1,14 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom'
 
 export default function DataLanding() {
   return (
-    <div className="bg-gray-800 P-2 flex flex-col px-14 rounded-lg">
-      <h1 className=" underline text-center text-white text-3xl">
+    <div className="P-2 flex flex-col rounded-lg bg-gray-800 px-14">
+      <h1 className=" text-center text-3xl text-white underline">
         Properties & You
       </h1>
-      <h4 className="text-white flex flex-row justify-center p-3 items-center">
+      <h4 className="flex flex-row items-center justify-center p-3 text-white">
         <svg
-          className="w-7 h-7 text-yellow-400"
+          className="h-7 w-7 text-yellow-400"
           fill="currentColor"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
@@ -21,9 +21,9 @@ export default function DataLanding() {
         </svg>
         Lidera en ventas y alquileres en el mercado inmobiliario
       </h4>
-      <h4 className="text-white flex flex-row  justify-center text-center p-3 ">
+      <h4 className="flex flex-row justify-center  p-3 text-center text-white ">
         <svg
-          className="w-6 h-6 text-blue-50"
+          className="h-6 w-6 text-blue-50"
           fill="currentColor"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
@@ -33,9 +33,9 @@ export default function DataLanding() {
         Publica tus casas sin comisión por venta/alquiler
       </h4>
 
-      <h4 className="text-white flex flex-row  justify-center text-center p-3">
+      <h4 className="flex flex-row justify-center  p-3 text-center text-white">
         <svg
-          className="w-6 h-6"
+          className="h-6 w-6"
           fill="currentColor"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
@@ -52,9 +52,9 @@ export default function DataLanding() {
         Todo eso lo podes hacer suscribiéndote a la membresía PREMIUM, ingresa
         haciendo click
         <Link to="/bePremium">
-          <button className="underline text-indigo-400"> aquí</button>
+          <button className="text-indigo-400 underline"> aquí</button>
         </Link>
       </p>
     </div>
-  );
+  )
 }

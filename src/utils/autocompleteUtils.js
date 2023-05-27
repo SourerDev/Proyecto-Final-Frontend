@@ -1,20 +1,20 @@
 export function valuesCities(object) {
-  let cities = [];
+  let cities = []
 
   for (const key in object) {
-    cities.push(key);
+    cities.push(key)
   }
-  return cities.sort();
+  return cities.sort()
 }
 
 export function findNameCity(object, id) {
-  let name = "";
+  let name = ''
 
   for (const key in object) {
     if (object[key].id === id) {
-      name = object[key].name + ' ' + object[key].provincia;
+      name = object[key].name + ' ' + object[key].provincia
     }
   }
 
-  return name;
+  return name
 }
