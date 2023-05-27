@@ -57,7 +57,7 @@ export function SignUp() {
         icon: "success",
       });
       addAuthorizationWithToken(token);
-      navigate(`/profile`);
+      navigate(`/home`);
     } catch ({ response, ...error }) {
       let text = "...";
       if (response?.data?.Error) text = response?.data?.Error;
