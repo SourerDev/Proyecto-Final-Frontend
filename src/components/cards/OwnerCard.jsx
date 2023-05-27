@@ -75,5 +75,5 @@ OwnerCard.propTypes = {
 
 Card.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.element,
+  children: PropTypes.any,
 }
