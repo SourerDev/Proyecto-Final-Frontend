@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { loadUserInfo, postSignUp } from "../../redux/actions/index";
-import callsApi, { addAuthorizationWithToken } from "../../services";
+import { addAuthorizationWithToken } from "../../services";
 import { actionsUser } from "../../redux2.0/reducers";
 import { ApiPropYou } from "../../services";
 import { authentication } from "../../firabase/Firabase.Config.jsx";
@@ -17,6 +16,7 @@ import { saveInStorage, getOfStorage } from "../../utils";
 //components
 import { Input } from "../../components/form/inputs/Input";
 import { PasswordInput } from "../../components/form/inputs/PasswordInput";
+import { Button } from "../../components/form/buttons/Button";
 
 export function SignIn() {
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ export function SignIn() {
     }
   };
 
-  const handleClickGoogle = async () => {
+  /* const handleClickGoogle = async () => {
     const provider = new GoogleAuthProvider();
     provider.addScope("email");
     const { user } = await signInWithPopup(authentication, provider);
@@ -76,14 +76,13 @@ export function SignIn() {
       setResponse({ state: true, msg: "" });
       setNavigate();
     }
-
-    /* 
+ 
     localStorage.setItem(
         "accessToken",
         JSON.stringify(result.user.accessToken)
     );
-    */
-  };
+    
+  }; */
 
   async function handleSubmit(email, password) {
     if (!email || !password) return;
@@ -98,23 +97,28 @@ export function SignIn() {
       saveInStorage("token", token);
       addAuthorizationWithToken(token);
       navigate("/home");
-    } catch (error) {
-      setResponse({ state: false, msg: error.message });
+    } catch ({ response, message }) {
+      if (response)
+        setResponse({
+          state: false,
+          msg: `${response.status} - ${response.data.Error}`,
+        });
+      else setResponse({ state: false, msg: message });
     }
   }
 
   return (
     <section className="h-[87vh]">
-      <div className="px-6 h-full text-gray-800">
-        <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
-          <div className=" hidden lg:flex grow-0 shrink-1 lg:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0">
+      <div className="h-full px-6 text-gray-800">
+        <div className="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between xl:justify-center">
+          <div className=" shrink-1 mb-12 hidden grow-0 basis-auto md:mb-0 md:w-9/12 lg:flex lg:w-6/12 lg:shrink-0 xl:w-6/12">
             <img
               src="https://img.freepik.com/vector-premium/registro-linea-o-registro-inicie-sesion-obtener-cuenta-aplicacion-telefono-inteligente-interfaz-usuario-aplicacion-movil-contrasena-segura-interfaz-usuario-banner-web-acceso-ilustracion-vector-gente-dibujos-animados_2175-1060.jpg?w=2000"
               className="w-full"
               alt="Sample image"
             />
           </div>
-          <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
+          <div className="mb-12 md:mb-0 md:w-8/12 lg:w-5/12 xl:ml-20 xl:w-5/12">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -122,16 +126,16 @@ export function SignIn() {
               }}
             >
               <div className="flex flex-row items-center justify-center lg:justify-start">
-                <p className="text-lg mb-0 mr-4">Iniciar sesión con :</p>
-                <div onClick={handleClickGoogle}>
-                  <button class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+                <p className="mb-0 mr-4 text-lg">Iniciar sesión con :</p>
+                <div title="Proximamente">
+                  <span className="inline-block rounded-full bg-blue-600 px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 hover:bg-blue-700 hover:shadow-lg active:bg-blue-800 active:shadow-lg">
                     GOOGLE
-                  </button>
+                  </span>
                 </div>
               </div>
 
-              <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
-                <p className="text-center font-semibold mx-4 mb-0">O</p>
+              <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-gray-300 after:mt-0.5 after:flex-1 after:border-t after:border-gray-300">
+                <p className="mx-4 mb-0 text-center font-semibold">O</p>
               </div>
 
               <div className="mb-6">
@@ -154,21 +158,21 @@ export function SignIn() {
               <div className="flex flex-col sm:items-center">
                 {/* <Link to="/"> */}
                 {!response.state && (
-                  <p className="px-2 my-2 text-red-700 bg-red-200 rounded-md w-full sm:w-auto">
+                  <p className="my-2 w-full rounded-md bg-red-200 px-2 text-red-700 sm:w-auto">
                     {response.msg}
                   </p>
                 )}
-                <div className="flex flex-col sm:flex-row sm:space-x-4 sm:justify-center">
+                <div className="my-2 flex flex-col p-2 sm:flex-row sm:justify-center sm:gap-x-4">
                   <input
                     type="submit"
-                    className="mt-2 sm:my-2 inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                    className="inline-block rounded bg-blue-600 px-7 py-3 text-sm font-medium uppercase leading-snug text-white shadow-md transition duration-150 ease-in-out focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 hover:bg-blue-700 hover:shadow-lg active:bg-blue-800 active:shadow-lg"
                     value={"Iniciar Sesión"}
                   />
 
                   <Link to="/sign-up">
-                    <button className="w-full my-2 inline-block px-7 py-3 bg-red-400 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out disabled:bg-red-400 disabled:cursor-not-allowed">
+                    <span className="inline-block w-full rounded bg-red-400 px-7 py-3 text-sm font-medium uppercase leading-snug text-white shadow-md transition duration-150 ease-in-out focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:bg-red-400 hover:bg-blue-700 hover:shadow-lg active:bg-blue-800 active:shadow-lg">
                       Registrarme
-                    </button>
+                    </span>
                   </Link>
                 </div>
               </div>
