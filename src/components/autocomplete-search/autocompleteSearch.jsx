@@ -1,12 +1,17 @@
-import { valuesCities} from "../../utils/autocompleteUtils";
+import { valuesCities } from '../../utils/autocompleteUtils'
 
-export default function AutocompleteSearch({apiData, city, stateHandleChange, refCity}) {
-
+export default function AutocompleteSearch({
+  apiData,
+  city,
+  stateHandleChange,
+  refCity,
+}) {
   return (
     <div className="">
-      <div className="border-1 rounded item-center ">
-        <input ref={refCity}
-        className="w-full placeholder:text-black p-2"
+      <div className="border-1 item-center rounded ">
+        <input
+          ref={refCity}
+          className="w-full p-2 placeholder:text-black"
           list="ubications"
           name="city"
           value={city}
@@ -15,11 +20,17 @@ export default function AutocompleteSearch({apiData, city, stateHandleChange, re
         />
         <datalist id="ubications">
           {valuesCities(apiData).map((element) => (
-            <option key={apiData[element].id} value={element} id={apiData[element].id}/>
+            <option
+              key={apiData[element].id}
+              value={element}
+              id={apiData[element].id}
+            />
           ))}
         </datalist>
       </div>
-      {apiData[city] || !city ? null : <p className="text-red-700">eliga una de las opciones</p> }
+      {apiData[city] || !city ? null : (
+        <p className="text-red-700">eliga una de las opciones</p>
+      )}
     </div>
   )
 }

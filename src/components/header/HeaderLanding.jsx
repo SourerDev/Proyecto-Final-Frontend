@@ -1,23 +1,23 @@
-import styled from "styled-components";
-import LandingSearch from "../landingSearch/LandingSearch";
+import styled from 'styled-components'
+import LandingSearch from '../landingSearch/LandingSearch'
 
 const HeaderLanding = (images) => {
-  const Slider = slider();
+  const Slider = slider()
   return (
-      <div className="h-[60vh] relative my-2 overflow-hidden rounded-sm shadow-sm sm:h-[80vh] sm:px-4 lg:h-[86vh] xl:px-[5%] transition-all ease-in-out duration-200 ">
-        <Slider>
-          <div className="h-full w-full flex justify-center items-end">
-            <LandingSearch />
-          </div>
-        </Slider>
-      </div>
-  );
-};
+    <div className="relative my-2 h-[60vh] overflow-hidden rounded-sm shadow-sm transition-all duration-200 ease-in-out sm:h-[80vh] sm:px-4 lg:h-[86vh] xl:px-[5%] ">
+      <Slider>
+        <div className="flex h-full w-full items-end justify-center">
+          <LandingSearch />
+        </div>
+      </Slider>
+    </div>
+  )
+}
 
 export function slider(
   images = [
-    "https://img.freepik.com/foto-gratis/familia-moviendose-usando-cajas_1157-35480.jpg?w=2000",
-    "https://amarilo.com.co/blog/wp-content/uploads/2019/07/Como-elegir-la-casa-ideal-para-vivir-en-familia.jpg",
+    'https://img.freepik.com/foto-gratis/familia-moviendose-usando-cajas_1157-35480.jpg?w=2000',
+    'https://amarilo.com.co/blog/wp-content/uploads/2019/07/Como-elegir-la-casa-ideal-para-vivir-en-familia.jpg',
   ]
 ) {
   return styled.div`
@@ -39,6 +39,6 @@ export function slider(
         background-image: url(${images[1]});
       }
     }
-  `;
+  `
 }
-export default HeaderLanding;
+export default HeaderLanding

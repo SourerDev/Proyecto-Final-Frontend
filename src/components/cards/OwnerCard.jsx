@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { Avatar } from "../avatars/Avatar";
-import { Button } from "../form/buttons/Button";
-import { TextArea } from "../form/text-areas/TextArea";
+import { useState } from 'react'
+import { Avatar } from '../avatars/Avatar'
+import { Button } from '../form/buttons/Button'
+import { TextArea } from '../form/text-areas/TextArea'
 import {
   EnvelopeIcon,
   DevicePhoneMobileIcon,
-} from "@heroicons/react/24/outline";
+} from '@heroicons/react/24/outline'
 
 export function OwnerCard({ User }) {
   return (
@@ -16,45 +16,45 @@ export function OwnerCard({ User }) {
           name={`${User.fName} ${User.lName}`}
           active={User.active}
         />
-        <p className="flex flex-col -ml-2">
+        <p className="-ml-2 flex flex-col">
           <span className="text-lg font-bold">{`${User.fName} ${User.lName}`}</span>
           <span className="text-gray-600">@{User.userName}</span>
         </p>
-        <p className="border flex-grow">** No stars **</p>
+        <p className="flex-grow border">** No stars **</p>
       </div>
-      <div className="flex justify-between mb-4">
-        <p className=" flex gap-x-2 items-center">
+      <div className="mb-4 flex justify-between">
+        <p className=" flex items-center gap-x-2">
           <EnvelopeIcon
             title={User.email}
-            className="w-6 h-auto stroke-gray-800"
-          />{" "}
+            className="h-auto w-6 stroke-gray-800"
+          />{' '}
           <span>{User.email}</span>
         </p>
-        <p className=" flex gap-x-2 items-center">
+        <p className=" flex items-center gap-x-2">
           <DevicePhoneMobileIcon
             title={User.cellphone}
-            className="w-6 h-auto stroke-gray-800"
-          />{" "}
-          <span>{User.cellphone || "+ 57 3123122626"}</span>
+            className="h-auto w-6 stroke-gray-800"
+          />{' '}
+          <span>{User.cellphone || '+ 57 3123122626'}</span>
         </p>
       </div>
       <CardMessage />
     </Card>
-  );
+  )
 }
 
 function Card({ className, children }) {
   return (
     <div
-      className={`min-w-[50px] h-auto border px-4 py-2 bg-white ${className}`}
+      className={`h-auto min-w-[50px] border bg-white px-4 py-2 ${className}`}
     >
       {children}
     </div>
-  );
+  )
 }
 
 function CardMessage() {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('')
   return (
     <div className="flex flex-col gap-y-2">
       <TextArea
@@ -64,5 +64,5 @@ function CardMessage() {
       />
       <Button>Contactar</Button>
     </div>
-  );
+  )
 }

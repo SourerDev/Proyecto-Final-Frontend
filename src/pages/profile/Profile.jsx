@@ -1,18 +1,18 @@
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { actionsUser } from "../../redux2.0/reducers";
-import { isValidUser } from "../../utils";
-import { useNavigate } from "react-router-dom";
-import { actualizar } from "../../sweetAlerts/sweetAlerts";
-import swal from "sweetalert2";
-import { ApiPropYou } from "../../services";
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { actionsUser } from '../../redux2.0/reducers'
+import { isValidUser } from '../../utils'
+import { useNavigate } from 'react-router-dom'
+import { actualizar } from '../../sweetAlerts/sweetAlerts'
+import swal from 'sweetalert2'
+import { ApiPropYou } from '../../services'
 
 export function Profile() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  const { session } = useSelector((state) => state.user);
+  const { session } = useSelector((state) => state.user)
   const [newUser, setNewUser] = useState({
     userName: session.userName,
     fName: session.fName,
@@ -20,19 +20,16 @@ export function Profile() {
     cellphone: session.cellphone,
     email: session.email,
     photo: session.photo,
-  });
-  const [errs, setErrs] = useState({});
+  })
+  const [errs, setErrs] = useState({})
 
-  useEffect(() => {
-    console.log(newUser);
-    console.log(errs);
-  }, [newUser, errs]);
+  useEffect(() => {}, [newUser, errs])
 
   function onUserChange(e) {
     setNewUser({
       ...newUser,
       [e.target.name]: e.target.value,
-    });
+    })
     /* setErrs(
       isValidUser({
         ...newUser,
@@ -42,30 +39,30 @@ export function Profile() {
   }
 
   return (
-    <div className="flex justify-center flex-col items-center h-[40rem] sm:h-[43rem] lg:[4rem] bg-sky-200">
+    <div className="lg:[4rem] flex h-[40rem] flex-col items-center justify-center bg-sky-200 sm:h-[43rem]">
       <p className="self-right text-2xl">Editar usuario</p>
-      <div className="w-16 h-16 rounded-full overflow-hidden">
+      <div className="h-16 w-16 overflow-hidden rounded-full">
         <img
           className="w-full rounded-full"
           src={
             newUser.photo ||
-            "https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png"
+            'https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png'
           }
           alt=""
         />
       </div>
-      <div className="flex justify-center flex-col ">
+      <div className="flex flex-col justify-center ">
         <label
-          for="userName"
-          className="block m-1 text-sm font-medium text-gray-900 dark:text-white"
+          htmlFor="userName"
+          className="m-1 block text-sm font-medium text-gray-900 dark:text-white"
         >
           Usuario
         </label>
         <input
           type="text"
           name="userName"
-          className="  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder={session?.userName || "sin nombre de usuario"}
+          className="  block rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500  focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+          placeholder={session?.userName || 'sin nombre de usuario'}
           value={newUser?.userName}
           onChange={(e) => onUserChange(e)}
         />
@@ -73,49 +70,49 @@ export function Profile() {
       {errs?.userName && (
         <p className="text-red-600 dark:text-red-500">{errs.userName}</p>
       )}
-      <div className="flex justify-center flex-col ">
+      <div className="flex flex-col justify-center ">
         <label
-          for="userName"
-          className="block m-1 text-sm font-medium text-gray-900 dark:text-white"
+          htmlFor="userName"
+          className="m-1 block text-sm font-medium text-gray-900 dark:text-white"
         >
           Nombre
         </label>
         <input
           type="text"
           name="fName"
-          className="  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder={session?.fName || "sin nombre de usuario"}
+          className="  block rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500  focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+          placeholder={session?.fName || 'sin nombre de usuario'}
           value={newUser.fName}
           onChange={(e) => onUserChange(e)}
         />
       </div>
-      <div className="flex justify-center flex-col ">
+      <div className="flex flex-col justify-center ">
         <label
-          for="userName"
-          className="block m-1 text-sm font-medium text-gray-900 dark:text-white"
+          htmlFor="userName"
+          className="m-1 block text-sm font-medium text-gray-900 dark:text-white"
         >
           Apellido
         </label>
         <input
           type="text"
           name="lName"
-          className="  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder={session?.lName || "sin nombre de usuario"}
+          className="  block rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500  focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+          placeholder={session?.lName || 'sin nombre de usuario'}
           value={newUser.lName}
           onChange={(e) => onUserChange(e)}
         />
       </div>
       <div>
         <label
-          for="email"
-          className="block m-1 text-sm font-medium text-gray-900 dark:text-white"
+          htmlFor="email"
+          className="m-1 block text-sm font-medium text-gray-900 dark:text-white"
         >
           Telefono
         </label>
         <input
           type="numer"
           name="cellphone"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
           placeholder={session?.cellphone}
           value={newUser?.cellphone}
           onChange={(e) => onUserChange(e)}
@@ -126,15 +123,15 @@ export function Profile() {
       </div>
       <div>
         <label
-          for="email"
-          className="block m-1 text-sm font-medium text-gray-900 dark:text-white"
+          htmlFor="email"
+          className="m-1 block text-sm font-medium text-gray-900 dark:text-white"
         >
           Email
         </label>
         <input
           type="text"
           name="email"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
           placeholder={session?.email}
           value={newUser.email}
           onChange={(e) => onUserChange(e)}
@@ -145,16 +142,16 @@ export function Profile() {
       </div>
       <div>
         <label
-          for="photo"
-          className="block m-1 text-sm font-medium text-gray-900 dark:text-white"
+          htmlFor="photo"
+          className="m-1 block text-sm font-medium text-gray-900 dark:text-white"
         >
           Avatar
         </label>
         <input
           type="text"
           name="photo"
-          className="bg-gray-50 border mb-4  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder={"se le asignara un avatar por defecto"}
+          className="mb-4 block w-full  rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+          placeholder={'se le asignara un avatar por defecto'}
           value={newUser.photo}
           onChange={(e) => onUserChange(e)}
         />
@@ -163,22 +160,20 @@ export function Profile() {
         <Link>
           <button
             disabled={Object.values(errs)?.length ? true : false}
-            className="hover:bg-gradient-to-br px-4 py-3  text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
+            className="rounded-lg bg-blue-700 px-4  py-3 text-center text-xs font-medium text-white focus:ring-4 focus:ring-blue-200 hover:bg-blue-800 hover:bg-gradient-to-br dark:focus:ring-blue-900"
             onClick={() => {
-              console.log(session.idUser);
-              console.log(newUser);
               ApiPropYou.updateUser({
                 idUser: session.idUser,
                 data: { ...newUser },
               })
                 .then((res) => {
-                  dispatch(actionsUser.setUser(res.data.user));
-                  const axu = <Link to="/home"></Link>;
-                  swal.fire(actualizar(axu));
+                  dispatch(actionsUser.setUser(res.data.user))
+                  const axu = <Link to="/home"></Link>
+                  swal.fire(actualizar(axu))
                 })
                 .catch((err) => {
-                  swal.fire("Algo salio mal", `${err.message}`, "error");
-                });
+                  swal.fire('Algo salio mal', `${err.message}`, 'error')
+                })
 
               // setDisabled(true)
               //navigate("/")
@@ -190,21 +185,21 @@ export function Profile() {
       </div>
 
       <button
-        className="hover:bg-gradient-to-br px-4 py-3  text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
+        className="rounded-lg bg-blue-700 px-4  py-3 text-center text-xs font-medium text-white focus:ring-4 focus:ring-blue-200 hover:bg-blue-800 hover:bg-gradient-to-br dark:focus:ring-blue-900"
         onClick={() => {
-          if (!session?.user_type || session?.user_type === "userPremiun") {
-            navigate("/createProperty");
+          if (!session?.user_type || session?.user_type === 'userPremiun') {
+            navigate('/createProperty')
           } else {
             swal.fire(
-              "Algo salio mal,",
-              "deves ser usuario Premiun",
-              navigate("/bePremium")
-            );
+              'Algo salio mal,',
+              'deves ser usuario Premiun',
+              navigate('/bePremium')
+            )
           }
         }}
       >
         Create Property
       </button>
     </div>
-  );
+  )
 }

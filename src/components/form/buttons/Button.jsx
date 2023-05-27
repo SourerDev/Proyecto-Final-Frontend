@@ -6,5 +6,5 @@ export function Button({ children, className, ...props }) {
     >
       {children}
     </button>
-  );
+  )
 }

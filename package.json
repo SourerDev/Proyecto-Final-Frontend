@@ -36,7 +36,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eslint": "eslint ./**/*.{js,jsx}"
   },
   "eslintConfig": {
     "extends": [
@@ -58,6 +58,8 @@
   },
   "devDependencies": {
     "@reduxjs/toolkit": "1.9.5",
+    "eslint": "^8.41.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0"
   }

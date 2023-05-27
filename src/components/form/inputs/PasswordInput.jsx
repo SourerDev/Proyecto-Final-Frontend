@@ -1,14 +1,14 @@
-import { useState } from "react";
-import { Input } from "./Input";
+import { useState } from 'react'
+import { Input } from './Input'
 
 export function PasswordInput({ ...props }) {
-  const [viewPassword, setViewPassword] = useState(true);
+  const [viewPassword, setViewPassword] = useState(true)
 
   return (
-    <div className="w-full relative ">
-      <Input {...props} type={viewPassword ? "password" : "text"} />
+    <div className="relative w-full ">
+      <Input {...props} type={viewPassword ? 'password' : 'text'} />
       <button
-        className="h-full w-8 border-l absolute z-10 top-0 right-0 text-gray-600 hover:text-gray-800 px-1 "
+        className="absolute top-0 right-0 z-10 h-full w-8 border-l px-1 text-gray-600 hover:text-gray-800 "
         type="button"
         onClick={() => setViewPassword(viewPassword ? false : true)}
       >
@@ -37,5 +37,5 @@ export function PasswordInput({ ...props }) {
         )}
       </button>
     </div>
-  );
+  )
 }

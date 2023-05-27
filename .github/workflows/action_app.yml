@@ -1,0 +1,45 @@
+name: Action Proyect
+
+on:
+  push:
+    branches: [master, develop, refactor]
+  pull_request:
+    branches: [master, develop, refactor]
+    types: [opened, synchronize]
+
+jobs:
+  avoid_reduncy:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Cancel Previous RedundantBuilds
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{github.token}}
+
+  lint:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+      - name: Install dependecies
+        run: npm install --no-audit --no-fund --no-optional
+      - name: Lint
+        run: npm run eslint
+
+  test:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund --no-optional
+      - name: Tests
+        run: npm test

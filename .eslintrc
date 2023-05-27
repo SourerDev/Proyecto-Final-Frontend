@@ -1,0 +1,37 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest/globals": true,
+    "node": true
+  },
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "jest", "prettier"],
+  "rules": {
+    "indent": ["error", 2],
+    "linebreak-style": "off",
+    "quotes": ["error", "single"],
+    "semi": ["error", "never"],
+    "eqeqeq": "error",
+    "no-trailing-spaces": "error",
+    "object-curly-spacing": ["error", "always"],
+    "arrow-spacing": ["error", { "before": true, "after": true }],
+    "react/prop-types": "warn",
+    "react/react-in-jsx-scope": "off",
+    "no-unused-vars": "off",
+    "jsx-quotes": "off",
+    "no-console": "error"
+  }
+}

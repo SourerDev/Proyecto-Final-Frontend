@@ -1,13 +1,13 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore } from '@reduxjs/toolkit'
 
-import { appRs, publicationRs, userRs } from "./reducers";
+import { appRs, publicationRs, userRs } from './reducers'
 
 const store = configureStore({
   reducer: {
     publication: publicationRs,
     user: userRs,
-    app: appRs
+    app: appRs,
   },
-});
+})
 
-export default store;
+export default store
