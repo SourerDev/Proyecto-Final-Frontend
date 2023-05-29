@@ -1,7 +1,6 @@
 import {
   setPublications,
   setDetailPublication,
-  setPublicationPage,
 } from './Publication.js'
 import { setUser, setSignIn } from './User.js'
 import { setPage } from './App.js'
@@ -13,7 +12,6 @@ export { appRs } from './App.js'
 export const actionsPublications = {
   setPublications,
   setDetailPublication,
-  setPublicationPage,
 }
 
 export const actionsUser = {

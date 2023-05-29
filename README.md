@@ -1,148 +1,86 @@
-[![action](https://github.com/SourerDev/Proyecto-Final-Frontend/actions/workflows/action.yml/badge.svg)](https://github.com/SourerDev/Proyecto-Final-Frontend/actions/workflows/action.yml)
+[![Action Proyect](https://github.com/SourerDev/Proyecto-Final-Frontend/actions/workflows/action_app.yml/badge.svg)](https://github.com/SourerDev/Proyecto-Final-Frontend/actions/workflows/action_app.yml)
 
 # Properties & You
 
-Descripcion ...
+Properties and You es una plataforma web innovadora que tiene como objetivo facilitar la búsqueda y publicación de propiedades inmobiliarias. Nuestra plataforma proporcionará a los usuarios una experiencia fluida y eficiente al buscar y encontrar el inmueble perfecto que se adapte a sus necesidades.
+
+Con Properties and You, los usuarios podrán explorar una amplia variedad de propiedades en una interfaz intuitiva y fácil de usar. Nuestro sistema de filtrado avanzado permitirá a los usuarios refinar su búsqueda según sus preferencias específicas. Podrán filtrar las propiedades por tipo de operación (alquiler o venta), tipo de propiedad, ubicación, rango de precios y otras características relevantes.
 
 ## Comenzando 🚀
 
-### Pre-requisitos 📋
-
-**What** _things you need to install the software and how to install them_
-
-```bash
-example -e
-```
+**Asegurate de tener instalado** `node.js v18.15.0`, tambien necesitaras la [api del proyecto](https://github.com/SourerDev/api-properties-you)
 
 ### Instalacion 🔧
 
-**You must first** make a _fork_ of the repository and then _clone_
+**Primero asegurate** de hacer un _fork_ del repositorio y luego debes _clonarlo_
 
-Make sure to create the .env file in the root directory, with the following environment variables:
+Asegurate de tener el archivo `.env` en la raiz del directorio, con las siguiente variables de entorno:
 
 ```js
-REACT_APP_API_URL = ""
+REACT_APP_API_URL = ''
 ```
 
-You can also look at the ` .env.example ` file
-
-## Running the tests ⚙️
-
-### Analyze end-to-end testing 🔩
+Tambien puedes mirar el archivo `.env.example`.\
+Finalmente instala las dependencias:
 
 ```bash
-example -e
+npm i
 ```
 
-### And the coding style tests ⌨️
+## Scripts disponibles
 
-```bash
-example -e
-```
+En el directorio del proyecto, puedes ejecutar:
 
-## Deployment 📦
+### `npm start` ⚙️
 
-## Built with → Create T3 App 🛠️
+Ejecuta la app en el modo desarrollo.\
+Abre [http://localhost:3000](http://localhost:3000) para visualizarla en el browser.
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+La página se recargará cuando hagas cambios.\
+También puede ver cualquier error de pelusa en la consola.
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs.
+### `npm test` 🔩
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+Lanza el ejecutor de pruebas en el modo de observación interactivo.\
+Consulte la sección sobre [ejecución de pruebas](https://facebook.github.io/create-react-app/docs/running-tests) para obtener más información.
 
-### Learn More
+### `npm run build` 🛠️
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+Construye la aplicación para producción en la carpeta `build`.
+Agrupa correctamente React en modo de producción y optimiza la compilación para obtener el mejor rendimiento.
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+La compilación está minificada y los nombres de archivo incluyen los hashes.\
+Tu aplicación está lista para ser desplegada.
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+Consulta la sección sobre [deployment](https://facebook.github.io/create-react-app/docs/deployment) para más información.
 
-## Contributing 🖇️
+### `npm run eslint` ⌨️
+
+Ejecuta las pruebas de estilo de codigo
+
+## Construido con → Create-react-App 🛠️
+
+Este proyecto fue arrancado con [Create React App](https://github.com/facebook/create-react-app).
+
+## Mas informacion
+
+Puedes obtener más información en la [documentación de Create React App](https://facebook.github.io/create-react-app/docs/getting-started).
+
+## Contribuyendo 🖇️
+
+...proximamente
 
 ## Wiki 📖
 
-You can find much more on how to use this project in our [Wiki](https://github.com/SourerDev/tendencia/wiki)
+Encontrará más información sobre cómo utilizar este proyecto en nuestra [Wiki](https://github.com/SourerDev/proyecto-final-frontend/wiki)
 
-## Versioning 📌
+## Autores ✒️
 
-## Authors ✒️
-
-**Yhonier Alegria** - _Initial Work_ - [SourerDev](https://github.com/SourerDev)
-
-
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Yhonier Alegria** - _Initial Work and maintenance_ - [SourerDev](https://github.com/SourerDev).\
+**Tomás Pérez** - _Initial Work and maintenance_ - [TomasPerez1](https://github.com/TomasPerez1).\
+**Enzo Monti** - _Initial Work_ - [enzo2022](https://github.com/enzo2022).\
+**Arturo Gutierrez** - _Initial Work_ - [arturogutierrez11](https://github.com/arturogutierrez11).\
+**Chantal Coutenceau** - _Initial Work_ - [chanticou](https://github.com/chanticou).\
+**Agustin Berger** - _Initial Work_ - [Agustin-Berger](https://github.com/Agustin-Berger).\
+**Rodrigo Mauricio** - _Initial Work_ - [rmalegr](https://github.com/rmalegr).\
+**Hermes Ortiz** - _Initial Work_ - [asouesou](https://github.com/asouesou)

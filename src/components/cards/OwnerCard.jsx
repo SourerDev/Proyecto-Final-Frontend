@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { useState } from 'react'
 import { Avatar } from '../avatars/Avatar'
 import { Button } from '../form/buttons/Button'
@@ -13,7 +14,7 @@ export function OwnerCard({ User }) {
       <div className="flex items-center gap-x-4">
         <Avatar
           avatar={User.photo}
-          name={`${User.fName} ${User.lName}`}
+          ame={`${User.fName} ${User.lName}`}
           active={User.active}
         />
         <p className="-ml-2 flex flex-col">
@@ -65,4 +66,14 @@ function CardMessage() {
       <Button>Contactar</Button>
     </div>
   )
+}
+
+//
+OwnerCard.propTypes = {
+  User: PropTypes.object,
+}
+
+Card.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.any,
 }

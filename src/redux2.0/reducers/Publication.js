@@ -4,8 +4,6 @@ const publication = createSlice({
   name: 'publication',
   initialState: {
     publications: [],
-    page: 0,
-    leakedPublications: [],
     detailPublication: {},
   },
   reducers: {
@@ -14,9 +12,6 @@ const publication = createSlice({
     },
     setDetailPublication: (state, action) => {
       state.detailPublication = action.payload
-    },
-    setPublicationPage: (state, action) => {
-      state.page = action.payload
     },
   },
 })
