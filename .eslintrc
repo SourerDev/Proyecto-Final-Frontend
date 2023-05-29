@@ -30,7 +30,7 @@
     "arrow-spacing": ["error", { "before": true, "after": true }],
     "react/prop-types": "warn",
     "react/react-in-jsx-scope": "off",
-    "no-unused-vars": "off",
+    "no-unused-vars": "warn",
     "jsx-quotes": "off",
     "no-console": "error"
   }
