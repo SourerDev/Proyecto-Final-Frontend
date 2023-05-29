@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { setPublicationPage } from '../../redux2.0/reducers/Publication'
+import React from 'react'
+import { actionsApp } from '../../redux2.0/reducers'
 import { useDispatch } from 'react-redux'
 
 export function Pagination({ nButtons, currentPage }) {
@@ -17,7 +17,7 @@ export function Pagination({ nButtons, currentPage }) {
     <nav aria-label="Page navigation example">
       <ul className="inline-flex items-center -space-x-px">
         <button
-          onClick={() => dispatch(setPublicationPage(currentPage - 1))}
+          onClick={() => dispatch(actionsApp(currentPage - 1))}
           disabled={currentPage === 0 ? true : false}
         >
           <li>
@@ -47,7 +47,7 @@ export function Pagination({ nButtons, currentPage }) {
             <button
               key={i}
               className="boton"
-              onClick={() => dispatch(setPublicationPage(number))}
+              onClick={() => dispatch(actionsApp(number))}
             >
               <li>
                 <a
@@ -64,7 +64,7 @@ export function Pagination({ nButtons, currentPage }) {
             </button>
           ))}
         <button
-          onClick={() => dispatch(setPublicationPage(currentPage + 1))}
+          onClick={() => dispatch(actionsApp(currentPage + 1))}
           disabled={currentPage === nButtons - 1 ? true : false}
         >
           <li>
