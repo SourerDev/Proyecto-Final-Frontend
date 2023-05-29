@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Pagination } from '../components/pagination/Pagination.jsx'
+import { Pagination } from '../components/Pagination.jsx'
 import { PropertyCard } from '../components/cards/PropertyCard.jsx'
 import { arrayPaginator } from '../utils'
-
+import { actionsApp } from '../redux2.0/reducers'
 import AdvancedFilters from '../components/advanced-filters/AdvancedFilters.jsx'
 import ModalAF from '../components/modal/ModalAdvancedFilters.jsx'
 //import LandingSearch from '../../components/landingSearch/LandingSearch.jsx';
@@ -56,7 +56,11 @@ export function Home() {
 
       {/* {typeof (filteredProperties) === "string" &&(swal.fire(noProperties()).then(res => console.log()))} */}
       <div className="flex flex-wrap justify-center sm:flex-row lg:shadow-2xl">
-        <Pagination nButtons={nButtons} currentPage={page} />
+        <Pagination
+          nButtons={nButtons}
+          currentPage={page}
+          setPage={(page) => dispatch(actionsApp.setPage(page))}
+        />
         {_publications?.length &&
           _publications.map((publication, i) => {
             const { idPublication, modality, price, id } = publication
