@@ -36,7 +36,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eslint": "eslint ./**/*.{js,jsx}"
+    "eslint": "eslint ./**/*.{js,jsx}",
+    "build:serve": "npm run build & serve -s build"
   },
   "eslintConfig": {
     "extends": [

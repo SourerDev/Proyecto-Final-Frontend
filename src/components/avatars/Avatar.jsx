@@ -1,4 +1,8 @@
+import PropTypes from 'prop-types'
+
 export function Avatar({ className, avatar, name, active }) {
+  if (avatar) return null
+
   return (
     <picture
       className={`relative grid h-auto w-16 place-content-center overflow-hidden ${className}`}
@@ -10,9 +14,10 @@ export function Avatar({ className, avatar, name, active }) {
     </picture>
   )
 }
+
 Avatar.propTypes = {
-  name: String,
-  className: String,
-  avatar: String,
-  active: Boolean,
+  className: PropTypes.string,
+  avatar: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  active: PropTypes.bool.isRequired,
 }
