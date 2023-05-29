@@ -17,7 +17,7 @@ export function Pagination({ nButtons, currentPage }) {
     <nav aria-label="Page navigation example">
       <ul className="inline-flex items-center -space-x-px">
         <button
-          onClick={() => dispatch(actionsApp(currentPage - 1))}
+          onClick={() => dispatch(actionsApp.setPage(currentPage - 1))}
           disabled={currentPage === 0 ? true : false}
         >
           <li>
@@ -47,7 +47,7 @@ export function Pagination({ nButtons, currentPage }) {
             <button
               key={i}
               className="boton"
-              onClick={() => dispatch(actionsApp(number))}
+              onClick={() => dispatch(actionsApp.setPage(number))}
             >
               <li>
                 <a
@@ -64,7 +64,7 @@ export function Pagination({ nButtons, currentPage }) {
             </button>
           ))}
         <button
-          onClick={() => dispatch(actionsApp(currentPage + 1))}
+          onClick={() => dispatch(actionsApp.setPage(currentPage + 1))}
           disabled={currentPage === nButtons - 1 ? true : false}
         >
           <li>
