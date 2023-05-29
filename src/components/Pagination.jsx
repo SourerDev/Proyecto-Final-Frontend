@@ -1,9 +1,6 @@
 import React from 'react'
-import { actionsApp } from '../../redux2.0/reducers'
-import { useDispatch } from 'react-redux'
 
-export function Pagination({ nButtons, currentPage }) {
-  const dispatch = useDispatch()
+export function Pagination({ nButtons, currentPage, setPage }) {
   function createArray(n) {
     var array = []
     for (var i = 0; i < n; i++) {
@@ -17,7 +14,7 @@ export function Pagination({ nButtons, currentPage }) {
     <nav aria-label="Page navigation example">
       <ul className="inline-flex items-center -space-x-px">
         <button
-          onClick={() => dispatch(actionsApp.setPage(currentPage - 1))}
+          onClick={() => (setPage(currentPage - 1))}
           disabled={currentPage === 0 ? true : false}
         >
           <li>
@@ -47,7 +44,7 @@ export function Pagination({ nButtons, currentPage }) {
             <button
               key={i}
               className="boton"
-              onClick={() => dispatch(actionsApp.setPage(number))}
+              onClick={() => setPage(number)}
             >
               <li>
                 <a
@@ -64,7 +61,7 @@ export function Pagination({ nButtons, currentPage }) {
             </button>
           ))}
         <button
-          onClick={() => dispatch(actionsApp.setPage(currentPage + 1))}
+          onClick={() => setPage(currentPage + 1)}
           disabled={currentPage === nButtons - 1 ? true : false}
         >
           <li>
