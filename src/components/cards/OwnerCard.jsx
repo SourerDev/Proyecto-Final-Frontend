@@ -14,7 +14,7 @@ export function OwnerCard({ User }) {
       <div className="flex items-center gap-x-4">
         <Avatar
           avatar={User.photo}
-          ame={`${User.fName} ${User.lName}`}
+          name={`${User.fName} ${User.lName}`}
           active={User.active}
         />
         <p className="-ml-2 flex flex-col">
