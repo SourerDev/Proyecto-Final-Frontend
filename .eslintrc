@@ -32,6 +32,6 @@
     "react/react-in-jsx-scope": "off",
     "no-unused-vars": "warn",
     "jsx-quotes": "off",
-    "no-console": "error"
+    "no-console": "warn"
   }
 }
