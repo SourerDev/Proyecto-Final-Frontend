@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-import Landing from './pages/Landing.jsx'
+import { Landing } from './pages/Landing.jsx'
 /*
 import Detail from "./pages/detail/Detail.jsx";
 import Form from "./pages/createProperty/form.jsx"; */
@@ -25,13 +25,12 @@ import Nosotros from './components/Nosotros/nosotros'
 
 //Components
 import Footer from './components/footer/Footer.jsx'
-
-//actions
-import { actionsPublications } from './redux2.0/reducers'
-
-import { ApiPropYou } from './services'
 import { PropertyDetails } from './pages/property/PropertyDetails.jsx'
 import { ScrollToTop } from './components/ScrollToTop.jsx'
+
+//actions
+import { ApiPropYou } from './services'
+import { actionsPublications, actionsCity } from './redux2.0/reducers'
 
 function App() {
   const dispatch = useDispatch()
@@ -41,6 +40,10 @@ function App() {
       .then((response) => {
         const { publications } = response.data
         dispatch(actionsPublications.setPublications(publications))
+        ApiPropYou.getCities().then((response) => {
+          const { cities } = response.data
+          dispatch(actionsCity.setCities(cities))
+        })
       })
       .catch((error) => {})
   }, [dispatch])
