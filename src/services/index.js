@@ -72,6 +72,7 @@ const callsApi = {
 const routes = {
   PUBLICATION: 'publish',
   USERS: 'user',
+  CITY: 'city',
 }
 
 export const ApiPropYou = {
@@ -96,6 +97,9 @@ export const ApiPropYou = {
   },
   updateUser: function ({ idUser, data }) {
     return apiProperties.put(`/${routes.USERS}/${idUser}`, data)
+  },
+  getCities: function () {
+    return apiProperties.get(`/${routes.CITY}/all`)
   },
 }
 
