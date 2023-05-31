@@ -1,13 +1,12 @@
-import {
-  setPublications,
-  setDetailPublication,
-} from './Publication.js'
+import { setPublications, setDetailPublication } from './Publication.js'
 import { setUser, setSignIn } from './User.js'
 import { setPage } from './App.js'
+import { setCities } from './City.js'
 
 export { publicationRs } from './Publication.js'
 export { userRs } from './User.js'
 export { appRs } from './App.js'
+export { cityRs } from './City.js'
 
 export const actionsPublications = {
   setPublications,
@@ -21,4 +20,8 @@ export const actionsUser = {
 
 export const actionsApp = {
   setPage,
+}
+
+export const actionsCity = {
+  setCities,
 }

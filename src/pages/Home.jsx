@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Pagination } from '../components/pagination/Pagination.jsx'
+import { Pagination } from '../components/Pagination.jsx'
 import { PropertyCard } from '../components/cards/PropertyCard.jsx'
 import { arrayPaginator } from '../utils'
-
+import { actionsApp } from '../redux2.0/reducers'
 import AdvancedFilters from '../components/advanced-filters/AdvancedFilters.jsx'
 import ModalAF from '../components/modal/ModalAdvancedFilters.jsx'
 //import LandingSearch from '../../components/landingSearch/LandingSearch.jsx';
@@ -55,42 +55,48 @@ export function Home() {
         */}
 
       {/* {typeof (filteredProperties) === "string" &&(swal.fire(noProperties()).then(res => console.log()))} */}
-      <div className="flex flex-wrap justify-center sm:flex-row lg:shadow-2xl">
-        <Pagination nButtons={nButtons} currentPage={page} />
-        {_publications?.length &&
-          _publications.map((publication, i) => {
-            const { idPublication, modality, price, id } = publication
-            const mainData = {
-              idPublication,
-              modality,
-              price,
-            }
-            const { address, idCity, photos, bedrooms, bathrooms, type } =
-              publication.Property
-            const details = {
-              address,
-              city: idCity /* Temporal hasta refactor de autocomplete & API cities */,
-              photo: photos[0],
-              bedrooms,
-              bathrooms,
-              type,
-            }
+      <div className="flex flex-col items-center">
+        <Pagination
+          nButtons={nButtons}
+          currentPage={page}
+          setPage={(page) => dispatch(actionsApp.setPage(page))}
+        />
+        <div className='sm:flex sm:flex-wrap gap-1 sm:justify-center'>
+          {_publications?.length &&
+            _publications.map((publication, i) => {
+              const { idPublication, modality, price, id } = publication
+              const mainData = {
+                idPublication,
+                modality,
+                price,
+              }
+              const { address, idCity, photos, bedrooms, bathrooms, type } =
+                publication.Property
+              const details = {
+                address,
+                city: idCity /* Temporal hasta refactor de autocomplete & API cities */,
+                photo: photos[0],
+                bedrooms,
+                bathrooms,
+                type,
+              }
 
-            const user = {
-              ...publication.User,
-              avatar: publication.User.photo,
-            }
-            return (
-              <div key={i} className=" my-2 px-4 lg:px-9 ">
-                <PropertyCard
-                  mainData={mainData}
-                  details={details}
-                  user={user}
-                  signIn={signIn}
-                />
-              </div>
-            )
-          })}
+              const user = {
+                ...publication.User,
+                avatar: publication.User.photo,
+              }
+              return (
+                <div key={i} className=" my-2 px-4 lg:px-9 ">
+                  <PropertyCard
+                    mainData={mainData}
+                    details={details}
+                    user={user}
+                    signIn={signIn}
+                  />
+                </div>
+              )
+            })}
+        </div>
       </div>
     </div>
   )

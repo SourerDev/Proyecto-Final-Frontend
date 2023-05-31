@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 
 export function Avatar({ className, avatar, name, active }) {
-  if (avatar) return null
+  if (!avatar) return null
 
   return (
     <picture

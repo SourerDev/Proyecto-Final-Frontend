@@ -1,14 +1,16 @@
-//import HeaderLanding from "../../components/header/HeaderLanding.jsx";
-import CardsLanding from '../components/infoLanding/InfoLanding'
 //import Carousel from "../../components/carousel/Carousel";
-import ServiciosExtras from '../components/ServiciosExtras/serviciosExtras.jsx'
-
+import CardsLanding from '../components/infoLanding/InfoLanding'
 import DataLanding from '../components/dataLanding/DataLanding.jsx'
+import ServiciosExtras from '../components/ServiciosExtras/serviciosExtras.jsx'
+import { SearchCityInput } from '../components/form/inputs/SearchCityInput'
+import { MainHeader } from '../components/MainHeader'
 
-export default function Landing() {
+export function Landing() {
   return (
     <div className="border px-1">
-      {/* <HeaderLanding /> */}
+      <MainHeader>
+        <SearchCityInput />
+      </MainHeader>
       <div className="px-10">
         <DataLanding />
       </div>
