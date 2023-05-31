@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import AutocompleteSearch from '../autocomplete-search/autocompleteSearch.jsx'
+import { SearchCityInput } from '../form/inputs/SearchCityInput.jsx'
 import { filter } from '../../utils/filters.js'
 import {
   filterProperties,
@@ -262,7 +262,7 @@ export default function AdvancedFilters({ setModalOn }) {
           </div>{' '}
           <br />
           <div className=" flex justify-center px-2 ">
-            <AutocompleteSearch
+            <SearchCityInput
               refCity={refCity}
               apiData={citiesA}
               city={state.city}

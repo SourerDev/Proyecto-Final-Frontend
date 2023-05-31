@@ -60,6 +60,7 @@ export function SearchCityInput() {
     <div className="relative my-2 max-w-[400px]">
       <Input
         className="h-8 px-1 text-[1rem]"
+        placeholder="Buscar ciudad"
         value={city?.string}
         onChange={handleCity}
         onFocus={() => setShowResults(true)}
