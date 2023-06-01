@@ -10,8 +10,23 @@ export function Card({ className, children }) {
   )
 }
 
+export function ContainerCards({ className, children }) {
+  return (
+    <div
+      className={`sm:flex sm:flex-wrap gap-1 sm:justify-center ${className}`}
+    >
+      {children}
+    </div>
+  )
+}
 
+
+//
 Card.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.any,
+}
+ContainerCards.propTypes = {
   className: PropTypes.string,
   children: PropTypes.any,
 }
