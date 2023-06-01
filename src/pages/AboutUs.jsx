@@ -1,3 +1,63 @@
+import { CreatorCard } from '../components/cards/CreatorCard'
+import { GoBackButton } from '../components/form/buttons/GoBack'
+import { ContainerCards } from '../components/cards/Card'
+
 export function AboutUs() {
-  return <h1>Acerca de nosotros</h1>
+  return (
+    <>
+      <GoBackButton />
+      <ContainerCards>
+        {creators_info.map((creator, i) => (
+          <CreatorCard
+            key={i}
+            userName={creator.userName}
+            linkedin={creator.linkedin}
+          />
+        ))}
+      </ContainerCards>
+    </>
+  )
 }
+
+const creators_info = [
+  {
+    userName: 'SourerDev',
+    role: 'Full Stack developer',
+    linkedin: 'https://www.linkedin.com/in/yhonier-c-alegria/',
+  },
+  {
+    userName: 'TomasPerez1',
+    role: 'Full Stack developer',
+    linkedin: 'https://www.linkedin.com/in/tomas-perez-371bb4258/',
+  },
+  {
+    userName: 'enzo2022',
+    role: 'Full Stack developer',
+    linkedin: 'https://www.linkedin.com/in/enzo-monti-65bb9a19a/',
+  },
+  {
+    userName: 'Agustin-Berger',
+    role: 'Full Stack developer',
+    linkedin: 'https://www.linkedin.com/in/agustin-berger-b9589a240/',
+  },
+  {
+    userName: 'chanticou',
+    role: 'Full Stack developer',
+    linkedin: 'https://www.linkedin.com/in/chantal-denise-coutenceau/',
+  },
+  {
+    userName: 'arturogutierrez11',
+    role: 'Full Stack developer',
+    linkedin: 'https://www.linkedin.com/in/arturo-gutierrez-6a7449181/',
+  },
+  {
+    userName: 'asouesou',
+    role: 'Full Stack developer',
+    linkedin: 'https://www.linkedin.com/in/HBOHermes',
+  },
+  {
+    userName: 'rmalegr',
+    role: 'Full Stack developer',
+    linkedin: 'https://www.linkedin.com/in/rmalegre',
+  },
+]
