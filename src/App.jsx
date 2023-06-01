@@ -23,7 +23,7 @@ import DashboardUsers from "./components/dashboard/DashboardUsers.jsx";
 
 //Components
 import { Nav } from './components/navs/Nav.jsx'
-import Footer from './components/footer/Footer.jsx'
+import { Footer } from './components/Footer.jsx'
 import { ScrollToTop } from './components/ScrollToTop.jsx'
 
 import { ApiPropYou } from './services'
