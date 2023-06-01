@@ -2,16 +2,15 @@ import { Route, Routes } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { Landing } from './pages/Landing.jsx'
-/*
-import Detail from "./pages/detail/Detail.jsx";
-import Form from "./pages/createProperty/form.jsx"; */
-
-import { Nav } from './components/navs/Nav.jsx'
+//pages
 import { SignUp } from './pages/session/SignUp.jsx'
 import { SignIn } from './pages/session/SignIn.jsx'
 import { Home } from './pages/Home.jsx'
 import { Profile } from './pages/profile/Profile.jsx'
+import { PropertyDetails } from './pages/property/PropertyDetails.jsx'
+import { Landing } from './pages/Landing.jsx'
+import { AboutUs } from './pages/AboutUs.jsx'
+
 /*
 import BePremium from "./pages/bePremium/BePremium";
 import Redirect from "./components/redirect/Redirect";
@@ -21,14 +20,12 @@ import Favoriteid from "./components/FaroriteId/favoriteId";
 import DashboardPage from "./pages/dashboard/DashboardPage";
 import DashboardUsers from "./components/dashboard/DashboardUsers.jsx";
 */
-import Nosotros from './components/Nosotros/nosotros'
 
 //Components
+import { Nav } from './components/navs/Nav.jsx'
 import Footer from './components/footer/Footer.jsx'
-import { PropertyDetails } from './pages/property/PropertyDetails.jsx'
 import { ScrollToTop } from './components/ScrollToTop.jsx'
 
-//actions
 import { ApiPropYou } from './services'
 import { actionsPublications, actionsCity } from './redux2.0/reducers'
 
@@ -59,7 +56,7 @@ function App() {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/about-us" element={<Nosotros />} />
+          <Route path="/about-us" element={<AboutUs />} />
           <Route path="/home" element={<Home />} />
           <Route path="/properties/:id" element={<PropertyDetails />} />
           {/* <Route path="/newRoute" element={<><Nav/><DashboardUsers/></>}/>
