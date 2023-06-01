@@ -82,7 +82,7 @@ export function PropertyCard({ mainData, details, user, favorite, signIn }) {
       <div className="flex h-20 w-full justify-between px-2">
         <div className="flex flex-col justify-center p-2">
           <h3 className="pt-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-            {city || 'Sin localización'}
+            {city.string}
           </h3>
           <span className="-mt-1 pl-2 text-sm">{address}</span>
           <span className="pt-2 text-2xl font-bold text-gray-900 dark:text-white">

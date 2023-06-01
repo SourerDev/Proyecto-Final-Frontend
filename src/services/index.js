@@ -1,5 +1,4 @@
-import { apiProperties } from './api/baseApi.js'
-import { getOfStorage } from '../utils'
+import { apiProperties, apiGitHub } from './api/baseApi.js'
 
 const property = 'properties'
 const user = 'users'
@@ -100,6 +99,12 @@ export const ApiPropYou = {
   },
   getCities: function () {
     return apiProperties.get(`/${routes.CITY}/all`)
+  },
+}
+
+export const ApiGitHub = {
+  getUser: function ({ userName }) {
+    return apiGitHub.get(`/users/${userName}`)
   },
 }
 

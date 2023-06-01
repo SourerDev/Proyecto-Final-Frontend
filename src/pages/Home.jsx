@@ -70,11 +70,11 @@ export function Home() {
                 modality,
                 price,
               }
-              const { address, idCity, photos, bedrooms, bathrooms, type } =
+              const { address, City, photos, bedrooms, bathrooms, type } =
                 publication.Property
               const details = {
                 address,
-                city: idCity /* Temporal hasta refactor de autocomplete & API cities */,
+                city: City /* Temporal hasta refactor de autocomplete & API cities */,
                 photo: photos[0],
                 bedrooms,
                 bathrooms,
