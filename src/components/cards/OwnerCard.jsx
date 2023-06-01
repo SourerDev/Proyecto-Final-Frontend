@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Avatar } from '../avatars/Avatar'
 import { Button } from '../form/buttons/Button'
 import { TextArea } from '../form/text-areas/TextArea'
+import { Card } from './Card'
 import {
   EnvelopeIcon,
   DevicePhoneMobileIcon,
@@ -44,15 +45,7 @@ export function OwnerCard({ User }) {
   )
 }
 
-function Card({ className, children }) {
-  return (
-    <div
-      className={`h-auto min-w-[50px] border bg-white px-4 py-2 ${className}`}
-    >
-      {children}
-    </div>
-  )
-}
+
 
 function CardMessage() {
   const [value, setValue] = useState('')
@@ -73,7 +66,3 @@ OwnerCard.propTypes = {
   User: PropTypes.object,
 }
 
-Card.propTypes = {
-  className: PropTypes.string,
-  children: PropTypes.any,
-}
