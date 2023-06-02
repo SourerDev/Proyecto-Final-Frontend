@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { ApiGitHub } from '../../services'
 import PropTypes from 'prop-types'
-
+import { ArrowPathIcon } from '@heroicons/react/24/outline'
 import { Card } from './Card'
 
-export function CreatorCard({ userName, linkedin }) {
+export function CreatorCard({ userName, role, linkedin }) {
   const [creator, setCreator] = useState({})
   const [isLoading, setLoading] = useState(true)
 
@@ -20,17 +20,22 @@ export function CreatorCard({ userName, linkedin }) {
   return (
     <Card className="flex h-[338px] w-[250px] flex-col items-center justify-center">
       {isLoading ? (
-        <h1>loading...</h1>
+        <div>
+          <ArrowPathIcon className="h-auto w-10 animate-spin stroke-gray-300" />
+        </div>
       ) : (
         <>
           <picture className="aspect-square w-40 overflow-hidden rounded-full shadow-lg">
             <img className="" src={creator.avatar_url} alt="" />
           </picture>
 
-          <div className="p-6 ">
-            <h5 className="mb-2 text-center text-xl font-medium text-gray-900">
-              {creator.name}
-            </h5>
+          <div className="p-6">
+            <p className='flex flex-col -gap-x-1 mb-2'>
+              <span className="text-xl font-medium text-gray-900">
+                {creator.name}
+              </span>
+              <span className='text-gray-500'>{role}</span>
+            </p>
             <div className="flex flex-row justify-center">
               <a
                 className="mr-4"
@@ -43,7 +48,7 @@ export function CreatorCard({ userName, linkedin }) {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 496 512"
-                  className="h-5 w-5"
+                  className="h-6 w-6 text-gray-600 hover:text-gray-900"
                 >
                   <path
                     fill="currentColor"
@@ -56,7 +61,7 @@ export function CreatorCard({ userName, linkedin }) {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 448 512"
-                  className="h-5 w-5"
+                  className="h-6 w-6 text-gray-600 hover:text-blue-700"
                 >
                   {' '}
                   <path
@@ -77,4 +82,5 @@ export function CreatorCard({ userName, linkedin }) {
 CreatorCard.propTypes = {
   userName: PropTypes.string.isRequired,
   linkedin: PropTypes.string.isRequired,
+  role: PropTypes.string.isRequired,
 }

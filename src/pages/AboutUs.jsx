@@ -1,17 +1,21 @@
 import { CreatorCard } from '../components/cards/CreatorCard'
 import { GoBackButton } from '../components/form/buttons/GoBack'
 import { ContainerCards } from '../components/cards/Card'
+import { ArrowLeftIcon } from '@heroicons/react/24/outline'
 
 export function AboutUs() {
   return (
     <>
-      <GoBackButton />
-      <ContainerCards>
+      <GoBackButton className="">
+        <ArrowLeftIcon className="h-auto w-8" />
+      </GoBackButton>
+      <ContainerCards className="gap-2">
         {creators_info.map((creator, i) => (
           <CreatorCard
             key={i}
             userName={creator.userName}
             linkedin={creator.linkedin}
+            role={creator.role}
           />
         ))}
       </ContainerCards>
