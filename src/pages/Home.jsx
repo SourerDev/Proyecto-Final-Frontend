@@ -9,6 +9,7 @@ import ModalAF from '../components/modal/ModalAdvancedFilters.jsx'
 //import LandingSearch from '../../components/landingSearch/LandingSearch.jsx';
 import swal from 'sweetalert2'
 import { noProperties } from '../sweetAlerts/sweetAlerts.js'
+import { LoadingProperties } from '../components/loaders/LoadingProperties.jsx'
 //import state from 'sweetalert/typings/modules/state.js';
 
 export function Home() {
@@ -61,9 +62,10 @@ export function Home() {
           currentPage={page}
           setPage={(page) => dispatch(actionsApp.setPage(page))}
         />
-        <div className='sm:flex sm:flex-wrap gap-1 sm:justify-center'>
-          {_publications?.length &&
-            _publications.map((publication, i) => {
+
+        {_publications?.length ? (
+          <div className="gap-x-6 gap-y-4 sm:flex sm:flex-wrap sm:justify-center">
+            {_publications.map((publication, i) => {
               const { idPublication, modality, price, id } = publication
               const mainData = {
                 idPublication,
@@ -86,17 +88,19 @@ export function Home() {
                 avatar: publication.User.photo,
               }
               return (
-                <div key={i} className=" my-2 px-4 lg:px-9 ">
-                  <PropertyCard
-                    mainData={mainData}
-                    details={details}
-                    user={user}
-                    signIn={signIn}
-                  />
-                </div>
+                <PropertyCard
+                  key={i}
+                  mainData={mainData}
+                  details={details}
+                  user={user}
+                  signIn={signIn}
+                />
               )
             })}
-        </div>
+          </div>
+        ) : (
+          <LoadingProperties cards={CARDS_PER_PAGE} />
+        )}
       </div>
     </div>
   )
