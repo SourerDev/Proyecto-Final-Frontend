@@ -45,7 +45,7 @@ export function SearchCityInput({ city, setCity }) {
       if (!target.value) return
       setCity((prev) => ({
         ...prev,
-        idCity: 0,
+        idCity: null,
         name: '',
         province: '',
       }))
