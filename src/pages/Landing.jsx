@@ -2,14 +2,14 @@
 import CardsLanding from '../components/infoLanding/InfoLanding'
 import DataLanding from '../components/dataLanding/DataLanding.jsx'
 import ServiciosExtras from '../components/ServiciosExtras/serviciosExtras.jsx'
-import { SearchCityInput } from '../components/form/inputs/SearchCityInput'
+import { InitialFiltersCard } from '../components/form/InitialFiltersCard'
 import { MainHeader } from '../components/MainHeader'
 
 export function Landing() {
   return (
     <div className="border px-1">
-      <MainHeader>
-        <SearchCityInput />
+      <MainHeader className="flex items-center justify-center">
+        <InitialFiltersCard />
       </MainHeader>
       <div className="px-10">
         <DataLanding />
