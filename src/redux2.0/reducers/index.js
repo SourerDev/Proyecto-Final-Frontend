@@ -1,6 +1,6 @@
 import { setPublications, setDetailPublication } from './Publication.js'
 import { setUser, setSignIn } from './User.js'
-import { setPage } from './App.js'
+import { setPage, setFilters, resetFilters } from './App.js'
 import { setCities } from './City.js'
 
 export { publicationRs } from './Publication.js'
@@ -20,6 +20,8 @@ export const actionsUser = {
 
 export const actionsApp = {
   setPage,
+  setFilters,
+  resetFilters,
 }
 
 export const actionsCity = {
