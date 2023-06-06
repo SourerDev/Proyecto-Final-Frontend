@@ -11,8 +11,8 @@ export function Landing() {
     (state) => state.app.filters
   )
   return (
-    <div className="border px-1">
-      <MainHeader className="flex items-center justify-center">
+    <div className="px-1">
+      <MainHeader className="flex items-center justify-center mb-2">
         <InitialFiltersCard />
       </MainHeader>
       <div>
