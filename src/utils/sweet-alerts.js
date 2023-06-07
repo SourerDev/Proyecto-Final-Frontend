@@ -31,9 +31,8 @@ export const Alerts = {
   soon: ({ text }) => {
     const toast = Toast({ position: 'top-right' })
     return toast.fire({
-      title: 'Próximamente',
+      title: text || 'Próximamente',
       icon: 'info',
-      text,
     })
   },
 }
