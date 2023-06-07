@@ -8,6 +8,7 @@ import {
   EnvelopeIcon,
   DevicePhoneMobileIcon,
 } from '@heroicons/react/24/outline'
+import { Alerts } from '../../utils'
 
 export function OwnerCard({ User }) {
   return (
@@ -45,8 +46,6 @@ export function OwnerCard({ User }) {
   )
 }
 
-
-
 function CardMessage() {
   const [value, setValue] = useState('')
   return (
@@ -56,7 +55,9 @@ function CardMessage() {
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
-      <Button>Contactar</Button>
+      <Button onClick={() => Alerts.soon({ text: 'Pronto podras contactar' })}>
+        Contactar
+      </Button>
     </div>
   )
 }
@@ -65,4 +66,3 @@ function CardMessage() {
 OwnerCard.propTypes = {
   User: PropTypes.object,
 }
-
