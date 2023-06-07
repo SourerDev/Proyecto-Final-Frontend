@@ -13,11 +13,12 @@ function Toast({ position = 'bottom-right' }) {
   })
 }
 export const Alerts = {
-  success: ({ text }) => {
-    return Swal.fire({
-      title: 'Correcto',
-      text,
+  smallSuccess: ({ text }) => {
+    const toast = Toast({ position: 'top-right' })
+
+    return toast.fire({
       icon: 'success',
+      title: text,
     })
   },
   warning: ({ text }) => {
@@ -25,6 +26,14 @@ export const Alerts = {
 
     return toast.fire({
       icon: 'warning',
+      title: text,
+    })
+  },
+  smallError: ({ text }) => {
+    const toast = Toast({ position: 'top' })
+
+    return toast.fire({
+      icon: 'error',
       title: text,
     })
   },
