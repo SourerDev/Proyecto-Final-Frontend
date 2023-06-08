@@ -2,10 +2,10 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialFilters = {
   byPublication: {
-    modality: ''
+    modality: '',
   },
   byProperty: {
-    type: ''
+    type: '',
   },
   byCity: {
     idCity: null,
@@ -18,6 +18,7 @@ const app = createSlice({
   initialState: {
     page: 0,
     filters: initialFilters,
+    viewNav: true,
   },
   reducers: {
     setPage: function (state, action) {
@@ -29,8 +30,11 @@ const app = createSlice({
     resetFilters: function (state) {
       state.filters = initialFilters
     },
+    setViewNav: function (state, action) {
+      state.viewNav = action.payload
+    },
   },
 })
 
 export const appRs = app.reducer
-export const { setPage, setFilters, resetFilters } = app.actions
+export const { setPage, setFilters, resetFilters, setViewNav } = app.actions

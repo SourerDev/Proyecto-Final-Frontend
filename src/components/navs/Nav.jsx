@@ -6,8 +6,11 @@ import { ModalNav } from './ModalNav.jsx'
 import { MainAvatar } from '../avatars/MainAvatar.jsx'
 
 export function Nav({ rutes = true, login = true }) {
+  const view = useSelector(state => state.app.viewNav)
   const { signIn, session } = useSelector((state) => state.user)
   const userType = session?.userType
+
+  if (!view) return null
 
   return (
     <div className="-mx-auto max-w-8xl relative mb-1 bg-white px-2">

@@ -2,9 +2,9 @@ import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { loadUserInfo } from '../../redux/actions'
 import { Icon } from '../../assets'
 import { useSelector } from 'react-redux'
+import { actionsUser } from '../../redux2.0/reducers'
 
 export function MainAvatar() {
   const dispatch = useDispatch()
@@ -87,7 +87,10 @@ export function MainAvatar() {
 
             <Link to="/home">
               <Popover.Button
-                onClick={() => dispatch(loadUserInfo({}))}
+                onClick={() => {
+                  dispatch(actionsUser.setUser({}))
+                  dispatch(actionsUser.setSignIn(false))
+                }}
                 className="flex w-full text-gray-500 hover:text-red-600"
               >
                 <Icon.Exit

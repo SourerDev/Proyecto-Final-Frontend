@@ -19,7 +19,7 @@ export function Home() {
   const { page } = useSelector((state) => state.app)
   const { signIn } = useSelector((state) => state.user)
 
-  const CARDS_PER_PAGE = 4
+  const CARDS_PER_PAGE = 9
   const { newArr, nButtons } = arrayPaginator(
     publications,
     CARDS_PER_PAGE,
