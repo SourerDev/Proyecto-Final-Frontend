@@ -44,4 +44,27 @@ export const Alerts = {
       icon: 'info',
     })
   },
+  confirmation: ({
+    title = '¿Estas Seguro?',
+    icon = 'warning',
+    text = 'Esta accion es irreversible',
+    confirmButtonText = 'Confirmar',
+  }) => {
+    return Swal.fire({
+      title,
+      icon,
+      text,
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar !',
+      confirmButtonText,
+      customClass: {
+        confirmButton:
+          'px-3 py-2 mx-2 text-white min-w-[150px]  bg-green-600 hover:bg-green-700 font-medium rounded border-2 border-transparent hover:border-green-200',
+        cancelButton:
+          'px-3 py-2 mx-2 text-white min-w-[150px] bg-red-600 hover:bg-red-700 font-medium rounded border-2 border-transparent hover:border-red-200',
+      },
+      reverseButtons: true,
+      buttonsStyling: false,
+    })
+  },
 }
