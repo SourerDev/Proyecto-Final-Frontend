@@ -6,11 +6,11 @@ import { ApiPropYou, addAuthorizationWithToken } from '../../services'
 import { actionsUser, actionsApp } from '../../redux2.0/reducers'
 import { saveInStorage, isValidSingUp } from '../../utils'
 import { Input } from '../../components/form/inputs/Input'
-import swal from 'sweetalert'
 import { PasswordInput } from '../../components/form/inputs/PasswordInput'
 import { GoBackButton } from '../../components/form/buttons/GoBack'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 
+import { Alerts } from '../../utils'
 export function SignUp() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -52,12 +52,7 @@ export function SignUp() {
       const { user, token } = response.data
       dispatch(actionsUser.setUser(user))
       saveInStorage('token', token)
-
-      swal({
-        title: 'Ecxelente',
-        text: 'Usuario Creado!',
-        icon: 'success',
-      })
+      Alerts.smallSuccess({ text: 'Bienvenido' })
       addAuthorizationWithToken(token)
       navigate('/home')
     } catch ({ response, ...error }) {
@@ -69,11 +64,7 @@ export function SignUp() {
         text = response?.data
       }
 
-      swal({
-        title: 'Error',
-        text: `Ha sucedido un error \n ${text}`,
-        icon: 'error',
-      })
+      Alerts.smallError({ text })
     }
   }
   useEffect(() => {
@@ -82,8 +73,8 @@ export function SignUp() {
   }, [])
   return (
     <>
-      <div className="flex items-center justify-end h-[3.5rem] px-8">
-        <GoBackButton className='bg-transparent hover:bg-transparent shadow-none group'>
+      <div className="flex h-[3.5rem] items-center justify-end px-8">
+        <GoBackButton className="group bg-transparent shadow-none hover:bg-transparent">
           <XMarkIcon className="h-auto w-9 text-gray-400 group-hover:text-gray-600" />
         </GoBackButton>
       </div>
