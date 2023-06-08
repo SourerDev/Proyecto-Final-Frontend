@@ -1,11 +1,11 @@
 import Swal from 'sweetalert2'
 
-function Toast({ position = 'bottom-right' }) {
+function Toast({ position = 'bottom-right', timer = 3000 }) {
   return Swal.mixin({
     toast: true,
     position,
     showConfirmButton: false,
-    timer: 3000,
+    timer,
     didOpen: (toast) => {
       toast.addEventListener('mouseenter', Swal.stopTimer)
       toast.addEventListener('mouseleave', Swal.resumeTimer)
@@ -21,8 +21,8 @@ export const Alerts = {
       title: text,
     })
   },
-  warning: ({ text }) => {
-    const toast = Toast({ position: 'top-right' })
+  smallWarning: ({ text }) => {
+    const toast = Toast({ position: 'bottom', timer: 4000 })
 
     return toast.fire({
       icon: 'warning',

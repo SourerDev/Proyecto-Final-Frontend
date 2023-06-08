@@ -7,12 +7,13 @@ import { useNavigate } from 'react-router-dom'
 import { actualizar } from '../../sweetAlerts/sweetAlerts'
 import swal from 'sweetalert2'
 import { ApiPropYou } from '../../services'
+import { Alerts } from '../../utils'
 
 export function Profile() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const { session } = useSelector((state) => state.user)
+  const { session, signIn } = useSelector((state) => state.user)
   const [newUser, setNewUser] = useState({
     userName: session.userName,
     fName: session.fName,
@@ -23,7 +24,12 @@ export function Profile() {
   })
   const [errs, setErrs] = useState({})
 
-  useEffect(() => {}, [newUser, errs])
+  useEffect(() => {
+    if (!signIn) {
+      Alerts.smallWarning({ text: 'Lo sentimos, no autorizado' })
+      navigate('/')
+    }
+  }, [newUser, errs])
 
   function onUserChange(e) {
     setNewUser({
@@ -37,7 +43,7 @@ export function Profile() {
       })
     ); */
   }
-
+  if(!signIn) return null
   return (
     <div className="lg:[4rem] flex h-[40rem] flex-col items-center justify-center bg-sky-200 sm:h-[43rem]">
       <p className="self-right text-2xl">Editar usuario</p>
