@@ -11,7 +11,7 @@ import {
   GoogleAuthProvider,
   GithubAuthProvider,
 } from 'firebase/auth'
-import { saveInStorage, getOfStorage } from '../../utils'
+import { saveInStorage, getOfStorage, Alerts } from '../../utils'
 
 //components
 import { Input } from '../../components/form/inputs/Input'
@@ -115,9 +115,9 @@ export function SignIn() {
   return (
     <>
       <div className="flex h-[3.5rem] items-center justify-end px-8">
-        <GoBackButton className="group bg-transparent shadow-none hover:bg-transparent">
+        <Link to="/home" className="group bg-transparent shadow-none hover:bg-transparent">
           <XMarkIcon className="h-auto w-9 text-gray-400 group-hover:text-gray-600" />
-        </GoBackButton>
+        </Link>
       </div>
       <section className="h-[87vh]">
         <div className="h-full px-6 text-gray-800">
@@ -173,18 +173,26 @@ export function SignIn() {
                       {response.msg}
                     </p>
                   )}
-                  <div className="my-2 flex flex-col p-2 sm:flex-row sm:justify-center sm:gap-x-4">
+                  <div className="my-2 flex w-full flex-col gap-y-4 p-2">
+                    <p className="flex justify-between text-sm">
+                      <span
+                        onClick={() => Alerts.soon({ text: 'Acción Proximamente' })}
+                        className="cursor-pointer hover:font-medium hover:underline"
+                      >
+                        ¿Olvidaste tu Contraseña?
+                      </span>
+                      <Link
+                        to="/sign-up"
+                        className="hover:font-medium text-blue-700"
+                      >
+                        Registrarme
+                      </Link>
+                    </p>
                     <input
                       type="submit"
-                      className="inline-block rounded bg-blue-600 px-7 py-3 text-sm font-medium uppercase leading-snug text-white shadow-md transition duration-150 ease-in-out focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 hover:bg-blue-700 hover:shadow-lg active:bg-blue-800 active:shadow-lg"
+                      className="inline-block min-w-[170px] self-center rounded bg-blue-600 px-7 py-3 text-sm font-medium uppercase leading-snug text-white shadow-md transition duration-150 ease-in-out focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 hover:bg-blue-700 hover:shadow-lg active:bg-blue-800 active:shadow-lg"
                       value={'Iniciar Sesión'}
                     />
-
-                    <Link to="/sign-up">
-                      <span className="inline-block w-full rounded bg-red-400 px-7 py-3 text-sm font-medium uppercase leading-snug text-white shadow-md transition duration-150 ease-in-out focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:bg-red-400 hover:bg-blue-700 hover:shadow-lg active:bg-blue-800 active:shadow-lg">
-                        Registrarme
-                      </span>
-                    </Link>
                   </div>
                 </div>
               </form>

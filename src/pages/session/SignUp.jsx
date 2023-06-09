@@ -7,7 +7,6 @@ import { actionsUser, actionsApp } from '../../redux2.0/reducers'
 import { saveInStorage, isValidSingUp } from '../../utils'
 import { Input } from '../../components/form/inputs/Input'
 import { PasswordInput } from '../../components/form/inputs/PasswordInput'
-import { GoBackButton } from '../../components/form/buttons/GoBack'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 
 import { Alerts } from '../../utils'
@@ -74,9 +73,12 @@ export function SignUp() {
   return (
     <>
       <div className="flex h-[3.5rem] items-center justify-end px-8">
-        <GoBackButton className="group bg-transparent shadow-none hover:bg-transparent">
+        <Link
+          to="/home"
+          className="group bg-transparent shadow-none hover:bg-transparent"
+        >
           <XMarkIcon className="h-auto w-9 text-gray-400 group-hover:text-gray-600" />
-        </GoBackButton>
+        </Link>
       </div>
       <div className="h-[87vh]">
         <section className="my-4 h-full">
@@ -175,23 +177,22 @@ export function SignUp() {
                     <ErrorMessage error={errs.cellphone} />
                   </div>
 
-                  <div className="grid flex-col items-start gap-2 text-center lg:h-20 lg:grid-cols-3 lg:content-center lg:gap-4 lg:text-left">
+                  <div className="-mt-3 flex flex-col gap-y-2">
+                    <Link
+                      to="/sign-in"
+                      className="self-end text-sm text-blue-700 underline hover:font-medium"
+                    >
+                      Iniciar sesión
+                    </Link>
                     <button
                       disabled={
                         !(!Object.keys(errs).length && data.email.length)
                       }
                       type="submit"
-                      className="disabled: inline-block rounded bg-blue-600 px-7 py-3 text-sm font-medium uppercase leading-snug text-white shadow-md transition duration-150 ease-in-out focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:bg-red-400 hover:bg-blue-700 hover:shadow-lg active:bg-blue-800 active:shadow-lg"
+                      className="min-w-[170px] self-center rounded bg-blue-600 px-7 py-3 text-sm font-medium uppercase leading-snug text-white shadow-md transition duration-150 ease-in-out focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 disabled:inline-block disabled:cursor-not-allowed disabled:bg-red-400 hover:bg-blue-700 hover:shadow-lg active:bg-blue-800 active:shadow-lg"
                     >
-                      Crear Usuario
+                      Registrarme
                     </button>
-                    <div>
-                      <Link to="/sign-in">
-                        <span className="inline-block rounded bg-blue-600 px-7 py-3 text-sm font-medium uppercase leading-snug text-white shadow-md transition duration-150 ease-in-out focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:bg-red-400 hover:bg-blue-700 hover:shadow-lg active:bg-blue-800 active:shadow-lg">
-                          Iniciar sesión
-                        </span>
-                      </Link>
-                    </div>
                   </div>
                 </form>
               </div>
