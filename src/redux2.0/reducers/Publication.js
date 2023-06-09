@@ -4,6 +4,7 @@ const publication = createSlice({
   name: 'publication',
   initialState: {
     publications: [],
+    filteredPublications: [],
     detailPublication: {},
   },
   reducers: {
@@ -13,9 +14,12 @@ const publication = createSlice({
     setDetailPublication: (state, action) => {
       state.detailPublication = action.payload
     },
+    setFilteredPublications: (state, action) => {
+      state.filteredPublications = action.payload
+    },
   },
 })
 
 export const publicationRs = publication.reducer
-export const { setPublications, setDetailPublication, setPublicationPage } =
+export const { setPublications, setDetailPublication, setPublicationPage, setFilteredPublications } =
   publication.actions

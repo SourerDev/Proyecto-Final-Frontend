@@ -78,6 +78,9 @@ export const ApiPropYou = {
   getPublications: function () {
     return apiProperties.get(`/${routes.PUBLICATION}/all`)
   },
+  getFilteredPublications: function (data) {
+    return apiProperties.post(`/${routes.PUBLICATION}/filter`, data)
+  },
   getPublicationById: function ({ idPublication }) {
     return apiProperties.get(`/${routes.PUBLICATION}/${idPublication}`)
   },
@@ -100,6 +103,7 @@ export const ApiPropYou = {
   getCities: function () {
     return apiProperties.get(`/${routes.CITY}/all`)
   },
+
 }
 
 export const ApiGitHub = {
