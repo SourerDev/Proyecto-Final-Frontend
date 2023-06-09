@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom'
 
 export function Footer() {
   return (
-    <div className="flex flex-col items-center justify-around p-4  shadow sm:flex-row">
+    <div className="relative -mx-1 -mb-1 mt-4 flex flex-col items-center justify-around bg-[#111111]  py-12  text-white sm:flex-row">
+
       <div className="flex items-center space-x-4">
         <img
           src="https://images.vexels.com/media/users/3/142719/isolated/preview/f07a4b2d673e9935e58e6ff8262d4a1d-icono-de-casas-de-triangulo.png"
