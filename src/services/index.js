@@ -94,6 +94,9 @@ export const ApiPropYou = {
       cellphone,
     })
   },
+  googleSignin: function({ credential }){
+    return apiProperties.post(`/${routes.USERS}/google`, { credential })
+  },
   updateUser: function ({ idUser, data }) {
     return apiProperties.put(`/${routes.USERS}/${idUser}`, data)
   },
