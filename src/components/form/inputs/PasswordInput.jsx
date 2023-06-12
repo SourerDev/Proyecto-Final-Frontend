@@ -8,7 +8,7 @@ export function PasswordInput({ ...props }) {
     <div className="relative w-full ">
       <Input {...props} type={viewPassword ? 'password' : 'text'} />
       <button
-        className="absolute top-0 right-0 z-10 h-full w-8 border-l px-1 text-gray-600 hover:text-gray-800 "
+        className="absolute top-0 right-0 z-10 h-[90%] w-8 border-l px-1 my-0.5 text-gray-600 hover:text-gray-800 "
         type="button"
         onClick={() => setViewPassword(viewPassword ? false : true)}
       >

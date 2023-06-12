@@ -5,20 +5,11 @@ import { useNavigate } from 'react-router-dom'
 import { addAuthorizationWithToken } from '../../services'
 import { actionsUser, actionsApp } from '../../redux2.0/reducers'
 import { ApiPropYou } from '../../services'
-import { authentication } from '../../firabase/Firabase.Config.jsx'
-import {
-  signInWithPopup,
-  GoogleAuthProvider,
-  GithubAuthProvider,
-} from 'firebase/auth'
-import { saveInStorage, getOfStorage, Alerts } from '../../utils'
-
-//components
+import { saveInStorage, Alerts } from '../../utils'
 import { Input } from '../../components/form/inputs/Input'
 import { PasswordInput } from '../../components/form/inputs/PasswordInput'
-import { Button } from '../../components/form/buttons/Button'
 import { XMarkIcon } from '@heroicons/react/24/outline'
-import { GoBackButton } from '../../components/form/buttons/GoBack'
+import { GoogleSignin } from '../../modules/authentication/GoogleSignin'
 
 export function SignIn() {
   const navigate = useNavigate()
@@ -27,62 +18,6 @@ export function SignIn() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [response, setResponse] = useState({ state: true, msg: '' })
-
-  const setNavigate = () => {
-    const save = getOfStorage('detail')
-
-    if (save?.id) {
-      navigate(`/detail/${save.id}`)
-    } else {
-      navigate('/')
-    }
-  }
-
-  /* const handleClickGoogle = async () => {
-    const provider = new GoogleAuthProvider();
-    provider.addScope("email");
-    const { user } = await signInWithPopup(authentication, provider);
-    let data = {
-      email: user.email,
-      photo: user.photoURL,
-      userName: user.displayName,
-      password: user.uid,
-      user_type: "userLogged",
-    };
-    let loginValue = false;
-
-    try {
-      const post = await callsApi.postSignUp(data);
-      if (post?.data === "Usuario creado") {
-        loginValue = true;
-      }
-    } catch (error) {
-      let msg = error.response.data;
-      if (msg === "User already exist") {
-        loginValue = true;
-      }
-    }
-
-    if (loginValue && data.email) {
-      const login = await callsApi.login({
-        email: data.email,
-        password: data.password,
-      });
-      const { Message, token } = login.data;
-      dispatch(
-        loadUserInfo({
-          ...Message,
-          favorites: Message.favorites.map((el) => el.id_Property),
-        })
-      );
-      setResponse({ state: true, msg: "" });
-      setNavigate();
-    }
-    localStorage.setItem(
-        "accessToken",
-        JSON.stringify(result.user.accessToken)
-    );
-  }; */
 
   async function handleSubmit(email, password) {
     if (!email || !password) return
@@ -101,7 +36,7 @@ export function SignIn() {
       if (response)
         setResponse({
           state: false,
-          msg: `${response.status} - ${response.data.Error}`,
+          msg: `Error - ${response.data.Error}`,
         })
       else setResponse({ state: false, msg: message })
     }
@@ -115,7 +50,10 @@ export function SignIn() {
   return (
     <>
       <div className="flex h-[3.5rem] items-center justify-end px-8">
-        <Link to="/home" className="group bg-transparent shadow-none hover:bg-transparent">
+        <Link
+          to="/home"
+          className="group bg-transparent shadow-none hover:bg-transparent"
+        >
           <XMarkIcon className="h-auto w-9 text-gray-400 group-hover:text-gray-600" />
         </Link>
       </div>
@@ -137,12 +75,7 @@ export function SignIn() {
                 }}
               >
                 <div className="flex flex-row items-center justify-center lg:justify-start">
-                  <p className="mb-0 mr-4 text-lg">Iniciar sesión con :</p>
-                  <div title="Proximamente">
-                    <span className="inline-block rounded-full bg-blue-600 px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 hover:bg-blue-700 hover:shadow-lg active:bg-blue-800 active:shadow-lg">
-                      GOOGLE
-                    </span>
-                  </div>
+                  <GoogleSignin navigateTo='/home '/>
                 </div>
 
                 <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-gray-300 after:mt-0.5 after:flex-1 after:border-t after:border-gray-300">
@@ -176,21 +109,23 @@ export function SignIn() {
                   <div className="my-2 flex w-full flex-col gap-y-4 p-2">
                     <p className="flex justify-between text-sm">
                       <span
-                        onClick={() => Alerts.soon({ text: 'Acción Proximamente' })}
+                        onClick={() =>
+                          Alerts.soon({ text: 'Acción Proximamente' })
+                        }
                         className="cursor-pointer hover:font-medium hover:underline"
                       >
                         ¿Olvidaste tu Contraseña?
                       </span>
                       <Link
                         to="/sign-up"
-                        className="hover:font-medium text-blue-700"
+                        className="text-blue-700 hover:font-medium"
                       >
                         Registrarme
                       </Link>
                     </p>
                     <input
                       type="submit"
-                      className="inline-block min-w-[170px] self-center rounded bg-blue-600 px-7 py-3 text-sm font-medium uppercase leading-snug text-white shadow-md transition duration-150 ease-in-out focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 hover:bg-blue-700 hover:shadow-lg active:bg-blue-800 active:shadow-lg"
+                      className="inline-block min-w-[170px] cursor-pointer self-center rounded bg-blue-600 px-7 py-3 text-sm font-medium uppercase leading-snug text-white shadow-md transition duration-150 ease-in-out focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 hover:bg-blue-700 hover:shadow-lg active:bg-blue-800 active:shadow-lg"
                       value={'Iniciar Sesión'}
                     />
                   </div>

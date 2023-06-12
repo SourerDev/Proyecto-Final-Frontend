@@ -28,6 +28,7 @@ import { ScrollToTop } from './components/ScrollToTop.jsx'
 
 import { ApiPropYou } from './services'
 import { actionsPublications, actionsCity } from './redux2.0/reducers'
+import { GoogleOAuthProvider } from '@react-oauth/google'
 
 function App() {
   const dispatch = useDispatch()
@@ -46,20 +47,23 @@ function App() {
   }, [dispatch])
 
   return (
-    <div className="mx-auto max-w-7xl p-1 shadow">
-      <Nav />
-      <main className="min-h-screen">
-        <ScrollToTop />
-        <Routes>
-          {/* Temporal */}
-          <Route path="/" element={<Landing />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/properties/:id" element={<PropertyDetails />} />
-          {/* <Route path="/newRoute" element={<><Nav/><DashboardUsers/></>}/>
+    <GoogleOAuthProvider
+      clientId={process.env.REACT_APP_G_CLIENT_ID}
+    >
+      <div className="mx-auto max-w-7xl overflow-hidden p-1 shadow">
+        <Nav />
+        <main className="min-h-screen">
+          <ScrollToTop />
+          <Routes>
+            {/* Temporal */}
+            <Route path="/" element={<Landing />} />
+            <Route path="/sign-up" element={<SignUp />} />
+            <Route path="/sign-in" element={<SignIn />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/properties/:id" element={<PropertyDetails />} />
+            {/* <Route path="/newRoute" element={<><Nav/><DashboardUsers/></>}/>
           <Route path="/createProperty" element={<><Nav/><Form/><Footer/></>}/>
           <Route path="/bePremium" element={<><Nav/><BePremium/></>} />
           <Route path="/redirect" element={<><Redirect/><Footer/></>} />
@@ -67,10 +71,11 @@ function App() {
           BACKEND TRABAJANDO
           <Route path="/dashboard" element={<><Nav/><DashboardPage/></>}/>
           <Route path="/ownerData/:id_User" element={<><Nav/><OwnerData /></>}/> */}
-        </Routes>
-      </main>
-      <Footer />
-    </div>
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </GoogleOAuthProvider>
   )
 }
 
