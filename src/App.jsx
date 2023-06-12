@@ -46,7 +46,7 @@ function App() {
   }, [dispatch])
 
   return (
-    <div className="mx-auto max-w-7xl p-1 shadow">
+    <div className="mx-auto max-w-7xl p-1 shadow overflow-hidden">
       <Nav />
       <main className="min-h-screen">
         <ScrollToTop />

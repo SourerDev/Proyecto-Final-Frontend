@@ -6,7 +6,7 @@ import { ModalNav } from './ModalNav.jsx'
 import { MainAvatar } from '../avatars/MainAvatar.jsx'
 
 export function Nav({ rutes = true, login = true }) {
-  const view = useSelector(state => state.app.viewNav)
+  const view = useSelector((state) => state.app.viewNav)
   const { signIn, session } = useSelector((state) => state.user)
   const userType = session?.userType
 
@@ -66,14 +66,6 @@ export function Nav({ rutes = true, login = true }) {
                 </Link>
               </li>
             )}
-            <li>
-              <Link
-                to="/about-us"
-                className="text-base font-medium text-gray-500 hover:text-gray-900"
-              >
-                NOSOTROS
-              </Link>
-            </li>
 
             {(userType === 'admin' || userType === 'premium') && (
               <Link
@@ -83,6 +75,14 @@ export function Nav({ rutes = true, login = true }) {
                 <span className="m-0 p-0">DASHBOARD</span>
               </Link>
             )}
+            <li>
+              <Link
+                to="/about-us"
+                className="text-base font-medium text-gray-500 hover:text-gray-900"
+              >
+                NOSOTROS
+              </Link>
+            </li>
           </ul>
         )}
         <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
