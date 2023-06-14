@@ -1,7 +1,6 @@
-import CardsLanding from '../components/infoLanding/InfoLanding'
+import { LandingCards } from '../components/infoLanding/LandingCards'
 import DataLanding from '../components/dataLanding/DataLanding'
-import ServiciosExtras from '../components/ServiciosExtras/serviciosExtras'
-
+import { ServicesPropertyCarousel } from '../components/carousels/ServicesPropertyCarousel'
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
 import { InitialFiltersCard } from '../components/form/InitialFiltersCard'
@@ -25,9 +24,10 @@ export function Landing({ setActiveStyle, scrollY }) {
       </div>
 
       <div>
-        <CardsLanding />
+        <LandingCards />
       </div>
-      <ServiciosExtras />
+
+      <ServicesPropertyCarousel />
     </div>
   )
 }

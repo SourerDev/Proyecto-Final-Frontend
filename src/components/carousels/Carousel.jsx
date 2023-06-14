@@ -7,11 +7,13 @@ import { Link, useNavigate } from 'react-router-dom'
 import { filterProperties } from '../../redux/actions'
 
 export function Carousel({ children, quantity }) {
-  return <div className="relative min-h-[150px] w-full border">{children}</div>
+  return (
+    <div className="relative flex min-h-[150px] w-full border flex-wrap">{children}</div>
+  )
 }
 
-export function Item() {
-  return <div>Item</div>
+export function Item({ children, className }) {
+  return <div className={`border ${className} `}>{children}</div>
 }
 
 export default function CarouselOld({ title, images }) {
@@ -278,4 +280,8 @@ const Title = styled.h1`
 
 Carousel.propTypes = {
   children: PropTypes.any,
+}
+Item.propTypes = {
+  children: PropTypes.any,
+  className: PropTypes.string
 }
