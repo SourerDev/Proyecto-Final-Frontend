@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types'
 import { SearchCityInput } from './inputs/SearchCityInput'
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { ModalitySelect } from './selects/ModalitySelect'
 import { PropertyTypeSelect } from './selects/PropertyTypeSelect'
 import { Button } from './buttons/Button'
-import { actionsApp } from '../../redux2.0/reducers'
+import { actionsApp, actionsPublications } from '../../redux2.0/reducers'
 import { useDispatch, useSelector } from 'react-redux'
-
+import { ApiPropYou } from '../../services'
 export function InitialFiltersCard({ className }) {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const { byPublication, byProperty, byCity } = useSelector(
     (state) => state.app.filters
@@ -17,7 +19,9 @@ export function InitialFiltersCard({ className }) {
     ...byProperty,
   })
   const [city, setCity] = useState(byCity)
+  const [filterButton, setFilterButton] = useState(false)
   function handleInitialFilters({ target }) {
+    setFilterButton(true)
     setInitialFilters((prev) => ({
       ...prev,
       [target.name]: target.value,
@@ -25,17 +29,21 @@ export function InitialFiltersCard({ className }) {
   }
   function onSubmitFilters(evt) {
     evt.preventDefault()
-    dispatch(
-      actionsApp.setFilters({
-        byPublication: {
-          modality: initialFilters.modality,
-        },
-        byProperty: {
-          type: initialFilters.type,
-        },
-        byCity: city,
-      })
-    )
+    const dataFilters = {
+      byPublication: {
+        modality: initialFilters.modality,
+      },
+      byProperty: {
+        type: initialFilters.type,
+      },
+      byCity: city,
+    }
+    dispatch(actionsApp.setFilters(dataFilters))
+    ApiPropYou.getFilteredPublications(dataFilters).then((res) => {
+      dispatch(actionsPublications.setPublications(res.data))
+      ///
+      navigate('/home')
+    })
   }
 
   return (
@@ -55,7 +63,11 @@ export function InitialFiltersCard({ className }) {
         value={initialFilters.type}
       />
       <SearchCityInput city={city} setCity={setCity} />
-      <Button type="onSubmit">Filtrar</Button>
+      {filterButton ? (
+        <Button type="onSubmit">Filtrar</Button>
+      ) : (
+        <Button onClick={() => navigate('/home')}>ver propiedades</Button>
+      )}
     </form>
   )
 }
