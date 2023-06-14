@@ -8,6 +8,7 @@ import { Button } from './buttons/Button'
 import { actionsApp, actionsPublications } from '../../redux2.0/reducers'
 import { useDispatch, useSelector } from 'react-redux'
 import { ApiPropYou } from '../../services'
+import { Alerts } from '../../utils'
 export function InitialFiltersCard({ className }) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -39,9 +40,9 @@ export function InitialFiltersCard({ className }) {
       byCity: city,
     }
     dispatch(actionsApp.setFilters(dataFilters))
-    ApiPropYou.getFilteredPublications(dataFilters).then((res) => {
-      dispatch(actionsPublications.setPublications(res.data))
-      ///
+    ApiPropYou.getFilteredPublications(dataFilters).then(({ data }) => {
+      dispatch(actionsPublications.setPublications(data.publications))
+      if (data?.info.error) Alerts.smallError({ text: `${data.info.error}` })
       navigate('/home')
     })
   }
@@ -62,7 +63,11 @@ export function InitialFiltersCard({ className }) {
         onChange={handleInitialFilters}
         value={initialFilters.type}
       />
-      <SearchCityInput city={city} setCity={setCity} />
+      <SearchCityInput
+        city={city}
+        setCity={setCity}
+        setFilterButton={setFilterButton}
+      />
       {filterButton ? (
         <Button type="onSubmit">Filtrar</Button>
       ) : (

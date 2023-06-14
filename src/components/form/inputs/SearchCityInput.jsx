@@ -3,7 +3,7 @@ import { Input } from './Input'
 import { useState } from 'react'
 import { MapPinIcon } from '@heroicons/react/24/outline'
 
-export function SearchCityInput({ city, setCity }) {
+export function SearchCityInput({ city, setCity, setFilterButton }) {
   const { cities } = useSelector((state) => state.city)
   const [suggestions, setSuggestions] = useState([])
   const [showResults, setShowResults] = useState(false)
@@ -13,7 +13,7 @@ export function SearchCityInput({ city, setCity }) {
   const shortSugestions = suggestions.slice(0, SIZE_RENDER)
   function handleCity(evt) {
     const { value } = evt.target
-
+    setFilterButton(true)
     let matches = []
     if (value.length > 0) {
       matches = cities.filter((city) => {
