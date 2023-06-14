@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
@@ -5,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { ModalNav } from './ModalNav.jsx'
 import { MainAvatar } from '../avatars/MainAvatar.jsx'
 
-export function Nav({ rutes = true, login = true }) {
+export function Nav({ rutes = true, login = true, className }) {
   const view = useSelector((state) => state.app.viewNav)
   const { signIn, session } = useSelector((state) => state.user)
   const userType = session?.userType
@@ -13,8 +14,8 @@ export function Nav({ rutes = true, login = true }) {
   if (!view) return null
 
   return (
-    <div className="-mx-auto max-w-8xl relative mb-1 bg-white px-2">
-      <nav className="flex items-center justify-between border-b-2 border-gray-100 py-4 md:justify-start md:space-x-10">
+    <div className={`-mx-auto sticky top-0 z-50 ${className}`}>
+      <nav className="relative flex items-center justify-between py-4 md:justify-start md:space-x-10">
         <div className="flex justify-start lg:w-0 lg:flex-1">
           <Link to="/" className="flex items-center">
             <span className="sr-only">Properties & You</span>
@@ -106,4 +107,10 @@ export function Nav({ rutes = true, login = true }) {
       </nav>
     </div>
   )
+}
+
+Nav.propTypes = {
+  rutes: PropTypes.bool,
+  login: PropTypes.bool,
+  className: PropTypes.string,
 }

@@ -5,7 +5,7 @@ export function PropertyTypeSelect({ ...props }) {
     { name: 'Departamento', value: 'apartment' },
     { name: 'Casa', value: 'house' },
     { name: 'PH', value: 'ph' },
-    { name: 'Finca', value: 'Ranch' },
+    { name: 'Finca', value: 'ranch' },
   ]
 
   return <Select {...props} options={options} selectName="Tipo de propiedad" />

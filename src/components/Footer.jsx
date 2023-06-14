@@ -1,17 +1,25 @@
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-export function Footer() {
+export function Footer({ className, ...props }) {
   const { viewNav } = useSelector((state) => state.app)
 
   if (!viewNav) return null
 
   return (
-    <div className="relative -mx-1 -mb-1 mt-4 flex flex-col items-center bg-[#111111]  pt-2 pb-4 px-6  text-gray-200">
+    <div
+      {...props}
+      className={`relative -mx-1 -mb-1 flex flex-col items-center bg-[#111111]  px-6 pt-2 pb-4  text-gray-200 ${className}`}
+    >
       <section className="ga flex w-full items-center justify-between">
-        <div className='flex gap-x-2 items-center'>
-          <img src="https://images.vexels.com/media/users/3/142719/isolated/preview/f07a4b2d673e9935e58e6ff8262d4a1d-icono-de-casas-de-triangulo.png" alt="" width={30} height={30}/>
-          <span className='font-medium self-end'>Properties & you</span>
+        <div className="flex items-center gap-x-2">
+          <img
+            src="https://images.vexels.com/media/users/3/142719/isolated/preview/f07a4b2d673e9935e58e6ff8262d4a1d-icono-de-casas-de-triangulo.png"
+            alt=""
+            width={30}
+            height={30}
+          />
+          <span className="self-end font-medium">Properties & you</span>
         </div>
         <a
           href="https://github.com/SourerDev/Proyecto-Final-Frontend"

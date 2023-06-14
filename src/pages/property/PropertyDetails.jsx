@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { actionsPublications } from '../../redux2.0/reducers'
 import { ApiPropYou } from '../../services'
 import { GoBackButton } from '../../components/form/buttons/GoBack'
-import CarrouselDetail from '../../components/carousel/CarrouselDetail'
+import CarrouselDetail from '../../components/carousels/CarrouselDetail'
 import { OwnerCard } from '../../components/cards/OwnerCard'
 
 export function PropertyDetails() {

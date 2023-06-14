@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 //pages
@@ -32,31 +32,50 @@ import { GoogleOAuthProvider } from '@react-oauth/google'
 
 function App() {
   const dispatch = useDispatch()
+  const [activeStyle, setActiveStyle] = useState(false)
+  const [scrollPosition, setScrollPosition] = useState(0)
 
   useEffect(() => {
-    ApiPropYou.getPublications()
-      .then((response) => {
-        const { publications } = response.data
-        dispatch(actionsPublications.setPublications(publications))
-        ApiPropYou.getCities().then((response) => {
-          const { cities } = response.data
-          dispatch(actionsCity.setCities(cities))
-        })
+    ApiPropYou.getPublications().then((response) => {
+      const { publications } = response.data
+      dispatch(actionsPublications.setPublications(publications))
+      ApiPropYou.getCities().then((response) => {
+        const { cities } = response.data
+        dispatch(actionsCity.setCities(cities))
       })
-      .catch((error) => {})
+    })
   }, [dispatch])
 
+  function handleScroll({ target }) {
+    setScrollPosition(target.scrollTop)
+  }
   return (
-    <GoogleOAuthProvider
-      clientId={process.env.REACT_APP_G_CLIENT_ID}
-    >
-      <div className="mx-auto max-w-7xl overflow-hidden p-1 shadow">
-        <Nav />
-        <main className="min-h-screen">
+    <GoogleOAuthProvider clientId={process.env.REACT_APP_G_CLIENT_ID}>
+      <div
+        onScroll={handleScroll}
+        id="main-screen"
+        className="h-screen w-screen overflow-hidden scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-indigo-600 hover:scrollbar-thumb-indigo-800"
+      >
+        <Nav
+          className={`width-max-main transition-all ${
+            activeStyle
+              ? 'bg-gradient-to-b from-gray-500/70 px-5'
+              : 'rounded border-gray-50 bg-white px-4 shadow-md '
+          }`}
+        />
+        <main className="width-max-main min-h-screen border-x border-gray-50">
           <ScrollToTop />
           <Routes>
             {/* Temporal */}
-            <Route path="/" element={<Landing />} />
+            <Route
+              path="/"
+              element={
+                <Landing
+                  setActiveStyle={setActiveStyle}
+                  scrollY={scrollPosition}
+                />
+              }
+            />
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/sign-in" element={<SignIn />} />
             <Route path="/profile" element={<Profile />} />
@@ -73,7 +92,7 @@ function App() {
           <Route path="/ownerData/:id_User" element={<><Nav/><OwnerData /></>}/> */}
           </Routes>
         </main>
-        <Footer />
+        <Footer className="width-max-main" />
       </div>
     </GoogleOAuthProvider>
   )

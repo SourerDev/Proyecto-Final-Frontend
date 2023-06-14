@@ -17,8 +17,8 @@ export function MainAvatar() {
   const user = useSelector((state) => state.user.session)
 
   return (
-    <Popover className="relative bg-white ">
-      <Popover.Button className=" border-1 focus:border-1 inline-flex  h-12 w-12 items-center justify-center rounded-full bg-white hover:bg-gray-100">
+    <Popover className="relative grid place-content-center">
+      <Popover.Button className=" border-1 focus:border-1 inline-flex h-12 w-12 items-center justify-center rounded-full bg-white hover:bg-gray-100 border ">
         <span className="sr-only">user</span>
         <img className="h-full w-full rounded-full" src={user?.photo} alt="" />
       </Popover.Button>
