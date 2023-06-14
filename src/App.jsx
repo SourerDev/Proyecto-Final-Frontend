@@ -59,7 +59,7 @@ function App() {
         <Nav
           className={`width-max-main transition-all ${
             activeStyle
-              ? 'bg-gradient-to-b from-gray-500/70 to-gray-500/5 px-5'
+              ? 'bg-gradient-to-b from-gray-500/70 px-5'
               : 'rounded border-gray-50 bg-white px-4 shadow-md '
           }`}
         />

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { useRef } from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
@@ -5,12 +6,11 @@ import { findNameCity } from '../../utils/autocompleteUtils'
 import { Link, useNavigate } from 'react-router-dom'
 import { filterProperties } from '../../redux/actions'
 
-
-export function Carousel(){
-  return <div>Carousel</div>
+export function Carousel({ children, quantity }) {
+  return <div className="relative min-h-[150px] w-full border">{children}</div>
 }
 
-export function Item(){
+export function Item() {
   return <div>Item</div>
 }
 
@@ -229,6 +229,7 @@ const Controls = styled.div`
   height: 100%;
   pointer-events: none;
 `
+
 const Button = styled.button`
   pointer-events: all;
   background: none;
@@ -274,3 +275,7 @@ const Title = styled.h1`
     z-index: 10;
   }
 `
+
+Carousel.propTypes = {
+  children: PropTypes.any,
+}
