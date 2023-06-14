@@ -40,7 +40,8 @@ export function InitialFiltersCard({ className }) {
     }
     dispatch(actionsApp.setFilters(dataFilters))
     ApiPropYou.getFilteredPublications(dataFilters).then((res) => {
-      dispatch(actionsPublications.setFilteredPublications(res.data))
+      dispatch(actionsPublications.setPublications(res.data))
+      ///
       navigate('/home')
     })
   }
