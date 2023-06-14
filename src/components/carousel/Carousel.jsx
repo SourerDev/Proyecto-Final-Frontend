@@ -5,7 +5,16 @@ import { findNameCity } from '../../utils/autocompleteUtils'
 import { Link, useNavigate } from 'react-router-dom'
 import { filterProperties } from '../../redux/actions'
 
-export default function Carousel({ title, images }) {
+
+export function Carousel(){
+  return <div>Carousel</div>
+}
+
+export function Item(){
+  return <div>Item</div>
+}
+
+export default function CarouselOld({ title, images }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { citiesA } = useSelector((state) => state)
