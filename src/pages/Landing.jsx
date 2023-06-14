@@ -6,7 +6,6 @@ import PropTypes from 'prop-types'
 import { useEffect } from 'react'
 import { InitialFiltersCard } from '../components/form/InitialFiltersCard'
 import { MainHeader } from '../components/MainHeader'
-import { Carousel, Item } from '../components/carousels/Carousel'
 
 export function Landing({ setActiveStyle, scrollY }) {
   useEffect(() => {
