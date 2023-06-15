@@ -6,14 +6,34 @@ import { findNameCity } from '../../utils/autocompleteUtils'
 import { Link, useNavigate } from 'react-router-dom'
 import { filterProperties } from '../../redux/actions'
 
-export function Carousel({ children, quantity }) {
+import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
+
+export function Carousel({ children, viewItems }) {
   return (
-    <div className="relative flex min-h-[150px] w-full border flex-wrap">{children}</div>
+    <div
+      className={
+        'flex-nowrap relative mb-6 flex min-h-[150px] overflow-hidden w-full flex-row border-4 border-y-2 border-red-500'
+      }
+    >
+      <button className="absolute top-1/2 left-2 grid aspect-square -translate-y-1/2 transform place-content-center rounded-full border border-red-500">
+        <ArrowLeftIcon className="h-6 w-8" />
+      </button>
+      <button className="absolute top-1/2 right-2 grid aspect-square -translate-y-1/2 transform place-content-center rounded-full border border-red-500">
+        <ArrowRightIcon className="h-6 w-8" />
+      </button>
+      <span className="absolute left-1/2 top-[105%] h-4  w-8 -translate-x-1/2 transform border border-red-500"></span>
+
+      {children}
+    </div>
   )
 }
 
 export function Item({ children, className }) {
-  return <div className={`border ${className} `}>{children}</div>
+  return (
+    <div className={`flex items-center justify-center border-x-2 min-w-full sm:min-w-[50%]  md:min-w-[33.333%] md:max-w-[25%] lg:min-w-[25%] lg:max-w-[33.333%]${className}`}>
+      {children}
+    </div>
+  )
 }
 
 export default function CarouselOld({ title, images }) {
@@ -280,8 +300,9 @@ const Title = styled.h1`
 
 Carousel.propTypes = {
   children: PropTypes.any,
+  viewItems: PropTypes.number,
 }
 Item.propTypes = {
   children: PropTypes.any,
-  className: PropTypes.string
+  className: PropTypes.string,
 }

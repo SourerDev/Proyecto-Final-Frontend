@@ -8,8 +8,8 @@ export function ModalNav({ signIn, session }) {
   const userType = session.userType
 
   return (
-    <Popover className="relative bg-white">
-      <Popover.Button className=" inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 outline-0 focus:outline-0 focus:ring-2 focus:ring-inset hover:bg-gray-100 hover:text-gray-500">
+    <Popover className="relative">
+      <Popover.Button className=" inline-flex items-center justify-center p-2 text-gray-500 outline-none  hover:text-gray-800">
         <span className="sr-only">Menu</span>
         <Bars3Icon className="h-6 w-6" aria-hidden="true" />
       </Popover.Button>

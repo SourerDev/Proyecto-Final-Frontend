@@ -25,7 +25,7 @@ const services = [
 
 export function ServicesPropertyCarousel() {
   return (
-    <div>
+    <div className='border-green-800 border-2 sm:border-yellow-600 sm:border-2 md:border-red-800 md:border-2'>
       <h2 className="mt-2 rounded-lg bg-gray-800 px-4 text-center text-white">
         Servicios
       </h2>
@@ -33,10 +33,10 @@ export function ServicesPropertyCarousel() {
         {services.map((service, i) => (
           <Item
             key={i}
-            className="m-4 rounded-lg border border-gray-200 bg-white p-3 text-center text-gray-800 "
+            className="rounded-lg border border-yellow-500 bg-white p-3 text-center text-gray-800"
           >
             <p>{service.firm}</p>
-            <p>service.service</p> <p>Telefono: {service.cellphone} </p>{' '}
+            <p>service.service</p> <p>Telefono: {service.cellphone} </p>
           </Item>
         ))}
       </Carousel>

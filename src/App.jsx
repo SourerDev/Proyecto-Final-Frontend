@@ -54,7 +54,7 @@ function App() {
       <div
         onScroll={handleScroll}
         id="main-screen"
-        className="h-screen w-screen overflow-hidden scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-indigo-600 hover:scrollbar-thumb-indigo-800"
+        className="min-w-[440px] h-screen w-screen overflow-hidden scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-gray-300 hover:scrollbar-thumb-gray-500 bg-gray-100 sm:scrollbar-thumb-indigo-600 sm:hover:scrollbar-thumb-indigo-800"
       >
         <Nav
           className={`width-max-main transition-all ${
@@ -63,7 +63,7 @@ function App() {
               : 'rounded border-gray-50 bg-white px-4 shadow-md '
           }`}
         />
-        <main className="width-max-main min-h-screen border-x border-gray-50">
+        <main className="width-max-main min-h-screen xl:border-x border-gray-100 bg-white">
           <ScrollToTop />
           <Routes>
             {/* Temporal */}

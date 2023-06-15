@@ -14,17 +14,17 @@ export function Nav({ rutes = true, login = true, className }) {
   if (!view) return null
 
   return (
-    <div className={`-mx-auto sticky top-0 z-50 ${className}`}>
+    <div className={`-mx-auto sticky top-0 z-50 max-h-[75px] ${className}`}>
       <nav className="relative flex items-center justify-between py-4 md:justify-start md:space-x-10">
         <div className="flex justify-start lg:w-0 lg:flex-1">
           <Link to="/" className="flex items-center">
             <span className="sr-only">Properties & You</span>
             <img
-              className="h-8 w-auto sm:h-10"
+              className="h-8 w-auto sm:h-10 md:w-10"
               src="https://images.vexels.com/media/users/3/142719/isolated/preview/f07a4b2d673e9935e58e6ff8262d4a1d-icono-de-casas-de-triangulo.png"
               alt=""
             />
-            <span className="mx-2 text-xl sm:text-2xl">Properties & You</span>
+            <span className="mx-2 text-xl sm:text-2xl md:hidden xl:block">Properties & You</span>
           </Link>
         </div>
 
