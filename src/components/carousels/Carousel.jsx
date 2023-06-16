@@ -1,36 +1,72 @@
 import PropTypes from 'prop-types'
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { findNameCity } from '../../utils/autocompleteUtils'
 import { Link, useNavigate } from 'react-router-dom'
 import { filterProperties } from '../../redux/actions'
-
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
 
-export function Carousel({ children, viewItems }) {
+/*
+  ABCD -> BCDA ->
+  -tamaño del carrosel luego +tamaño del tamaño
+  boton derecho
+*/
+
+export function Carousel({ children }) {
+  const [renderChildren, setRenderChildren] = useState(children)
+  const [isLoading, setIsLoading] = useState(false)
+  const [sizeCarousel, setSizeCarousel] = useState(0)
+
+  function next() {
+    if (renderChildren.length > 0) {
+      const children = [...renderChildren]
+      const eliminado = children.shift()
+      children.push(eliminado)
+      setRenderChildren(children)
+    }
+  }
+
+  function previus() {
+    if (renderChildren.length > 0) {
+      const children = [...renderChildren]
+      const eliminado = children.pop()
+      children.unshift(eliminado)
+      setRenderChildren(children)
+    }
+  }
+
   return (
     <div
       className={
-        'flex-nowrap relative mb-6 flex min-h-[150px] overflow-hidden w-full flex-row border-4 border-y-2 border-red-500'
+        'relative mb-6 flex min-h-[150px] w-full flex-row flex-nowrap overflow-hidden border-4 border-y-2 border-red-500'
       }
     >
-      <button className="absolute top-1/2 left-2 grid aspect-square -translate-y-1/2 transform place-content-center rounded-full border border-red-500">
+      <button
+        disabled={isLoading}
+        onClick={previus}
+        className="absolute top-1/2 left-2 grid aspect-square -translate-y-1/2 transform place-content-center rounded-full border border-red-500"
+      >
         <ArrowLeftIcon className="h-6 w-8" />
       </button>
-      <button className="absolute top-1/2 right-2 grid aspect-square -translate-y-1/2 transform place-content-center rounded-full border border-red-500">
+      <button
+        disabled={isLoading}
+        onClick={next}
+        className="absolute top-1/2 right-2 grid aspect-square -translate-y-1/2 transform place-content-center rounded-full border border-red-500"
+      >
         <ArrowRightIcon className="h-6 w-8" />
       </button>
       <span className="absolute left-1/2 top-[105%] h-4  w-8 -translate-x-1/2 transform border border-red-500"></span>
-
-      {children}
+      {renderChildren}
     </div>
   )
 }
 
 export function Item({ children, className }) {
   return (
-    <div className={`flex items-center justify-center border-x-2 min-w-full sm:min-w-[50%]  md:min-w-[33.333%] md:max-w-[25%] lg:min-w-[25%] lg:max-w-[33.333%]${className}`}>
+    <div
+      className={`flex min-w-full items-center justify-center border-x-2 sm:min-w-[50%]  md:min-w-[33.333%] md:max-w-[25%] lg:min-w-[25%] lg:max-w-[33.333%]${className}`}
+    >
       {children}
     </div>
   )
@@ -52,7 +88,7 @@ export default function CarouselOld({ title, images }) {
       const size = slideshow.current.children[0].offsetWidth
 
       slideshow.current.style.transform = `translatex(-${size}px)`
-
+      /* [][]*/
       const transicion = () => {
         slideshow.current.style.transition = 'none'
         slideshow.current.style.transform = 'translatex(0px)'
@@ -266,18 +302,6 @@ const Button = styled.button`
   &:hover {
     path {
       fill: #b7b4b4;
-    }
-  }
-
-  path {
-    filter: ${(props) =>
-    props.r
-      ? 'drop-shadow(-2px 0px 0px #fff)'
-      : 'drop-shadow(2px 0px 0px #fff)'};
-  }
-  @media screen and (max-width: 400px) {
-    svg {
-      display: none;
     }
   }
 `
