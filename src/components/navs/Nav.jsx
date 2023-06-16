@@ -86,7 +86,7 @@ export function Nav({ rutes = true, login = true, className }) {
             </li>
           </ul>
         )}
-        <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
+        <div className="hidden items-center justify-end md:flex md:flex-1">
           {signIn ? (
             <MainAvatar />
           ) : (
