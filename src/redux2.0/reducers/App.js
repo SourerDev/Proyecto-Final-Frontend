@@ -19,6 +19,7 @@ const app = createSlice({
     page: 0,
     filters: initialFilters,
     viewNav: true,
+    isLoading: false
   },
   reducers: {
     setPage: function (state, action) {
@@ -33,8 +34,11 @@ const app = createSlice({
     setViewNav: function (state, action) {
       state.viewNav = action.payload
     },
+    setIsLoading: function (state , action){
+      state.isLoading = action.payload
+    }
   },
 })
 
 export const appRs = app.reducer
-export const { setPage, setFilters, resetFilters, setViewNav } = app.actions
+export const { setPage, setFilters, resetFilters, setViewNav, setIsLoading } = app.actions

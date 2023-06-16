@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 //pages
 import { SignUp } from './pages/session/SignUp.jsx'
@@ -27,19 +27,28 @@ import { Footer } from './components/Footer.jsx'
 import { ScrollToTop } from './components/ScrollToTop.jsx'
 
 import { ApiPropYou } from './services'
-import { actionsPublications, actionsCity } from './redux2.0/reducers'
+import {
+  actionsPublications,
+  actionsCity,
+  actionsApp,
+} from './redux2.0/reducers'
 import { GoogleOAuthProvider } from '@react-oauth/google'
+import { LoaderIcon } from './components/loaders/Loader.jsx'
 
 function App() {
   const dispatch = useDispatch()
   const [activeStyle, setActiveStyle] = useState(false)
   const [scrollPosition, setScrollPosition] = useState(0)
+  const { isLoading } = useSelector((state) => state.app)
 
   useEffect(() => {
+    dispatch(actionsApp.setIsLoading(true))
     ApiPropYou.getPublications().then((response) => {
       const { publications } = response.data
       dispatch(actionsPublications.setPublications(publications))
       ApiPropYou.getCities().then((response) => {
+        dispatch(actionsApp.setIsLoading(false))
+
         const { cities } = response.data
         dispatch(actionsCity.setCities(cities))
       })
@@ -54,7 +63,7 @@ function App() {
       <div
         onScroll={handleScroll}
         id="main-screen"
-        className="min-w-[440px] h-screen w-screen overflow-hidden scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-gray-300 hover:scrollbar-thumb-gray-500 bg-gray-100 sm:scrollbar-thumb-indigo-600 sm:hover:scrollbar-thumb-indigo-800"
+        className="h-screen w-screen min-w-[440px] overflow-hidden bg-gray-100 scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-gray-300 hover:scrollbar-thumb-gray-500 sm:scrollbar-thumb-indigo-600 sm:hover:scrollbar-thumb-indigo-800"
       >
         <Nav
           className={`width-max-main transition-all ${
@@ -63,7 +72,7 @@ function App() {
               : 'rounded border-gray-50 bg-white px-4 shadow-md '
           }`}
         />
-        <main className="width-max-main min-h-screen xl:border-x border-gray-100 bg-white">
+        <main className="width-max-main min-h-screen border-gray-100 bg-white xl:border-x">
           <ScrollToTop />
           <Routes>
             {/* Temporal */}
@@ -94,6 +103,7 @@ function App() {
         </main>
         <Footer className="width-max-main" />
       </div>
+      {isLoading && <LoaderIcon className="fixed bottom-2 left-2 w-[40px]" />}
     </GoogleOAuthProvider>
   )
 }

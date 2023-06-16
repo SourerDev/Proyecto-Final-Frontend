@@ -5,31 +5,27 @@ import { useDispatch } from 'react-redux'
 import { addAuthorizationWithToken } from '../../services'
 import { actionsUser } from '../../redux2.0/reducers'
 import { useNavigate } from 'react-router-dom'
-import { LoaderIcon } from '../../components/loaders/Loader'
-import { useState } from 'react'
+import { actionsApp } from '../../redux2.0/reducers'
+
 export function GoogleSignin({ navigateTo = '/' }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [isLoading, setIsLoading] = useState(false)
   function handleGoogleLogin({ credential }) {
-    setIsLoading(true)
+    dispatch(actionsApp.setIsLoading(true))
     ApiPropYou.googleSignin({ credential }).then(({ data }) => {
       const { user, token } = data
       dispatch(actionsUser.setUser(user))
       addAuthorizationWithToken(token)
-      setIsLoading(false)
+      dispatch(actionsApp.setIsLoading(false))
       navigate(navigateTo)
     })
   }
   return (
-    <>
-      <GoogleLogin
-        useOneTap={true}
-        onSuccess={handleGoogleLogin}
-        onError={handleGoogleLogin}
-      />
-      {isLoading && <LoaderIcon className="fixed bottom-2 left-2 w-[48px]" />}
-    </>
+    <GoogleLogin
+      useOneTap={true}
+      onSuccess={handleGoogleLogin}
+      onError={handleGoogleLogin}
+    />
   )
 }
 
