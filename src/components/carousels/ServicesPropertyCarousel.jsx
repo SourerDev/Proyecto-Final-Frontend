@@ -21,19 +21,24 @@ const services = [
     firm: 'InterNaxa S.A - Argentina',
     cellphone: '44444',
   },
+  {
+    service: 'Proveedor de servicios de telecomunicacion',
+    firm: 'InterNaxa S.A - Argentina',
+    cellphone: '5555',
+  },
 ]
 
 export function ServicesPropertyCarousel() {
   return (
-    <div>
-      <h2 className="mt-2 rounded-lg bg-gray-800 px-4 text-left text-white">
+    <div className='p-3 '>
+      <h2 className="mt-2 rounded-lg bg-gray-800 px-4 text-left text-white mb-1">
         Servicios
       </h2>
       <Carousel>
         {services.map((service, i) => (
           <Item
             key={i}
-            className="flex flex-col rounded-lg border border-yellow-500 bg-white p-3 text-center text-gray-800"
+            className="p-3 flex flex-col bg-white  text-center text-gray-800  justify-around border-x border-gray-800"
           >
             <p>{service.firm}</p>
             <p>{service.service}</p>
@@ -41,6 +46,7 @@ export function ServicesPropertyCarousel() {
           </Item>
         ))}
       </Carousel>
+
     </div>
   )
 }
