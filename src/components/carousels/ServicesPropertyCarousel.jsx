@@ -2,24 +2,24 @@ import { Carousel, Item } from './Carousel'
 
 const services = [
   {
-    service: 'Proveedor de servicios de podacion',
+    service: 'Proveedor de servicios de comunicacion',
     firm: 'InterNaxa S.A - Argentina',
-    cellphone: '1111',
+    cellphone: '011 5431-8176',
   },
   {
-    service: 'Proveedor de servicios de alimentos',
-    firm: 'InterNaxa S.A - Argentina',
-    cellphone: '222',
+    service: 'Compañía eletrica',
+    firm: 'Enersa - Paraná',
+    cellphone: '0800-777-0080',
   },
   {
-    service: 'Proveedor de servicios de picinas',
-    firm: 'InterNaxa S.A - Argentina',
-    cellphone: '3333',
+    service: 'Instalador de gas',
+    firm: 'Chavez Plomeria y Gas',
+    cellphone: '0341 719-8170',
   },
   {
-    service: 'Proveedor de servicios de telecomunicacion',
-    firm: 'InterNaxa S.A - Argentina',
-    cellphone: '44444',
+    service: 'Cerrajero',
+    firm: 'Cerrajeria la Milagrosa',
+    cellphone: '0341 482-6481',
   },
   {
     service: 'Proveedor de servicios de telecomunicacion',
@@ -38,7 +38,7 @@ export function ServicesPropertyCarousel() {
         {services.map((service, i) => (
           <Item
             key={i}
-            className="p-3 flex flex-col bg-white  text-center text-gray-800  justify-around border-x border-gray-800"
+            className="p-3 flex justify-center text-center items-center flex-col bg-white  text-gray-800 border-x border-gray-800"
           >
             <p>{service.firm}</p>
             <p>{service.service}</p>
@@ -50,26 +50,3 @@ export function ServicesPropertyCarousel() {
     </div>
   )
 }
-/**
- *   <div className="m-4 rounded-lg border border-gray-200 bg-white p-3 text-center text-gray-800 ">
-          <p>InterNaxa S.A - Argentina</p>
-          <p> Proveedor de servicios de telecomunicacion</p>{' '}
-          <p>Telefono: 011 5431-8176 </p>{' '}
-        </div>
-
-        <div className="m-4 rounded-lg border border-gray-200 bg-white p-3 text-center text-gray-800 ">
-          <p>Enersa - Paraná</p> <p>Compañía eletrica </p>{' '}
-          <p>telefono: 0800-777-0080 </p>
-        </div>
-
-        <div className="m-4 rounded-lg border  border-gray-200 bg-white p-3 text-center text-gray-800 ">
-          <p>Chavez Plomeria y Gas</p>
-          <p> Instalador de gas </p> <p>Telefono: 0341 719-8170</p>
-        </div>
-
-        <div className="m-4 rounded-lg border border-gray-200 bg-white p-3 text-center text-gray-800 ">
-          <p>Cerrajeria la Milagrosa</p>
-          <p>Cerrajero</p>
-          <p>Telefono: 0341 482-6481</p>
-        </div>
- */

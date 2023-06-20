@@ -34,6 +34,7 @@ import {
 } from './redux2.0/reducers'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import { LoaderIcon } from './components/loaders/Loader.jsx'
+import { Alerts } from './utils'
 
 function App() {
   const dispatch = useDispatch()
@@ -52,12 +53,16 @@ function App() {
         const { cities } = response.data
         dispatch(actionsCity.setCities(cities))
       })
+    }).catch((err) => {
+      dispatch(actionsApp.setIsLoading(false))
+      Alerts.errorConection({ text: err.message })
     })
   }, [dispatch])
 
   function handleScroll({ target }) {
     setScrollPosition(target.scrollTop)
   }
+
   return (
     <GoogleOAuthProvider clientId={process.env.REACT_APP_G_CLIENT_ID}>
       <div
