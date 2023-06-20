@@ -2,9 +2,9 @@ import { Carousel, Item } from './Carousel'
 
 const services = [
   {
-    service: 'Proveedor de servicios de podacion',
-    firm: 'InterNaxa S.A - Argentina',
-    cellphone: '1111',
+    service: 'Servicio de Jardinería y Paisajismo',
+    firm: 'CDI Eluney - Buenos Aires',
+    cellphone: '1160509350',
   },
   {
     service: 'Proveedor de servicios de alimentos',
@@ -50,26 +50,4 @@ export function ServicesPropertyCarousel() {
     </div>
   )
 }
-/**
- *   <div className="m-4 rounded-lg border border-gray-200 bg-white p-3 text-center text-gray-800 ">
-          <p>InterNaxa S.A - Argentina</p>
-          <p> Proveedor de servicios de telecomunicacion</p>{' '}
-          <p>Telefono: 011 5431-8176 </p>{' '}
-        </div>
 
-        <div className="m-4 rounded-lg border border-gray-200 bg-white p-3 text-center text-gray-800 ">
-          <p>Enersa - Paraná</p> <p>Compañía eletrica </p>{' '}
-          <p>telefono: 0800-777-0080 </p>
-        </div>
-
-        <div className="m-4 rounded-lg border  border-gray-200 bg-white p-3 text-center text-gray-800 ">
-          <p>Chavez Plomeria y Gas</p>
-          <p> Instalador de gas </p> <p>Telefono: 0341 719-8170</p>
-        </div>
-
-        <div className="m-4 rounded-lg border border-gray-200 bg-white p-3 text-center text-gray-800 ">
-          <p>Cerrajeria la Milagrosa</p>
-          <p>Cerrajero</p>
-          <p>Telefono: 0341 482-6481</p>
-        </div>
- */

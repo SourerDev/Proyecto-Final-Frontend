@@ -70,15 +70,15 @@ export function Carousel({ children }) {
     >
       <button
         onClick={previus}
-        className=" group absolute top-1/2  left-0 z-50 grid aspect-square -translate-y-1/2 transform place-content-center  rounded-full "
+        className=" group absolute top-1/2  left-0 z-40 grid aspect-square -translate-y-1/2 transform place-content-center  rounded-full "
       >
-        <ChevronLeftIcon className="h-6 w-8 stroke-gray-300/50 group-hover:stroke-gray-500/50 transition-all" />
+        <ChevronLeftIcon className="h-6 w-8 stroke-gray-500/50 group-hover:stroke-gray-800/50 transition-all" />
       </button>
       <button
         onClick={next}
-        className=" group absolute top-1/2 right-0 z-50 grid aspect-square -translate-y-1/2 transform place-content-center rounded-full"
+        className=" group absolute top-1/2 right-0 z-40 grid aspect-square -translate-y-1/2 transform place-content-center rounded-full"
       >
-        <ChevronRightIcon className="h-6 w-8 stroke-gray-300/50 group-hover:stroke-gray-500/50 transition-all" />
+        <ChevronRightIcon className="h-6 w-8 stroke-gray-500/50 group-hover:stroke-gray-800/50 transition-all" />
       </button>
       <div ref={carouselRef} className="flex h-[100%] w-full z-40">
         {children}
@@ -86,9 +86,10 @@ export function Carousel({ children }) {
     </div>
   )
 }
-export function Item({ children, className }) {
+export function Item({ children, className, ...props }) {
   return (
     <div
+      {...props}
       className={`flex h-full min-w-full items-center justify-center sm:min-w-[50%]  md:min-w-[33.333%] md:max-w-[25%] lg:min-w-[25%] lg:max-w-[33.333%] ${className}`}
     >
       {children}
