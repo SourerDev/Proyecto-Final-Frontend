@@ -75,7 +75,7 @@ function InfoCard({ title, description, icon }) {
 }
 export function LandingCards() {
   return (
-    <div className="p-3 lg:flex lg:flex-row lg:gap-3">
+    <div className="px-4 lg:flex lg:flex-row lg:gap-3">
       {Information.map((info, i) => (
         <InfoCard
           key={i}

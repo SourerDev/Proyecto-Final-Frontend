@@ -2,9 +2,9 @@ import { Carousel, Item } from './Carousel'
 
 const services = [
   {
-    service: 'Proveedor de servicios de comunicacion',
-    firm: 'InterNaxa S.A - Argentina',
-    cellphone: '011 5431-8176',
+    service: 'Servicio de Jardinería y Paisajismo',
+    firm: 'CDI Eluney - Buenos Aires',
+    cellphone: '1160509350',
   },
   {
     service: 'Compañía eletrica',
@@ -30,7 +30,7 @@ const services = [
 
 export function ServicesPropertyCarousel() {
   return (
-    <div className='p-3 '>
+    <div className='px-4 my-6'>
       <h2 className="mt-2 rounded-lg bg-gray-800 px-4 text-left text-white mb-1">
         Servicios
       </h2>
@@ -50,3 +50,4 @@ export function ServicesPropertyCarousel() {
     </div>
   )
 }
+
