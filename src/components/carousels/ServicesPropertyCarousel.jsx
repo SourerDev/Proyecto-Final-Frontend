@@ -30,7 +30,7 @@ const services = [
 
 export function ServicesPropertyCarousel() {
   return (
-    <div className='p-3 '>
+    <div className='px-4 my-6'>
       <h2 className="mt-2 rounded-lg bg-gray-800 px-4 text-left text-white mb-1">
         Servicios
       </h2>
