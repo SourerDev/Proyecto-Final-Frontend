@@ -80,7 +80,7 @@ export function Carousel({ children }) {
       >
         <ChevronRightIcon className="h-6 w-8 stroke-gray-500/50 group-hover:stroke-gray-800/50 transition-all" />
       </button>
-      <div ref={carouselRef} className="flex h-[100%] w-full z-40">
+      <div ref={carouselRef} className="flex w-full z-40">
         {children}
       </div>
     </div>
@@ -90,7 +90,7 @@ export function Item({ children, className, ...props }) {
   return (
     <div
       {...props}
-      className={`flex h-full min-w-full items-center justify-center sm:min-w-[50%]  md:min-w-[33.333%] md:max-w-[25%] lg:min-w-[25%] lg:max-w-[33.333%] ${className}`}
+      className={`min-w-full sm:min-w-[50%]  md:min-w-[33.333%] md:max-w-[25%] lg:min-w-[25%] lg:max-w-[33.333%] ${className}`}
     >
       {children}
     </div>

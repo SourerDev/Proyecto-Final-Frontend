@@ -7,19 +7,19 @@ const services = [
     cellphone: '1160509350',
   },
   {
-    service: 'Proveedor de servicios de alimentos',
-    firm: 'InterNaxa S.A - Argentina',
-    cellphone: '222',
+    service: 'Compañía eletrica',
+    firm: 'Enersa - Paraná',
+    cellphone: '0800-777-0080',
   },
   {
-    service: 'Proveedor de servicios de picinas',
-    firm: 'InterNaxa S.A - Argentina',
-    cellphone: '3333',
+    service: 'Instalador de gas',
+    firm: 'Chavez Plomeria y Gas',
+    cellphone: '0341 719-8170',
   },
   {
-    service: 'Proveedor de servicios de telecomunicacion',
-    firm: 'InterNaxa S.A - Argentina',
-    cellphone: '44444',
+    service: 'Cerrajero',
+    firm: 'Cerrajeria la Milagrosa',
+    cellphone: '0341 482-6481',
   },
   {
     service: 'Proveedor de servicios de telecomunicacion',
@@ -38,7 +38,7 @@ export function ServicesPropertyCarousel() {
         {services.map((service, i) => (
           <Item
             key={i}
-            className="p-3 flex flex-col bg-white  text-center text-gray-800  justify-around border-x border-gray-800"
+            className="p-3 flex justify-center text-center items-center flex-col bg-white  text-gray-800 border-x border-gray-800"
           >
             <p>{service.firm}</p>
             <p>{service.service}</p>
