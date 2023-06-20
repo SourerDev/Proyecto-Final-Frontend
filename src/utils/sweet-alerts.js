@@ -67,4 +67,15 @@ export const Alerts = {
       buttonsStyling: false,
     })
   },
+  errorConection: ({ text = '' }) => {
+    return Swal.fire({
+      toast: true,
+      showConfirmButton: false,
+      position: 'bottom-left',
+      icon: 'error',
+      title: text?.length > 20 ? text?.slice(0, 18) + '...' : text ,
+      buttonsStyling: false,
+      showCloseButton: true,
+    })
+  },
 }

@@ -18,7 +18,7 @@ export function MainAvatar() {
 
   return (
     <Popover className="relative grid place-content-center">
-      <Popover.Button className=" border-1 focus:border-1 inline-flex h-12 w-12 items-center justify-center rounded-full bg-white hover:bg-gray-100 border ">
+      <Popover.Button className=" border-1 focus:border-1 inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/40 hover:bg-white/60 border-2">
         <span className="sr-only">user</span>
         <img className="h-full w-full rounded-full" src={user?.photo} alt="" />
       </Popover.Button>

@@ -1,7 +1,6 @@
-import CardsLanding from '../components/infoLanding/InfoLanding'
-import DataLanding from '../components/dataLanding/DataLanding'
-import ServiciosExtras from '../components/ServiciosExtras/serviciosExtras'
-
+import { LandingCards } from '../components/infoLanding/LandingCards'
+import { DataLanding } from '../components/dataLanding/DataLanding'
+import { ServicesPropertyCarousel } from '../components/carousels/ServicesPropertyCarousel'
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
 import { InitialFiltersCard } from '../components/form/InitialFiltersCard'
@@ -17,17 +16,17 @@ export function Landing({ setActiveStyle, scrollY }) {
 
   return (
     <div className="pb-2">
-      <MainHeader className="-mt-[4.8rem] flex items-center justify-center">
-        <InitialFiltersCard className="flex w-full justify-center self-end" />
+      <MainHeader className="-mt-[4.8rem] mb-2 flex max-h-[800px] items-center justify-center">
+        <InitialFiltersCard scrollY={scrollY} className="flex w-full justify-center self-end sm:px-[5%] md:px-[10%] lg:px-2 lg:py-4 xl:py-8" />
       </MainHeader>
-      <div className="px-10">
+      <div className="px-10 lg:px-[10rem]">
         <DataLanding />
       </div>
 
       <div>
-        <CardsLanding />
+        <LandingCards />
       </div>
-      <ServiciosExtras />
+      <ServicesPropertyCarousel />
     </div>
   )
 }
