@@ -3,7 +3,7 @@ import { Input } from './Input'
 import { useState } from 'react'
 import { MapPinIcon } from '@heroicons/react/24/outline'
 
-export function SearchCityInput({ city, setCity, setFilterButton }) {
+export function SearchCityInput({ city, setCity, setFilterButton, scrollY }) {
   const { cities } = useSelector((state) => state.city)
   const [suggestions, setSuggestions] = useState([])
   const [showResults, setShowResults] = useState(false)
@@ -53,9 +53,9 @@ export function SearchCityInput({ city, setCity, setFilterButton }) {
   }
 
   return (
-    <div className="relative max-w-[400px]">
+    <div className="relative col-start-1 col-end-5 min-w-[200px] lg:col-start-5 lg:col-end-7 xl:col-start-6 xl:col-end-9">
       <Input
-        className="px-1 text-[1rem]"
+        className="px-2 text-[1rem]"
         placeholder="Buscar ciudad"
         value={city?.string}
         onChange={handleCity}
@@ -64,7 +64,11 @@ export function SearchCityInput({ city, setCity, setFilterButton }) {
         onKeyDown={handleKeyDown}
       />
       {showResults && shortSugestions.length > 0 && (
-        <ul className="absolute top-full left-0 w-full bg-white p-1">
+        <ul
+          className={`absolute left-0 z-50 w-full bg-white p-1 ${
+            scrollY >= 157 ? 'top-full' : 'bottom-full'
+          }`}
+        >
           {suggestions &&
             shortSugestions.map((suggestion, i) => (
               <li

@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 
-export default function DataLanding() {
+export function DataLanding() {
   return (
-    <div className="P-2 flex flex-col rounded-lg bg-gray-800 px-14">
+    <div className="py-2 flex flex-col rounded-lg bg-gray-800 px-14">
       <h1 className=" text-center text-3xl text-white underline">
         Properties & You
       </h1>

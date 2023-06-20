@@ -1,6 +1,12 @@
 import { setPublications, setDetailPublication } from './Publication.js'
 import { setUser, setSignIn } from './User.js'
-import { setPage, setFilters, resetFilters, setViewNav } from './App.js'
+import {
+  setPage,
+  setFilters,
+  resetFilters,
+  setViewNav,
+  setIsLoading,
+} from './App.js'
 import { setCities } from './City.js'
 
 export { publicationRs } from './Publication.js'
@@ -23,6 +29,7 @@ export const actionsApp = {
   setFilters,
   resetFilters,
   setViewNav,
+  setIsLoading,
 }
 
 export const actionsCity = {
