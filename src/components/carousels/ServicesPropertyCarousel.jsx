@@ -2,9 +2,9 @@ import { Carousel, Item } from './Carousel'
 
 const services = [
   {
-    service: 'Proveedor de servicios de comunicacion',
-    firm: 'InterNaxa S.A - Argentina',
-    cellphone: '011 5431-8176',
+    service: 'Servicio de Jardinería y Paisajismo',
+    firm: 'CDI Eluney - Buenos Aires',
+    cellphone: '1160509350',
   },
   {
     service: 'Compañía eletrica',
@@ -50,3 +50,4 @@ export function ServicesPropertyCarousel() {
     </div>
   )
 }
+
