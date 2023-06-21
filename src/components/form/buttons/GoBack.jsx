@@ -7,7 +7,7 @@ export function GoBackButton({ className, children, ...props }) {
   return (
     <button
       {...props}
-      className={`whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 ${className}`}
+      className={`whitespace-nowrap border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm  ${className}`}
       onClick={goBack}
     >
       {children || 'Volver'}
