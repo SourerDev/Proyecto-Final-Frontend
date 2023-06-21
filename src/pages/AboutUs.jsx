@@ -5,11 +5,11 @@ import { ArrowLeftIcon } from '@heroicons/react/24/outline'
 
 export function AboutUs() {
   return (
-    <>
-      <GoBackButton className="">
-        <ArrowLeftIcon className="h-auto w-8" />
+    <div className='px-4 pb-4'>
+      <GoBackButton className="rounded-full shadow-none  bg-transparent text-gray-700 hover:bg-gray-800 hover:text-white aspect-square mt-3">
+        <ArrowLeftIcon className="h-auto w-8 " />
       </GoBackButton>
-      <ContainerCards className="gap-2">
+      <ContainerCards className="gap-2  flex flex-col items-center sm:flex-row sm:justify-around">
         {creators_info.map((creator, i) => (
           <CreatorCard
             key={i}
@@ -19,7 +19,7 @@ export function AboutUs() {
           />
         ))}
       </ContainerCards>
-    </>
+    </div>
   )
 }
 
