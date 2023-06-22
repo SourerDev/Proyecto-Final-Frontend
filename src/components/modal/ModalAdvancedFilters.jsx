@@ -1,4 +1,4 @@
-import AdvancedFilters from '../advanced-filters/AdvancedFilters'
+import { AdvancedFilters } from '../advanced-filters/AdvancedFilters'
 
 export default function ModalAF({ setModalOn }) {
   const handleCancelClick = () => {

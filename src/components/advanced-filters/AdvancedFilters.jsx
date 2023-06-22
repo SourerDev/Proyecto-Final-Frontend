@@ -1,15 +1,25 @@
 import { useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { SearchCityInput } from '../form/inputs/SearchCityInput.jsx'
-import { filter } from '../../utils/filters.js'
-import {
-  filterProperties,
-  resetFilters,
-  filterNormal,
-} from '../../redux/actions/index.js'
 import { useEffect } from 'react'
+import { Popover } from '@headlessui/react'
 
-export default function AdvancedFilters({ setModalOn }) {
+export function AdvancedFilters() {
+  return (
+    <div>
+      <h1>hola</h1>
+      <Popover>
+        <Popover.Button>Filtros avanzados</Popover.Button>
+        <Popover.Panel>
+          <form>
+            <button type="submit">Aplicar filtros</button>
+          </form>
+        </Popover.Panel>
+      </Popover>
+    </div>
+  )
+}
+
+/* export default function AdvancedFilters({ setModalOn }) {
   const dispatch = useDispatch()
   const { properties, citiesA, filteredProperties } = useSelector(
     (state) => state
@@ -415,3 +425,4 @@ export default function AdvancedFilters({ setModalOn }) {
     </>
   )
 }
+ */
