@@ -2,15 +2,18 @@ import { useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { Popover } from '@headlessui/react'
+import { Select } from '../form/selects/Select'
+import RangeSlider from '../form/inputs/RangeSlider'
+import ReactSlider from 'react-slider'
 
 export function AdvancedFilters() {
   return (
     <div>
-      <h1>hola</h1>
       <Popover>
         <Popover.Button>Filtros avanzados</Popover.Button>
         <Popover.Panel>
           <form>
+            <Select/>
             <button type="submit">Aplicar filtros</button>
           </form>
         </Popover.Panel>
