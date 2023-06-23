@@ -71,10 +71,10 @@ function App() {
         className="h-screen w-screen min-w-[440px] overflow-hidden bg-gray-100 scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-gray-300 hover:scrollbar-thumb-gray-500 sm:scrollbar-thumb-indigo-600 sm:hover:scrollbar-thumb-indigo-800"
       >
         <Nav
-          className={`width-max-main transition-all ${
+          className={`width-max-main transition-all py-4 ${
             activeStyle
               ? 'bg-gradient-to-b from-gray-500/70 px-5'
-              : 'rounded border-gray-50 bg-white px-4 shadow-md '
+              : 'rounded border-gray-50 bg-white px-4 shadow-md'
           }`}
         />
         <main className="width-max-main min-h-screen border-gray-100 bg-white xl:border-x">
