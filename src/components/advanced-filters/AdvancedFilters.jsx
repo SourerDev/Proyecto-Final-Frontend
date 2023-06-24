@@ -7,8 +7,14 @@ import { SearchCityInput } from '../form/inputs/SearchCityInput'
 import { RangeSlider } from '../form/inputs/RangeSlider'
 
 export function AdvancedFilters({ scrollY }) {
-  const { byCity } = useSelector((state) => state.app.filters)
-  const [city, setCity] = useState(byCity)
+  const { filters } = useSelector((state) => state.app)
+  const [city, setCity] = useState(filters.byCity)
+
+  const [actualFilters, setActualFilters] = useState({
+    byPublication: {},
+    byProperty: {},
+    byCity: {},
+  })
 
   return (
     <div className="">
@@ -34,10 +40,10 @@ export function AdvancedFilters({ scrollY }) {
               setCity={setCity}
               setFilterButton={() => {}}
             />
-            <RangeSlider min={1} max={10} name='ambientes'/>
-            <RangeSlider min={1} max={10} name='cuartos'/>
-            <RangeSlider min={1} max={10} name='baños'/>
-            <RangeSlider min={1} max={10} name='ambientes'/>
+            <RangeSlider min={1} max={10} name="ambientes" />
+            <RangeSlider min={1} max={10} name="cuartos" />
+            <RangeSlider min={1} max={10} name="baños" />
+            <RangeSlider min={1} max={10} name="ambientes" />
             {
               //Price double Range slider
               //Year built double Range slider
