@@ -1,29 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-const RangeSlider = () => {
-  const [value, setValue] = useState(50)
+export function RangeSlider({ min, max, name }) {
+  const [value, setValue] = useState(max / 2)
 
   const handleChange = (e) => {
     setValue(e.target.value)
   }
-
   return (
     <div className="mx-auto w-64">
+      <p>{name}</p>
       <input
         type="range"
-        min="0"
-        max="100"
+        min={min}
+        max={max}
         value={value}
         onChange={handleChange}
         className="h-2 w-full appearance-none rounded-full bg-gray-200"
       />
       <div className="mt-2 flex justify-between">
-        <span>0</span>
-        <span>100</span>
+        <span>{min}</span>
+        <p className="mt-2">{`${value}${parseInt(value) === max || parseInt(value) === min ? '' : '+'}`}</p>
+        <span>{max}</span>
       </div>
-      <div className="mt-2">Selected value: {value}</div>
     </div>
   )
 }
-
-export default RangeSlider

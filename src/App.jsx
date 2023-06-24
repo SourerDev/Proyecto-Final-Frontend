@@ -96,7 +96,7 @@ function App() {
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/home" element={<Home />} />
             <Route path="/properties/:id" element={<PropertyDetails />} />
-            <Route path='/filter' element={<AdvancedFilters/>} />
+            <Route path='/filter' element={<AdvancedFilters scrollY={scrollPosition}/>} />
             {/* <Route path="/newRoute" element={<><Nav/><DashboardUsers/></>}/>
           <Route path="/createProperty" element={<><Nav/><Form/><Footer/></>}/>
           <Route path="/bePremium" element={<><Nav/><BePremium/></>} />

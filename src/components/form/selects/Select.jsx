@@ -4,6 +4,7 @@ export function Select({ className, selectName, options = [], ...props }) {
   return (
     <select
       {...props}
+      name={selectName}
       className={`rounded p-2 outline-none min-w-[200px] ${className}`}
     >
       <option value="" disabled hidden>

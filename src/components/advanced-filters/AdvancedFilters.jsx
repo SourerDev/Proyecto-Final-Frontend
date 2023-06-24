@@ -3,17 +3,46 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { Popover } from '@headlessui/react'
 import { Select } from '../form/selects/Select'
-import RangeSlider from '../form/inputs/RangeSlider'
-import ReactSlider from 'react-slider'
+import { SearchCityInput } from '../form/inputs/SearchCityInput'
+import { RangeSlider } from '../form/inputs/RangeSlider'
 
-export function AdvancedFilters() {
+export function AdvancedFilters({ scrollY }) {
+  const { byCity } = useSelector((state) => state.app.filters)
+  const [city, setCity] = useState(byCity)
+
   return (
-    <div>
+    <div className="">
       <Popover>
         <Popover.Button>Filtros avanzados</Popover.Button>
         <Popover.Panel>
           <form>
-            <Select/>
+            <div>
+              <p>Operación</p>
+              <Select
+                className=""
+                selectName="modality"
+                options={modalityOpts}
+              />
+            </div>
+            <div>
+              <p>Tipo de propiedad</p>
+              <Select className="" selectName="type" options={typeOpts} />
+            </div>
+            <SearchCityInput
+              city={city}
+              scrollY={scrollY}
+              setCity={setCity}
+              setFilterButton={() => {}}
+            />
+            <RangeSlider min={1} max={10} name='ambientes'/>
+            <RangeSlider min={1} max={10} name='cuartos'/>
+            <RangeSlider min={1} max={10} name='baños'/>
+            <RangeSlider min={1} max={10} name='ambientes'/>
+            {
+              //Price double Range slider
+              //Year built double Range slider
+              //Antiquity double Range slider
+            }
             <button type="submit">Aplicar filtros</button>
           </form>
         </Popover.Panel>
@@ -21,12 +50,19 @@ export function AdvancedFilters() {
     </div>
   )
 }
+const modalityOpts = [
+  { name: 'Comprar', value: 'sale' },
+  { name: 'Alquilar', value: 'rental' },
+]
+const typeOpts = [
+  { name: 'Casa', value: 'house' },
+  { name: 'Ph', value: 'ph' },
+  { name: 'Departamento', value: 'apartment' },
+  { name: 'Quinta', value: 'ranch' },
+]
 
-/* export default function AdvancedFilters({ setModalOn }) {
+/* export default function AdvanceddFilters({ setModalOn }) {
   const dispatch = useDispatch()
-  const { properties, citiesA, filteredProperties } = useSelector(
-    (state) => state
-  )
   const {
     operation,
     propertyType,
@@ -40,7 +76,20 @@ export function AdvancedFilters() {
     antiquity,
     area,
     price,
-  } = useSelector((state) => state.filters)
+  } = {
+    operation: null,
+    propertyType: null,
+    city: null,
+    rooms: null,
+    bathrooms: null,
+    idCity: null,
+    floors: null,
+    environments: null,
+    garage: null,
+    antiquity: null,
+    area: null,
+    price: null,
+  }
 
   const [state, setState] = useState({
     operation: '',
@@ -61,7 +110,7 @@ export function AdvancedFilters() {
     setModalOn(false)
   }
 
-  const stateHandleChange = (evt) => {
+  /* const null = (evt) => {
     const { name, value } = evt.target
     const [nameA, nameB] = name.split('-')
 
@@ -127,8 +176,8 @@ export function AdvancedFilters() {
       let element = ref.current
       element.value = ''
     })
-    dispatch(filterNormal(resetAll))
-    return dispatch(resetFilters())
+    //dispatch(filterNormal(resetAll))
+    return //dispatch(resetFilters())
   }
 
   useEffect(() => {
@@ -172,8 +221,8 @@ export function AdvancedFilters() {
         <button
           className="m-2 rounded-full bg-blue-500 p-2"
           onClick={() => {
-            dispatch(filterProperties(filter(properties, state)))
-            dispatch(filterNormal(state))
+            //dispatch(filterProperties(filter(properties, state)))
+            //dispatch(filterNormal(state))
             handleCancelClick()
           }}
         >
@@ -182,7 +231,7 @@ export function AdvancedFilters() {
         <button
           className="m-2  rounded-full bg-blue-500 p-2"
           onClick={() => {
-            dispatch(resetFilters())
+            //dispatch(resetFilters())
             reset([
               refPrecioMin,
               refPrecioMax,
@@ -222,7 +271,7 @@ export function AdvancedFilters() {
         m-0 block  w-full rounded border  border-solid  bg-white  bg-clip-padding px-3  py-1.5 text-base font-normal  text-gray-700  transition  ease-in-out  focus:border-blue-600  focus:bg-white focus:text-gray-700 focus:outline-none sm:text-center "
                 id="minPrice"
                 value={state.price.min}
-                onChange={stateHandleChange}
+                onChange={null}
                 name="price-min"
                 placeholder="Desde"
               />
@@ -233,7 +282,7 @@ export function AdvancedFilters() {
         m-0 block  w-full rounded border  border-solid  bg-white  bg-clip-padding px-3  py-1.5 text-base font-normal  text-gray-700  transition  ease-in-out  focus:border-blue-600  focus:bg-white focus:text-gray-700 focus:outline-none sm:text-center "
                 id="maxPrice"
                 value={state.price.max}
-                onChange={stateHandleChange}
+                onChange={null}
                 name="price-max"
                 placeholder="Hasta"
               />
@@ -245,7 +294,7 @@ export function AdvancedFilters() {
               ref={refOperation}
               className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pb-6 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-center"
               name="operation"
-              onChange={stateHandleChange}
+              onChange={null}
               value={state.operation}
             >
               <option value="" disabled hidden>
@@ -261,7 +310,7 @@ export function AdvancedFilters() {
               ref={refType}
               className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-center"
               name="propertyType"
-              onChange={stateHandleChange}
+              onChange={null}
               value={state.propertyType}
             >
               <option value="" selected>
@@ -275,11 +324,11 @@ export function AdvancedFilters() {
           </div>{' '}
           <br />
           <div className=" flex justify-center px-2 ">
-            <SearchCityInput
+             <SearchCityInput
               refCity={refCity}
               apiData={citiesA}
               city={state.city}
-              stateHandleChange={stateHandleChange}
+              null={null}
             />
           </div>{' '}
           <br />
@@ -288,7 +337,7 @@ export function AdvancedFilters() {
               ref={refEnviroments}
               className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-center"
               name="environments"
-              onChange={stateHandleChange}
+              onChange={null}
               value={state.environments}
             >
               <option value="">cantidad de ambientes</option>
@@ -305,7 +354,7 @@ export function AdvancedFilters() {
               ref={refFloors}
               className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-center"
               name="floors"
-              onChange={stateHandleChange}
+              onChange={null}
             >
               <option value="">cantidad de pisos</option>
               <option value="1">1</option>
@@ -321,7 +370,7 @@ export function AdvancedFilters() {
               ref={refRooms}
               className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-center"
               name="rooms"
-              onChange={stateHandleChange}
+              onChange={null}
             >
               <option value="">cantidad de cuartos</option>
               <option value="1">1</option>
@@ -337,7 +386,7 @@ export function AdvancedFilters() {
               ref={refBathrooms}
               className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-center"
               name="bathrooms"
-              onChange={stateHandleChange}
+              onChange={null}
             >
               <option value="">cantidad de baños</option>
               <option value="1">1</option>
@@ -353,7 +402,7 @@ export function AdvancedFilters() {
               ref={refGarage}
               className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-center"
               name="garage"
-              onChange={stateHandleChange}
+              onChange={null}
             >
               <option value="">cantidad de cocheras</option>
               <option value="1">1</option>
@@ -375,7 +424,7 @@ export function AdvancedFilters() {
         m-0 block   w-full rounded border  border-solid  bg-white  bg-clip-padding px-3  py-1.5 text-base font-normal  text-gray-700  transition  ease-in-out  focus:border-blue-600  focus:bg-white focus:text-gray-700 focus:outline-none sm:text-center "
                 id="minArea"
                 value={state.area.min}
-                onChange={stateHandleChange}
+                onChange={null}
                 name="area-min"
                 placeholder="Desde"
               />
@@ -386,7 +435,7 @@ export function AdvancedFilters() {
         m-0 block   w-full rounded border  border-solid  bg-white  bg-clip-padding px-3  py-1.5 text-base font-normal  text-gray-700  transition  ease-in-out  focus:border-blue-600  focus:bg-white focus:text-gray-700 focus:outline-none sm:text-center "
                 id="maxArea"
                 value={state.area.max}
-                onChange={stateHandleChange}
+                onChange={null}
                 name="area-max"
                 placeholder="Hasta"
               />
@@ -407,7 +456,7 @@ export function AdvancedFilters() {
         m-0 block   w-full rounded border  border-solid  bg-white  bg-clip-padding px-3  py-1.5 text-base font-normal  text-gray-700  transition  ease-in-out  focus:border-blue-600  focus:bg-white focus:text-gray-700 focus:outline-none sm:text-center "
                 id="minAntiquity"
                 value={state.antiquity.min}
-                onChange={stateHandleChange}
+                onChange={null}
                 name="antiquity-min"
                 placeholder="Desde"
               />
@@ -417,7 +466,7 @@ export function AdvancedFilters() {
                 className="form-control border-gray-30 m-0 block  w-full rounded border  border-solid  bg-white  bg-clip-padding px-3  py-1.5 text-base font-normal  text-gray-700  transition  ease-in-out  focus:border-blue-600  focus:bg-white focus:text-gray-700 focus:outline-none sm:text-center "
                 id="maxAntiquity"
                 value={state.antiquity.max}
-                onChange={stateHandleChange}
+                onChange={null}
                 name="antiquity-max"
                 placeholder="Hasta"
               />
@@ -427,5 +476,4 @@ export function AdvancedFilters() {
       </div>
     </>
   )
-}
- */
+} */
