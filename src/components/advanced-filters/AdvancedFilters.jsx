@@ -3,18 +3,36 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { Popover } from '@headlessui/react'
 import { Select } from '../form/selects/Select'
+import { ModalitySelect } from '../form/selects/ModalitySelect'
 import { SearchCityInput } from '../form/inputs/SearchCityInput'
 import { RangeSlider } from '../form/inputs/RangeSlider'
 
 export function AdvancedFilters({ scrollY }) {
   const { filters } = useSelector((state) => state.app)
+  const { byPublication, byProperty, byCity } = filters
   const [city, setCity] = useState(filters.byCity)
 
   const [actualFilters, setActualFilters] = useState({
-    byPublication: {},
-    byProperty: {},
-    byCity: {},
+    byPublication,
+    byProperty,
+    byCity,
   })
+
+  useEffect(() => {
+    console.log(actualFilters)
+  }, [actualFilters])
+
+  function handleFilters(e) {
+    console.log(e)
+
+    const strs = e.target.name.slice('-')
+    console.log(strs)
+    console.log(strs[0], strs[1])
+    setActualFilters({
+      ...actualFilters,
+      [e.target.name]: e.target.value,
+    })
+  }
 
   return (
     <div className="">
@@ -24,6 +42,11 @@ export function AdvancedFilters({ scrollY }) {
           <form>
             <div>
               <p>Operación</p>
+              <ModalitySelect
+                name="byPublication-modality"
+                onChange={handleFilters}
+                value={actualFilters.byPublication.modality}
+              />
               <Select
                 className=""
                 selectName="modality"
