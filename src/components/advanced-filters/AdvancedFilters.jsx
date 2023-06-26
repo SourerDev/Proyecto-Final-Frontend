@@ -5,6 +5,7 @@ import { Popover } from '@headlessui/react'
 import { Select } from '../form/selects/Select'
 import { SearchCityInput } from '../form/inputs/SearchCityInput'
 import { RangeSlider } from '../form/inputs/RangeSlider'
+import { RangeInputNumber } from '../form/inputs/RangeInputNumber'
 
 export function AdvancedFilters({ scrollY }) {
   const { filters } = useSelector((state) => state.app)
@@ -38,10 +39,19 @@ export function AdvancedFilters({ scrollY }) {
       })
     }
   }
+  function handleRangeNumbers(inputName, obj) {
+    const strs = inputName.split('-')
+    const nested = { ...actualFilters[strs[0]] }
+    nested[strs[1]] = obj
+    setActualFilters({
+      ...actualFilters,
+      [strs[0]]: nested,
+    })
+  }
 
   return (
     <div className="">
-      <Popover>
+      <Popover className="border-2 border-red-500">
         <Popover.Button>Filtros avanzados</Popover.Button>
         <Popover.Panel>
           <form>
@@ -89,11 +99,21 @@ export function AdvancedFilters({ scrollY }) {
               inputName="byProperty-yearBuilt"
               handleFilters={handleFilters}
             />
-            {
-              //Cambiar Double Range Slider por dos input numbers
-              //Price double Range slider
-              //Area
-            }
+
+            <RangeInputNumber
+              min={10}
+              max={50}
+              name="Precio"
+              inputName="byPublication-price"
+              handleRangeNumbers={handleRangeNumbers}
+            />
+            <RangeInputNumber
+              min={200}
+              max={10000}
+              name="Area (en mts²)"
+              inputName="byProperty-squareMeters"
+              handleRangeNumbers={handleRangeNumbers}
+            />
             <button type="submit">Aplicar filtros</button>
           </form>
         </Popover.Panel>
