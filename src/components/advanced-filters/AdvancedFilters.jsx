@@ -67,14 +67,32 @@ export function AdvancedFilters({ scrollY }) {
               setCity={setCity}
               setFilterButton={() => {}}
             />
-            <RangeSlider min={1} max={10} name="ambientes" />
-            <RangeSlider min={1} max={10} name="cuartos" />
-            <RangeSlider min={1} max={10} name="baños" />
-            <RangeSlider min={1} max={10} name="ambientes" />
+            <RangeSlider
+              min={1}
+              max={10}
+              name="cuartos"
+              inputName="byProperty-bedrooms"
+              handleFilters={handleFilters}
+            />
+            <RangeSlider
+              min={1}
+              max={10}
+              name="Baños"
+              inputName="byProperty-bathrooms"
+              handleFilters={handleFilters}
+            />
+
+            <RangeSlider
+              min={1}
+              max={10}
+              name="Fue construida a partir de:"
+              inputName="byProperty-yearBuilt"
+              handleFilters={handleFilters}
+            />
             {
+              //Cambiar Double Range Slider por dos input numbers
               //Price double Range slider
-              //Year built double Range slider
-              //Antiquity double Range slider
+              //Area
             }
             <button type="submit">Aplicar filtros</button>
           </form>
