@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { Popover } from '@headlessui/react'
 import { Select } from '../form/selects/Select'
-import { ModalitySelect } from '../form/selects/ModalitySelect'
 import { SearchCityInput } from '../form/inputs/SearchCityInput'
 import { RangeSlider } from '../form/inputs/RangeSlider'
 
@@ -22,16 +21,22 @@ export function AdvancedFilters({ scrollY }) {
     console.log(actualFilters)
   }, [actualFilters])
 
-  function handleFilters(e) {
-    console.log(e)
-
-    const strs = e.target.name.slice('-')
-    console.log(strs)
-    console.log(strs[0], strs[1])
-    setActualFilters({
-      ...actualFilters,
-      [e.target.name]: e.target.value,
-    })
+  function handleFilters({ target }) {
+    const strs = target.name.split('-')
+    const nested = { ...actualFilters[strs[0]] }
+    if (target.value === 'default') {
+      nested[strs[1]] = ''
+      setActualFilters({
+        ...actualFilters,
+        [strs[0]]: nested,
+      })
+    } else {
+      nested[strs[1]] = target.value
+      setActualFilters({
+        ...actualFilters,
+        [strs[0]]: nested,
+      })
+    }
   }
 
   return (
@@ -41,21 +46,20 @@ export function AdvancedFilters({ scrollY }) {
         <Popover.Panel>
           <form>
             <div>
-              <p>Operación</p>
-              <ModalitySelect
-                name="byPublication-modality"
-                onChange={handleFilters}
-                value={actualFilters.byPublication.modality}
-              />
               <Select
                 className=""
-                selectName="modality"
+                selectName="byPublication-modality"
                 options={modalityOpts}
+                onChange={handleFilters}
               />
             </div>
             <div>
-              <p>Tipo de propiedad</p>
-              <Select className="" selectName="type" options={typeOpts} />
+              <Select
+                className=""
+                selectName="byProperty-type"
+                options={typeOpts}
+                onChange={handleFilters}
+              />
             </div>
             <SearchCityInput
               city={city}
@@ -80,10 +84,12 @@ export function AdvancedFilters({ scrollY }) {
   )
 }
 const modalityOpts = [
+  { name: 'Operación', value: 'default' },
   { name: 'Comprar', value: 'sale' },
   { name: 'Alquilar', value: 'rental' },
 ]
 const typeOpts = [
+  { name: 'Tipo de propiedad', value: 'default' },
   { name: 'Casa', value: 'house' },
   { name: 'Ph', value: 'ph' },
   { name: 'Departamento', value: 'apartment' },

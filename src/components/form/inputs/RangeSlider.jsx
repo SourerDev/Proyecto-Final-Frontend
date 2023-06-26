@@ -19,7 +19,7 @@ export function RangeSlider({ min, max, name }) {
       />
       <div className="mt-2 flex justify-between">
         <span>{min}</span>
-        <p className="mt-2">{`${value}${parseInt(value) === max || parseInt(value) === min ? '' : '+'}`}</p>
+        <p className="mt-2">{`${value}${parseInt(value) === max && '+'}`}</p>
         <span>{max}</span>
       </div>
     </div>
