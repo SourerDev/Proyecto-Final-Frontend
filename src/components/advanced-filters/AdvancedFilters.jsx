@@ -7,6 +7,7 @@ import { SearchCityInput } from '../form/inputs/SearchCityInput'
 import { RangeSlider } from '../form/inputs/RangeSlider'
 import { RangeInputNumber } from '../form/inputs/RangeInputNumber'
 import { actionsApp, actionsPublications } from '../../redux2.0/reducers'
+import { ApiPropYou } from '../../services'
 
 export function AdvancedFilters({ scrollY }) {
   const dispatch = useDispatch()
@@ -17,12 +18,12 @@ export function AdvancedFilters({ scrollY }) {
   const [dataFilters, setdataFilters] = useState({
     byPublication,
     byProperty,
-    byCity,
   })
 
   useEffect(() => {
     console.log(dataFilters)
-  }, [dataFilters])
+    console.log(city)
+  }, [dataFilters, city])
 
   function handleFilters({ target }) {
     const strs = target.name.split('-')
@@ -41,12 +42,6 @@ export function AdvancedFilters({ scrollY }) {
       })
     }
   }
-  function handleCity(idCity) {
-    setdataFilters({
-      ...dataFilters,
-      byCity: idCity,
-    })
-  }
 
   function handleRangeNumbers(inputName, obj) {
     const strs = inputName.split('-')
@@ -59,80 +54,88 @@ export function AdvancedFilters({ scrollY }) {
   }
 
   return (
-    <div className="">
-      <Popover className="border-2 border-red-500">
-        <Popover.Button>Filtros avanzados</Popover.Button>
-        <Popover.Panel>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault()
-              dispatch(actionsApp.setFilters(dataFilters))
-            }}
-          >
-            <div>
-              <Select
-                className=""
-                selectName="byPublication-modality"
-                options={modalityOpts}
-                onChange={handleFilters}
-              />
-            </div>
-            <div>
-              <Select
-                className=""
-                selectName="byProperty-type"
-                options={typeOpts}
-                onChange={handleFilters}
-              />
-            </div>
-            <SearchCityInput
-              city={city}
-              scrollY={scrollY}
-              setCity={setCity}
-              setFilterButton={() => {}}
-            />
-            <RangeSlider
-              min={1}
-              max={10}
-              name="cuartos"
-              inputName="byProperty-bedrooms"
-              handleFilters={handleFilters}
-            />
-            <RangeSlider
-              min={1}
-              max={10}
-              name="Baños"
-              inputName="byProperty-bathrooms"
-              handleFilters={handleFilters}
-            />
+    <Popover className="w-1/2 border-2 border-red-500 p-2">
+      <Popover.Button className=" my-0 mx-auto border-2 border-green-600">
+        Filtros avanzados
+      </Popover.Button>
+      <Popover.Panel className="border-2 border-yellow-600">
+        <form
+          className="flex flex-col border-2 border-violet-700 p-10 "
+          onSubmit={(e) => {
+            e.preventDefault()
+            dispatch(actionsApp.setFilters(dataFilters))
+            //loader
+          }}
+        >
+          <Select
+            className="w-1/2 border-2 border-black"
+            selectName="byPublication-modality"
+            options={modalityOpts}
+            onChange={handleFilters}
+          />
 
-            <RangeSlider
-              min={1}
-              max={10}
-              name="Fue construida a partir de:"
-              inputName="byProperty-yearBuilt"
-              handleFilters={handleFilters}
-            />
+          <Select
+            className="w-1/2 border-2 border-black"
+            selectName="byProperty-type"
+            options={typeOpts}
+            onChange={handleFilters}
+          />
 
-            <RangeInputNumber
-              min={10}
-              max={50}
-              name="Precio"
-              inputName="byPublication-price"
-              handleRangeNumbers={handleRangeNumbers}
-            />
-            <RangeInputNumber
-              min={200}
-              max={10000}
-              name="Area (en mts²)"
-              inputName="byProperty-squareMeters"
-              handleRangeNumbers={handleRangeNumbers}
-            />
-            <button type="submit">Aplicar filtros</button>
-          </form>
-        </Popover.Panel>
-      </Popover>
-    </div>
+          <SearchCityInput
+            className="w-1/2"
+            city={city}
+            scrollY={scrollY}
+            setCity={setCity}
+            setFilterButton={() => {}}
+          />
+          <RangeSlider
+            className="border-2 border-black"
+            min={1}
+            max={10}
+            name="cuartos"
+            inputName="byProperty-bedrooms"
+            handleFilters={handleFilters}
+          />
+          <RangeSlider
+            className="border-2 border-black"
+            min={1}
+            max={10}
+            name="Baños"
+            inputName="byProperty-bathrooms"
+            handleFilters={handleFilters}
+          />
+
+          <RangeSlider
+            className="b border-2 border-black"
+            min={1}
+            max={10}
+            name="Fue construida a partir de:"
+            inputName="byProperty-yearBuilt"
+            handleFilters={handleFilters}
+          />
+
+          <RangeInputNumber
+            className="border-2 border-black"
+            min={10}
+            max={50}
+            name="Precio"
+            inputName="byPublication-price"
+            handleRangeNumbers={handleRangeNumbers}
+          />
+          <RangeInputNumber
+            className="border-2 border-black"
+            min={200}
+            max={10000}
+            name="Area (en mts²)"
+            inputName="byProperty-squareMeters"
+            handleRangeNumbers={handleRangeNumbers}
+          />
+          <button className="w-1/2 border-2 border-black" type="submit">
+            Aplicar filtros
+          </button>
+        </form>
+      </Popover.Panel>
+    </Popover>
   )
 }
 const modalityOpts = [

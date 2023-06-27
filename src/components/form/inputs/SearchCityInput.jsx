@@ -3,7 +3,13 @@ import { Input } from './Input'
 import { useState } from 'react'
 import { MapPinIcon } from '@heroicons/react/24/outline'
 
-export function SearchCityInput({ city, setCity, setFilterButton, scrollY }) {
+export function SearchCityInput({
+  city,
+  setCity,
+  setFilterButton,
+  scrollY,
+  className,
+}) {
   const { cities } = useSelector((state) => state.city)
   const [suggestions, setSuggestions] = useState([])
   const [showResults, setShowResults] = useState(false)
@@ -53,7 +59,9 @@ export function SearchCityInput({ city, setCity, setFilterButton, scrollY }) {
   }
 
   return (
-    <div className="relative col-start-1 col-end-5 min-w-[200px] lg:col-start-5 lg:col-end-7 xl:col-start-6 xl:col-end-9">
+    <div
+      className={`relative col-start-1 col-end-5 min-w-[200px] lg:col-start-5 lg:col-end-7 xl:col-start-6 xl:col-end-9 ${className}`}
+    >
       <Input
         className="px-2 text-[1rem]"
         placeholder="Buscar ciudad"

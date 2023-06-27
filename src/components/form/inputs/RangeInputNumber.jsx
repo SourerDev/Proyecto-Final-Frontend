@@ -6,6 +6,7 @@ export function RangeInputNumber({
   name,
   inputName,
   handleRangeNumbers,
+  className
 }) {
   const [values, setValues] = useState({
     min: '',
@@ -18,7 +19,7 @@ export function RangeInputNumber({
   }
 
   return (
-    <div>
+    <div className={`border-2 border-black w-1/2 ${className}`}>
       <p>{name}</p>
       <input
         type="number"
