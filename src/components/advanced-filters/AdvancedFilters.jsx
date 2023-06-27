@@ -6,45 +6,54 @@ import { Select } from '../form/selects/Select'
 import { SearchCityInput } from '../form/inputs/SearchCityInput'
 import { RangeSlider } from '../form/inputs/RangeSlider'
 import { RangeInputNumber } from '../form/inputs/RangeInputNumber'
+import { actionsApp, actionsPublications } from '../../redux2.0/reducers'
 
 export function AdvancedFilters({ scrollY }) {
+  const dispatch = useDispatch()
   const { filters } = useSelector((state) => state.app)
   const { byPublication, byProperty, byCity } = filters
   const [city, setCity] = useState(filters.byCity)
 
-  const [actualFilters, setActualFilters] = useState({
+  const [dataFilters, setdataFilters] = useState({
     byPublication,
     byProperty,
     byCity,
   })
 
   useEffect(() => {
-    console.log(actualFilters)
-  }, [actualFilters])
+    console.log(dataFilters)
+  }, [dataFilters])
 
   function handleFilters({ target }) {
     const strs = target.name.split('-')
-    const nested = { ...actualFilters[strs[0]] }
+    const nested = { ...dataFilters[strs[0]] }
     if (target.value === 'default') {
       nested[strs[1]] = ''
-      setActualFilters({
-        ...actualFilters,
+      setdataFilters({
+        ...dataFilters,
         [strs[0]]: nested,
       })
     } else {
       nested[strs[1]] = target.value
-      setActualFilters({
-        ...actualFilters,
+      setdataFilters({
+        ...dataFilters,
         [strs[0]]: nested,
       })
     }
   }
+  function handleCity(idCity) {
+    setdataFilters({
+      ...dataFilters,
+      byCity: idCity,
+    })
+  }
+
   function handleRangeNumbers(inputName, obj) {
     const strs = inputName.split('-')
-    const nested = { ...actualFilters[strs[0]] }
+    const nested = { ...dataFilters[strs[0]] }
     nested[strs[1]] = obj
-    setActualFilters({
-      ...actualFilters,
+    setdataFilters({
+      ...dataFilters,
       [strs[0]]: nested,
     })
   }
@@ -54,7 +63,12 @@ export function AdvancedFilters({ scrollY }) {
       <Popover className="border-2 border-red-500">
         <Popover.Button>Filtros avanzados</Popover.Button>
         <Popover.Panel>
-          <form>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault()
+              dispatch(actionsApp.setFilters(dataFilters))
+            }}
+          >
             <div>
               <Select
                 className=""
