@@ -12,7 +12,7 @@ import { LoadingProperties } from '../components/loaders/LoadingProperties.jsx'
 //import state from 'sweetalert/typings/modules/state.js';
 import { AdvancedFilters } from '../components/advanced-filters/AdvancedFilters.jsx'
 
-export function Home() {
+export function Home({ scrollY }) {
   // const {favorites}  = useSelector(state => state.user)
   const dispatch = useDispatch()
   const { publications } = useSelector((state) => state.publication)
@@ -57,12 +57,14 @@ export function Home() {
 
       {/* {typeof (filteredProperties) === "string" &&(swal.fire(noProperties()).then(res => console.log()))} */}
       <div className="flex flex-col items-center">
-        <Pagination
-          nButtons={nButtons}
-          currentPage={page}
-          setPage={(page) => dispatch(actionsApp.setPage(page))}
-        />
-        <AdvancedFilters/>
+        <div className='border-2 border-gray-600 w-full p-3 flex justify-between items-center'>
+          <Pagination
+            nButtons={nButtons}
+            currentPage={page}
+            setPage={(page) => dispatch(actionsApp.setPage(page))}
+          />
+          <AdvancedFilters scrollY={scrollY} />
+        </div>
         {_publications?.length ? (
           <div className="gap-x-6 gap-y-4 sm:flex sm:flex-wrap sm:justify-center">
             {_publications.map((publication, i) => {
