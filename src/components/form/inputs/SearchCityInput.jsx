@@ -9,6 +9,7 @@ export function SearchCityInput({
   setFilterButton,
   scrollY,
   className,
+  scrollIn = 157
 }) {
   const { cities } = useSelector((state) => state.city)
   const [suggestions, setSuggestions] = useState([])
@@ -74,7 +75,7 @@ export function SearchCityInput({
       {showResults && shortSugestions.length > 0 && (
         <ul
           className={`absolute left-0 z-50 w-full bg-white p-1 ${
-            scrollY >= 157 ? 'top-full' : 'bottom-full'
+            scrollY >= scrollIn ? 'top-full' : 'bottom-full'
           }`}
         >
           {suggestions &&

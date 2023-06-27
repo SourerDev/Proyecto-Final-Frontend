@@ -4,13 +4,13 @@ import { Pagination } from '../components/Pagination.jsx'
 import { PropertyCard } from '../components/cards/PropertyCard.jsx'
 import { arrayPaginator } from '../utils'
 import { actionsApp } from '../redux2.0/reducers'
-import AdvancedFilters from '../components/advanced-filters/AdvancedFilters.jsx'
 import ModalAF from '../components/modal/ModalAdvancedFilters.jsx'
 //import LandingSearch from '../../components/landingSearch/LandingSearch.jsx';
 import swal from 'sweetalert2'
 import { noProperties } from '../sweetAlerts/sweetAlerts.js'
 import { LoadingProperties } from '../components/loaders/LoadingProperties.jsx'
 //import state from 'sweetalert/typings/modules/state.js';
+import { AdvancedFilters } from '../components/advanced-filters/AdvancedFilters.jsx'
 
 export function Home() {
   // const {favorites}  = useSelector(state => state.user)
@@ -62,7 +62,7 @@ export function Home() {
           currentPage={page}
           setPage={(page) => dispatch(actionsApp.setPage(page))}
         />
-
+        <AdvancedFilters/>
         {_publications?.length ? (
           <div className="gap-x-6 gap-y-4 sm:flex sm:flex-wrap sm:justify-center">
             {_publications.map((publication, i) => {

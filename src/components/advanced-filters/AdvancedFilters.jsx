@@ -8,6 +8,7 @@ import { RangeSlider } from '../form/inputs/RangeSlider'
 import { RangeInputNumber } from '../form/inputs/RangeInputNumber'
 import { actionsApp, actionsPublications } from '../../redux2.0/reducers'
 import { ApiPropYou } from '../../services'
+import { Alerts } from '../../utils'
 
 export function AdvancedFilters({ scrollY }) {
   const dispatch = useDispatch()
@@ -54,17 +55,21 @@ export function AdvancedFilters({ scrollY }) {
   }
 
   return (
-    <Popover className="w-1/2 border-2 border-red-500 p-2">
-      <Popover.Button className=" my-0 mx-auto border-2 border-green-600">
+    <Popover className="w-1/2 border-2 border-red-500 p-2 relative">
+      <Popover.Button className="border-2 border-green-600">
         Filtros avanzados
       </Popover.Button>
-      <Popover.Panel className="border-2 border-yellow-600">
+      <Popover.Panel className="border-2 border-yellow-600 ">
         <form
-          className="flex flex-col border-2 border-violet-700 p-10 "
+          className="flex flex-col border-2 border-violet-700 p-10 items-center"
           onSubmit={(e) => {
             e.preventDefault()
             dispatch(actionsApp.setFilters(dataFilters))
             //loader
+            ApiPropYou.getFilteredPublications(dataFilters).then(({ data }) => {
+              dispatch(actionsPublications.setPublications(data.publications))
+              if (data?.info.error) Alerts.smallError({ text: `${data.info.error}` })
+            })
           }}
         >
           <Select
@@ -86,6 +91,7 @@ export function AdvancedFilters({ scrollY }) {
             city={city}
             scrollY={scrollY}
             setCity={setCity}
+            scrollIn={0}
             setFilterButton={() => {}}
           />
           <RangeSlider
