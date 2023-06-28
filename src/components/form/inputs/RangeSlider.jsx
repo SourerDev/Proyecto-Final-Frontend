@@ -9,8 +9,8 @@ export function RangeSlider({ min, max, name, inputName, handleFilters, classNam
   }
 
   return (
-    <div className={`border-2 border-black w-1/2 ${className}`}>
-      <p>{name}</p>
+    <div className={`text-gray-800 border-[1px] border-gray-800 px-4 pt-1 rounded-md w-2/3 ${className}`}>
+      <p className='my-0 mx-auto w-fit'>{name}</p>
       <input
         name={inputName}
         type="range"
@@ -18,12 +18,12 @@ export function RangeSlider({ min, max, name, inputName, handleFilters, classNam
         max={max}
         value={value}
         onChange={handleChange}
-        className="h-2 w-full appearance-none rounded-full bg-gray-200"
+        className="h-2 w-full appearance-none rounded-full bg-gray-200 active:bg-indigo-200 focus:outline-none"
       />
       <div className="mt-2 flex justify-between">
-        <span>{min}</span>
+        <span className='text-gray-400'>{min}</span>
         <p className="mt-2">{`${value}`}</p>
-        <span>{max}</span>
+        <span className='text-gray-400'>{max}</span>
       </div>
     </div>
   )

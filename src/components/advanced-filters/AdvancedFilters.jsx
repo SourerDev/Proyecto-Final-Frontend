@@ -9,6 +9,7 @@ import { RangeInputNumber } from '../form/inputs/RangeInputNumber'
 import { actionsApp, actionsPublications } from '../../redux2.0/reducers'
 import { ApiPropYou } from '../../services'
 import { Alerts } from '../../utils'
+import { XCircleIcon } from '@heroicons/react/24/outline'
 
 export function AdvancedFilters({ scrollY }) {
   const dispatch = useDispatch()
@@ -55,8 +56,8 @@ export function AdvancedFilters({ scrollY }) {
   }
 
   return (
-    <div className="top-25 fixed right-4">
-      <Popover className="relative border-2 border-red-500 p-2">
+    <div /* className="top-25 fixed right-4" */>
+      <Popover className=" border-2 border-red-500 p-2">
         <Popover.Button className="border-2 border-green-600">F</Popover.Button>
         <Transition
           as={Fragment}
@@ -67,9 +68,10 @@ export function AdvancedFilters({ scrollY }) {
           leaveFrom="opacity-100 translate-y-0"
           leaveTo="opacity-0 translate-y-1"
         >
-          <Popover.Panel className="absolute right-0.5 w-[63vh]">
+          <Popover.Panel className="fixed right-0 left-0 top-0 z-50 h-screen w-screen overflow-hidden  rounded-md scrollbar-thin ">
             <form
-              className="flex flex-col items-center border-2 border-violet-700 p-10"
+              className="m-2 flex h-[110vh] flex-col items-center
+              justify-around bg-white px-8 shadow-md shadow-gray-600 "
               onSubmit={(e) => {
                 e.preventDefault()
                 dispatch(actionsApp.setFilters(dataFilters))
@@ -85,22 +87,25 @@ export function AdvancedFilters({ scrollY }) {
                 )
               }}
             >
+              <Popover.Button className="self-end">
+                <XCircleIcon className="w-12  stroke-gray-800" />
+              </Popover.Button>
               <Select
-                className="w-1/2 border-2 border-black"
+                className="w-2/3 border-2 border-gray-400 focus:border-gray-800"
                 selectName="byPublication-modality"
                 options={modalityOpts}
                 onChange={handleFilters}
               />
 
               <Select
-                className="w-1/2 border-2 border-black"
+                className="w-2/3 border-2  border-gray-400 focus:border-gray-800"
                 selectName="byProperty-type"
                 options={typeOpts}
                 onChange={handleFilters}
               />
 
               <SearchCityInput
-                className="w-1/2"
+                className="w-2/3 border-2 border-gray-400"
                 city={city}
                 scrollY={scrollY}
                 setCity={setCity}
@@ -108,15 +113,15 @@ export function AdvancedFilters({ scrollY }) {
                 setFilterButton={() => {}}
               />
               <RangeSlider
-                className="border-2 border-black"
+                className=""
                 min={1}
                 max={10}
-                name="cuartos"
+                name="Cuartos"
                 inputName="byProperty-bedrooms"
                 handleFilters={handleFilters}
               />
               <RangeSlider
-                className="border-2 border-black"
+                className=""
                 min={1}
                 max={10}
                 name="Baños"
@@ -125,16 +130,16 @@ export function AdvancedFilters({ scrollY }) {
               />
 
               <RangeSlider
-                className="b border-2 border-black"
+                className=""
                 min={1}
                 max={10}
-                name="Fue construida a partir de:"
+                name="Construida a partir de"
                 inputName="byProperty-yearBuilt"
                 handleFilters={handleFilters}
               />
 
               <RangeInputNumber
-                className="border-2 border-black"
+                className=""
                 min={10}
                 max={50}
                 name="Precio"
@@ -142,16 +147,27 @@ export function AdvancedFilters({ scrollY }) {
                 handleRangeNumbers={handleRangeNumbers}
               />
               <RangeInputNumber
-                className="border-2 border-black"
+                className=""
                 min={200}
                 max={10000}
                 name="Area (en mts²)"
                 inputName="byProperty-squareMeters"
                 handleRangeNumbers={handleRangeNumbers}
               />
-              <button className="w-1/2 border-2 border-black" type="submit">
-                Aplicar filtros
-              </button>
+              <div className="flex w-full  justify-between">
+                <Popover.Button
+                  className="w-auto  rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                  type="submit"
+                >
+                  Resetear filtros
+                </Popover.Button>
+                <Popover.Button
+                  className="w-auto  rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                  type="submit"
+                >
+                  Aplicar filtros
+                </Popover.Button>
+              </div>
             </form>
           </Popover.Panel>
         </Transition>
