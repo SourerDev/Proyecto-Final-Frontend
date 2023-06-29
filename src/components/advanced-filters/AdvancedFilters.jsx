@@ -63,10 +63,10 @@ export function AdvancedFilters({ scrollY }) {
   function handleSubmit(e) {
     e.preventDefault()
     //loader
-    dispatch(actionsApp.setFilters({ ...dataFilters, byCity: city }))
     ApiPropYou.getFilteredPublications({ ...dataFilters, byCity: city }).then(
       ({ data }) => {
         console.log(data)
+        dispatch(actionsApp.setFilters({ ...dataFilters, byCity: city }))
         dispatch(actionsPublications.setPublications(data.publications))
         if (data?.info.error) {
           Alerts.smallError({ text: `${data.info.error}` })
