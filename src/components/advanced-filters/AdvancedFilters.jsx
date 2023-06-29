@@ -9,7 +9,7 @@ import { RangeInputNumber } from '../form/inputs/RangeInputNumber'
 import { actionsApp, actionsPublications } from '../../redux2.0/reducers'
 import { ApiPropYou } from '../../services'
 import { Alerts } from '../../utils'
-import { XCircleIcon } from '@heroicons/react/24/outline'
+import { XCircleIcon, ArrowPathIcon } from '@heroicons/react/24/outline'
 
 export function AdvancedFilters({ scrollY }) {
   const dispatch = useDispatch()
@@ -18,14 +18,14 @@ export function AdvancedFilters({ scrollY }) {
   const [city, setCity] = useState(filters.byCity)
 
   const [dataFilters, setdataFilters] = useState({
-    byPublication,
-    byProperty,
+    byPublication: byPublication,
+    byProperty: byProperty,
   })
 
-  useEffect(() => {
+  /* useEffect(() => {
     console.log(dataFilters)
     console.log(city)
-  }, [dataFilters, city])
+  }, [dataFilters, city]) */
 
   function handleFilters({ target }) {
     const strs = target.name.split('-')
@@ -55,10 +55,25 @@ export function AdvancedFilters({ scrollY }) {
     })
   }
 
+  function handleSubmit(e) {
+    e.preventDefault()
+    dispatch(actionsApp.setFilters({ ...dataFilters, byCity: city }))
+    //loader
+    ApiPropYou.getFilteredPublications({ ...dataFilters, byCity: city }).then(
+      ({ data }) => {
+        console.log(data)
+        dispatch(actionsPublications.setPublications(data.publications))
+        if (data?.info.error) Alerts.smallError({ text: `${data.info.error}` })
+      }
+    )
+  }
+
   return (
     <div /* className="top-25 fixed right-4" */>
-      <Popover className=" border-2 border-red-500 p-2">
-        <Popover.Button className="border-2 border-green-600">F</Popover.Button>
+      <Popover className="">
+        <Popover.Button className="rounded-lg border-2 border-gray-800 p-2">
+          Filtros avanzados
+        </Popover.Button>
         <Transition
           as={Fragment}
           enter="transition ease-out duration-200"
@@ -71,98 +86,91 @@ export function AdvancedFilters({ scrollY }) {
           <Popover.Panel className="fixed right-0 left-0 top-0 z-50 h-screen w-screen overflow-hidden  rounded-md scrollbar-thin ">
             <form
               className="m-2 flex h-[110vh] flex-col items-center
-              justify-around bg-white px-8 shadow-md shadow-gray-600 "
-              onSubmit={(e) => {
-                e.preventDefault()
-                dispatch(actionsApp.setFilters(dataFilters))
-                //loader
-                ApiPropYou.getFilteredPublications(dataFilters).then(
-                  ({ data }) => {
-                    dispatch(
-                      actionsPublications.setPublications(data.publications)
-                    )
-                    if (data?.info.error)
-                      Alerts.smallError({ text: `${data.info.error}` })
-                  }
-                )
-              }}
+               border-2 border-indigo-500 bg-white px-8 shadow-md shadow-gray-600"
+              onSubmit={handleSubmit}
             >
-              <Popover.Button className="self-end">
-                <XCircleIcon className="w-12  stroke-gray-800" />
-              </Popover.Button>
-              <Select
-                className="w-2/3 border-2 border-gray-400 focus:border-gray-800"
-                selectName="byPublication-modality"
-                options={modalityOpts}
-                onChange={handleFilters}
-              />
+              <div className="ml-5 mt-1  flex w-full justify-end">
+                <Popover.Button>
+                  <XCircleIcon className="w-12 stroke-gray-800 " />
+                </Popover.Button>
+              </div>
+              <div className="flex h-5/6 w-full flex-col items-center justify-around  ">
+                <Select
+                  className="w-2/3 border-2 border-gray-400 focus:border-gray-800"
+                  selectName="byPublication-modality"
+                  options={modalityOpts}
+                  onChange={(e) => console.log(e)}
+                />
 
-              <Select
-                className="w-2/3 border-2  border-gray-400 focus:border-gray-800"
-                selectName="byProperty-type"
-                options={typeOpts}
-                onChange={handleFilters}
-              />
+                <Select
+                  defaultValue='sale'
+                  className="w-2/3 border-2  border-gray-400 focus:border-gray-800"
+                  selectName="byProperty-type"
+                  options={typeOpts}
+                  onChange={handleFilters}
+                />
 
-              <SearchCityInput
-                className="w-2/3 border-2 border-gray-400"
-                city={city}
-                scrollY={scrollY}
-                setCity={setCity}
-                scrollIn={0}
-                setFilterButton={() => {}}
-              />
-              <RangeSlider
-                className=""
-                min={1}
-                max={10}
-                name="Cuartos"
-                inputName="byProperty-bedrooms"
-                handleFilters={handleFilters}
-              />
-              <RangeSlider
-                className=""
-                min={1}
-                max={10}
-                name="Baños"
-                inputName="byProperty-bathrooms"
-                handleFilters={handleFilters}
-              />
+                <SearchCityInput
+                  className="w-2/3 border-2 border-gray-400"
+                  city={city}
+                  scrollY={scrollY}
+                  setCity={setCity}
+                  scrollIn={0}
+                  setFilterButton={() => {}}
+                />
+                <RangeSlider
+                  className=""
+                  min={1}
+                  max={10}
+                  name="Cuartos"
+                  inputName="byProperty-bedrooms"
+                  handleFilters={handleFilters}
+                />
+                <RangeSlider
+                  className=""
+                  min={1}
+                  max={10}
+                  name="Baños"
+                  inputName="byProperty-bathrooms"
+                  handleFilters={handleFilters}
+                />
 
-              <RangeSlider
-                className=""
-                min={1}
-                max={10}
-                name="Construida a partir de"
-                inputName="byProperty-yearBuilt"
-                handleFilters={handleFilters}
-              />
+                <RangeSlider
+                  className=""
+                  min={1}
+                  max={10}
+                  name="Construida a partir de"
+                  inputName="byProperty-yearBuilt"
+                  handleFilters={handleFilters}
+                />
 
-              <RangeInputNumber
-                className=""
-                min={10}
-                max={50}
-                name="Precio"
-                inputName="byPublication-price"
-                handleRangeNumbers={handleRangeNumbers}
-              />
-              <RangeInputNumber
-                className=""
-                min={200}
-                max={10000}
-                name="Area (en mts²)"
-                inputName="byProperty-squareMeters"
-                handleRangeNumbers={handleRangeNumbers}
-              />
-              <div className="flex w-full  justify-between">
+                <RangeInputNumber
+                  className=""
+                  min={10}
+                  max={50}
+                  name="Precio"
+                  inputName="byPublication-price"
+                  handleRangeNumbers={handleRangeNumbers}
+                />
+                <RangeInputNumber
+                  className=""
+                  min={200}
+                  max={10000}
+                  name="Area (en mts²)"
+                  inputName="byProperty-squareMeters"
+                  handleRangeNumbers={handleRangeNumbers}
+                />
+              </div>
+              <div className="mt-4 flex w-full justify-between ">
                 <Popover.Button
-                  className="w-auto  rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                  className="w-auto  rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base shadow-sm hover:bg-indigo-700"
                   type="submit"
+                  title="Resetar filtros"
                 >
-                  Resetear filtros
+                  <ArrowPathIcon className="w-[2rem]  text-white" />
                 </Popover.Button>
                 <Popover.Button
-                  className="w-auto  rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                  className="w-auto  rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 "
                   type="submit"
                 >
                   Aplicar filtros

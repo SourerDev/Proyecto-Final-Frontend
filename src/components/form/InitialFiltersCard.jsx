@@ -43,7 +43,7 @@ export function InitialFiltersCard({ className, scrollY }) {
     ApiPropYou.getFilteredPublications(dataFilters).then(({ data }) => {
       dispatch(actionsPublications.setPublications(data.publications))
       if (data?.info.error) Alerts.smallError({ text: `${data.info.error}` })
-      navigate('/filter')
+      navigate('/home')
     })
   }
 
