@@ -54,6 +54,11 @@ export function UpdateUserForm() {
         Alerts.smallError({ text: `Upps - ${err.message}` })
       })
     setEdit(false)
+    setPhoto('')
+    setName('')
+    setUserName('')
+    setCellphone('')
+    setEmail('')
   }
 
   function handleEditPhoto() {
