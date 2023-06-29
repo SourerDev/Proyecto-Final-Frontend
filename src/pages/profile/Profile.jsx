@@ -7,12 +7,11 @@ import { actualizar } from '../../sweetAlerts/sweetAlerts'
 import swal from 'sweetalert2'
 import { ApiPropYou } from '../../services'
 import { Alerts } from '../../utils'
-import {
-  DevicePhoneMobileIcon,
-  EnvelopeIcon,
-  PencilIcon,
-} from '@heroicons/react/24/outline'
+
 import { Button } from '../../components/form/buttons/Button'
+import { UpdateEmailForm } from '../../components/form/UpdateEmailForm'
+import { ChangePasswordForm } from '../../components/form/ChangePasswordForm'
+import { UpdateUserForm } from '../../components/form/UpdateUserForm'
 
 export function Profile() {
   const dispatch = useDispatch()
@@ -28,8 +27,6 @@ export function Profile() {
     photo: session.photo,
   })
   const [errs, setErrs] = useState({})
-
-  const [edit, setEdit] = useState(false)
 
   useEffect(() => {
     if (!signIn) {
@@ -54,40 +51,26 @@ export function Profile() {
 
   if (signIn)
     return (
-      <div className="flex flex-col py-4 md:flex-row">
-        <section className="flex w-full flex-col items-center justify-center border-b">
-          <picture className="h-[10rem] w-[10rem] rounded-full border relative">
-            <img src={session.photo} alt={`@${session.userName}'s image`} />
-            {edit && (
-              <button className='group w-8 absolute bottom-3 right-5 p-1 rounded-xl bg-gray-50/50 hover:bg-black/50 aspect-squares grid place-content-center hover:text-white'>
-                <PencilIcon className='w-full h-auto'/>
-              </button>
-            )}
-          </picture>
-          <p className="flex flex-col text-left">
-            <span className="text-2xl font-medium">{`${session.fName} ${session.lName}`}</span>
-            <span className="-mt-2 text-gray-600">{`@${session.userName}`}</span>
-          </p>
-          <div>
-            <p className="flex items-center justify-start gap-x-2">
-              <DevicePhoneMobileIcon className="aspect-square w-6" />
-              <span> {`${session.cellphone || '+57 322 6215456'}`}</span>
-            </p>
-            <p className="flex items-center justify-start gap-x-2">
-              <EnvelopeIcon className="aspect-square w-6" />
-              <span>{`${session.email}`}</span>
-            </p>
-          </div>
-          <Button onClick={() => setEdit(true)}>Editar</Button>
-        </section>
-        <section className="">
-          verify Email
-          <Button>Verificar</Button>
-          <Button>Cambiar</Button>
-          Email: {session.email}
-          <Button>Delete Account</Button>
-        </section>
-      </div>
+      <>
+        <div className="flex flex-col px-4 py-4 md:flex-row md:gap-x-3">
+          <section className="flex flex-col border md:flex-1">
+            {/* <Link to='/be-premium' className='self-end'> Go to premium</Link> */}
+            <UpdateUserForm />
+          </section>
+          <section className="space-y-2 md:flex-1">
+            <UpdateEmailForm
+              verified={session.state === 'verified' ? true : false}
+              email={session.email}
+            />
+            <ChangePasswordForm />
+          </section>
+        </div>
+        <div className="mx-4 grid place-content-center p-3">
+          <Button className="bg-red-500 hover:bg-red-600">
+            Eliminar Cuenta
+          </Button>
+        </div>
+      </>
     )
 
   return (

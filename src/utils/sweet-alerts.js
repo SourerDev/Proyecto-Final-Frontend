@@ -73,9 +73,23 @@ export const Alerts = {
       showConfirmButton: false,
       position: 'bottom-left',
       icon: 'error',
-      title: text?.length > 20 ? text?.slice(0, 18) + '...' : text ,
+      title: text?.length > 20 ? text?.slice(0, 18) + '...' : text,
       buttonsStyling: false,
       showCloseButton: true,
+    })
+  },
+  alertWhitInput: ({ title, preConfirm }) => {
+    return Swal.fire({
+      title,
+      input: 'text',
+      inputAttributes: {
+        autocapitalize: 'off',
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Cargar',
+      showLoaderOnConfirm: true,
+      preConfirm,
+      allowOutsideClick: () => !Swal.isLoading(),
     })
   },
 }
