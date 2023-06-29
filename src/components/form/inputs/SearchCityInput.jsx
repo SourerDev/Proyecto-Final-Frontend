@@ -4,12 +4,13 @@ import { useState } from 'react'
 import { MapPinIcon } from '@heroicons/react/24/outline'
 
 export function SearchCityInput({
+  defaultValue,
   city,
   setCity,
   setFilterButton,
   scrollY,
   className,
-  scrollIn = 157
+  scrollIn = 157,
 }) {
   const { cities } = useSelector((state) => state.city)
   const [suggestions, setSuggestions] = useState([])
@@ -66,7 +67,7 @@ export function SearchCityInput({
       <Input
         className="px-2 text-[1rem]"
         placeholder="Buscar ciudad"
-        value={city?.string}
+        value={defaultValue ? defaultValue : city?.string}
         onChange={handleCity}
         onFocus={() => setShowResults(true)}
         onBlur={() => setTimeout(() => setShowResults(false), 300)}

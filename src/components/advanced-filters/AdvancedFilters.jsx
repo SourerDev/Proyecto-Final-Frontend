@@ -13,19 +13,24 @@ import { XCircleIcon, ArrowPathIcon } from '@heroicons/react/24/outline'
 
 export function AdvancedFilters({ scrollY }) {
   const dispatch = useDispatch()
-  const { filters } = useSelector((state) => state.app)
-  const { byPublication, byProperty, byCity } = filters
-  const [city, setCity] = useState(filters.byCity)
+  const { byPublication, byProperty, byCity } = useSelector(
+    (state) => state.app.filters
+  )
+  //const {  } = filters
+  const [city, setCity] = useState(byCity)
 
   const [dataFilters, setdataFilters] = useState({
-    byPublication: byPublication,
-    byProperty: byProperty,
+    byPublication,
+    byProperty,
   })
 
-  /* useEffect(() => {
-    console.log(dataFilters)
-    console.log(city)
-  }, [dataFilters, city]) */
+  useEffect(() => {
+    setdataFilters({
+      byPublication,
+      byProperty,
+    })
+    setCity(byCity)
+  }, [byPublication, byProperty, byCity])
 
   function handleFilters({ target }) {
     const strs = target.name.split('-')
@@ -57,19 +62,22 @@ export function AdvancedFilters({ scrollY }) {
 
   function handleSubmit(e) {
     e.preventDefault()
-    dispatch(actionsApp.setFilters({ ...dataFilters, byCity: city }))
     //loader
+    dispatch(actionsApp.setFilters({ ...dataFilters, byCity: city }))
     ApiPropYou.getFilteredPublications({ ...dataFilters, byCity: city }).then(
       ({ data }) => {
         console.log(data)
         dispatch(actionsPublications.setPublications(data.publications))
-        if (data?.info.error) Alerts.smallError({ text: `${data.info.error}` })
+        if (data?.info.error) {
+          Alerts.smallError({ text: `${data.info.error}` })
+          dispatch(actionsApp.resetFilters())
+        }
       }
     )
   }
 
   return (
-    <div /* className="top-25 fixed right-4" */>
+    <div>
       <Popover className="">
         <Popover.Button className="rounded-lg border-2 border-gray-800 p-2">
           Filtros avanzados
@@ -96,14 +104,15 @@ export function AdvancedFilters({ scrollY }) {
               </div>
               <div className="flex h-5/6 w-full flex-col items-center justify-around  ">
                 <Select
+                  selectedOption={dataFilters.byPublication?.modality}
                   className="w-2/3 border-2 border-gray-400 focus:border-gray-800"
                   selectName="byPublication-modality"
                   options={modalityOpts}
-                  onChange={(e) => console.log(e)}
+                  onChange={handleFilters}
                 />
 
                 <Select
-                  defaultValue='sale'
+                  selectedOption={dataFilters.byProperty?.type}
                   className="w-2/3 border-2  border-gray-400 focus:border-gray-800"
                   selectName="byProperty-type"
                   options={typeOpts}
@@ -111,6 +120,7 @@ export function AdvancedFilters({ scrollY }) {
                 />
 
                 <SearchCityInput
+                  defaultValue={city.string}
                   className="w-2/3 border-2 border-gray-400"
                   city={city}
                   scrollY={scrollY}
@@ -119,7 +129,7 @@ export function AdvancedFilters({ scrollY }) {
                   setFilterButton={() => {}}
                 />
                 <RangeSlider
-                  className=""
+                  defaultValue={dataFilters.byProperty?.bedrooms}
                   min={1}
                   max={10}
                   name="Cuartos"
@@ -127,7 +137,7 @@ export function AdvancedFilters({ scrollY }) {
                   handleFilters={handleFilters}
                 />
                 <RangeSlider
-                  className=""
+                  defaultValue={dataFilters.byProperty?.bathrooms}
                   min={1}
                   max={10}
                   name="Baños"
@@ -136,7 +146,7 @@ export function AdvancedFilters({ scrollY }) {
                 />
 
                 <RangeSlider
-                  className=""
+                  defaultValue={dataFilters.byProperty?.yearBuilt}
                   min={1}
                   max={10}
                   name="Construida a partir de"
@@ -145,7 +155,7 @@ export function AdvancedFilters({ scrollY }) {
                 />
 
                 <RangeInputNumber
-                  className=""
+                  defaultValue={byPublication.price}
                   min={10}
                   max={50}
                   name="Precio"
@@ -153,7 +163,7 @@ export function AdvancedFilters({ scrollY }) {
                   handleRangeNumbers={handleRangeNumbers}
                 />
                 <RangeInputNumber
-                  className=""
+                  defaultValue={byProperty.squareMeters}
                   min={200}
                   max={10000}
                   name="Area (en mts²)"
@@ -162,13 +172,19 @@ export function AdvancedFilters({ scrollY }) {
                 />
               </div>
               <div className="mt-4 flex w-full justify-between ">
-                <Popover.Button
+                <button
+                  onClick={() => {
+                    dispatch(actionsApp.resetFilters())
+                    ApiPropYou.getPublications().then(({ data }) =>
+                      dispatch(actionsPublications.setPublications(data.publications))
+                    )
+                  }}
+                  type="button"
                   className="w-auto  rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base shadow-sm hover:bg-indigo-700"
-                  type="submit"
                   title="Resetar filtros"
                 >
                   <ArrowPathIcon className="w-[2rem]  text-white" />
-                </Popover.Button>
+                </button>
                 <Popover.Button
                   className="w-auto  rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 "
                   type="submit"
