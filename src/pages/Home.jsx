@@ -57,7 +57,7 @@ export function Home({ scrollY }) {
 
       {/* {typeof (filteredProperties) === "string" &&(swal.fire(noProperties()).then(res => console.log()))} */}
       <div className="flex flex-col items-center">
-        <div className='border-2 border-gray-600 w-full p-3 flex justify-between items-center'>
+        <div className='w-full py-3 px-6 flex justify-between items-center'>
           <Pagination
             nButtons={nButtons}
             currentPage={page}
