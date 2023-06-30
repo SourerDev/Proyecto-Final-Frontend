@@ -40,8 +40,8 @@ export function ChangePasswordForm({ idUser }) {
         setErrors([])
       })
       .catch((error) => {
-        console.log(error)
-        Alerts.smallError({ text: `Upss - ${error.message}` })
+        let msg = error?.response?.data.Error
+        Alerts.smallError({ text: `Upss - ${msg || error.message}` })
       })
   }
 
