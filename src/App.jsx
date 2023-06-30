@@ -10,7 +10,7 @@ import { Profile } from './pages/profile/Profile.jsx'
 import { PropertyDetails } from './pages/property/PropertyDetails.jsx'
 import { Landing } from './pages/Landing.jsx'
 import { AboutUs } from './pages/AboutUs.jsx'
-
+import { AdvancedFilters } from './components/advanced-filters/AdvancedFilters.jsx'
 /*
 import BePremium from "./pages/bePremium/BePremium";
 import Redirect from "./components/redirect/Redirect";
@@ -94,7 +94,7 @@ function App() {
             <Route path="/sign-in" element={<SignIn />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/about-us" element={<AboutUs />} />
-            <Route path="/home" element={<Home />} />
+            <Route path="/home" element={<Home scrollY={scrollPosition}/>} />
             <Route path="/properties/:id" element={<PropertyDetails />} />
             {/* <Route path="/newRoute" element={<><Nav/><DashboardUsers/></>}/>
           <Route path="/createProperty" element={<><Nav/><Form/><Footer/></>}/>

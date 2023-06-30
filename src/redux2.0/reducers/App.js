@@ -3,9 +3,14 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialFilters = {
   byPublication: {
     modality: '',
+    price: '',
   },
   byProperty: {
     type: '',
+    bedrooms: '',
+    bathrooms: '',
+    yearBuilt: '',
+    squareMeters: '',
   },
   byCity: {
     idCity: null,

@@ -1,19 +1,29 @@
 import PropTypes from 'prop-types'
 
-export function Select({ className, selectName, options = [], ...props }) {
+export function Select({
+  className,
+  selectName,
+  selectedOption,
+  options = [],
+  ...props
+}) {
   return (
     <select
       {...props}
-      className={`rounded p-2 outline-none min-w-[200px] ${className}`}
+      name={selectName}
+      className={`min-w-[200px] rounded p-2 outline-none ${className}`}
     >
-      <option value="" disabled hidden>
-        {selectName}
-      </option>
-      {options.map((option) => (
-        <option key={option.value} value={option.value}>
-          {option.name}
-        </option>
-      ))}
+      {options.map((option) =>
+        option.value === selectedOption && selectedOption.length ? (
+          <option selected key={option.value} value={option.value}>
+            {option.name}
+          </option>
+        ) : (
+          <option key={option.value} value={option.value}>
+            {option.name}
+          </option>
+        )
+      )}
     </select>
   )
 }

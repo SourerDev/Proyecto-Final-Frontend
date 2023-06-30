@@ -3,7 +3,15 @@ import { Input } from './Input'
 import { useState } from 'react'
 import { MapPinIcon } from '@heroicons/react/24/outline'
 
-export function SearchCityInput({ city, setCity, setFilterButton, scrollY }) {
+export function SearchCityInput({
+  defaultValue,
+  city,
+  setCity,
+  setFilterButton,
+  scrollY,
+  className,
+  scrollIn = 157,
+}) {
   const { cities } = useSelector((state) => state.city)
   const [suggestions, setSuggestions] = useState([])
   const [showResults, setShowResults] = useState(false)
@@ -53,11 +61,13 @@ export function SearchCityInput({ city, setCity, setFilterButton, scrollY }) {
   }
 
   return (
-    <div className="relative col-start-1 col-end-5 min-w-[200px] lg:col-start-5 lg:col-end-7 xl:col-start-6 xl:col-end-9">
+    <div
+      className={`relative col-start-1 col-end-5 min-w-[200px] lg:col-start-5 lg:col-end-7 xl:col-start-6 xl:col-end-9 ${className}`}
+    >
       <Input
         className="px-2 text-[1rem]"
         placeholder="Buscar ciudad"
-        value={city?.string}
+        value={defaultValue ? defaultValue : city?.string}
         onChange={handleCity}
         onFocus={() => setShowResults(true)}
         onBlur={() => setTimeout(() => setShowResults(false), 300)}
@@ -66,7 +76,7 @@ export function SearchCityInput({ city, setCity, setFilterButton, scrollY }) {
       {showResults && shortSugestions.length > 0 && (
         <ul
           className={`absolute left-0 z-50 w-full bg-white p-1 ${
-            scrollY >= 157 ? 'top-full' : 'bottom-full'
+            scrollY >= scrollIn ? 'top-full' : 'bottom-full'
           }`}
         >
           {suggestions &&
