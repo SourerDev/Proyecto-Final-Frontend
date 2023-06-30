@@ -62,7 +62,7 @@ export function Profile() {
               verified={session.state === 'verified' ? true : false}
               email={session.email}
             />
-            <ChangePasswordForm />
+            <ChangePasswordForm idUser={session.idUser} />
           </section>
         </div>
         <div className="mx-4 grid place-content-center p-3">

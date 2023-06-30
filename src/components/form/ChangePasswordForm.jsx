@@ -7,8 +7,8 @@ import {
   ExclamationCircleIcon,
 } from '@heroicons/react/24/outline'
 import { Alerts, isValidPassword } from '../../utils'
-
-export function ChangePasswordForm() {
+import { ApiPropYou } from '../../services'
+export function ChangePasswordForm({ idUser }) {
   const [password, setPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -31,11 +31,18 @@ export function ChangePasswordForm() {
     if (password === newPassword)
       return Alerts.smallError({ text: 'Ingresa otra contraseña' })
 
-    Alerts.smallSuccess({ text: 'Tu contraseña va ha ser cambiada' })
-    setPassword('')
-    setNewPassword('')
-    setConfirmPassword('')
-    setErrors([])
+    ApiPropYou.SetNewPassword({ idUser, password, newPassword })
+      .then((response) => {
+        Alerts.smallSuccess({ text: 'Tu contraseña se ha cambiado' })
+        setPassword('')
+        setNewPassword('')
+        setConfirmPassword('')
+        setErrors([])
+      })
+      .catch((error) => {
+        console.log(error)
+        Alerts.smallError({ text: `Upss - ${error.message}` })
+      })
   }
 
   return (
