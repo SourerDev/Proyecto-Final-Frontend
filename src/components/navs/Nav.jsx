@@ -15,7 +15,7 @@ export function Nav({ rutes = true, login = true, className }) {
 
   return (
     <div className={`-mx-auto sticky top-0 z-50 max-h-[75px] ${className}`}>
-      <nav className="relative flex items-center justify-between py-4 md:justify-start md:space-x-10">
+      <nav className="relative flex items-center justify-between md:justify-start md:space-x-10">
         <div className="flex justify-start lg:w-0 lg:flex-1">
           <Link to="/" className="flex items-center">
             <span className="sr-only">Properties & You</span>

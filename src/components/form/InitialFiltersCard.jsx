@@ -16,31 +16,37 @@ export function InitialFiltersCard({ className, scrollY }) {
     (state) => state.app.filters
   )
   const [initialFilters, setInitialFilters] = useState({
-    ...byPublication,
-    ...byProperty,
+    byPublication,
+    byProperty,
   })
   const [city, setCity] = useState(byCity)
   const [filterButton, setFilterButton] = useState(false)
+
   function handleInitialFilters({ target }) {
     setFilterButton(true)
-    setInitialFilters((prev) => ({
-      ...prev,
-      [target.name]: target.value,
-    }))
+    const strs = target.name.split('-')
+    const nested = { ...initialFilters[strs[0]] }
+    if (target.value === 'default') {
+      nested[strs[1]] = ''
+      setInitialFilters({
+        ...initialFilters,
+        [strs[0]]: nested,
+      })
+    } else {
+      nested[strs[1]] = target.value
+      setInitialFilters({
+        ...initialFilters,
+        [strs[0]]: nested,
+      })
+    }
   }
   function onSubmitFilters(evt) {
     evt.preventDefault()
-    const dataFilters = {
-      byPublication: {
-        modality: initialFilters.modality,
-      },
-      byProperty: {
-        type: initialFilters.type,
-      },
+    dispatch(actionsApp.setFilters({ ...initialFilters, byCity: city }))
+    ApiPropYou.getFilteredPublications({
+      ...initialFilters,
       byCity: city,
-    }
-    dispatch(actionsApp.setFilters(dataFilters))
-    ApiPropYou.getFilteredPublications(dataFilters).then(({ data }) => {
+    }).then(({ data }) => {
       dispatch(actionsPublications.setPublications(data.publications))
       if (data?.info.error) Alerts.smallError({ text: `${data.info.error}` })
       navigate('/home')
@@ -57,13 +63,13 @@ export function InitialFiltersCard({ className, scrollY }) {
         className="col-start-1 col-end-3"
         name="modality"
         onChange={handleInitialFilters}
-        value={initialFilters.modality}
+        selectedOption={initialFilters.byPublication?.modality}
       />
       <PropertyTypeSelect
         className="col-start-3 col-end-5 xl:col-end-6"
         name="type"
         onChange={handleInitialFilters}
-        value={initialFilters.type}
+        selectedOption={initialFilters.byProperty?.type}
       />
       <SearchCityInput
         city={city}

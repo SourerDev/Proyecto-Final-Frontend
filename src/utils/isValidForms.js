@@ -19,6 +19,39 @@ export function isValidSingUp(data) {
   return errs
 }
 
+export function isValidPassword({ password }) {
+  const errors = []
+  if (!/^(?=.*[a-z])(?=.*[A-Z]).+$/.test(password))
+    errors.push('Debe tener caracteres en minuscula y mayuscula')
+  if (!/[\W_]/.test(password))
+    errors.push('Debe tener al menos un caracter especial')
+  if (!/\d/.test(password)) errors.push('Debe tener al menos un numero')
+  if (password.length < 8) errors.push('Debe tener al menos 8 caracteres')
+
+  return errors
+}
+
+export function isValidNameUser({ string }) {
+  let error = ''
+  if (!/^(?! )[A-Za-z ]*(?<! )$/.test(string)) error = 'Carater no valido'
+
+  return error
+}
+
+export function isValidString({ string }) {
+  let error = ''
+  if (string && !/^[a-zA-Z0-9_]+$/.test(string)) error = 'Carater no valido'
+
+  return error
+}
+export function isValidPhoneNumber({ number }) {
+  let error = ''
+  if (number && !/^\+\d{1,3}\s?\(\d{1,4}\)\s?\d{1,4}[-\s]?\d{1,9}$/.test(number))
+    error = 'Numero no valido'
+
+  return error
+}
+
 export function isValidUser(user) {
   /* let errs = {}
     if(!user.email.length) errs.email = "debe ingresar un nuevo email o dejar el actual"

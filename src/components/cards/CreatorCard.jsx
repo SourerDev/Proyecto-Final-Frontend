@@ -18,7 +18,7 @@ export function CreatorCard({ userName, role, linkedin }) {
       .catch((error) => {})
   }, [userName])
   return (
-    <Card className="flex h-[338px] w-[250px] flex-col items-center justify-center">
+    <Card className="mt-6 flex w-4/5 flex-col items-center justify-center rounded border-0 bg-gray-800 shadow-lg shadow-gray-800 sm:my-2 sm:h-[338px] sm:w-[250px] ">
       {isLoading ? (
         <div>
           <ArrowPathIcon className="h-auto w-10 animate-spin stroke-gray-300" />
@@ -30,11 +30,11 @@ export function CreatorCard({ userName, role, linkedin }) {
           </picture>
 
           <div className="p-6">
-            <p className='flex flex-col -gap-x-1 mb-2'>
-              <span className="text-xl font-medium text-gray-900">
+            <p className="-gap-x-1 mb-2 flex flex-col">
+              <span className="text-xl font-medium text-white">
                 {creator.name}
               </span>
-              <span className='text-gray-500'>{role}</span>
+              <span className="text-gray-500">{role}</span>
             </p>
             <div className="flex flex-row justify-center">
               <a
@@ -48,7 +48,7 @@ export function CreatorCard({ userName, role, linkedin }) {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 496 512"
-                  className="h-6 w-6 text-gray-600 hover:text-gray-900"
+                  className="h-8 w-8 text-gray-400 hover:text-gray-100 "
                 >
                   <path
                     fill="currentColor"
@@ -61,7 +61,7 @@ export function CreatorCard({ userName, role, linkedin }) {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 448 512"
-                  className="h-6 w-6 text-gray-600 hover:text-blue-700"
+                  className="h-8 w-8 text-gray-400 hover:text-blue-700"
                 >
                   {' '}
                   <path

@@ -10,7 +10,7 @@ import { Profile } from './pages/profile/Profile.jsx'
 import { PropertyDetails } from './pages/property/PropertyDetails.jsx'
 import { Landing } from './pages/Landing.jsx'
 import { AboutUs } from './pages/AboutUs.jsx'
-
+import { AdvancedFilters } from './components/advanced-filters/AdvancedFilters.jsx'
 /*
 import BePremium from "./pages/bePremium/BePremium";
 import Redirect from "./components/redirect/Redirect";
@@ -71,10 +71,10 @@ function App() {
         className="h-screen w-screen min-w-[440px] overflow-hidden bg-gray-100 scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-gray-300 hover:scrollbar-thumb-gray-500 sm:scrollbar-thumb-indigo-600 sm:hover:scrollbar-thumb-indigo-800"
       >
         <Nav
-          className={`width-max-main transition-all ${
+          className={`width-max-main transition-all py-4 ${
             activeStyle
               ? 'bg-gradient-to-b from-gray-500/70 px-5'
-              : 'rounded border-gray-50 bg-white px-4 shadow-md '
+              : 'rounded border-gray-50 bg-white px-4 shadow-md'
           }`}
         />
         <main className="width-max-main min-h-screen border-gray-100 bg-white xl:border-x">
@@ -94,7 +94,7 @@ function App() {
             <Route path="/sign-in" element={<SignIn />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/about-us" element={<AboutUs />} />
-            <Route path="/home" element={<Home />} />
+            <Route path="/home" element={<Home scrollY={scrollPosition}/>} />
             <Route path="/properties/:id" element={<PropertyDetails />} />
             {/* <Route path="/newRoute" element={<><Nav/><DashboardUsers/></>}/>
           <Route path="/createProperty" element={<><Nav/><Form/><Footer/></>}/>

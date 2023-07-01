@@ -1,8 +1,10 @@
+import PropTypes from 'prop-types'
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
 import { Icon } from '../../assets'
+import { Avatar } from '../avatars/Avatar'
 
 export function ModalNav({ signIn, session }) {
   const userType = session.userType
@@ -49,9 +51,17 @@ export function ModalNav({ signIn, session }) {
               <div className="mt-6">
                 <nav className="flex flex-col">
                   {signIn && (
-                    <Link to={'/user'} className="">
+                    <Link to={'/profile'} className="">
                       <Popover.Button className="flex w-full items-center rounded-md border border-white p-3 text-gray-600 hover:border hover:border-gray-200  hover:bg-gray-50 hover:text-gray-900">
-                        is Logged
+                        <Avatar avatar={session.photo} active={signIn} className="w-14"/>
+                        <p className='flex flex-col text-left'>
+                          <span className='font-medium text-lg'>
+                            {`${session.fName} ${session.lName}`}
+                          </span>
+                          <span className='text-gray-500 -mt-2'>
+                            {`@${session.userName}`}
+                          </span>
+                        </p>
                       </Popover.Button>
                     </Link>
                   )}
@@ -137,4 +147,9 @@ export function ModalNav({ signIn, session }) {
       </Transition>
     </Popover>
   )
+}
+
+ModalNav.propTypes = {
+  signIn: PropTypes.bool.isRequired,
+  session: PropTypes.object.isRequired
 }
