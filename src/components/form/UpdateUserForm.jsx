@@ -90,7 +90,7 @@ export function UpdateUserForm() {
           </button>
         )}
       </picture>
-      {}
+
       {!edit ? (
         <>
           <UserInfo
@@ -99,7 +99,9 @@ export function UpdateUserForm() {
             cellphone={session.cellphone}
             email={session.email}
           />
-          <Button onClick={() => setEdit(true)}>Editar</Button>
+          <Button className="min-w-[150px]" onClick={() => setEdit(true)}>
+            Editar
+          </Button>
         </>
       ) : (
         <form onSubmit={onSubmit} className="space-y-2">
@@ -177,8 +179,8 @@ function UserInfo({ name, username, cellphone, email }) {
         <span className="text-2xl font-medium">{name}</span>
         <span className="-mt-2 text-gray-600">{'@' + username}</span>
       </p>
-      <div className="mb-4">
-        <p className="flex items-center justify-start gap-x-2">
+      <div className="my-4 w-full">
+        <p className="flex items-center gap-x-2">
           <DevicePhoneMobileIcon className="aspect-square w-6" />
           <span> {`${cellphone || '+57 322 6215456'}`}</span>
         </p>

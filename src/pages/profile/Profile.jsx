@@ -52,9 +52,8 @@ export function Profile() {
   if (signIn)
     return (
       <>
-        <div className="flex flex-col px-4 py-4 md:flex-row md:gap-x-3">
-          <section className="flex flex-col border md:flex-1">
-            {/* <Link to='/be-premium' className='self-end'> Go to premium</Link> */}
+        <div className="flex flex-col px-4 pb-4 pt-8 md:flex-row md:gap-x-3">
+          <section className="relative flex flex-col items-center justify-center border md:flex-1">
             <UpdateUserForm />
           </section>
           <section className="space-y-2 md:flex-1">
@@ -219,7 +218,7 @@ export function Profile() {
         </Link>
       </div>
 
-      <button
+      {/* <button
         className="rounded-lg bg-blue-700 px-4  py-3 text-center text-xs font-medium text-white focus:ring-4 focus:ring-blue-200 hover:bg-blue-800 hover:bg-gradient-to-br dark:focus:ring-blue-900"
         onClick={() => {
           if (!session?.user_type || session?.user_type === 'userPremiun') {
@@ -234,7 +233,7 @@ export function Profile() {
         }}
       >
         Create Property
-      </button>
+      </button> */}
     </div>
   )
 }
