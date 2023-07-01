@@ -2,12 +2,16 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { actionsUser } from '../../redux2.0/reducers'
-import { isValidUser } from '../../utils'
 import { useNavigate } from 'react-router-dom'
 import { actualizar } from '../../sweetAlerts/sweetAlerts'
 import swal from 'sweetalert2'
 import { ApiPropYou } from '../../services'
 import { Alerts } from '../../utils'
+
+import { Button } from '../../components/form/buttons/Button'
+import { UpdateEmailForm } from '../../components/form/UpdateEmailForm'
+import { ChangePasswordForm } from '../../components/form/ChangePasswordForm'
+import { UpdateUserForm } from '../../components/form/UpdateUserForm'
 
 export function Profile() {
   const dispatch = useDispatch()
@@ -43,9 +47,33 @@ export function Profile() {
       })
     ); */
   }
-  if(!signIn) return null
+  if (!signIn) return null
+
+  if (signIn)
+    return (
+      <>
+        <div className="flex flex-col px-4 pb-4 pt-8 md:flex-row md:gap-x-3">
+          <section className="relative flex flex-col items-center justify-center border md:flex-1">
+            <UpdateUserForm />
+          </section>
+          <section className="space-y-2 md:flex-1">
+            <UpdateEmailForm
+              verified={session.state === 'verified' ? true : false}
+              email={session.email}
+            />
+            <ChangePasswordForm idUser={session.idUser} />
+          </section>
+        </div>
+        <div className="mx-4 grid place-content-center p-3">
+          <Button className="bg-red-500 hover:bg-red-600">
+            Eliminar Cuenta
+          </Button>
+        </div>
+      </>
+    )
+
   return (
-    <div className="lg:[4rem] flex h-[40rem] flex-col items-center justify-center bg-sky-200 sm:h-[43rem]">
+    <div className="lg:[4rem] flex h-[40rem] flex-col items-center justify-center sm:h-[43rem]">
       <p className="self-right text-2xl">Editar usuario</p>
       <div className="h-16 w-16 overflow-hidden rounded-full">
         <img
@@ -190,7 +218,7 @@ export function Profile() {
         </Link>
       </div>
 
-      <button
+      {/* <button
         className="rounded-lg bg-blue-700 px-4  py-3 text-center text-xs font-medium text-white focus:ring-4 focus:ring-blue-200 hover:bg-blue-800 hover:bg-gradient-to-br dark:focus:ring-blue-900"
         onClick={() => {
           if (!session?.user_type || session?.user_type === 'userPremiun') {
@@ -205,7 +233,7 @@ export function Profile() {
         }}
       >
         Create Property
-      </button>
+      </button> */}
     </div>
   )
 }

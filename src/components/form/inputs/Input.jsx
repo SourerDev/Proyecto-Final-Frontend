@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 export function Input({ className, ...props }) {
   return (
     <input
@@ -6,4 +8,32 @@ export function Input({ className, ...props }) {
     ${className}`}
     />
   )
+}
+
+export function InputWithErrorMessage({
+  id,
+  label,
+  value,
+  name,
+  type = 'text',
+  placehoder,
+}) {
+  return (
+    <div className="border">
+      <label htmlFor={id}>{label}</label>
+      <input
+        id={id}
+        value={value}
+        name={name}
+        type="text"
+        placeholder={placehoder}
+      />
+      <p>HOla</p>
+    </div>
+  )
+}
+
+InputWithErrorMessage.propTypes = {
+  id: PropTypes.number.isRequired,
+  label: PropTypes.string.isRequired,
 }

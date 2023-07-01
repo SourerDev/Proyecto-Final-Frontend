@@ -97,8 +97,14 @@ export const ApiPropYou = {
       cellphone,
     })
   },
-  googleSignin: function({ credential }){
+  googleSignin: function ({ credential }) {
     return apiProperties.post(`/${routes.USERS}/google`, { credential })
+  },
+  SetNewPassword: function ({ idUser, password, newPassword }) {
+    return apiProperties.put(`/${routes.USERS}/new-password/${idUser}`, {
+      password,
+      newPassword,
+    })
   },
   updateUser: function ({ idUser, data }) {
     return apiProperties.put(`/${routes.USERS}/${idUser}`, data)
@@ -106,7 +112,6 @@ export const ApiPropYou = {
   getCities: function () {
     return apiProperties.get(`/${routes.CITY}/all`)
   },
-
 }
 
 export const ApiGitHub = {
