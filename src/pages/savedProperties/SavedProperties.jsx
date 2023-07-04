@@ -1,27 +1,28 @@
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import Card from '../card/Card.jsx'
-import callsApi from '../../services'
+/* import Card from '../card/Card.jsx'
+import callsApi from '../../services/index.js'
 import { findNameCity } from '../../utils/autocompleteUtils.js'
 import { Link } from 'react-router-dom'
-import Nav from '../../components/nav-bar/Nav'
+import Nav from '../../components/nav-bar/Nav' */
 
-export default function Favoriteid() {
-  let { id_User } = useParams()
-  const { properties, citiesA } = useSelector((state) => state)
-  const [favorites, setFavorites] = useState([])
+export function SavedProperties() {
+  const { idUser } = useSelector((state) => state.user.session)
+  //const { idUser } = useSelector((state) => state.user.session)
 
   useEffect(() => {
-    callsApi.favoritesbyId_user(id_User).then((res) => {
+    console.log(idUser)
+    /* callsApi.favoritesbyId_user(id_User).then((res) => {
       const data = properties.filter((ele) => res.data.includes(ele.id))
       setFavorites(data)
-    })
-  }, [properties])
+    }) */
+  }, [idUser])
 
   return (
     <div className="px-4">
-      <Nav />
+      <h1>HOLA</h1>
+      {/* <Nav />
       <div className=" my-5">
         <Link to="/home">
           <button className="whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
@@ -67,7 +68,7 @@ export default function Favoriteid() {
             </dd>
           </h1>
         )}
-      </div>
+      </div> */}
     </div>
   )
 }

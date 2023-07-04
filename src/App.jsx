@@ -10,7 +10,7 @@ import { Profile } from './pages/profile/Profile.jsx'
 import { PropertyDetails } from './pages/property/PropertyDetails.jsx'
 import { Landing } from './pages/Landing.jsx'
 import { AboutUs } from './pages/AboutUs.jsx'
-import { AdvancedFilters } from './components/advanced-filters/AdvancedFilters.jsx'
+import { SavedProperties } from './pages/savedProperties/SavedProperties.jsx'
 /*
 import BePremium from "./pages/bePremium/BePremium";
 import Redirect from "./components/redirect/Redirect";
@@ -44,19 +44,21 @@ function App() {
 
   useEffect(() => {
     dispatch(actionsApp.setIsLoading(true))
-    ApiPropYou.getPublications().then((response) => {
-      const { publications } = response.data
-      dispatch(actionsPublications.setPublications(publications))
-      ApiPropYou.getCities().then((response) => {
-        dispatch(actionsApp.setIsLoading(false))
+    ApiPropYou.getPublications()
+      .then((response) => {
+        const { publications } = response.data
+        dispatch(actionsPublications.setPublications(publications))
+        ApiPropYou.getCities().then((response) => {
+          dispatch(actionsApp.setIsLoading(false))
 
-        const { cities } = response.data
-        dispatch(actionsCity.setCities(cities))
+          const { cities } = response.data
+          dispatch(actionsCity.setCities(cities))
+        })
       })
-    }).catch((err) => {
-      dispatch(actionsApp.setIsLoading(false))
-      Alerts.errorConection({ text: err.message })
-    })
+      .catch((err) => {
+        dispatch(actionsApp.setIsLoading(false))
+        Alerts.errorConection({ text: err.message })
+      })
   }, [dispatch])
 
   function handleScroll({ target }) {
@@ -71,7 +73,7 @@ function App() {
         className="h-screen w-screen min-w-[440px] overflow-hidden bg-gray-100 scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-gray-300 hover:scrollbar-thumb-gray-500 sm:scrollbar-thumb-indigo-600 sm:hover:scrollbar-thumb-indigo-800"
       >
         <Nav
-          className={`width-max-main transition-all py-4 ${
+          className={`width-max-main py-4 transition-all ${
             activeStyle
               ? 'bg-gradient-to-b from-gray-500/70 px-5'
               : 'rounded border-gray-50 bg-white px-4 shadow-md'
@@ -94,13 +96,13 @@ function App() {
             <Route path="/sign-in" element={<SignIn />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/about-us" element={<AboutUs />} />
-            <Route path="/home" element={<Home scrollY={scrollPosition}/>} />
+            <Route path="/home" element={<Home scrollY={scrollPosition} />} />
             <Route path="/properties/:id" element={<PropertyDetails />} />
+            <Route path="/saved-properties" element={<SavedProperties />} />
             {/* <Route path="/newRoute" element={<><Nav/><DashboardUsers/></>}/>
           <Route path="/createProperty" element={<><Nav/><Form/><Footer/></>}/>
           <Route path="/bePremium" element={<><Nav/><BePremium/></>} />
           <Route path="/redirect" element={<><Redirect/><Footer/></>} />
-          <Route path="/favorites/:id_User" element= {<><Favoriteid/></>}/>
           BACKEND TRABAJANDO
           <Route path="/dashboard" element={<><Nav/><DashboardPage/></>}/>
           <Route path="/ownerData/:id_User" element={<><Nav/><OwnerData /></>}/> */}

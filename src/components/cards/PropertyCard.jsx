@@ -8,8 +8,7 @@ import callsApi from '../../services'
 export function PropertyCard({ mainData, details, user, favorite, signIn }) {
   const { idPublication, modality, price } = mainData
   const { address, city, photo, bedrooms, bathrooms, type } = details
-  const { avatar, email, active, lName, fName, rating, idUser, cellphone } =
-    user
+  const { avatar, email, active, lName, fName, rating, idUser, cellphone } = user
   const dispatch = useDispatch()
 
   const [state, setState] = useState({

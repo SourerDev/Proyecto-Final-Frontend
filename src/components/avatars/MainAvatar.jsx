@@ -50,7 +50,7 @@ export function MainAvatar() {
                   <span className="">Perfil</span>
                 </Popover.Button>
               </Link>
-              <Link to="/properties-saved">
+              <Link to="/saved-properties">
                 <Popover.Button className="flex w-full gap-x-2 py-1 text-center text-gray-500 hover:text-gray-900">
                   <BookmarkIcon className="h-auto w-6" />
                   <span className="">Favoritos</span>

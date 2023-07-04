@@ -33,31 +33,12 @@ export function Home({ scrollY }) {
     setModalOn(true)
   }
 
-  /* typeof leakedPublications === "string" &&
-    swal.fire(noProperties()).then((res) => {
-      //dispatch(filterProperties(properties))
-      dispatch(resetAlert());
-    });
- */
   return (
     <div>
-      {/* <div className="bg-gray-900 m-2 rounded overflow-hidden">
-        <LandingSearch clicked={clicked} />
-      </div> */}
-
       {modalOn && <ModalAF setModalOn={setModalOn} />}
       <br />
-      {/* <div className='flex lg:flex-row flex-col '>
-
-        <div className='px-2 mb-10 lg:w-1/4'>
-        <AdvancedFilters/>
-        </div>
-        lg:ite grid  lg:grid-cols-2 lg:my-0
-        */}
-
-      {/* {typeof (filteredProperties) === "string" &&(swal.fire(noProperties()).then(res => console.log()))} */}
       <div className="flex flex-col items-center">
-        <div className='w-full py-3 px-6 flex justify-between items-center'>
+        <div className="flex w-full items-center justify-between py-3 px-6">
           <Pagination
             nButtons={nButtons}
             currentPage={page}
