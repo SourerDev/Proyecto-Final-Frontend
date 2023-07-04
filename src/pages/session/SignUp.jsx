@@ -47,8 +47,8 @@ export function SignUp() {
         userName: userName.value,
         ...data,
       })
-
       const { user, token } = response.data
+
       dispatch(actionsUser.setUser(user))
       saveInStorage('token', token)
       Alerts.smallSuccess({ text: 'Bienvenido' })

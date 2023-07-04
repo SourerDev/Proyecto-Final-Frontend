@@ -5,6 +5,7 @@ const user = createSlice({
   initialState: {
     session: {},
     signIn: false,
+    saveds: {},
   },
   reducers: {
     setUser: (state, action) => {
@@ -14,8 +15,11 @@ const user = createSlice({
     setSignIn: (state, action) => {
       state.signIn = action.payload
     },
+    setSaveds: (state, action) => {
+      state.saveds = action.payload
+    }
   },
 })
 
 export const userRs = user.reducer
-export const { setUser, setSignIn } = user.actions
+export const { setUser, setSignIn, setSaveds } = user.actions

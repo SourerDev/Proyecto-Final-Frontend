@@ -112,6 +112,15 @@ export const ApiPropYou = {
   getCities: function () {
     return apiProperties.get(`/${routes.CITY}/all`)
   },
+  getSavedPublications: function (idUser) {
+    return apiProperties.get(`/${routes.USERS}/saveds/${idUser}`)
+  },
+  setSaveds: function (idUser, idPublication) {
+    return apiProperties.put(`/${routes.PUBLICATION}/save`, {
+      idUser,
+      idPublication,
+    })
+  },
 }
 
 export const ApiGitHub = {

@@ -26,9 +26,12 @@ export function SignIn() {
         email,
         password,
       })
-
       const { user, token } = response.data
       dispatch(actionsUser.setUser(user))
+
+      const saveds = await ApiPropYou.setSaveds(user.idUser)
+      dispatch(actionsUser.setSaveds(saveds.data.dictionary))
+
       saveInStorage('token', token)
       addAuthorizationWithToken(token)
       navigate('/home')

@@ -17,7 +17,7 @@ export function Home({ scrollY }) {
   const dispatch = useDispatch()
   const { publications } = useSelector((state) => state.publication)
   const { page } = useSelector((state) => state.app)
-  const { signIn } = useSelector((state) => state.user)
+  const { signIn, saveds } = useSelector((state) => state.user)
 
   const CARDS_PER_PAGE = 9
   const { newArr, nButtons } = arrayPaginator(
@@ -28,7 +28,7 @@ export function Home({ scrollY }) {
   const _publications = newArr
 
   const [modalOn, setModalOn] = useState(false)
-
+  const [savedPublicationes, setSavedPublications] = useState({})
   const clicked = () => {
     setModalOn(true)
   }
