@@ -115,10 +115,10 @@ export const ApiPropYou = {
   getSavedPublications: function (idUser) {
     return apiProperties.get(`/${routes.USERS}/saveds/${idUser}`)
   },
-  setSaveds: function (idUser, idPublication) {
+  setSaveds: function (idUser, idsPublication) {
     return apiProperties.put(`/${routes.PUBLICATION}/save`, {
       idUser,
-      idPublication,
+      idsPublication,
     })
   },
 }

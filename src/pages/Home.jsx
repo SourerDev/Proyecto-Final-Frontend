@@ -5,17 +5,12 @@ import { PropertyCard } from '../components/cards/PropertyCard.jsx'
 import { arrayPaginator } from '../utils'
 import { actionsApp } from '../redux2.0/reducers'
 import ModalAF from '../components/modal/ModalAdvancedFilters.jsx'
-//import LandingSearch from '../../components/landingSearch/LandingSearch.jsx';
-import swal from 'sweetalert2'
-import { noProperties } from '../sweetAlerts/sweetAlerts.js'
 import { LoadingProperties } from '../components/loaders/LoadingProperties.jsx'
-//import state from 'sweetalert/typings/modules/state.js';
 import { AdvancedFilters } from '../components/advanced-filters/AdvancedFilters.jsx'
 import { actionsUser } from '../redux2.0/reducers'
 import { ApiPropYou } from '../services/index.js'
 
 export function Home({ scrollY }) {
-  // const {favorites}  = useSelector(state => state.user)
   const dispatch = useDispatch()
   const { publications } = useSelector((state) => state.publication)
   const { page } = useSelector((state) => state.app)
@@ -30,21 +25,27 @@ export function Home({ scrollY }) {
   const _publications = newArr
 
   const [modalOn, setModalOn] = useState(false)
-  const [actualSaved, setActualSaved] = useState(saveds)
+  //const [actualSaved, setActualSaved] = useState(saveds)
+
+  function setCurrentSaved(savedValue = true, id) {
+    const newSaveds = { ...saveds }
+    if (savedValue) {
+      delete newSaveds[id]
+      return dispatch(actionsUser.setSaveds(newSaveds))
+    } else {
+      newSaveds[id] = session.idUser
+      return dispatch(actionsUser.setSaveds(newSaveds))
+    }
+  }
 
   useEffect(() => {
-    return () => {
-      console.log('didUnmount')
-      console.log(actualSaved)
-      console.log(session.idUser)
-      const newSaved = Object.keys(actualSaved)
-      ApiPropYou.setSaveds({ idUser: session.idUser, newSaved })
-      dispatch(actionsUser.setSaveds(actualSaved))
+    if (session?.idUser) {
+      return () => {
+        const newSaveds = Object.keys(saveds)
+        ApiPropYou.setSaveds(session.idUser, newSaveds)
+      }
     }
   }, [])
-  /* const clicked = () => {
-    setModalOn(true)
-  } */
 
   return (
     <div>
@@ -85,9 +86,8 @@ export function Home({ scrollY }) {
               }
               return (
                 <PropertyCard
-                  session={session.idUser}
-                  saved={actualSaved[idPublication] ? true : false}
-                  setActualSaved={setActualSaved}
+                  saved={saveds[idPublication] ? true : false}
+                  setCurrentSaved={setCurrentSaved}
                   key={i}
                   mainData={mainData}
                   details={details}
