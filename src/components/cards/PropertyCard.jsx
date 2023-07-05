@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import { Icon } from '../../assets'
 import { removeFavorite, addFavorites } from '../../redux/actions/index'
 import callsApi from '../../services'
+import { BookmarkIcon } from '@heroicons/react/24/solid'
+import BookmarkIcon2 from '@heroicons/react/24/outline/BookmarkIcon'
 
 export function PropertyCard({
   mainData,
@@ -54,10 +56,11 @@ export function PropertyCard({
             onClick={() => setCurrentSaved(saved, idPublication)}
           >
             {saved ? (
-              <Icon.Heart fill={'#eb33c6'} width="20" hover={'#a20582'} />
+              <BookmarkIcon className="h-auto w-6 hover:text-gray-700" />
             ) : (
-              <Icon.HeartBorder fill={'#eb33c6'} width="20" hover={'#a20582'} />
+              <BookmarkIcon2 className="h-auto w-6 hover:text-gray-700" />
             )}
+            {/* cambiar el icono heart por el de guardado */}
           </button>
         )}
       </div>

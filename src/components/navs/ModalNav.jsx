@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types'
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, BookmarkIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
 import { Icon } from '../../assets'
 import { Avatar } from '../avatars/Avatar'
+
 
 export function ModalNav({ signIn, session }) {
   const userType = session.userType
@@ -53,12 +54,16 @@ export function ModalNav({ signIn, session }) {
                   {signIn && (
                     <Link to={'/profile'} className="">
                       <Popover.Button className="flex w-full items-center rounded-md border border-white p-3 text-gray-600 hover:border hover:border-gray-200  hover:bg-gray-50 hover:text-gray-900">
-                        <Avatar avatar={session.photo} active={signIn} className="w-14"/>
-                        <p className='flex flex-col text-left'>
-                          <span className='font-medium text-lg'>
+                        <Avatar
+                          avatar={session.photo}
+                          active={signIn}
+                          className="w-14"
+                        />
+                        <p className="flex flex-col text-left">
+                          <span className="text-lg font-medium">
                             {`${session.fName} ${session.lName}`}
                           </span>
-                          <span className='text-gray-500 -mt-2'>
+                          <span className="-mt-2 text-gray-500">
                             {`@${session.userName}`}
                           </span>
                         </p>
@@ -90,12 +95,12 @@ export function ModalNav({ signIn, session }) {
                         </Popover.Button>
                       </Link>
                       <Popover.Button className="flex w-full items-center rounded-md border border-white  p-3 text-gray-600 hover:border hover:border-gray-200  hover:bg-gray-50 hover:text-gray-900">
-                        <Icon.HeartBorder
+                        {/* <Icon.HeartBorder
                           width="25"
                           hover={'#ea2d98'}
                           fill="#9c9c9c"
-                        />
-
+                        /> */}
+                        <BookmarkIcon className="h-auto w-6" />
                         <span className="pl-3">Guardados</span>
                       </Popover.Button>
                     </>
@@ -151,5 +156,5 @@ export function ModalNav({ signIn, session }) {
 
 ModalNav.propTypes = {
   signIn: PropTypes.bool.isRequired,
-  session: PropTypes.object.isRequired
+  session: PropTypes.object.isRequired,
 }
