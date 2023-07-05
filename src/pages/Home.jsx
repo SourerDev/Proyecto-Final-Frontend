@@ -4,11 +4,12 @@ import { Pagination } from '../components/Pagination.jsx'
 import { PropertyCard } from '../components/cards/PropertyCard.jsx'
 import { arrayPaginator } from '../utils'
 import { actionsApp } from '../redux2.0/reducers'
-import ModalAF from '../components/modal/ModalAdvancedFilters.jsx'
+//import ModalAF from '../components/modal/ModalAdvancedFilters.jsx'
 import { LoadingProperties } from '../components/loaders/LoadingProperties.jsx'
 import { AdvancedFilters } from '../components/advanced-filters/AdvancedFilters.jsx'
 import { actionsUser } from '../redux2.0/reducers'
 import { ApiPropYou } from '../services/index.js'
+
 
 export function Home({ scrollY }) {
   const dispatch = useDispatch()
@@ -25,7 +26,6 @@ export function Home({ scrollY }) {
   const _publications = newArr
 
   const [modalOn, setModalOn] = useState(false)
-  //const [actualSaved, setActualSaved] = useState(saveds)
 
   function setCurrentSaved(savedValue = true, id) {
     const newSaveds = { ...saveds }
@@ -49,7 +49,7 @@ export function Home({ scrollY }) {
 
   return (
     <div>
-      {modalOn && <ModalAF setModalOn={setModalOn} />}
+      {/* modalOn && <ModalAF setModalOn={setModalOn} /> */}
       <br />
       <div className="flex flex-col items-center">
         <div className="flex w-full items-center justify-between py-3 px-6">

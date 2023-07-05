@@ -13,7 +13,6 @@ export function PropertyCard({
   saved,
   setCurrentSaved,
   signIn,
-  session,
 }) {
   const { idPublication, modality, price } = mainData
   const { address, city, photo, bedrooms, bathrooms, type } = details

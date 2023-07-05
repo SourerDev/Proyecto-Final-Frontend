@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { LoaderIcon } from '../../components/loaders/Loader'
+import { ApiPropYou } from '../../services'
 /* import Card from '../card/Card.jsx'
 import callsApi from '../../services/index.js'
 import { findNameCity } from '../../utils/autocompleteUtils.js'
@@ -9,19 +10,17 @@ import Nav from '../../components/nav-bar/Nav' */
 
 export function SavedProperties() {
   const { idUser } = useSelector((state) => state.user.session)
-  //const { idUser } = useSelector((state) => state.user.session)
+  const [publications, setPublications] = useState(false)
 
   useEffect(() => {
     console.log(idUser)
-    /* callsApi.favoritesbyId_user(id_User).then((res) => {
-      const data = properties.filter((ele) => res.data.includes(ele.id))
-      setFavorites(data)
-    }) */
+    ApiPropYou.getSavedPublications(idUser)
   }, [idUser])
 
   return (
     <div className="px-4">
-      <h1>HOLA</h1>
+
+      {!publications && <LoaderIcon className="fixed bottom-2 left-2 w-[40px]" />}
       {/* <Nav />
       <div className=" my-5">
         <Link to="/home">

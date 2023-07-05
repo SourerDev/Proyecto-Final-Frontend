@@ -96,7 +96,7 @@ export function ModalNav({ signIn, session }) {
                           fill="#9c9c9c"
                         />
 
-                        <span className="pl-3">Favoritos</span>
+                        <span className="pl-3">Guardados</span>
                       </Popover.Button>
                     </>
                   )}
