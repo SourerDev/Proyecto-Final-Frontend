@@ -11,13 +11,15 @@ import { noProperties } from '../sweetAlerts/sweetAlerts.js'
 import { LoadingProperties } from '../components/loaders/LoadingProperties.jsx'
 //import state from 'sweetalert/typings/modules/state.js';
 import { AdvancedFilters } from '../components/advanced-filters/AdvancedFilters.jsx'
+import { actionsUser } from '../redux2.0/reducers'
+import { ApiPropYou } from '../services/index.js'
 
 export function Home({ scrollY }) {
   // const {favorites}  = useSelector(state => state.user)
   const dispatch = useDispatch()
   const { publications } = useSelector((state) => state.publication)
   const { page } = useSelector((state) => state.app)
-  const { signIn, saveds } = useSelector((state) => state.user)
+  const { signIn, saveds, session } = useSelector((state) => state.user)
 
   const CARDS_PER_PAGE = 9
   const { newArr, nButtons } = arrayPaginator(
@@ -28,10 +30,21 @@ export function Home({ scrollY }) {
   const _publications = newArr
 
   const [modalOn, setModalOn] = useState(false)
-  const [savedPublicationes, setSavedPublications] = useState({})
-  const clicked = () => {
+  const [actualSaved, setActualSaved] = useState(saveds)
+
+  useEffect(() => {
+    return () => {
+      console.log('didUnmount')
+      console.log(actualSaved)
+      console.log(session.idUser)
+      const newSaved = Object.keys(actualSaved)
+      ApiPropYou.setSaveds({ idUser: session.idUser, newSaved })
+      dispatch(actionsUser.setSaveds(actualSaved))
+    }
+  }, [])
+  /* const clicked = () => {
     setModalOn(true)
-  }
+  } */
 
   return (
     <div>
@@ -72,6 +85,9 @@ export function Home({ scrollY }) {
               }
               return (
                 <PropertyCard
+                  session={session.idUser}
+                  saved={actualSaved[idPublication] ? true : false}
+                  setActualSaved={setActualSaved}
                   key={i}
                   mainData={mainData}
                   details={details}

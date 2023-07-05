@@ -5,10 +5,20 @@ import { Icon } from '../../assets'
 import { removeFavorite, addFavorites } from '../../redux/actions/index'
 import callsApi from '../../services'
 
-export function PropertyCard({ mainData, details, user, favorite, signIn }) {
+export function PropertyCard({
+  mainData,
+  details,
+  user,
+  favorite,
+  saved,
+  setActualSaved,
+  signIn,
+  session,
+}) {
   const { idPublication, modality, price } = mainData
   const { address, city, photo, bedrooms, bathrooms, type } = details
-  const { avatar, email, active, lName, fName, rating, idUser, cellphone } = user
+  const { avatar, email, active, lName, fName, rating, idUser, cellphone } =
+    user
   const dispatch = useDispatch()
 
   const [state, setState] = useState({
@@ -25,7 +35,7 @@ export function PropertyCard({ mainData, details, user, favorite, signIn }) {
       }
     })
   }
-  const addFavorite = (evt) => {
+  /* const addFavorite = (evt) => {
     evt.preventDefault()
     setState((previus) => {
       return {
@@ -33,12 +43,12 @@ export function PropertyCard({ mainData, details, user, favorite, signIn }) {
         favorite: previus.favorite ? false : true,
       }
     })
-  }
+  } */
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
 
-  useEffect(() => {
+  /* useEffect(() => {
     if ((favorite && state.favorite) || (!favorite && !state.favorite)) return
     if (favorite && !state.favorite) {
       dispatch(removeFavorite(idPublication))
@@ -54,7 +64,21 @@ export function PropertyCard({ mainData, details, user, favorite, signIn }) {
         .catch((err) => {})
     }
   }, [state])
-
+ */
+  function handleSave() {
+    setActualSaved((previous) => {
+      let prev = { ...previous }
+      if(saved) {
+        delete prev[idPublication]
+        return prev
+      } else {
+        return {
+          ...previous,
+          [idPublication]: session,
+        }
+      }
+    })
+  }
   return (
     <div className="flex min-w-[340px] max-w-[341px] flex-col items-center justify-center bg-white p-2 shadow">
       <div className="relative z-10 h-60 w-[95%] overflow-hidden rounded-lg">
@@ -68,9 +92,9 @@ export function PropertyCard({ mainData, details, user, favorite, signIn }) {
         {signIn && (
           <button
             className="absolute  bottom-1 right-1 flex items-center justify-center rounded-full bg-white p-1 hover:bg-zinc-100"
-            onClick={addFavorite}
+            onClick={handleSave}
           >
-            {state.favorite ? (
+            {saved ? (
               <Icon.Heart fill={'#eb33c6'} width="20" hover={'#a20582'} />
             ) : (
               <Icon.HeartBorder fill={'#eb33c6'} width="20" hover={'#a20582'} />
