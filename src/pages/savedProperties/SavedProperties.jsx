@@ -1,7 +1,9 @@
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { LoaderIcon } from '../../components/loaders/Loader'
 import { ApiPropYou } from '../../services'
+import { actionsUser } from '../../redux2.0/reducers'
+import { PropertyCard } from '../../components/cards/PropertyCard'
 /* import Card from '../card/Card.jsx'
 import callsApi from '../../services/index.js'
 import { findNameCity } from '../../utils/autocompleteUtils.js'
@@ -9,18 +11,78 @@ import { Link } from 'react-router-dom'
 import Nav from '../../components/nav-bar/Nav' */
 
 export function SavedProperties() {
-  const { idUser } = useSelector((state) => state.user.session)
+  const dispatch = useDispatch()
+  const { session, saveds } = useSelector((state) => state.user)
   const [publications, setPublications] = useState(false)
 
   useEffect(() => {
-    console.log(idUser)
-    ApiPropYou.getSavedPublications(idUser)
-  }, [idUser])
+    ApiPropYou.getSavedPublications(session.idUser).then((res) => {
+      console.log(res.data)
+      setPublications(res.data.publications)
+    })
+    if (session?.idUser) {
+      return () => {
+        const newSaveds = Object.keys(saveds)
+        ApiPropYou.setSaveds(session.idUser, newSaveds)
+      }
+    }
+  }, [])
 
+  function setCurrentSaved(savedValue = true, id) {
+    const newSaveds = { ...saveds }
+    if (savedValue) {
+      delete newSaveds[id]
+      return dispatch(actionsUser.setSaveds(newSaveds))
+    } else {
+      newSaveds[id] = session.idUser
+      return dispatch(actionsUser.setSaveds(newSaveds))
+    }
+  }
   return (
     <div className="px-4">
+      {/* {!publications && (
+        <LoaderIcon className="fixed bottom-2 left-2 w-[40px]" />
+      )} */}
+      {publications && publications.length ? (
+        <div className="gap-x-6 gap-y-4 sm:flex sm:flex-wrap sm:justify-center pt-3">
+          {publications.map((publication, i) => {
+            const { idPublication, modality, price, id } = publication.Publication
+            const mainData = {
+              idPublication,
+              modality,
+              price,
+            }
+            const { address, City, photos, bedrooms, bathrooms, type } =
+              publication.Publication.Property
+            const details = {
+              address,
+              city: City /* Temporal hasta refactor de autocomplete & API cities */,
+              photo: photos[0],
+              bedrooms,
+              bathrooms,
+              type,
+            }
 
-      {!publications && <LoaderIcon className="fixed bottom-2 left-2 w-[40px]" />}
+            const user = {
+              ...publication.Publication.User,
+              avatar: publication.Publication.User.photo,
+            }
+            return (
+              <PropertyCard
+                saved={saveds[idPublication] ? true : false}
+                setCurrentSaved={setCurrentSaved}
+                key={i}
+                mainData={mainData}
+                details={details}
+                user={user}
+                signIn={true}
+              />
+            )
+          })}
+        </div>
+      ) : (
+        <div>no hay length</div>
+      )}
       {/* <Nav />
       <div className=" my-5">
         <Link to="/home">
