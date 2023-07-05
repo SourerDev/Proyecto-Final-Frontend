@@ -30,7 +30,8 @@ export function Home({ scrollY }) {
   function setCurrentSaved(savedValue = true, id) {
     const newSaveds = { ...saveds }
     if (savedValue) {
-      delete newSaveds[id]
+      const d = delete newSaveds[id]
+      console.log(d, newSaveds)
       return dispatch(actionsUser.setSaveds(newSaveds))
     } else {
       newSaveds[id] = session.idUser

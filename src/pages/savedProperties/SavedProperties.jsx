@@ -43,7 +43,7 @@ export function SavedProperties() {
       {/* {!publications && (
         <LoaderIcon className="fixed bottom-2 left-2 w-[40px]" />
       )} */}
-      {publications && publications.length ? (
+      { publications?.length ? (
         <div className="gap-x-6 gap-y-4 sm:flex sm:flex-wrap sm:justify-center pt-3">
           {publications.map((publication, i) => {
             const { idPublication, modality, price, id } = publication.Publication
@@ -65,7 +65,7 @@ export function SavedProperties() {
 
             const user = {
               ...publication.Publication.User,
-              avatar: publication.Publication.User.photo,
+              avatar: publication.Publication.User?.photo,
             }
             return (
               <PropertyCard
