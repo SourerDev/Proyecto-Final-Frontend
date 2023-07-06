@@ -1,5 +1,4 @@
 import { LandingCards } from '../components/infoLanding/LandingCards'
-import { DataLanding } from '../components/dataLanding/DataLanding'
 import { ServicesPropertyCarousel } from '../components/carousels/ServicesPropertyCarousel'
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
@@ -23,9 +22,6 @@ export function Landing({ setActiveStyle, scrollY }) {
         />
       </MainHeader>
       <PropertiesCarousel _type={'sale'} />
-      {/* <div className="px-10 lg:px-[10rem]">
-        <DataLanding />
-      </div> */}
 
       <div>
         <LandingCards />

@@ -4,13 +4,22 @@ import { Link } from 'react-router-dom'
 import { Icon } from '../../assets'
 import { removeFavorite, addFavorites } from '../../redux/actions/index'
 import callsApi from '../../services'
+import { BookmarkIcon } from '@heroicons/react/24/solid'
+import BookmarkIcon2 from '@heroicons/react/24/outline/BookmarkIcon'
 
-export function PropertyCard({ mainData, details, user, favorite, signIn }) {
+export function PropertyCard({
+  mainData,
+  details,
+  user,
+  favorite,
+  saved,
+  setCurrentSaved,
+  signIn,
+}) {
   const { idPublication, modality, price } = mainData
   const { address, city, photo, bedrooms, bathrooms, type } = details
   const { avatar, email, active, lName, fName, rating, idUser, cellphone } =
     user
-  const dispatch = useDispatch()
 
   const [state, setState] = useState({
     favorite: favorite,
@@ -26,35 +35,10 @@ export function PropertyCard({ mainData, details, user, favorite, signIn }) {
       }
     })
   }
-  const addFavorite = (evt) => {
-    evt.preventDefault()
-    setState((previus) => {
-      return {
-        ...previus,
-        favorite: previus.favorite ? false : true,
-      }
-    })
-  }
+
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
-
-  useEffect(() => {
-    if ((favorite && state.favorite) || (!favorite && !state.favorite)) return
-    if (favorite && !state.favorite) {
-      dispatch(removeFavorite(idPublication))
-      callsApi
-        .removeFavorite(idPublication)
-        .then((res) => {})
-        .catch((err) => {})
-    } else if (!favorite && state.favorite) {
-      dispatch(addFavorites([idPublication]))
-      callsApi
-        .postFavorite({ idUser: idUser, id_Property: idPublication })
-        .then((res) => {})
-        .catch((err) => {})
-    }
-  }, [state])
 
   return (
     <div className="flex min-w-[340px] max-w-[341px] flex-col items-center justify-center bg-white p-2 shadow">
@@ -69,13 +53,14 @@ export function PropertyCard({ mainData, details, user, favorite, signIn }) {
         {signIn && (
           <button
             className="absolute  bottom-1 right-1 flex items-center justify-center rounded-full bg-white p-1 hover:bg-zinc-100"
-            onClick={addFavorite}
+            onClick={() => setCurrentSaved(saved, idPublication)}
           >
-            {state.favorite ? (
-              <Icon.Heart fill={'#eb33c6'} width="20" hover={'#a20582'} />
+            {saved ? (
+              <BookmarkIcon className="h-auto w-6 hover:text-gray-700" />
             ) : (
-              <Icon.HeartBorder fill={'#eb33c6'} width="20" hover={'#a20582'} />
+              <BookmarkIcon2 className="h-auto w-6 hover:text-gray-700" />
             )}
+            {/* cambiar el icono heart por el de guardado */}
           </button>
         )}
       </div>
