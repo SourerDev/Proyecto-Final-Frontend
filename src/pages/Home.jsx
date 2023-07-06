@@ -1,15 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Pagination } from '../components/Pagination.jsx'
 import { PropertyCard } from '../components/cards/PropertyCard.jsx'
 import { arrayPaginator } from '../utils'
 import { actionsApp } from '../redux2.0/reducers'
-//import ModalAF from '../components/modal/ModalAdvancedFilters.jsx'
 import { LoadingProperties } from '../components/loaders/LoadingProperties.jsx'
 import { AdvancedFilters } from '../components/advanced-filters/AdvancedFilters.jsx'
 import { actionsUser } from '../redux2.0/reducers'
 import { ApiPropYou } from '../services/index.js'
-
 
 export function Home({ scrollY }) {
   const dispatch = useDispatch()
@@ -25,13 +23,10 @@ export function Home({ scrollY }) {
   )
   const _publications = newArr
 
-  const [modalOn, setModalOn] = useState(false)
-
   function setCurrentSaved(savedValue = true, id) {
     const newSaveds = { ...saveds }
     if (savedValue) {
       const d = delete newSaveds[id]
-      console.log(d, newSaveds)
       return dispatch(actionsUser.setSaveds(newSaveds))
     } else {
       newSaveds[id] = session.idUser
@@ -50,7 +45,6 @@ export function Home({ scrollY }) {
 
   return (
     <div>
-      {/* modalOn && <ModalAF setModalOn={setModalOn} /> */}
       <br />
       <div className="flex flex-col items-center">
         <div className="flex w-full items-center justify-between py-3 px-6">
@@ -74,7 +68,7 @@ export function Home({ scrollY }) {
                 publication.Property
               const details = {
                 address,
-                city: City /* Temporal hasta refactor de autocomplete & API cities */,
+                city: City,
                 photo: photos[0],
                 bedrooms,
                 bathrooms,

@@ -7,10 +7,6 @@ import { PropertyCard } from '../../components/cards/PropertyCard'
 import { Link } from 'react-router-dom'
 import { Button } from '../../components/form/buttons/Button'
 import { GoBackButton } from '../../components/form/buttons/GoBack'
-/* import Card from '../card/Card.jsx'
-import callsApi from '../../services/index.js'
-import { findNameCity } from '../../utils/autocompleteUtils.js'
-import Nav from '../../components/nav-bar/Nav' */
 
 export function SavedProperties() {
   const dispatch = useDispatch()
@@ -19,7 +15,6 @@ export function SavedProperties() {
 
   useEffect(() => {
     ApiPropYou.getSavedPublications(session.idUser).then((res) => {
-      console.log(res.data)
       setPublications(res.data.publications)
     })
     if (session?.idUser) {
