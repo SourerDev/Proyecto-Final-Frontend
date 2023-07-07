@@ -1,6 +1,9 @@
+import PropTypes from 'prop-types'
 import React from 'react'
+import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
 
 export function Pagination({ nButtons, currentPage, setPage }) {
+  nButtons = Math.ceil(nButtons)
   function createArray(n) {
     var array = []
     for (var i = 0; i < n; i++) {
@@ -10,83 +13,45 @@ export function Pagination({ nButtons, currentPage, setPage }) {
   }
   const buttons = createArray(nButtons)
 
+  if (!nButtons) return <p>loading...</p>
+
   return (
-    <nav aria-label="Page navigation example">
-      <ul className="inline-flex items-center -space-x-px">
-        <button
-          onClick={() => (setPage(currentPage - 1))}
-          disabled={currentPage === 0 ? true : false}
-        >
-          <li>
-            <a
-              href="#"
-              className="ml-0 block rounded-l-lg border border-gray-300 bg-white py-2 px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            >
-              <span className="sr-only">Previous</span>
-              <svg
-                aria-hidden="true"
-                className="h-5 w-5"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
-            </a>
-          </li>
-        </button>
-        {buttons &&
-          buttons.map((number, i) => (
-            <button
-              key={i}
-              className="boton"
-              onClick={() => setPage(number)}
-            >
-              <li>
-                <a
-                  href="#"
-                  className={
-                    currentPage === number
-                      ? 'text-white-500 rounded-sm border bg-sky-600 py-2 px-3 leading-tight'
-                      : 'hover:red-gray-700 dark:hover:bg-grared-700 rounded-sm border border-gray-300 bg-white py-2 px-3 leading-tight text-gray-500 hover:bg-sky-200 dark:border-red-700 dark:bg-red-800 dark:text-red-400 dark:hover:text-white'
-                  }
-                >
-                  {number + 1}
-                </a>
-              </li>
-            </button>
-          ))}
-        <button
-          onClick={() => setPage(currentPage + 1)}
-          disabled={currentPage === nButtons - 1 ? true : false}
-        >
-          <li>
-            <a
-              href="#"
-              className="block rounded-r-lg border border-gray-300 bg-white py-2 px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            >
-              <span className="sr-only">Next</span>
-              <svg
-                aria-hidden="true"
-                className="h-5 w-5"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
-            </a>
-          </li>
-        </button>
-      </ul>
-    </nav>
+    <div className="flex items-center gap-4 text-gray-700">
+      <button
+        onClick={() => setPage(currentPage - 1)}
+        className="rounded p-2 disabled:text-gray-400 hover:bg-gray-100 disabled:hover:bg-transparent"
+        disabled={currentPage === 0}
+      >
+        <ArrowLeftIcon className="h-5 w-5" />
+      </button>
+      <div className="flex items-center gap-2 text-sm">
+        {buttons.map((number) => (
+          <button
+            onClick={() => setPage(number)}
+            key={number}
+            className={`grid  h-10 w-10 place-content-center rounded p-2.5 transition-all ${
+              currentPage === number
+                ? 'bg-sky-600 font-medium text-white shadow shadow-sky-700 ease-in'
+                : ' ease-out hover:bg-gray-100'
+            }`}
+          >
+            <span>{number + 1}</span>
+          </button>
+        ))}
+      </div>
+      <button
+        onClick={() => setPage(currentPage + 1)}
+        className="rounded p-2 disabled:text-gray-400 hover:bg-gray-100 disabled:hover:bg-transparent"
+        disabled={currentPage === nButtons - 1}
+      >
+        <ArrowRightIcon className="h-5 w-5" />
+      </button>
+    </div>
   )
+}
+
+Pagination.propTypes = {
+  nButtons: PropTypes.number.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  setPage: PropTypes.func.isRequired,
 }
