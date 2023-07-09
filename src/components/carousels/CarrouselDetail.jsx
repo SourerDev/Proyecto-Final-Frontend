@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux'
 
-export default function CarrouselDetail({ images }) {
+export function CarrouselDetail({ images, className }) {
   const dispatch = useDispatch()
 
   const slideshow = useRef(null)
@@ -46,9 +46,9 @@ export default function CarrouselDetail({ images }) {
       }, 30)
     }
   }
-
+  //h-4/4  flex flex-col items-center justify-center lg:w-[41rem]
   return (
-    <div className="h-4/4  flex flex-col items-center justify-center lg:w-[41rem] ">
+    <div className={`w-full ${className}`}>
       {images?.length > 0 && (
         <Main className="shadow">
           <Slideshow

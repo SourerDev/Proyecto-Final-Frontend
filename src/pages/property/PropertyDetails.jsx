@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { actionsPublications } from '../../redux2.0/reducers'
 import { ApiPropYou } from '../../services'
 import { GoBackButton } from '../../components/form/buttons/GoBack'
-import CarrouselDetail from '../../components/carousels/CarrouselDetail'
+import { CarrouselDetail } from '../../components/carousels/CarrouselDetail'
 import { OwnerCard } from '../../components/cards/OwnerCard'
 import {
   CurrencyDollarIcon,
@@ -39,41 +39,46 @@ export function PropertyDetails() {
   if (!publication?.idPublication) return <div>...Loading</div>
 
   return (
-    <div className="min-h-screen border-2 border-blue-600 p-2">
-      <div className="h-[10rem] w-[45%]  border-2 border-yellow-600">
-        {}
+    <div className="flex min-h-screen border-2 border-blue-600 p-2 justify-evenly">
+      <div className="w-[53%]">
+        <CarrouselDetail className="" images={[...Property.photos]} />
+      </div>
+      <div className="h-fit w-[42%]  border-2 border-yellow-600">
         <div className="flex border-2 border-gray-400">
-          <div className="flex items-center rounded-sm  border-2 border-blue-900 bg-blue-800 py-1 px-1 text-gray-200">
-            <CurrencyDollarIcon className="h-6 w-6 " />
-            <p className="mt-0.5 pl-0.5 text-lg font-medium  tracking-wide">
-              {publication.price}
-            </p>
-          </div>
-          <div className="flex w-full items-center justify-evenly p-0">
+          <div className="flex w-full items-center justify-evenly py-1">
             <p className="border-r-2 border-gray-500 pr-2 text-xl font-medium">{`${Property.City.string}`}</p>
             <p className="italic text-gray-600">{Property.address}</p>
           </div>
         </div>
-        {}
-        <div className="flex ">
-          <p className="flex px-1">
-            <CurrencyDollarIcon className="h4 w-4" />
-            baños
+        <div className="flex text-xl border-2 border-red-500 p-3 justify-around">
+          <p className="flex gap-2">
+            <CurrencyDollarIcon className="h-6 w-6" />
+            Baños
+            <p className='text-gray-500'>{Property.bathrooms}</p>
           </p>
-          <p className="flex px-1">
-            <CubeTransparentIcon className="h4 w-4" />
-            metros ²
+          <p className="flex gap-2">
+            <RectangleGroupIcon className="h-6 w-6" />
+            Cuartos
+            <p className='text-gray-500'>{Property.bedrooms}</p>
           </p>
-          <p className="flex px-1">
-            <RectangleGroupIcon className="h5 w-5" />
-            cuartos
+          <p className="flex gap-2">
+            <CubeTransparentIcon className="h-6 w-6" />
+            Metros²
+            <p className='text-gray-500'>{Property.squareMeters}</p>
           </p>
         </div>
       </div>
     </div>
   )
 }
-{
+{ //price
+  /* <div className="flex items-center rounded-sm  border-2 border-blue-900 bg-blue-800 py-1 px-1 text-gray-200">
+    <CurrencyDollarIcon className="h-6 w-6 " />
+    <p className="mt-0.5 pl-0.5 text-lg font-medium  tracking-wide">
+      {publication.price}
+    </p>
+  </div> */
+
   /* <dl>
   <div className="col-start-1 col-end-3 row-start-1 grid items-center rounded-lg bg-white shadow-2xl sm:mb-3 sm:grid-cols-2">
     <dd className="m-3 flex items-center p-1 text-black  dark:text-black">
