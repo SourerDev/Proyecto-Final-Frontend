@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import callsApi from '../../services'
 import { getIdProperties } from '../../redux/actions/index'
 
-export default function Question({
+export function Question({
   question,
   answer,
   isOwner,

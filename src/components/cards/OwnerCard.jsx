@@ -12,7 +12,7 @@ import { Alerts } from '../../utils'
 
 export function OwnerCard({ User }) {
   return (
-    <Card className="max-w-[500px]">
+    <Card className="">
       <div className="flex items-center gap-x-4">
         <Avatar
           avatar={User.photo}
