@@ -39,16 +39,16 @@ export function PropertyDetails() {
   if (!publication?.idPublication) return <div>...Loading</div>
 
   return (
-    <div className="flex min-h-screen border-2 border-blue-600 p-2 justify-evenly">
-      <div className="w-[53%]">
+    <div className="flex min-h-screen px-4 py-8 justify-between">
+      <div className="w-[56%]">
         <CarrouselDetail className="" images={[...Property.photos]} />
       </div>
-      <div className="h-fit w-[42%] border-2 border-blue-800 rounded">
+      <div className="h-fit w-[42%] border shadow-md rounded p-4">
         <p className='pl-1 w-fit ml-auto mr-2 text-indigo-600 font-semibold'> {type[Property.type]} en {modality[publication.modality]}</p>
-        <div className='flex mb-2 p-1 border-l-4 border-indigo-600'>
-          <p className='flex'>$ {publication.price} <p className='font-bold ml-[0.3rem]'>USD</p></p>
+        <div className=' flex mt-2 mb-4 p-1 border-l-4 border-indigo-600'>
+          <p className='flex pl-1 text-xl'>{publication.price} <p className='font-bold ml-[0.3rem]'>USD</p></p>
         </div>
-        { // border-2 border-black shadow-2xl
+        { // border-2 border-black bg-white shadow-2xl
         /* <div className='flex ml-1 gap-1 py-1'>
           <CurrencyDollarIcon className="h-6 w-6"/>
           <p className='flex'>{publication.price} <p className='font-bold'>USD</p></p>

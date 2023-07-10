@@ -71,7 +71,7 @@ export function CarrouselDetail({ images, className }) {
               ))}
           </Slideshow>
           <Controls>
-            <Button r className="left-0" onClick={previus}>
+            <Button r className="left-0 pl-3" onClick={previus}>
               <svg
                 width="24"
                 height="24"
@@ -83,7 +83,7 @@ export function CarrouselDetail({ images, className }) {
               </svg>
             </Button>
             <Button
-              className="right-0 flex items-center justify-end"
+              className="right-0 pr-3 flex items-center justify-end"
               onClick={next}
             >
               <svg
@@ -177,12 +177,7 @@ const Button = styled.button`
     }
   }
 
-  path {
-    filter: ${(props) =>
-    props.r
-      ? 'drop-shadow(-2px 0px 0px #fff)'
-      : 'drop-shadow(2px 0px 0px #fff)'};
-  }
+  
   @media screen and (max-width: 400px) {
     svg {
       display: none;
