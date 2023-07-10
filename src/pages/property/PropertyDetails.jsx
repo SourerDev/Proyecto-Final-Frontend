@@ -43,14 +43,23 @@ export function PropertyDetails() {
       <div className="w-[53%]">
         <CarrouselDetail className="" images={[...Property.photos]} />
       </div>
-      <div className="h-fit w-[42%]  border-2 border-yellow-600">
-        <div className="flex border-2 border-gray-400">
+      <div className="h-fit w-[42%] border-2 border-blue-800 rounded">
+        <p className='pl-1 w-fit ml-auto mr-2 text-indigo-600 font-semibold'> {type[Property.type]} en {modality[publication.modality]}</p>
+        <div className='flex mb-2 p-1 border-l-4 border-indigo-600'>
+          <p className='flex'>$ {publication.price} <p className='font-bold ml-[0.3rem]'>USD</p></p>
+        </div>
+        { // border-2 border-black shadow-2xl
+        /* <div className='flex ml-1 gap-1 py-1'>
+          <CurrencyDollarIcon className="h-6 w-6"/>
+          <p className='flex'>{publication.price} <p className='font-bold'>USD</p></p>
+        </div> */}
+        <div className="flex border-y-2 border-gray-400">
           <div className="flex w-full items-center justify-evenly py-1">
             <p className="border-r-2 border-gray-500 pr-2 text-xl font-medium">{`${Property.City.string}`}</p>
             <p className="italic text-gray-600">{Property.address}</p>
           </div>
         </div>
-        <div className="flex text-xl border-2 border-red-500 p-3 justify-around">
+        <div className="flex text-xl p-3 justify-around">
           <p className="flex gap-2">
             <CurrencyDollarIcon className="h-6 w-6" />
             Baños
@@ -70,6 +79,16 @@ export function PropertyDetails() {
       </div>
     </div>
   )
+}
+const modality = {
+  sale: 'venta',
+  rental: 'alquiler',
+}
+const type = {
+  apartment: 'departamento',
+  house: 'casa',
+  ph: 'PH',
+  ranch: 'finca',
 }
 { //price
   /* <div className="flex items-center rounded-sm  border-2 border-blue-900 bg-blue-800 py-1 px-1 text-gray-200">
