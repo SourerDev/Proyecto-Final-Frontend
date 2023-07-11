@@ -40,51 +40,47 @@ export function PropertyDetails() {
   if (!publication?.idPublication) return <div>...Loading</div>
 
   return (
-    <div className="flex min-h-screen justify-between border-2 border-red-700 px-4 py-8 ">
-      <div className="min-h-screen w-[56%] border-2 border-orange-400 ">
+    <div className="flex flex-col xl:min-h-screen xl:justify-between border-2 border-red-700 px-2 py-4 xl:px-4 xl:py-8 ">
+      <div className="xl:min-h-screen xl:w-[56%] border-2 border-orange-400 ">
         <CarrouselDetail className="" images={[...Property.photos]} />
-        <div className="mt-4">
+        {/* <div className="mt-4">
           <OwnerCard User={User} />
-        </div>
+        </div> */}
       </div>
 
-      <div className="flex w-[42%] flex-col border-2 border-green-500">
+      <div className="flex xl:w-[42%] flex-col border-2 border-green-500">
         <div className="rounded border p-4 shadow-md">
-          <p className="ml-auto mr-2 w-fit pl-1 font-semibold text-indigo-600">
-            {' '}
+          <p className="text-lg xl:ml-auto xl:mr-2 xl:w-fit pl-1 font-semibold text-indigo-600">
             {type[Property.type]} en {modality[publication.modality]}
           </p>
-          <div className=" mt-2 mb-4 flex border-l-4 border-indigo-600 p-1">
-            <p className="flex pl-1 text-xl">
+          <div className="mt-2 mb-4 xl:flex border-l-4 border-indigo-600 p-1">
+            <p className="flex pl-1 text-2xl">
               {publication.price} <p className="ml-[0.3rem] font-bold">USD</p>
             </p>
           </div>
           <div className="flex border-y-2 border-gray-400">
-            <div className="flex w-full items-center justify-evenly py-1">
-              <p className="border-r-2 border-gray-500 pr-2 text-xl font-medium">{`${Property.City.string}`}</p>
-              <p className="italic text-gray-600">{Property.address}</p>
+            <div className="flex xl:w-full xl:items-center xl:justify-evenly py-2">
+              <p className="border-r-2 border-gray-500 w-fit text-xl font-medium">{`${Property.City.string}`}</p>
+              <p className="ml-1 pl-2 italic text-gray-600">{Property.address}</p>
             </div>
           </div>
-          <div className="flex justify-around p-3 text-xl">
-            <p className="flex gap-2">
+          <div className="xl:flex xl:justify-around p-3 text-xl">
+            <p className="flex items-center text-center gap-2">
               <CurrencyDollarIcon className="h-6 w-6" />
-              Baños
-              <p className="text-gray-500">{Property.bathrooms}</p>
+              <p className="flex text-lg">Baños <p className='text-lg text-gray-500 ml-2'>{Property.bathrooms}</p></p>
             </p>
-            <p className="flex gap-2">
+            <p className="flex items-center text-center gap-2">
               <RectangleGroupIcon className="h-6 w-6" />
-              Cuartos
-              <p className="text-gray-500">{Property.bedrooms}</p>
+              <p className="flex text-lg">Cuartos <p className='text-lg text-gray-500 ml-2'>{Property.bedrooms}</p></p>
             </p>
-            <p className="flex gap-2">
-              <CubeTransparentIcon className="h-6 w-6" />
-              Metros²
-              <p className="text-gray-500">{Property.squareMeters}</p>
+            <p className="flex items-center text-center gap-2">
+              <RectangleGroupIcon className="h-6 w-6" />
+              <p className="flex text-lg">Metros² <p className='text-lg text-gray-500 ml-2'>{Property.squareMeters}</p></p>
             </p>
           </div>
         </div>
 
-        <div className="overflow-scroll  h-[34.8%] rounded border px-3 py-1 mt-3 shadow-md border-2 border-red-500">
+        <div className="overflow-scroll  xl:h-[34.8%] rounded border px-3 py-1 mt-3 shadow-md border-2 border-red-500">
           <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit.
             Consequuntur dicta quidem molestias harum molestiae, blanditiis
