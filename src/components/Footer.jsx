@@ -9,7 +9,7 @@ export function Footer({ className, ...props }) {
   return (
     <div
       {...props}
-      className={`relative -mx-1 -mb-1 flex flex-col items-center bg-[#111111]  px-6 pt-2 pb-4  text-gray-200 ${className}`}
+      className={`relative -mx-1 -mt-2 mb-5 rounded-md flex flex-col items-center bg-[#111111]  px-6 pt-2 pb-4  text-gray-200 ${className}`}
     >
       <section className="ga flex w-full items-center justify-between">
         <div className="flex items-center gap-x-2">
