@@ -10,9 +10,11 @@ import {
   paymentError,
   paymentOk,
 } from '../../sweetAlerts/sweetAlerts'
-import Footer from '../../components/footer/Footer'
+import { CheckIcon } from '@heroicons/react/24/outline'
+import { Carousel } from '../../components/carousels/Carousel'
+import { Alerts } from '../../utils'
 
-export default function BePremium() {
+export function BePremium() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
@@ -20,6 +22,7 @@ export default function BePremium() {
   const [linkPago, setLinkPago] = useState('#')
   const [redirect, setRedirect] = useState(false)
   const { user } = useSelector((state) => state)
+  const { session, signIn } = useSelector((state) => state.user)
 
   useEffect(() => {
     if (user?.user_type === 'userLogged') {
@@ -37,6 +40,13 @@ export default function BePremium() {
       }
     }
   }, [])
+
+  useEffect(() => {
+    if (!signIn) {
+      Alerts.smallWarning({ text: 'Lo sentimos, debes iniciar sesión' })
+      navigate('/sign-in')
+    }
+  })
 
   if (redirect) {
     //navigate("/redirect")
@@ -69,6 +79,33 @@ export default function BePremium() {
       console.log(status)
     }
   } */
+  const True = !signIn
+
+  if (True) return null
+
+  if (!True)
+    return (
+      <div className="flex  min-h-[600px] flex-col items-center gap-4 py-8 px-4 text-lg lg:flex-row">
+        <div className=" flex w-full flex-col gap-6 p-7 lg:w-3/6 ">
+          <h1 className="text-2xl font-semibold">Razon para ser Premium</h1>
+          <p>
+            Al volverte usuario premium pagando la membresía mensual podras
+            subir tus publicaciones para la venta o alquiler, posicionarte en el
+            mercado de propiedades, interactuar con los usuarios y comunicarte
+            con los interesados en tu publicación.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni
+            debitis impedit voluptatem ducimus eveniet, veritatis commodi neque
+            quos dolores corporis illum nobis, nisi laborum repellat
+            voluptatibus perferendis id delectus sapiente.
+          </p>
+        </div>
+        <div className=" grid w-3/6 place-content-center p-7">
+          <PaymentCarousel />
+        </div>
+      </div>
+    )
 
   return (
     <div className="bg-[url('https://wrmx00.epimg.net/radio/imagenes/2022/02/22/martha_debayle/1645547060_000751_1645549058_noticia_normal.jpg')] bg-cover bg-center bg-no-repeat  px-3 lg:h-screen lg:px-20 ">
@@ -77,7 +114,7 @@ export default function BePremium() {
           <h1 className="">Bienvenido {user?.userName} </h1>
         </div>
         <div className="flex   flex-col ">
-          <div className=" mt-10 flex h-[10vh] flex-col items-center justify-center rounded-lg text-2xl ">
+          <div className="mt-10 flex h-[10vh] flex-col items-center justify-center rounded-lg text-2xl ">
             <div className="rounded-lg border-4 border-black bg-white bg-opacity-60 p-4 text-black shadow-2xl">
               <h4 className="flex justify-center">Usuario PREMIUM</h4>
               <p>Costo mensual: $5.000 (ars)</p>
@@ -85,12 +122,7 @@ export default function BePremium() {
           </div>
         </div>
         <div className="bg mb-3 mt-20 flex justify-center rounded-lg bg-white  bg-opacity-60  p-10 px-10  lg:mb-20 ">
-          <p className="text-2xl text-black ">
-            Al volverte usuario premium pagando la membresía mensual podras
-            subir tus publicaciones para la venta o alquiler, posicionarte en el
-            mercado de propiedades, interactuar con los usuarios y comunicarte
-            con los interesados en tu publicación.
-          </p>
+          <p className="text-2xl text-black "></p>
         </div>
 
         <div className="mb-20 flex justify-center">
@@ -115,6 +147,46 @@ export default function BePremium() {
           )}
         </div>
       </div>
+    </div>
+  )
+}
+
+function PaymentCarousel() {
+  const payments = [
+    { price: 0.25, time: 'Semanal' },
+    { price: 0.26, time: 'Mensual' },
+    { price: 0.27, time: 'Anual' },
+  ]
+  if (!payments) return null
+
+  return (
+    <div className="w-[370px] shadow-md">
+      <Carousel>
+        {payments.map((pay, i) => (
+          <div
+            key={i}
+            className="flex h-[500px] min-w-full flex-col items-center justify-around bg-secondary p-10 text-text/80"
+          >
+            <h2 className="mb-3 text-3xl font-bold">Premium</h2>
+            <p>
+              $ {pay.price} / {pay.time}
+            </p>
+            <ul className="my-4 h-40">
+              <li className="flex items-center gap-4">
+                <CheckIcon className="h-8 w-8 stroke-2 text-green-600" />
+                <span>Sube tus publicaciones</span>
+              </li>
+              <li className="flex items-center gap-4">
+                <CheckIcon className="h-8 w-8 stroke-2 text-green-600" />
+                <span>And more</span>
+              </li>
+            </ul>
+            <button className="my-3 rounded-md bg-primary px-8  py-4 font-medium text-gray-100 transition-transform duration-700 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/50 ">
+              Comienza
+            </button>
+          </div>
+        ))}
+      </Carousel>
     </div>
   )
 }
