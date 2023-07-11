@@ -29,10 +29,10 @@ export function Pagination({ nButtons, currentPage, setPage }) {
           <button
             onClick={() => setPage(number)}
             key={number}
-            className={`grid  h-10 w-10 place-content-center rounded p-2.5 transition-all ${
+            className={`grid  h-10 w-10 place-content-center rounded p-2.5 transition-all  ${
               currentPage === number
-                ? 'bg-sky-600 font-medium text-white shadow shadow-sky-700 ease-in'
-                : ' ease-out hover:bg-gray-100'
+                ? 'bg-primary font-medium text-white shadow shadow-primary/80 ease-in'
+                : ' ease-out bg-gray-100 hover:bg-gray-300'
             }`}
           >
             <span>{number + 1}</span>
