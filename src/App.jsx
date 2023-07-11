@@ -11,12 +11,12 @@ import { PropertyDetails } from './pages/property/PropertyDetails.jsx'
 import { Landing } from './pages/Landing.jsx'
 import { AboutUs } from './pages/AboutUs.jsx'
 import { SavedProperties } from './pages/savedProperties/SavedProperties.jsx'
+import { BePremium } from './pages/profile/BePremium.jsx'
 /*
 import BePremium from "./pages/bePremium/BePremium";
 import Redirect from "./components/redirect/Redirect";
 import ContentDashboard from "./components/dashboard/ContentDashboard";
 import OwnerData from "./components/dashboard/OwnerData";
-import Favoriteid from "./components/FaroriteId/favoriteId";
 import DashboardPage from "./pages/dashboard/DashboardPage";
 import DashboardUsers from "./components/dashboard/DashboardUsers.jsx";
 */
@@ -70,7 +70,7 @@ function App() {
       <div
         onScroll={handleScroll}
         id="main-screen"
-        className="h-screen w-screen min-w-[440px] overflow-hidden bg-gray-100 scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-gray-300 hover:scrollbar-thumb-gray-500 sm:scrollbar-thumb-indigo-600 sm:hover:scrollbar-thumb-indigo-800"
+        className="h-screen w-screen min-w-[440px] overflow-hidden bg-bg-two scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-gray-300 hover:scrollbar-thumb-gray-500 sm:scrollbar-thumb-indigo-600 sm:hover:scrollbar-thumb-indigo-800"
       >
         <Nav
           className={`width-max-main py-4 transition-all ${
@@ -79,7 +79,7 @@ function App() {
               : 'rounded border-gray-50 bg-white px-4 shadow-md'
           }`}
         />
-        <main className="width-max-main min-h-screen border-gray-100 bg-white xl:border-x">
+        <main className="width-max-main min-h-[600px] pb-8 border-gray-100 bg-white xl:border-x">
           <ScrollToTop />
           <Routes>
             {/* Temporal */}
@@ -99,6 +99,7 @@ function App() {
             <Route path="/home" element={<Home scrollY={scrollPosition} />} />
             <Route path="/properties/:id" element={<PropertyDetails />} />
             <Route path="/saved-properties" element={<SavedProperties />} />
+            <Route path="/be-premium" element={<BePremium />} />
             {/* <Route path="/newRoute" element={<><Nav/><DashboardUsers/></>}/>
           <Route path="/createProperty" element={<><Nav/><Form/><Footer/></>}/>
           <Route path="/bePremium" element={<><Nav/><BePremium/></>} />

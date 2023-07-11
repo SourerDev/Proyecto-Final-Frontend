@@ -1,28 +1,10 @@
 import PropTypes from 'prop-types'
-import { useEffect, useRef, useState } from 'react'
-import styled from 'styled-components'
-import { useSelector, useDispatch } from 'react-redux'
-import { findNameCity } from '../../utils/autocompleteUtils'
-import { Link, useNavigate } from 'react-router-dom'
-import { filterProperties } from '../../redux/actions'
+import { useRef } from 'react'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
-
-/*
-  ABCD -> BCDA ->
-  -tamaño del carrosel luego +tamaño del tamaño
-  boton derecho
-*/
 
 export function Carousel({ children }) {
   const carouselRef = useRef(null)
 
-  /* function next() {
-    if (carouselRef?.current?.children.length > 0) {
-      const firstElement = carouselRef.current.children[carouselRef.current.children.length - 1]
-      const eliminado = children.shift()
-      children.push(eliminado)
-    }
-  } */
   const next = () => {
     if (carouselRef?.current?.children?.length > 0) {
       const firstElement = carouselRef?.current?.children[0]
@@ -65,22 +47,20 @@ export function Carousel({ children }) {
   }
 
   return (
-    <div
-      className= 'relative w-full overflow-hidden p-0 m-0 '
-    >
+    <div className="relative m-0 w-full overflow-hidden p-0 ">
       <button
         onClick={previus}
         className=" group absolute top-1/2  left-0 z-40 grid aspect-square -translate-y-1/2 transform place-content-center  rounded-full "
       >
-        <ChevronLeftIcon className="h-6 w-8 stroke-gray-500/50 group-hover:stroke-gray-800/50 transition-all" />
+        <ChevronLeftIcon className="h-6 w-8 stroke-gray-500/50 transition-all group-hover:stroke-gray-800/50" />
       </button>
       <button
         onClick={next}
         className=" group absolute top-1/2 right-0 z-40 grid aspect-square -translate-y-1/2 transform place-content-center rounded-full"
       >
-        <ChevronRightIcon className="h-6 w-8 stroke-gray-500/50 group-hover:stroke-gray-800/50 transition-all" />
+        <ChevronRightIcon className="h-6 w-8 stroke-gray-500/50 transition-all group-hover:stroke-gray-800/50" />
       </button>
-      <div ref={carouselRef} className="flex w-full z-40">
+      <div ref={carouselRef} className="z-40 flex w-full">
         {children}
       </div>
     </div>
