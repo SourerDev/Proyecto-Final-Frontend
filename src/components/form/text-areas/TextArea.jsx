@@ -14,7 +14,7 @@ export function TextArea({ value, className, ...props }) {
     <textarea
       ref={inputRef}
       style={{ height: 0 }}
-      className={`flex-grow resize-none overflow-hidden p-4 text-lg outline-none ${className}`}
+      className={`flex-grow resize-none overflow-hidden text-lg outline-none ${className}`}
       {...props}
     ></textarea>
   )

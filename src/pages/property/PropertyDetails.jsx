@@ -40,57 +40,81 @@ export function PropertyDetails() {
   if (!publication?.idPublication) return <div>...Loading</div>
 
   return (
-    <div className="flex flex-col xl:min-h-screen xl:justify-between border-2 border-red-700 px-2 py-4 xl:px-4 xl:py-8 ">
-      <div className="xl:min-h-screen xl:w-[56%] border-2 border-orange-400 ">
+    <div className="flex flex-col p-4 xl:min-h-screen    xl:px-4 xl:py-8 xl:border-2 xl:border-violet-500">
+      <div className="xl:w-[56%] xl:inline-block ">
         <CarrouselDetail className="" images={[...Property.photos]} />
-        {/* <div className="mt-4">
-          <OwnerCard User={User} />
-        </div> */}
       </div>
 
-      <div className="flex xl:w-[42%] flex-col border-2 border-green-500">
-        <div className="rounded border p-4 shadow-md">
-          <p className="text-lg xl:ml-auto xl:mr-2 xl:w-fit pl-1 font-semibold text-indigo-600">
+      <div className="my-4 flex flex-col items-start gap-[1rem]  xl:w-[42%] xl:border-4 xl:border-red-500">
+        <div className="w-full rounded border p-4 shadow-md ">
+          <p className="pl-1 text-lg font-semibold text-indigo-600 xl:ml-auto xl:mr-2 xl:w-fit">
             {type[Property.type]} en {modality[publication.modality]}
           </p>
-          <div className="mt-2 mb-4 xl:flex border-l-4 border-indigo-600 p-1">
+          <div className="mt-2 mb-4 border-l-4 border-indigo-600 p-1 xl:flex">
             <p className="flex pl-1 text-2xl">
               {publication.price} <p className="ml-[0.3rem] font-bold">USD</p>
             </p>
           </div>
+
           <div className="flex border-y-2 border-gray-400">
-            <div className="flex xl:w-full xl:items-center xl:justify-evenly py-2">
-              <p className="border-r-2 border-gray-500 w-fit text-xl font-medium">{`${Property.City.string}`}</p>
-              <p className="ml-1 pl-2 italic text-gray-600">{Property.address}</p>
+            <div className="flex py-2 md:gap-4 xl:w-full xl:items-center">
+              <p className="w-fit border-r-2 border-gray-500 pr-0.5 text-xl font-medium md:pr-6">{`${Property.City.string}`}</p>
+              <p className="ml-1  pl-2 italic text-gray-600">
+                {Property.address}
+              </p>
             </div>
           </div>
-          <div className="xl:flex xl:justify-around p-3 text-xl">
-            <p className="flex items-center text-center gap-2">
+          <div className="p-3 text-xl xl:flex xl:justify-around">
+            <p className="flex items-center gap-2 text-center">
               <CurrencyDollarIcon className="h-6 w-6" />
-              <p className="flex text-lg">Baños <p className='text-lg text-gray-500 ml-2'>{Property.bathrooms}</p></p>
+              <p className="flex text-lg">
+                Baños{' '}
+                <p className="ml-2 text-lg text-gray-500">
+                  {Property.bathrooms}
+                </p>
+              </p>
             </p>
-            <p className="flex items-center text-center gap-2">
+            <p className="flex items-center gap-2 text-center">
               <RectangleGroupIcon className="h-6 w-6" />
-              <p className="flex text-lg">Cuartos <p className='text-lg text-gray-500 ml-2'>{Property.bedrooms}</p></p>
+              <p className="flex text-lg">
+                Cuartos{' '}
+                <p className="ml-2 text-lg text-gray-500">
+                  {Property.bedrooms}
+                </p>
+              </p>
             </p>
-            <p className="flex items-center text-center gap-2">
+            <p className="flex items-center gap-2 text-center">
               <RectangleGroupIcon className="h-6 w-6" />
-              <p className="flex text-lg">Metros² <p className='text-lg text-gray-500 ml-2'>{Property.squareMeters}</p></p>
+              <p className="flex text-lg">
+                Metros²{' '}
+                <p className="ml-2 text-lg text-gray-500">
+                  {Property.squareMeters}
+                </p>
+              </p>
             </p>
           </div>
         </div>
 
-        <div className="overflow-scroll  xl:h-[34.8%] rounded border px-3 py-1 mt-3 shadow-md border-2 border-red-500">
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-            Consequuntur dicta quidem molestias harum molestiae, blanditiis
-            fuga, neque inventore repellendus consectetur, consequatur corporis
-            libero quae cumque ullam autem et aliquam odio!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque quo molestiae cupiditate atque consectetur perspiciatis deserunt commodi! Nesciunt, quaerat illo dolore molestiae saepe, sit tempore veniam officiis odio pariatur aspernatur. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo suscipit excepturi velit quaerat dolor cupiditate amet, cumque officia ipsum assumenda dolores eaque quis. Exercitationem facere cupiditate est corporis minus laborum?
-          </p>
-        </div>
-        <div className="mt-4">
-          <OwnerCard User={User} />
+        <div className="lg:flex lg:gap-4 xl:border-2 xl:border-violet-500">
+          <div className="overflow-scroll  rounded border border-2 border-violet-700 px-3 py-1 text-center shadow-md md:mt-2 md:h-[20rem] md:h-fit xl:h-[34.8%] lg:flex-1 lg:mt-0">
+            <p>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+              Consequuntur dicta quidem molestias harum molestiae, blanditiis
+              fuga, neque inventore repellendus consectetur, consequatur
+              corporis libero quae cumque ullam autem et aliquam odio! Lorem
+              ipsum dolor sit amet, consectetur adipisicing elit. Neque quo
+              molestiae cupiditate atque consectetur perspiciatis deserunt
+              commodi! Nesciunt, quaerat illo dolore molestiae saepe, sit
+              tempore veniam officiis odio pariatur aspernatur. Lorem ipsum
+              dolor sit, amet consectetur adipisicing elit. Illo suscipit
+              excepturi velit quaerat dolor cupiditate amet, cumque officia
+              ipsum assumenda dolores eaque quis. Exercitationem facere
+              cupiditate est corporis minus laborum?
+            </p>
+          </div>
+          <div className="w-full  border-2 border-red-500 md:m-0 md:inline-flex lg:flex-1 lg:h-fit">
+            <OwnerCard User={User} />
+          </div>
         </div>
       </div>
     </div>

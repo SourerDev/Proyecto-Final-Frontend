@@ -12,33 +12,34 @@ import { Alerts } from '../../utils'
 
 export function OwnerCard({ User }) {
   return (
-    <Card className="">
-      <div className="flex items-center gap-x-4">
+    <Card className="w-full">
+      <div className="flex items-center gap-x-2 ">
         <Avatar
           avatar={User.photo}
           name={`${User.fName} ${User.lName}`}
           active={User.active}
         />
-        <p className="-ml-2 flex flex-col">
+        <p className="flex flex-col ">
           <span className="text-lg font-bold">{`${User.fName} ${User.lName}`}</span>
           <span className="text-gray-600">@{User.userName}</span>
         </p>
-        <p className="flex-grow border">** No stars **</p>
+        <p className=" flex items-center gap-x-1">
+          <DevicePhoneMobileIcon
+            title={User.cellphone}
+            className="h-auto w-6 stroke-gray-800"
+          />{' '}
+          <span>{User.cellphone || '+ 57 3123122626'}</span>
+        </p>
+        {//considerar si implementaremos un sitema real de valoracion con estrellas
+        /* <p className="flex-grow border">** No stars **</p> */}
       </div>
-      <div className="mb-4 flex justify-between">
+      <div className="my-2 flex justify-between">
         <p className=" flex items-center gap-x-2">
           <EnvelopeIcon
             title={User.email}
             className="h-auto w-6 stroke-gray-800"
           />{' '}
           <span>{User.email}</span>
-        </p>
-        <p className=" flex items-center gap-x-2">
-          <DevicePhoneMobileIcon
-            title={User.cellphone}
-            className="h-auto w-6 stroke-gray-800"
-          />{' '}
-          <span>{User.cellphone || '+ 57 3123122626'}</span>
         </p>
       </div>
       <CardMessage />
@@ -51,11 +52,12 @@ function CardMessage() {
   return (
     <div className="flex flex-col gap-y-2">
       <TextArea
-        placeholder="Message"
+        className='border border-gray-800 p-2 rounded-sm'
+        placeholder="Mensaje"
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
-      <Button onClick={() => Alerts.soon({ text: 'Pronto podras contactar' })}>
+      <Button className='w-fit my-0 mx-auto' onClick={() => Alerts.soon({ text: 'Pronto podras contactar' })}>
         Contactar
       </Button>
     </div>
