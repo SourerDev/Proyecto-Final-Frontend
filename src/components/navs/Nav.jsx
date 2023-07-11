@@ -60,7 +60,7 @@ export function Nav({ rutes = true, login = true, className }) {
             {userType === 'logged' && (
               <li>
                 <Link
-                  to="/user/be-premium"
+                  to="/be-premium"
                   className="text-base font-medium text-gray-500 hover:text-gray-900"
                 >
                   PREMIUM
