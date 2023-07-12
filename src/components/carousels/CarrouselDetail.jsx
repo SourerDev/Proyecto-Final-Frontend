@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux'
 
-export default function CarrouselDetail({ images }) {
+export function CarrouselDetail({ images, className }) {
   const dispatch = useDispatch()
 
   const slideshow = useRef(null)
@@ -46,9 +46,9 @@ export default function CarrouselDetail({ images }) {
       }, 30)
     }
   }
-
+  //h-4/4  flex flex-col items-center justify-center lg:w-[41rem]
   return (
-    <div className="h-4/4  flex flex-col items-center justify-center lg:w-[41rem] ">
+    <div className={`w-full ${className}`}>
       {images?.length > 0 && (
         <Main className="shadow">
           <Slideshow
@@ -71,7 +71,7 @@ export default function CarrouselDetail({ images }) {
               ))}
           </Slideshow>
           <Controls>
-            <Button r className="left-0" onClick={previus}>
+            <Button r className="left-0 pl-3" onClick={previus}>
               <svg
                 width="24"
                 height="24"
@@ -83,7 +83,7 @@ export default function CarrouselDetail({ images }) {
               </svg>
             </Button>
             <Button
-              className="right-0 flex items-center justify-end"
+              className="right-0 pr-3 flex items-center justify-end"
               onClick={next}
             >
               <svg
@@ -177,12 +177,7 @@ const Button = styled.button`
     }
   }
 
-  path {
-    filter: ${(props) =>
-    props.r
-      ? 'drop-shadow(-2px 0px 0px #fff)'
-      : 'drop-shadow(2px 0px 0px #fff)'};
-  }
+  
   @media screen and (max-width: 400px) {
     svg {
       display: none;
