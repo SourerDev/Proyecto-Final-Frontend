@@ -31,19 +31,15 @@ export function BePremium() {
   })
 
   useEffect(() => {
-    if (session?.session_type === 'userLogged') {
-      axios
-        .post(`${API_URL}/payments`, { user_id: session?.id_User })
-        .then((r) => {
-          setLinkPago(r.data)
-        })
+    if (session?.type === 'logged') {
+      axios.post(`${API_URL}/payments`, session.idUser).then((r) => {
+        setLinkPago(r.data)
+      })
     }
-    if (status) {
-      if (status === 'approved') {
-        axios.put(`${API_URL}/users/upDate/${user_id}`).then((r) => {
-          return dispatch(loadUserInfo(r.data.Message))
-        })
-      }
+    if (status && status === 'approved') {
+      axios.put(`${API_URL}/users/upDate/${user_id}`).then((r) => {
+        return dispatch(loadUserInfo(r.data.Message))
+      })
     }
   }, [])
 
