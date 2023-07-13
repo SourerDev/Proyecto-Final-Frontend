@@ -72,6 +72,7 @@ const routes = {
   PUBLICATION: 'publish',
   USERS: 'user',
   CITY: 'city',
+  PAY: 'payments',
 }
 
 export const ApiPropYou = {
@@ -120,6 +121,9 @@ export const ApiPropYou = {
       idUser,
       idsPublication,
     })
+  },
+  paymentUrl: function (user_id) {
+    return apiProperties.post(`${routes.PAY}`, { user_id })
   },
 }
 

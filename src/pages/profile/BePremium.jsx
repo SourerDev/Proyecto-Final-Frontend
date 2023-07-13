@@ -21,13 +21,19 @@ export function BePremium() {
 
   const [linkPago, setLinkPago] = useState('#')
   const [redirect, setRedirect] = useState(false)
-  const { user } = useSelector((state) => state)
   const { session, signIn } = useSelector((state) => state.user)
 
   useEffect(() => {
-    if (user?.user_type === 'userLogged') {
+    if (!signIn) {
+      Alerts.smallWarning({ text: 'Lo sentimos, debes iniciar sesión' })
+      navigate('/sign-in')
+    }
+  })
+
+  useEffect(() => {
+    if (session?.session_type === 'userLogged') {
       axios
-        .post(`${API_URL}/payments`, { user_id: user?.id_User })
+        .post(`${API_URL}/payments`, { user_id: session?.id_User })
         .then((r) => {
           setLinkPago(r.data)
         })
@@ -40,13 +46,6 @@ export function BePremium() {
       }
     }
   }, [])
-
-  useEffect(() => {
-    if (!signIn) {
-      Alerts.smallWarning({ text: 'Lo sentimos, debes iniciar sesión' })
-      navigate('/sign-in')
-    }
-  })
 
   if (redirect) {
     //navigate("/redirect")
@@ -109,7 +108,7 @@ export function BePremium() {
 
   return (
     <div className="bg-[url('https://wrmx00.epimg.net/radio/imagenes/2022/02/22/martha_debayle/1645547060_000751_1645549058_noticia_normal.jpg')] bg-cover bg-center bg-no-repeat  px-3 lg:h-screen lg:px-20 ">
-      <div className=" bg-opacity-75 ">
+      {/* <div className=" bg-opacity-75 ">
         <div className=" flex justify-center text-center text-6xl underline ">
           <h1 className="">Bienvenido {user?.userName} </h1>
         </div>
@@ -146,7 +145,7 @@ export function BePremium() {
             </div>
           )}
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }
