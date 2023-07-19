@@ -96,7 +96,7 @@ export function BePremium() {
           </p>
         </div>
         <div className=" grid w-3/6 place-content-center p-7">
-          <PaymentCarousel />
+          <PaymentCarousel linkPago={linkPago}/>
         </div>
       </div>
     )
