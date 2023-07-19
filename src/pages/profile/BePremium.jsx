@@ -35,13 +35,14 @@ export function BePremium() {
       axios.post(`${API_URL}/payments`, session.idUser).then((r) => {
         setLinkPago(r.data)
       })
+      console.log(linkPago)
     }
     if (status && status === 'approved') {
       axios.put(`${API_URL}/users/upDate/${user_id}`).then((r) => {
         return dispatch(loadUserInfo(r.data.Message))
       })
     }
-  }, [])
+  }, [linkPago])
 
   if (redirect) {
     //navigate("/redirect")
