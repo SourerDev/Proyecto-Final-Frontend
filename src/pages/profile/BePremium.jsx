@@ -10,10 +10,9 @@ import {
   paymentError,
   paymentOk,
 } from '../../sweetAlerts/sweetAlerts'
-import { CheckIcon } from '@heroicons/react/24/outline'
-import { Carousel } from '../../components/carousels/Carousel'
 import { Alerts } from '../../utils'
 import { ApiPropYou } from '../../services'
+import { PaymentCarousel } from './PaymentCarousel'
 
 export function BePremium() {
   const dispatch = useDispatch()
@@ -47,7 +46,6 @@ export function BePremium() {
     console.log(linkPago)
   }, [linkPago])
 
-
   if (status && status === 'approved') {
     swal.fire(paymentOk()).then((res) => navigate('/'))
   } else if (status && status === 'rejected') {
@@ -61,7 +59,6 @@ export function BePremium() {
       navigate('/')
     })
   } */
-
 
   /* if(status) {
     if(status === "approved") {
@@ -148,7 +145,7 @@ export function BePremium() {
   )
 }
 
-function PaymentCarousel() {
+/* function PaymentCarousel() {
   const payments = [
     { price: 0.25, time: 'Semanal' },
     { price: 0.26, time: 'Mensual' },
@@ -178,12 +175,15 @@ function PaymentCarousel() {
                 <span>And more</span>
               </li>
             </ul>
-            <button className="my-3 rounded-md bg-primary px-8  py-4 font-medium text-gray-100 transition-transform duration-700 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/50 ">
-              Comienza
-            </button>
+            <a href={linkPago}>
+              <button className="my-3 rounded-md bg-primary px-8  py-4 font-medium text-gray-100 transition-transform duration-700 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/50">
+                Comienza
+              </button>
+            </a>
           </div>
         ))}
       </Carousel>
     </div>
   )
 }
+ */
