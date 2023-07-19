@@ -23,44 +23,41 @@ export function BePremium() {
   const [redirect, setRedirect] = useState(false)
   const { session, signIn } = useSelector((state) => state.user)
 
-  useEffect(() => {
-    if (!signIn) {
-      Alerts.smallWarning({ text: 'Lo sentimos, debes iniciar sesión' })
-      navigate('/sign-in')
-    }
-  })
+  if (!signIn) {
+    Alerts.smallWarning({ text: 'Lo sentimos, debes iniciar sesión' })
+    navigate('/sign-in')
+  }
 
+  const status = new URLSearchParams(location.search).get('status')
   useEffect(() => {
-    if (session?.type === 'logged') {
+    if (session?.userType === 'logged') {
       axios.post(`${API_URL}/payments`, session.idUser).then((r) => {
         setLinkPago(r.data)
       })
       console.log(linkPago)
     }
     if (status && status === 'approved') {
-      axios.put(`${API_URL}/users/upDate/${user_id}`).then((r) => {
+      axios.put(`${API_URL}/users/upDate/${session.idUser}`).then((r) => {
         return dispatch(loadUserInfo(r.data.Message))
       })
     }
-  }, [linkPago])
+  }, [])
 
-  if (redirect) {
-    //navigate("/redirect")
-
-    swal.fire(completePayment()).then((res) => {
-      dispatch(resetUser())
-      navigate('/')
-    })
-  }
-
-  const status = new URLSearchParams(location.search).get('status')
-  const user_id = new URLSearchParams(location.search).get('external_reference')
 
   if (status && status === 'approved') {
     swal.fire(paymentOk()).then((res) => navigate('/'))
   } else if (status && status === 'rejected') {
     swal.fire(paymentError())
   }
+  /* if (redirect) {
+    //navigate("/redirect")
+
+    swal.fire(completePayment()).then((res) => {
+      dispatch(resetUser())
+      navigate('/')
+    })
+  } */
+
 
   /* if(status) {
     if(status === "approved") {
