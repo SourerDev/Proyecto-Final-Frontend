@@ -125,6 +125,9 @@ export const ApiPropYou = {
   paymentUrl: function (user_id) {
     return apiProperties.post(`${routes.PAY}`, { user_id })
   },
+  setPremiumUser: function (idUser) {
+    return apiProperties.put(`${routes.USERS}/premium/${idUser}`)
+  }
 }
 
 export const ApiGitHub = {

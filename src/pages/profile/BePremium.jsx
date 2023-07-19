@@ -13,6 +13,7 @@ import {
 import { CheckIcon } from '@heroicons/react/24/outline'
 import { Carousel } from '../../components/carousels/Carousel'
 import { Alerts } from '../../utils'
+import { ApiPropYou } from '../../services'
 
 export function BePremium() {
   const dispatch = useDispatch()
@@ -30,18 +31,21 @@ export function BePremium() {
 
   const status = new URLSearchParams(location.search).get('status')
   useEffect(() => {
+    if (status && status === 'approved') {
+      /* axios.put(`${API_URL}/users/upDate/${session.idUser}`).then((r) => {
+        return dispatch(loadUserInfo(r.data.Message))
+      }) */
+      ApiPropYou.setPremiumUser(session.idUser)
+    }
     if (session?.userType === 'logged') {
-      axios.post(`${API_URL}/payments`, session.idUser).then((r) => {
-        setLinkPago(r.data)
-      })
+      ApiPropYou.paymentUrl(session.idUser).then((res) => setLinkPago(res.data))
       console.log(linkPago)
     }
-    if (status && status === 'approved') {
-      axios.put(`${API_URL}/users/upDate/${session.idUser}`).then((r) => {
-        return dispatch(loadUserInfo(r.data.Message))
-      })
-    }
   }, [])
+
+  useEffect(() => {
+    console.log(linkPago)
+  }, [linkPago])
 
 
   if (status && status === 'approved') {
