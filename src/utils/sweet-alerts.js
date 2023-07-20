@@ -67,6 +67,17 @@ export const Alerts = {
       buttonsStyling: false,
     })
   },
+  completePayment: () => {
+    return Swal.fire({
+      title: 'Complete el pago',
+      text: 'porfavor complete el pago en la pestaña emergente para continuar',
+      icon: 'warning',
+      showCancelButton: false,
+      confirmButtonText: 'volver al inicio',
+      cancelButtonText: '',
+      reverseButtons: false,
+    })
+  },
   errorConection: ({ text = '' }) => {
     return Swal.fire({
       toast: true,

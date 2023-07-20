@@ -1,16 +1,29 @@
 import { CheckIcon } from '@heroicons/react/24/outline'
 import { Carousel } from '../../components/carousels/Carousel'
 import { Alerts } from '../../utils'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { resetUser } from '../../redux2.0/reducers/User'
 
 export function PaymentCarousel({ linkPago = '#' }) {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const payments = [
     { price: 0.25, time: 'Semanal' },
     { price: 0.26, time: 'Mensual' },
     { price: 0.27, time: 'Anual' },
   ]
+
   if (!payments) return null
   const blank = '_blank'
-  //Alerts.alertWhitInput({ title: 'ophhh my god', preConfirm: false })
+
+  function redirect() {
+    Alerts.completePayment().then((r) => {
+      dispatch(resetUser())
+      navigate('/home')
+    })
+  }
+
   return (
     <div className="w-[370px] shadow-md">
       <Carousel>
@@ -33,7 +46,7 @@ export function PaymentCarousel({ linkPago = '#' }) {
                 <span>And more</span>
               </li>
             </ul>
-            <a href={linkPago} target={blank}>
+            <a onClick={() => redirect()} href={linkPago} target={blank}>
               <button className="my-3 rounded-md bg-primary px-8  py-4 font-medium text-gray-100 transition-transform duration-700 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/50">
                 Comienza
               </button>

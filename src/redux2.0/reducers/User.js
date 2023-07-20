@@ -12,6 +12,11 @@ const user = createSlice({
       state.session = action.payload
       state.signIn = true
     },
+    resetUser: (state, action) => {
+      state.session = {}
+      state.signIn = false
+      state.saveds = {}
+    },
     setSignIn: (state, action) => {
       state.signIn = action.payload
     },
@@ -22,4 +27,4 @@ const user = createSlice({
 })
 
 export const userRs = user.reducer
-export const { setUser, setSignIn, setSaveds } = user.actions
+export const { setUser, resetUser, setSignIn, setSaveds } = user.actions

@@ -101,7 +101,7 @@ function App() {
             <Route path="/properties/:id" element={<PropertyDetails />} />
             <Route path="/saved-properties" element={<SavedProperties />} />
             <Route path="/be-premium" element={<BePremium />} />
-            <Route path="/redirect" element={<Redirect />} />
+            {/* <Route path="/redirect" element={<Redirect />} /> */}
             {/* <Route path="/newRoute" element={<><Nav/><DashboardUsers/></>}/>
           <Route path="/createProperty" element={<><Nav/><Form/><Footer/></>}/>
           <Route path="/bePremium" element={<><Nav/><BePremium/></>} />

@@ -24,7 +24,7 @@ export function BePremium() {
   const { session, signIn } = useSelector((state) => state.user)
 
   if (!signIn) {
-    Alerts.smallWarning({ text: 'Lo sentimos, debes iniciar sesión' })
+    Alerts.smallWarning({ text: 'Lo sentimos, primero debes iniciar sesión' })
     navigate('/sign-in')
   }
 

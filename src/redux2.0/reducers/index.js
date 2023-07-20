@@ -1,5 +1,5 @@
 import { setPublications, setDetailPublication } from './Publication.js'
-import { setUser, setSignIn, setSaveds } from './User.js'
+import { setUser, resetUser, setSignIn, setSaveds } from './User.js'
 import {
   setPage,
   setFilters,
@@ -21,6 +21,7 @@ export const actionsPublications = {
 
 export const actionsUser = {
   setUser,
+  resetUser,
   setSignIn,
   setSaveds,
 }
