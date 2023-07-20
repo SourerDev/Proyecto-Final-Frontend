@@ -20,7 +20,6 @@ export function BePremium() {
   const location = useLocation()
 
   const [linkPago, setLinkPago] = useState('#')
-  const [redirect, setRedirect] = useState(false)
   const { session, signIn } = useSelector((state) => state.user)
 
   /* if (!signIn) {
@@ -29,8 +28,17 @@ export function BePremium() {
   } */
 
   const status = new URLSearchParams(location.search).get('status')
+  const user_id = new URLSearchParams(location.search).get('external_reference')
+
+  if (status && status === 'approved') {
+    swal.fire(paymentOk()).then((res) => navigate('/'))
+  } else if (status && status === 'rejected') {
+    swal.fire(paymentError())
+  }
+
   useEffect(() => {
     if (status && status === 'approved') {
+      console.log(user_id)
       ApiPropYou.setPremiumUser(session.idUser)
     }
     if (session?.userType === 'logged') {
@@ -43,33 +51,7 @@ export function BePremium() {
     console.log(linkPago)
   }, [linkPago])
 
-  if (status && status === 'approved') {
-    swal.fire(paymentOk()).then((res) => navigate('/'))
-  } else if (status && status === 'rejected') {
-    swal.fire(paymentError())
-  }
-  /* if (redirect) {
-    //navigate("/redirect")
 
-    swal.fire(completePayment()).then((res) => {
-      dispatch(resetUser())
-      navigate('/')
-    })
-  } */
-
-  /* if(status) {
-    if(status === "approved") {
-      axios.put(`${API_URL}/users/upDate/${user_id}`)
-      .then((r) => {
-        console.log(r)
-        dispatch(loadUserInfo(r.data.Message))
-      })
-    }
-    else {
-      console.log("ocurrio un error inesperado")
-      console.log(status)
-    }
-  } */
   const True = !signIn
 
   if (True) return null
@@ -141,46 +123,3 @@ export function BePremium() {
     </div>
   )
 }
-
-/* function PaymentCarousel() {
-  const payments = [
-    { price: 0.25, time: 'Semanal' },
-    { price: 0.26, time: 'Mensual' },
-    { price: 0.27, time: 'Anual' },
-  ]
-  if (!payments) return null
-
-  return (
-    <div className="w-[370px] shadow-md">
-      <Carousel>
-        {payments.map((pay, i) => (
-          <div
-            key={i}
-            className="flex h-[500px] min-w-full flex-col items-center justify-around bg-secondary p-10 text-text/80"
-          >
-            <h2 className="mb-3 text-3xl font-bold">Premium</h2>
-            <p>
-              $ {pay.price} / {pay.time}
-            </p>
-            <ul className="my-4 h-40">
-              <li className="flex items-center gap-4">
-                <CheckIcon className="h-8 w-8 stroke-2 text-green-600" />
-                <span>Sube tus publicaciones</span>
-              </li>
-              <li className="flex items-center gap-4">
-                <CheckIcon className="h-8 w-8 stroke-2 text-green-600" />
-                <span>And more</span>
-              </li>
-            </ul>
-            <a href={linkPago}>
-              <button className="my-3 rounded-md bg-primary px-8  py-4 font-medium text-gray-100 transition-transform duration-700 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/50">
-                Comienza
-              </button>
-            </a>
-          </div>
-        ))}
-      </Carousel>
-    </div>
-  )
-}
- */
