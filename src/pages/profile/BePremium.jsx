@@ -13,6 +13,7 @@ import {
 import { Alerts } from '../../utils'
 import { ApiPropYou } from '../../services'
 import { PaymentCarousel } from './PaymentCarousel'
+import { setUser } from '../../redux2.0/reducers/User'
 
 export function BePremium() {
   const dispatch = useDispatch()
@@ -30,10 +31,14 @@ export function BePremium() {
   const status = new URLSearchParams(location.search).get('status')
   const user_id = new URLSearchParams(location.search).get('external_reference')
 
-  if (status && status === 'approved') {
-    swal.fire(paymentOk()).then((res) => navigate('/'))
-  } else if (status && status === 'rejected') {
-    swal.fire(paymentError())
+  if (status) {
+    // modificar despues con la tokenización y uso de cookies
+    ApiPropYou.getUserById(user_id).then((r) => dispatch(setUser(r.data.user)))
+    if (status && status === 'approved') {
+      swal.fire(paymentOk()).then((res) => navigate('/'))
+    } else if (status && status === 'rejected') {
+      swal.fire(paymentError())
+    }
   }
 
   useEffect(() => {
@@ -50,7 +55,6 @@ export function BePremium() {
   useEffect(() => {
     console.log(linkPago)
   }, [linkPago])
-
 
   const True = !signIn
 
@@ -75,7 +79,7 @@ export function BePremium() {
           </p>
         </div>
         <div className=" grid w-3/6 place-content-center p-7">
-          <PaymentCarousel linkPago={linkPago}/>
+          <PaymentCarousel linkPago={linkPago} />
         </div>
       </div>
     )

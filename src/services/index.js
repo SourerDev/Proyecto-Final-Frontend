@@ -127,6 +127,9 @@ export const ApiPropYou = {
   },
   setPremiumUser: function (idUser) {
     return apiProperties.put(`${routes.USERS}/premium/${idUser}`)
+  },
+  getUserById: function (idUser) {
+    return apiProperties.get(`${routes.USERS}/${idUser}`)
   }
 }
 
