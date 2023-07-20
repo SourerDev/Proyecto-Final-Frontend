@@ -1,5 +1,6 @@
 import { CheckIcon } from '@heroicons/react/24/outline'
 import { Carousel } from '../../components/carousels/Carousel'
+import { Alerts } from '../../utils'
 
 export function PaymentCarousel({ linkPago = '#' }) {
   const payments = [
@@ -9,6 +10,7 @@ export function PaymentCarousel({ linkPago = '#' }) {
   ]
   if (!payments) return null
   const blank = '_blank'
+  //Alerts.alertWhitInput({ title: 'ophhh my god', preConfirm: false })
   return (
     <div className="w-[370px] shadow-md">
       <Carousel>
