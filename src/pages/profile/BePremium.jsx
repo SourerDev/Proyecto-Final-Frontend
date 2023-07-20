@@ -23,17 +23,14 @@ export function BePremium() {
   const [redirect, setRedirect] = useState(false)
   const { session, signIn } = useSelector((state) => state.user)
 
-  if (!signIn) {
+  /* if (!signIn) {
     Alerts.smallWarning({ text: 'Lo sentimos, primero debes iniciar sesión' })
     navigate('/sign-in')
-  }
+  } */
 
   const status = new URLSearchParams(location.search).get('status')
   useEffect(() => {
     if (status && status === 'approved') {
-      /* axios.put(`${API_URL}/users/upDate/${session.idUser}`).then((r) => {
-        return dispatch(loadUserInfo(r.data.Message))
-      }) */
       ApiPropYou.setPremiumUser(session.idUser)
     }
     if (session?.userType === 'logged') {
