@@ -1,9 +1,6 @@
-import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { loadUserInfo, resetUser } from '../../redux/actions'
-import { API_URL } from '../../services/api/baseApi'
 import swal from 'sweetalert2'
 import {
   completePayment,
