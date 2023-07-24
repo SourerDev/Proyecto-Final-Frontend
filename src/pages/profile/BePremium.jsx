@@ -33,13 +33,13 @@ export function BePremium() {
   const user_id = new URLSearchParams(location.search).get('external_reference')
   const [status, setStatus] = useState('approved')
 
-  if (status) {
+  if (_status) {
     // modificar despues con la tokenización y uso de cookies
     ApiPropYou.getUserById(user_id).then((r) => {
       dispatch(setUser(r.data.user))
-      if (status === 'approved') {
+      if (_status === 'approved') {
         swal.fire(paymentOk())
-      } else if (status && status === 'rejected') {
+      } else if (_status && _status === 'rejected') {
         swal.fire(paymentError())
       }
     })
