@@ -14,6 +14,7 @@ import { Alerts } from '../../utils'
 import { ApiPropYou } from '../../services'
 import { PaymentCarousel } from './PaymentCarousel'
 import { setUser } from '../../redux2.0/reducers/User'
+import { LoaderIcon } from '../../components/loaders/Loader'
 
 export function BePremium() {
   const dispatch = useDispatch()
@@ -35,13 +36,18 @@ export function BePremium() {
 
   if (_status && !signIn) {
     // modificar despues con la tokenización y uso de cookies
+    if (_status === 'approved') {
+      ApiPropYou.setPremiumUser(user_id).then((r) => {
+        ApiPropYou.getUserById(user_id).then((res) =>
+          dispatch(setUser(res.data.user))
+        )
+        swal.fire(paymentOk()).then((r) => navigate('/home'))
+      })
+    } else if (_status && _status === 'rejected') {
+      swal.fire(paymentError())
+    }
     ApiPropYou.getUserById(user_id).then((r) => {
       dispatch(setUser(r.data.user))
-      if (_status === 'approved') {
-        swal.fire(paymentOk())
-      } else if (_status && _status === 'rejected') {
-        swal.fire(paymentError())
-      }
     })
   }
 
