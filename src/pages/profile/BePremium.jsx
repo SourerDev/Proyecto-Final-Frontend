@@ -27,7 +27,7 @@ export function BePremium() {
     Alerts.smallWarning({ text: 'Lo sentimos, primero debes iniciar sesión' })
     navigate('/sign-in')
   } */
-  swal.fire(paymentOk()).then((r) => navigate('/about-us'))
+
 
   const _status = new URLSearchParams(location.search).get('status')
   const user_id = new URLSearchParams(location.search).get('external_reference')
