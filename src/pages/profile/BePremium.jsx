@@ -44,7 +44,10 @@ export function BePremium() {
         swal.fire(paymentOk()).then((r) => navigate('/home'))
       })
     } else if (_status && _status === 'rejected') {
-      swal.fire(paymentError())
+      ApiPropYou.getUserById(user_id).then((res) => {
+        dispatch(setUser(res.data.user))
+      })
+      swal.fire(paymentError()).then(r => navigate('/be-premium'))
     }
 
   }
