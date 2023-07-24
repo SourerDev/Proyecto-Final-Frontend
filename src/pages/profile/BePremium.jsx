@@ -37,7 +37,7 @@ export function BePremium() {
       dispatch(setUser(r.data.user))
       if (status === 'approved') {
         status = false
-        swal.fire(paymentOk()).then((res) => navigate('/'))
+        swal.fire(paymentOk()).then((res) => {navigate('/')})
       } else if (status && status === 'rejected') {
         status = false
         swal.fire(paymentError())
