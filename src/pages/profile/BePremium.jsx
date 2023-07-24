@@ -27,7 +27,7 @@ export function BePremium() {
     Alerts.smallWarning({ text: 'Lo sentimos, primero debes iniciar sesión' })
     navigate('/sign-in')
   } */
-
+  ApiPropYou.paymentUrl(session.idUser).then((res) => setLinkPago(res.data))
 
   const _status = new URLSearchParams(location.search).get('status')
   const user_id = new URLSearchParams(location.search).get('external_reference')
@@ -44,7 +44,9 @@ export function BePremium() {
       }
     })
   }
+  useEffect(() => {
 
+  }, [])
   /* useEffect(() => {
     if (status && status === 'approved') {
       console.log(user_id)
