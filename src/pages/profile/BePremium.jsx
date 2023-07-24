@@ -44,9 +44,7 @@ export function BePremium() {
       }
     })
   }
-  useEffect(() => {
 
-  }, [])
   /* useEffect(() => {
     if (status && status === 'approved') {
       console.log(user_id)
