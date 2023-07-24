@@ -37,10 +37,13 @@ export function BePremium() {
   if (_status && !signIn) {
     // modificar despues con la tokenización y uso de cookies
     if (_status === 'approved') {
+      console.log('aporovado pero cargando')
       ApiPropYou.setPremiumUser(user_id).then((r) => {
-        ApiPropYou.getUserById(user_id).then((res) =>
+        console.log('seteo de premium')
+        ApiPropYou.getUserById(user_id).then((res) => {
+          console.log('cargando nuevo usuario')
           dispatch(setUser(res.data.user))
-        )
+        })
         swal.fire(paymentOk()).then((r) => navigate('/home'))
       })
     } else if (_status && _status === 'rejected') {
