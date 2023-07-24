@@ -28,16 +28,18 @@ export function BePremium() {
     navigate('/sign-in')
   } */
 
-  const status = new URLSearchParams(location.search).get('status')
+  let status = new URLSearchParams(location.search).get('status')
   const user_id = new URLSearchParams(location.search).get('external_reference')
 
   if (status) {
     // modificar despues con la tokenización y uso de cookies
     ApiPropYou.getUserById(user_id).then((r) => {
       dispatch(setUser(r.data.user))
-      if (status && status === 'approved') {
+      if (status === 'approved') {
+        status = false
         swal.fire(paymentOk()).then((res) => navigate('/'))
       } else if (status && status === 'rejected') {
+        status = false
         swal.fire(paymentError())
       }
     })
