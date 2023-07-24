@@ -27,25 +27,25 @@ export function BePremium() {
     Alerts.smallWarning({ text: 'Lo sentimos, primero debes iniciar sesión' })
     navigate('/sign-in')
   } */
+  swal.fire(paymentOk()).then((r) => navigate('/about-us'))
 
-  let status = new URLSearchParams(location.search).get('status')
+  const _status = new URLSearchParams(location.search).get('status')
   const user_id = new URLSearchParams(location.search).get('external_reference')
+  const [status, setStatus] = useState('approved')
 
   if (status) {
     // modificar despues con la tokenización y uso de cookies
     ApiPropYou.getUserById(user_id).then((r) => {
       dispatch(setUser(r.data.user))
       if (status === 'approved') {
-        status = false
-        swal.fire(paymentOk()).then((res) => {navigate('/')})
+        swal.fire(paymentOk())
       } else if (status && status === 'rejected') {
-        status = false
         swal.fire(paymentError())
       }
     })
   }
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (status && status === 'approved') {
       console.log(user_id)
       ApiPropYou.setPremiumUser(session.idUser)
@@ -54,11 +54,7 @@ export function BePremium() {
       ApiPropYou.paymentUrl(session.idUser).then((res) => setLinkPago(res.data))
       console.log(linkPago)
     }
-  }, [])
-
-  useEffect(() => {
-    console.log(linkPago)
-  }, [linkPago])
+  }, []) */
 
   const True = !signIn
 

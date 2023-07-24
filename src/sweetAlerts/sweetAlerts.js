@@ -66,6 +66,7 @@ export const paymentOk = (status) => {
     showCancelButton: false,
     confirmButtonText: 'Finalizar',
     reverseButtons: true,
+    backdrop: true,
   }
 }
 
