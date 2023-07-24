@@ -33,12 +33,14 @@ export function BePremium() {
 
   if (status) {
     // modificar despues con la tokenización y uso de cookies
-    ApiPropYou.getUserById(user_id).then((r) => dispatch(setUser(r.data.user)))
-    if (status && status === 'approved') {
-      swal.fire(paymentOk()).then((res) => navigate('/'))
-    } else if (status && status === 'rejected') {
-      swal.fire(paymentError())
-    }
+    ApiPropYou.getUserById(user_id).then((r) => {
+      dispatch(setUser(r.data.user))
+      if (status && status === 'approved') {
+        swal.fire(paymentOk()).then((res) => navigate('/'))
+      } else if (status && status === 'rejected') {
+        swal.fire(paymentError())
+      }
+    })
   }
 
   useEffect(() => {
