@@ -25,7 +25,9 @@ export function BePremium() {
     Alerts.smallWarning({ text: 'Lo sentimos, primero debes iniciar sesión' })
     navigate('/sign-in')
   }
-  ApiPropYou.paymentUrl(session.idUser).then((res) => setLinkPago(res.data))
+  useEffect(() => {
+    ApiPropYou.paymentUrl(session.idUser).then((res) => setLinkPago(res.data))
+  }, [])
 
   const status = new URLSearchParams(location.search).get('status')
   const user_id = new URLSearchParams(location.search).get('external_reference')
@@ -46,7 +48,7 @@ export function BePremium() {
       swal.fire(paymentError()).then((r) => navigate('/be-premium'))
     }
   }
-  if (linkPago.length <= 1) return <LoaderIcon/>
+  if(linkPago.length <= 1) return <LoaderIcon className='fixed bottom-2 left-2 w-[40px]'/>
   return (
     <div className="flex  min-h-[600px] flex-col items-center gap-4 py-8 px-4 text-lg lg:flex-row">
       <div className=" flex w-full flex-col gap-6 p-7 lg:w-3/6 ">

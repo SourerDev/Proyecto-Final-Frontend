@@ -47,7 +47,7 @@ export function PaymentCarousel({ linkPago = '#' }) {
               </li>
             </ul>
             <a onClick={() => redirect()} href={linkPago} target={blank}>
-              <button className="my-3 rounded-md bg-primary px-8  py-4 font-medium text-gray-100 transition-transform duration-700 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/50">
+              <button disabled={linkPago === '#' ? true : false} className="disabled:bg-[#4994a7] my-3 rounded-md bg-primary px-8  py-4 font-medium text-gray-100 transition-transform duration-700 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/50">
                 Comienza
               </button>
             </a>
