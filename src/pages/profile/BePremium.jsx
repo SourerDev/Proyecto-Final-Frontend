@@ -46,7 +46,7 @@ export function BePremium() {
       swal.fire(paymentError()).then((r) => navigate('/be-premium'))
     }
   }
-
+  if (linkPago.length <= 1) return <LoaderIcon/>
   return (
     <div className="flex  min-h-[600px] flex-col items-center gap-4 py-8 px-4 text-lg lg:flex-row">
       <div className=" flex w-full flex-col gap-6 p-7 lg:w-3/6 ">
