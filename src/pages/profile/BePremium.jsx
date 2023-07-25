@@ -48,7 +48,8 @@ export function BePremium() {
       swal.fire(paymentError()).then((r) => navigate('/be-premium'))
     }
   }
-  if(linkPago.length <= 1) return <LoaderIcon className='fixed bottom-2 left-2 w-[40px]'/>
+  if (linkPago.length <= 1)
+    return <LoaderIcon className="fixed bottom-2 left-2 w-[40px]" />
   return (
     <div className="flex  min-h-[600px] flex-col items-center gap-4 py-8 px-4 text-lg lg:flex-row">
       <div className=" flex w-full flex-col gap-6 p-7 lg:w-3/6 ">
@@ -66,7 +67,7 @@ export function BePremium() {
           perferendis id delectus sapiente.
         </p>
       </div>
-      <div className=" grid w-3/6 place-content-center p-7">
+      <div className="grid w-3/6 place-content-center p-7">
         <PaymentCarousel linkPago={linkPago} />
       </div>
     </div>
